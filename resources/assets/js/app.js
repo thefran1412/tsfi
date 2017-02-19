@@ -4,6 +4,8 @@
  * include Vue and Vue Resource. This gives a great starting point for
  * building robust, powerful web applications using Vue and Laravel.
  */
+var Vue = require('vue');
+var VueRouter = require('vue-router');
 
 require('./bootstrap');
 
@@ -13,8 +15,24 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
+Vue.use(VueRouter);
 
-const app = new Vue({
-    el: '#app'
+import Index from './components/Index.vue';
+
+import HomeStudents from './components/HomeStudents.vue';
+
+import HomeTeachers from './components/HomeTeachers.vue';
+
+
+const router = new VueRouter({
+    hashbang:false,
+    base:__dirname,
+    linkActiveClass: 'active',
+    routes:[
+    	{path:'/events',component:HomeStudents, name:'HomeStudents' },
+    	{path:'/events',component:HomeTeachers, name:'HomeTeachers' }
+    ]
 });
+
+new Vue(Vue.util.extend({router}, Index)).$mount('#app')

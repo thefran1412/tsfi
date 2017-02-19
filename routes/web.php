@@ -12,5 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+
+Route::get('/students/home/', function () {
+    return view('HomeStudents');
+});
+
+
+Route::get('/teachers/home/', function () {
+    return view('HomeTeachers');
 });

@@ -50,7 +50,7 @@
 
                 localStorage.setItem("typeUser", typeUser);
 
-                location.pathname = '/'+typeUser+'s/home/';
+                window.location = 'http://localhost:8000/'+typeUser+'s/home/';
             }
         }
     }

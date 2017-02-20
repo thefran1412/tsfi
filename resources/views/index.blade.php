@@ -7,6 +7,7 @@
         <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
         <meta name="_token" content="{{ csrf_token() }}" />
         <link rel="stylesheet" type="text/css" href="css/app.css">
+        <link rel="stylesheet" type="text/css" href="css/home.css">
         <title>Laravel</title>
 
         <!-- Fonts -->
@@ -14,14 +15,28 @@
 
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <a onclick="saveTypeLocalStorage('student')" href="{{ url('/students/home/') }}">Students</a>
-            <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/teachers/home/') }}">Teachers</a>
-            <!-- <div id="app" class="content">
+        <div class="home-container">
+            <div class="student">
+                <h1>T.S.</h1>
+                <h2>Taula Sectorial</h2>
+                <div>
+                    <img src="img/startup.svg">
+                </div>
+                <a onclick="saveTypeLocalStorage('student')" href="{{ url('/students/home/') }}">Students</a>
+            </div>
+            <div class="teacher">
+                <h1>F.I.</h1>
+                <h2>Formació Industrial</h2>
+                <div>
+                    <img src="img/settings-pen.svg">
+                </div>
                 
-            </div> -->
+                <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/teachers/home/') }}">Teachers</a>
+            </div>
+            <div class="admin">
+                <h1>Administrador</h1>
+            </div>
         </div>
-        <!--<script src="/js/app.js"></script>-->
     </body>
     <script>
 

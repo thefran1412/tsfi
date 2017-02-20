@@ -16,7 +16,7 @@
     <body>
         <div class="flex-center position-ref full-height">
 
-            <div id="app" class="content">
+            <div id="appVue" class="content">
                 
             </div>
         </div>

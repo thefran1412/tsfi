@@ -40,7 +40,7 @@
     </body>
     <script>
 
-        whatPage();
+        //whatPage();
 
         function whatPage(){
 
@@ -50,9 +50,15 @@
                 
                 if(typeUser === 'student'){
                     location.pathname = '/students/home/';
-                }else{
+                }
+
+                if(typeUser === 'teachers'){
                     location.pathname = '/teachers/home/';
                 }
+
+                // else{
+                    // location.pathname = '/teachers/home/';
+                // }
             }
 
         }

@@ -24,3 +24,13 @@ Route::get('/students/home/', function () {
 Route::get('/teachers/home/', function () {
     return view('HomeTeachers');
 });
+
+// Route::get('/login', function () {
+//     return view('home');
+// });
+
+Route::get('/home', 'HomeController@index');
+
+Auth::routes();
+
+

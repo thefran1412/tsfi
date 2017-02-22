@@ -31,22 +31,29 @@ body{
     clear: both;
 }
 .student, .teacher{
-	transition: border 1s ease, background-color 1s ease;
-	border: solid 15px rgba(244,247,247,0);
-	background-color: rgba(255,255,255,0);
+	transition: background-color 1s ease;
 }
-.student:hover, .teacher:hover{
-	border: solid 15px rgba(244,247,247,1);
-	background-color: rgba(64,89,107,0.75);
-}
-
 .student {
 	float: left;
 	padding: 15px;
-    /*background-color: #35495E;*/
+    background-color: rgba(53, 73, 94, 0.6);
     display: inline-block;
     width: 50%;
 }
+.teacher {
+	float: left;
+	padding: 15px;
+    background-color: rgba(79, 192, 141, 0.6);
+    display: inline-block;
+    width: 50%;
+}
+.student:hover{
+	background-color: rgba(64,89,107,1);
+}
+.teacher:hover{
+	background-color: rgba(79,192,141,1);
+}
+
 
 .student h2{
 	clear: both;
@@ -59,13 +66,6 @@ body{
 }
 
 
-.teacher {
-	float: left;
-	padding: 15px;
-    /*background-color: #4fc08d;*/
-    display: inline-block;
-    width: 50%;
-}
 
 
 .teacher h2{

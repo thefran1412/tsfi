@@ -14,22 +14,20 @@ body{
 	color:#fff;
 }
 
-.student p, .teacher p{
+.student span, .teacher span{
 	width: 100%;
+	display: block;
     text-align: center;
-    margin-top: 40px;
 	font-size: 80px;
     color: #fff;
     text-decoration: none;
 }
-.student p{
-	float: left;
-    clear: both;
+
+.student, .teacher > div{
+	display: block;
+	clear: both;
 }
-.teacher p{
-	float: right;
-    clear: both;
-}
+
 .student, .teacher{
 	transition: background-color 1s ease;
 }
@@ -64,9 +62,6 @@ body{
 .student h1{
 	float: right;
 }
-
-
-
 
 .teacher h2{
 	float: left;

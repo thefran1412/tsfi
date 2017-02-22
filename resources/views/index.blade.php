@@ -38,21 +38,29 @@
                 <div class="student">
                     <h1>T.S.</h1>
                     <h2>Taula Sectorial</h2>
-                    {{-- <div>
+                     <!-- <div>
                         <img src="img/family.png">
-                    </div> --}}
-                    <p>Students</p>
+                    </div>  -->
+
+                    <div>
+                        <span>Estudiants</span>
+                        <span>i</span>
+                        <span>Pares</span>
+                    </div>
                 </div>
             </a>
             <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/teachers/home/') }}">
                 <div class="teacher">
                     <h1>F.I.</h1>
                     <h2>Formació Industrial</h2>
-                   {{--  <div>
+                    <!-- <div>
                         <img src="img/teacher.png">
-                    </div> --}}
-                    
-                    <p>Teachers</p>
+                    </div> -->
+                    <div>
+                        <span>Orientadors</span>
+                        <span>i</span>
+                        <span>Professors</span>
+                    </div>
                 </div>
             </a>
         </div>

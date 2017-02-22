@@ -1,3 +1,21 @@
+<script type="text/javascript">
+    whatPage();
+
+        function whatPage(){
+
+            if(localStorage.length === 1){
+
+                var typeUser = localStorage.getItem("typeUser");
+                
+                if(typeUser === 'student'){
+                    location.pathname = '/students/home/';
+                }else{
+                    location.pathname = '/teachers/home/';
+                }
+            }
+
+        }
+</script>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -39,23 +57,6 @@
         </div>
     </body>
     <script>
-
-        whatPage();
-
-        function whatPage(){
-
-            if(localStorage.length === 1){
-
-                var typeUser = localStorage.getItem("typeUser");
-                
-                if(typeUser === 'student'){
-                    location.pathname = '/students/home/';
-                }else{
-                    location.pathname = '/teachers/home/';
-                }
-            }
-
-        }
 
         function saveTypeLocalStorage(typeUser){
 

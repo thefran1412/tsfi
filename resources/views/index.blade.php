@@ -34,26 +34,27 @@
     </head>
     <body>
         <div class="home-container">
-            <div class="student">
-                <h1>T.S.</h1>
-                <h2>Taula Sectorial</h2>
-                <div>
-                    <img src="img/startup.svg">
+            <a onclick="saveTypeLocalStorage('student')" href="{{ url('/students/home/') }}">
+                <div class="student">
+                    <h1>T.S.</h1>
+                    <h2>Taula Sectorial</h2>
+                    {{-- <div>
+                        <img src="img/family.png">
+                    </div> --}}
+                    <p>Students</p>
                 </div>
-                <a onclick="saveTypeLocalStorage('student')" href="{{ url('/students/home/') }}">Students</a>
-            </div>
-            <div class="teacher">
-                <h1>F.I.</h1>
-                <h2>Formació Industrial</h2>
-                <div>
-                    <img src="img/settings-pen.svg">
+            </a>
+            <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/teachers/home/') }}">
+                <div class="teacher">
+                    <h1>F.I.</h1>
+                    <h2>Formació Industrial</h2>
+                   {{--  <div>
+                        <img src="img/teacher.png">
+                    </div> --}}
+                    
+                    <p>Teachers</p>
                 </div>
-                
-                <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/teachers/home/') }}">Teachers</a>
-            </div>
-            <div class="admin">
-                <h1>Administrador</h1>
-            </div>
+            </a>
         </div>
     </body>
     <script>

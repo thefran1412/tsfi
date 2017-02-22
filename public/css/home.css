@@ -1,5 +1,12 @@
 html,body,.home-container,.student,.teacher{
-	height: calc(100vh - 61.33px);
+	height: 100vh;
+}
+body{
+	background-image: url('/img/background.jpg');
+	background-repeat:no-repeat;
+	background-size: cover;
+	/*background-size:contain;*/
+	background-position:center;
 }
 
 .student h1, .teacher h1{
@@ -7,23 +14,46 @@ html,body,.home-container,.student,.teacher{
 	color:#fff;
 }
 
-.student a, .teacher a{
+.student p, .teacher p{
 	width: 100%;
     text-align: center;
-    margin-top: 25px;
-	font-size: 36px;
+    margin-top: 40px;
+	font-size: 80px;
     color: #fff;
     text-decoration: none;
 }
-
-
+.student p{
+	float: left;
+    clear: both;
+}
+.teacher p{
+	float: right;
+    clear: both;
+}
+.student, .teacher{
+	transition: background-color 1s ease;
+}
 .student {
 	float: left;
 	padding: 15px;
-    background-color: #35495E;
+    background-color: rgba(53, 73, 94, 0.6);
     display: inline-block;
     width: 50%;
 }
+.teacher {
+	float: left;
+	padding: 15px;
+    background-color: rgba(79, 192, 141, 0.6);
+    display: inline-block;
+    width: 50%;
+}
+.student:hover{
+	background-color: rgba(64,89,107,1);
+}
+.teacher:hover{
+	background-color: rgba(79,192,141,1);
+}
+
 
 .student h2{
 	clear: both;
@@ -35,23 +65,8 @@ html,body,.home-container,.student,.teacher{
 	float: right;
 }
 
-.student a{
-	float: left;
-    clear: both;
-}
 
-.teacher {
-	float: left;
-	padding: 15px;
-    background-color: #4fc08d;
-    display: inline-block;
-    width: 50%;
-}
 
-.teacher a{
-	float: right;
-    clear: both;
-}
 
 .teacher h2{
 	float: left;

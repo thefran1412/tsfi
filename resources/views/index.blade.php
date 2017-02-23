@@ -23,7 +23,9 @@
                     {{-- <div>
                         <img src="img/family.png">
                     </div> --}}
-                    <p>Students</p>
+                    <span>Pares</span>
+                    <span>i</span> 
+                    <span>Alumnes</span>
                 </div>
             </a>
             <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/teachers/home/') }}">
@@ -34,7 +36,9 @@
                         <img src="img/teacher.png">
                     </div> --}}
                     
-                    <p>Teachers</p>
+                    <span>Professors<span/>
+                    <span>i</span> 
+                    <span>Orientadors</span>
                 </div>
             </a>
         </div>

@@ -2,7 +2,6 @@
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="navbar-header">
-
                 <button v-on:click="changeTypeUser('teacher')" v-if="type === 'students'"  id="myButton" class="float-left submit-button" >Go Teachers</button>
 
                 <button  v-if="type === 'teachers'" v-on:click="changeTypeUser('student')" id="myButton" class="float-left submit-button" >Go Students</button>
@@ -34,15 +33,17 @@
         },
         methods:{
             typeUser(){
-                var actualRoute = window.location;
+                /*var actualRoute = window.location;*/
 
-                if(actualRoute.pathname.indexOf('students') === 1){
+                this.type = 'students';
+
+                /*if(actualRoute.pathname.indexOf('students') === 1){
                     this.type = 'students';
                 }
 
                 if(actualRoute.pathname.indexOf('teachers') === 1){
                     this.type = 'teachers';
-                }
+                }*/
             },
             changeTypeUser: function (typeUser){
 

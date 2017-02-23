@@ -1,3 +1,21 @@
+<script type="text/javascript">
+    whatPage();
+
+        function whatPage(){
+
+            if(localStorage.length === 1){
+
+                var typeUser = localStorage.getItem("typeUser");
+                
+                if(typeUser === 'student'){
+                    location.pathname = '/students/home/';
+                }else{
+                    location.pathname = '/teachers/home/';
+                }
+            }
+
+        }
+</script>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,7 +27,7 @@
         <link rel="stylesheet" type="text/css" href="css/app.css">
         <link rel="stylesheet" type="text/css" href="css/home.css">
         <title>Laravel</title>
-
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript" /></script>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
@@ -20,53 +38,28 @@
                 <div class="student">
                     <h1>T.S.</h1>
                     <h2>Taula Sectorial</h2>
-                    {{-- <div>
-                        <img src="img/family.png">
-                    </div> --}}
-                    <span>Pares</span>
-                    <span>i</span> 
-                    <span>Alumnes</span>
+
+                    <div>
+                        <span>Estudiants</span>
+                        <span>i</span>
+                        <span>Pares</span>
+                    </div>
                 </div>
             </a>
             <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/teachers/home/') }}">
                 <div class="teacher">
                     <h1>F.I.</h1>
                     <h2>Formació Industrial</h2>
-                   {{--  <div>
-                        <img src="img/teacher.png">
-                    </div> --}}
-                    
-                    <span>Professors<span/>
-                    <span>i</span> 
-                    <span>Orientadors</span>
+                    <div>
+                        <span>Orientadors</span>
+                        <span>i</span>
+                        <span>Professors</span>
+                    </div>
                 </div>
             </a>
         </div>
     </body>
     <script>
-
-        //whatPage();
-
-        function whatPage(){
-
-            if(localStorage.length === 1){
-
-                var typeUser = localStorage.getItem("typeUser");
-                
-                if(typeUser === 'student'){
-                    location.pathname = '/students/home/';
-                }
-
-                if(typeUser === 'teachers'){
-                    location.pathname = '/teachers/home/';
-                }
-
-                // else{
-                    // location.pathname = '/teachers/home/';
-                // }
-            }
-
-        }
 
         function saveTypeLocalStorage(typeUser){
 

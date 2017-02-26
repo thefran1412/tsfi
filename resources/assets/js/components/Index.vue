@@ -2,15 +2,12 @@
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="navbar-header">
-                <button v-on:click="changeTypeUser('teacher')" v-if="type === 'students'"  id="myButton" class="float-left submit-button" >Go Teachers</button>
-
-                <button  v-if="type === 'teachers'" v-on:click="changeTypeUser('student')" id="myButton" class="float-left submit-button" >Go Students</button>
-
+                
             </div>
             <div id="navbar" class="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li v-if="type === 'students'"><router-link :to="{name: 'HomeStudents'}">Students</router-link></li>
-                    <li v-if="type === 'teachers'"><router-link :to="{name: 'HomeTeachers'}">Teachers</router-link></li>
+                    <li v-on:click="changeTypeUser('teacher')" v-if="type === 'students'"><router-link :to="{name: 'HomeTeachers'}">Students</router-link></li>
+                    <li  v-on:click="changeTypeUser('student')" v-if="type === 'teachers'"><router-link :to="{name: 'HomeStudents'}">Teachers</router-link></li>
                 </ul>
             </div>
         </nav>
@@ -25,25 +22,42 @@
     export default{
         data(){
             return{
-                type:''
+                type:'',
+                rolNumber: 0
             }
         },
         created(){
+            this.whatUserPage();
             this.typeUser();
         },
         methods:{
             typeUser(){
-                /*var actualRoute = window.location;*/
 
-                this.type = 'students';
+                if(localStorage.length === 1){
 
-                /*if(actualRoute.pathname.indexOf('students') === 1){
-                    this.type = 'students';
+                    var typeUser = localStorage.getItem("typeUser");
+
+                    if(typeUser === 'student'){
+                        this.type = 'students';
+                    }else{
+                        this.type = 'teachers';
+                    }
                 }
 
-                if(actualRoute.pathname.indexOf('teachers') === 1){
-                    this.type = 'teachers';
-                }*/
+            },
+            whatUserPage(){
+                if(localStorage.length === 1 && this.rolNumber === 0){
+
+                    this.rolNumber = 1;
+
+                    var typeUser = localStorage.getItem("typeUser");
+                    
+                    if(typeUser === 'student'){
+                        this.$router.push('/events-students')
+                    }else{
+                        this.$router.push('/events-teachers')
+                    }
+                }
             },
             changeTypeUser: function (typeUser){
 
@@ -51,7 +65,10 @@
 
                 localStorage.setItem("typeUser", typeUser);
 
-                window.location = 'http://localhost:8000/'+typeUser+'s/home/';
+                this.rolNumber = 0;
+
+                this.whatUserPage();
+                this.typeUser();
             }
         }
     }

@@ -16,20 +16,20 @@ Route::get('/', function () {
 });
 
 
-Route::get('/students/home/', function () {
-    return view('HomeStudents');
+Route::get('/home/', function () {
+    return view('EventsHome');
 });
 
 
-Route::get('/teachers/home/', function () {
-    return view('HomeTeachers');
-});
+// Route::get('/teachers/home/', function () {
+//     return view('HomeTeachers');
+// });
 
 // Route::get('/login', function () {
 //     return view('home');
 // });
 
-Route::get('/home', 'HomeController@index');
+Route::get('/admin-login', 'HomeController@index');
 
 Auth::routes();
 

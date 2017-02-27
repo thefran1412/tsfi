@@ -1,6 +1,30 @@
 <template>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <div id="menu">
+            <div class="header-item header-search-container">
+                <span>TSFI</span>
+                <form class="site-search" >
+                      <div id="site-search-container">
+                        <input value="" type="search" id="site-search" placeholder="Cerca el recurs...">
+                      </div>
+                      <button tabindex="2" type="submit">
+                        <span class="a11y-only">Search</span>
+                            <svg class="icon-search" viewBox="0 0 34 34" fill="none" stroke="currentColor">
+                                <ellipse stroke-width="3" cx="16" cy="15" rx="12" ry="12"></ellipse>
+                                <path d="M26 26 l 8 8" stroke-width="3" stroke-linecap="square"></path>
+                            </svg>
+                     </button>
+                </form>
+                <div class="user-type">
+                    <li v-on:click="changeTypeUser('teacher')" v-if="type === 'students'"><router-link :to="{name: 'HomeTeachers'}">Alumnes</router-link></li>
+                    <li  v-on:click="changeTypeUser('student')" v-if="type === 'teachers'"><router-link :to="{name: 'HomeStudents'}">Professors</router-link></li>
+                </div>
+            </div>
+            <div class="footer-menu">
+                
+            </div>
+        </div>
+        <!-- <nav class="navbar navbar-default navbar-static-top">
             <div class="navbar-header">
                 
             </div>
@@ -11,7 +35,7 @@
                     <li v-if="type === 'students'"><router-link :to="{name: 'ArticlesStudents'}">Articles</router-link></li>
                 </ul>
             </div>
-        </nav>
+        </nav> -->
         <div class="container">
             <router-view></router-view>
         </div>

@@ -29,7 +29,6 @@ import HomeTeachers from './components/HomeTeachers.vue';
 const router = new VueRouter({
     hashbang:false,
     base:__dirname,
-    mode: 'history',
     linkActiveClass: 'active',
     routes:[
     	{path:'/events-students',component:HomeStudents, name:'HomeStudents' },

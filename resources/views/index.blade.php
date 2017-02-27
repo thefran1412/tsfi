@@ -34,7 +34,7 @@
     </head>
     <body>
         <div class="home-container">
-            <a onclick="saveTypeLocalStorage('student')" href="{{ url('/home') }}">
+            <a onclick="saveTypeLocalStorage('student')" href="{{ url('/home/') }}">
                 <div class="student">
                     <h1>T.S.</h1>
                     <h2>Taula Sectorial</h2>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </a>
-            <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/home') }}">
+            <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/home/') }}">
                 <div class="teacher">
                     <h1>F.I.</h1>
                     <h2>Formació Industrial</h2>
@@ -71,5 +71,4 @@
         }
 
     </script>
-    <script src="{{ URL::asset('/js/app.js') }}" ></script>
 </html>

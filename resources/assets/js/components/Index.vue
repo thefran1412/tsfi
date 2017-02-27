@@ -8,6 +8,7 @@
                 <ul class="nav navbar-nav">
                     <li v-on:click="changeTypeUser('teacher')" v-if="type === 'students'"><router-link :to="{name: 'HomeTeachers'}">Students</router-link></li>
                     <li  v-on:click="changeTypeUser('student')" v-if="type === 'teachers'"><router-link :to="{name: 'HomeStudents'}">Teachers</router-link></li>
+                    <li v-if="type === 'students'"><router-link :to="{name: 'ArticlesStudents'}">Articles</router-link></li>
                 </ul>
             </div>
         </nav>
@@ -67,7 +68,6 @@
 
                 this.rolNumber = 0;
 
-                this.whatUserPage();
                 this.typeUser();
             }
         }

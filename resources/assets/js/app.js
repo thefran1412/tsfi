@@ -21,6 +21,7 @@ Vue.use(VueRouter);
 import Index from './components/Index.vue';
 
 import HomeStudents from './components/HomeStudents.vue';
+import ArticlesStudents from './components/ArticlesStudents.vue';
 
 import HomeTeachers from './components/HomeTeachers.vue';
 
@@ -28,11 +29,15 @@ import HomeTeachers from './components/HomeTeachers.vue';
 const router = new VueRouter({
     hashbang:false,
     base:__dirname,
+    mode: 'history',
     linkActiveClass: 'active',
     routes:[
     	{path:'/events-students',component:HomeStudents, name:'HomeStudents' },
+    	{path:'/articles-students',component:ArticlesStudents, name:'ArticlesStudents' },
     	{path:'/events-teachers',component:HomeTeachers, name:'HomeTeachers' }
     ]
 });
+
+
 
 new Vue(Vue.util.extend({router}, Index)).$mount('#appVue')

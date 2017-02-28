@@ -22,6 +22,7 @@ class CreateEntitatsTable extends Migration
             $table->string('link');
             $table->string('logo');
             $table->string('desc');
+            $table->boolean('esMembre');
             $table->integer('idLocalitzacio')->references('id')->on('localitzacio');
             $table->timestamps();
         });

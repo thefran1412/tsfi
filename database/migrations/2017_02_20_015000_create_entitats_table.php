@@ -15,6 +15,14 @@ class CreateEntitatsTable extends Migration
     {
         Schema::create('entitats', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nom');
+            $table->string('adreca');
+            $table->integer('telf1');
+            $table->integer('telf2');
+            $table->string('link');
+            $table->string('logo');
+            $table->string('desc');
+            $table->integer('idLocalitzacio')->references('id')->on('localitzacio');
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ class CreateSocialMediasTable extends Migration
             $table->string('instagram');
             $table->string('facebook');
             $table->string('twitter');
-            $table->integer('idEntitat')->references('idEntitat')->on('Entitats');
+            $table->integer('idEntitat')->references('id')->on('entitats');
             $table->timestamps();
         });
     }

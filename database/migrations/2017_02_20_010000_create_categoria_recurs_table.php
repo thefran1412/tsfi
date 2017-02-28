@@ -15,6 +15,8 @@ class CreateCategoriaRecursTable extends Migration
     {
         Schema::create('categoria_recurs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('idCategoria')->references('id')->on('categories');
+            $table->integer('idRecurs')->references('id')->on('recursos');
             $table->timestamps();
         });
     }

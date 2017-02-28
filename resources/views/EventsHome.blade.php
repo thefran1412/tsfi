@@ -7,6 +7,7 @@
         <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
         <meta name="_token" content="{{ csrf_token() }}" />
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/menu.css') }}">
         <title>Laravel</title>
 
         <!-- Fonts -->

@@ -54,8 +54,7 @@ body{
 .student {
 	padding: 15px;
 	float: left;
-     background-color: rgba(53, 73, 94, 0.6); 
-    /*background-color: rgba(51, 51, 51, 0.6);*/
+     background-color: rgba(51, 51, 51, 0.6); 
     display: inline-block;
     width: 50%;
 }
@@ -63,19 +62,15 @@ body{
 	padding: 15px;
 	float: left;
     background-color: rgba(79, 192, 141, 0.6);
-    /*background-color: rgba(106, 197, 169, 0.6);*/
     display: inline-block;
     width: 50%;
 }
 .student:hover{
-	/*background-color: rgba(64,89,107,1);*/
 	background-color: rgba(51, 51, 51, 1);
-	/*color:#6AC5A9;*/
 	color: #4FC08D;
 }
 .teacher:hover{
 	background-color: rgba(79,192,141,1);
-	/*background-color: rgba(106, 197, 169, 1);*/
 	color:#333333;
 }
 
@@ -131,20 +126,5 @@ body{
 		font-weight: bold;
         letter-spacing: 3px;
 		font-size: xx-large;
-	}
-
-	.student {
-		padding: 15px;
-		float: left;
-	    background-color: rgba(53, 73, 94, 0.6);
-	    display: inline-block;
-	    width: 50%;
-	}
-	.teacher {
-		padding: 15px;
-		float: left;
-	    background-color: rgba(79, 192, 141, 0.6);
-	    display: inline-block;
-	    width: 50%;
 	}
 }

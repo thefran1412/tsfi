@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    whatPage();
+    //whatPage();
 
         function whatPage(){
 

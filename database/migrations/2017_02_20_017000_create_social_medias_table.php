@@ -14,7 +14,11 @@ class CreateSocialMediasTable extends Migration
     public function up()
     {
         Schema::create('social_medias', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('idSocial');
+            $table->string('instagram');
+            $table->string('facebook');
+            $table->string('twitter');
+            $table->integer('idEntitat')->references('idEntitat')->on('Entitats');
             $table->timestamps();
         });
     }

@@ -15,20 +15,22 @@ class CreateRecursosTable extends Migration
     {
         Schema::create('recursos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('TitolResum', 150);
-            $table->string('SubTitolResum', 250);
-            $table->string('DecBreu', 500);
-            $table->string('DescDetaill1');
-            $table->string('DescDetaill2');
-            $table->integer('Relevancia');
-            $table->date('DataInici');
-            $table->date('DataFinal');
+            $table->string('titol', 150);
+            $table->string('subTitol', 250);
+            $table->string('descBreu', 500);
+            $table->string('descDetaill1');
+            $table->string('descDetaill2');
+            $table->integer('relevancia');
+            $table->date('dataInici');
+            $table->date('DdtaFinal');
             $table->boolean('Gratuit');
-            $table->double('PreuInferior', 15, 2);
-            $table->double('PreuSuperior', 15, 2);
-            $table->dateTime('DataPublicacio');
-            $table->boolean('Visible');
-            $table->string('FotoResum');
+            $table->double('preuInferior', 15, 2);
+            $table->double('preuSuperior', 15, 2);
+            $table->dateTime('dataPublicacio');
+            $table->boolean('visible');
+            $table->string('fotoResum');
+            $table->string('creatPer');
+            $table->increments('idLocalitzacio');->references('id')->on('localitzacions');
             $table->timestamps();
         });
     }

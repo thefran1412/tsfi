@@ -15,6 +15,8 @@ class CreateTipusVideosTable extends Migration
     {
         Schema::create('tipus_videos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('plataforma');
+            $table->string('codiPlataforma');
             $table->timestamps();
         });
     }

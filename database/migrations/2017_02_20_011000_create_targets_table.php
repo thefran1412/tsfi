@@ -15,6 +15,8 @@ class CreateTargetsTable extends Migration
     {
         Schema::create('targets', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('codi');
+            $table->string('target');
             $table->timestamps();
         });
     }

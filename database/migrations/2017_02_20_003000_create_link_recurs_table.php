@@ -15,6 +15,9 @@ class CreateLinkRecursTable extends Migration
     {
         Schema::create('link_recurs', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('descLink', 200);
+            $table->string('link');
+            $table->integer('idRecurs')->references('id')->on('recursos');
             $table->timestamps();
         });
     }

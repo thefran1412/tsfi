@@ -15,6 +15,11 @@ class CreateImatgeRecursTable extends Migration
     {
         Schema::create('imatge_recurs', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('titol', 200);
+            $table->string('descImatge');
+            $table->string('imatge');
+            $table->string('ordre');
+            $table->integer('idRecurs')->references('id')->on('recursos');
             $table->timestamps();
         });
     }

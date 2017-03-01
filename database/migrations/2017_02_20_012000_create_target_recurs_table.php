@@ -15,6 +15,8 @@ class CreateTargetRecursTable extends Migration
     {
         Schema::create('target_recurs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('idRecurs')->references('id')->on('recursos');
+            $table->integer('idTarget')->references('id')->on('target');
             $table->timestamps();
         });
     }

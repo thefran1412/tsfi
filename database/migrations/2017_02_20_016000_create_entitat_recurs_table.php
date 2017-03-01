@@ -15,6 +15,8 @@ class CreateEntitatRecursTable extends Migration
     {
         Schema::create('entitat_recurs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('idEntitat')->references('id')->on('entitats');
+            $table->integer('idRecurs');
             $table->timestamps();
         });
     }

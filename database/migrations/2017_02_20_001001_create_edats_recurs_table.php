@@ -15,6 +15,8 @@ class CreateEdatsRecursTable extends Migration
     {
         Schema::create('edats_recurs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('idEdat')->references('id')->on('edats');
+            $table->integer('idRecurs')->references('id')->on('recursos');
             $table->timestamps();
         });
     }

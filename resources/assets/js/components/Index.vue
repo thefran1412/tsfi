@@ -1,11 +1,11 @@
 <template>
     <div id="app">
-        <div id="menu">
-            <div class="header-item header-search-container">
+        <header>
+            <div class="header-top-item header-search-container">
                 <span>TSFI</span>
                 <form class="site-search" >
                       <div id="site-search-container">
-                        <input value="" type="search" id="site-search" placeholder="Cerca el recurs...">
+                        <input value="" type="search" id="site-search" placeholder=" Cerca el recurs...">
                       </div>
                       <button tabindex="2" type="submit">
                         <span class="a11y-only">Search</span>
@@ -21,21 +21,16 @@
                 </div>
             </div>
             <div class="footer-menu">
-                
+                <div class="container">
+                    <div class="col-md-6">
+                        <multiselect v-model="category" selected-label="Seleccionada" track-by="category" label="category" placeholder="Select one" :options="categories" :selected="selected" :searchable="false" :allow-empty="false"></multiselect>
+                    </div>
+                    <div class="col-md-6">
+                        <multiselect v-model="value" :options="options" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="name" track-by="name"></multiselect>
+                    </div>
+               </div>
             </div>
-        </div>
-        <!-- <nav class="navbar navbar-default navbar-static-top">
-            <div class="navbar-header">
-                
-            </div>
-            <div id="navbar" class="navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li v-on:click="changeTypeUser('teacher')" v-if="type === 'students'"><router-link :to="{name: 'HomeTeachers'}">Students</router-link></li>
-                    <li  v-on:click="changeTypeUser('student')" v-if="type === 'teachers'"><router-link :to="{name: 'HomeStudents'}">Teachers</router-link></li>
-                    <li v-if="type === 'students'"><router-link :to="{name: 'ArticlesStudents'}">Articles</router-link></li>
-                </ul>
-            </div>
-        </nav> -->
+        </header>
         <div class="container">
             <router-view></router-view>
         </div>
@@ -44,11 +39,42 @@
 
 <script>
 
+    import Multiselect from 'vue-multiselect';
+
     export default{
+        components: {
+            Multiselect
+        },
+        props:{
+            maxHeight: {
+                type: Number,
+                default: 162
+              },
+          },
         data(){
             return{
                 type:'',
-                rolNumber: 0
+                rolNumber: 0,
+                category: { category: 'Categories' },
+                categories: [
+                    { category: 'Categories' },
+                    { category: 'Events' },
+                    { category: 'Noticies' },
+                    { category: 'Tallers' },
+                    { category: 'Conferencies' }
+                ],
+                options: [
+                    { name: 'Vue.js' },
+                    { name: 'Rails' },
+                    { name: 'Sinatra' },
+                    { name: 'Laravel' },
+                    { name: 'Phoenix' },
+                    { name: 'Vue.js' },
+                    { name: 'Rails' },
+                    { name: 'Sinatra' },
+                    { name: 'Laravel' },
+                    { name: 'Phoenix' }
+                  ]
             }
         },
         created(){
@@ -93,6 +119,9 @@
                 this.rolNumber = 0;
 
                 this.typeUser();
+            },
+            nameWithLang ({ name }) {
+              return `${name}`
             }
         }
     }

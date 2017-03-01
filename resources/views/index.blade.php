@@ -61,6 +61,7 @@
     </body>
     <script>
 
+
         function saveTypeLocalStorage(typeUser){
 
             if (window.localStorage) {

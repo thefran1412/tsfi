@@ -30,7 +30,7 @@ class CreateRecursosTable extends Migration
             $table->boolean('visible');
             $table->string('fotoResum');
             $table->string('creatPer');
-            $table->increments('idLocalitzacio');->references('id')->on('localitzacions');
+            $table->integer('idLocalitzacio')->references('id')->on('localitzacions');
             $table->timestamps();
         });
     }

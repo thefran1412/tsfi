@@ -3,12 +3,11 @@
 
         function whatPage(){
 
-            if(localStorage.length === 1){
+            if(localStorage.length === 2){
 
                 var typeUser = localStorage.getItem("typeUser");
                 
                 if(typeUser === 'student'){
-                    console.log('hola');
                     location.pathname = '/tsfi/';
                 }else{
                     location.pathname = '/tsfi/';
@@ -67,6 +66,7 @@
 
             if (window.localStorage) {
                 localStorage.setItem('typeUser', typeUser);
+                localStorage.setItem('numType', 0);
             } else {
               throw new Error('Tu Browser no soporta LocalStorage!');
             }

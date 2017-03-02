@@ -54,7 +54,6 @@
         data(){
             return{
                 type:'',
-                rolNumber: 0,
                 category: { category: 'Categories' },
                 categories: [
                     { category: 'Categories' },
@@ -84,7 +83,7 @@
         methods:{
             typeUser(){
 
-                if(localStorage.length === 1){
+                if(localStorage.length === 2){
 
                     var typeUser = localStorage.getItem("typeUser");
 
@@ -97,11 +96,16 @@
 
             },
             whatUserPage(){
-                if(localStorage.length === 1 && this.rolNumber === 0){
 
-                    this.rolNumber = 1;
+                var typeNum = localStorage.getItem("numType");
+
+                if(localStorage.length === 2 && Number(typeNum) === 0){
 
                     var typeUser = localStorage.getItem("typeUser");
+
+                    localStorage.removeItem("numType");
+
+                    localStorage.setItem("numType", 1);
                     
                     if(typeUser === 'student'){
                         this.$router.push('/home-students')
@@ -116,7 +120,9 @@
 
                 localStorage.setItem("typeUser", typeUser);
 
-                this.rolNumber = 0;
+                localStorage.removeItem("numType");
+
+                localStorage.setItem("numType", 0);
 
                 this.typeUser();
             },

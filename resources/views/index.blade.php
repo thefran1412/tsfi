@@ -9,9 +9,9 @@
                 
                 if(typeUser === 'student'){
                     console.log('hola');
-                    location.pathname = '/events/';
+                    location.pathname = '/tsfi/';
                 }else{
-                    location.pathname = '/events/';
+                    location.pathname = '/tsfi/';
                 }
             }
 
@@ -35,7 +35,7 @@
     </head>
     <body>
         <div class="home-container">
-            <a onclick="saveTypeLocalStorage('student')" href="{{ url('/events/') }}">
+            <a onclick="saveTypeLocalStorage('student')" href="{{ url('/tsfi/') }}">
                 <div class="student">
                     <h1>T.S.</h1>
                     <h2>Taula Sectorial</h2>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </a>
-            <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/events/') }}">
+            <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/tsfi/') }}">
                 <div class="teacher">
                     <h1>F.I.</h1>
                     <h2>Formació Industrial</h2>

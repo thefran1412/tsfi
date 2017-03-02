@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/events/', function () {
+Route::get('/tsfi/', function () {
     return view('EventsHome');
 });
 
@@ -28,9 +28,11 @@ Route::get('/events/', function () {
 // Route::get('/login', function () {
 //     return view('home');
 // });
+//Auth::routes();
+Route::get('/admin/login', 'Auth\LoginController@index');
+Route::get('/admin', 'HomeController@index');
+Route::get('/resource', 'HomeController@resource');
 
-Route::get('/admin-login', 'HomeController@index');
 
-Auth::routes();
 
 

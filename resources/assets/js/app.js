@@ -18,12 +18,18 @@ require('./bootstrap');
 Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 Vue.use(VueRouter);
 
+//Index
 import Index from './components/Index.vue';
 
+//Students
 import HomeStudents from './components/HomeStudents.vue';
 import ArticlesStudents from './components/ArticlesStudents.vue';
 
+//Teachers
 import HomeTeachers from './components/HomeTeachers.vue';
+
+//Recurso
+import Resource from './components/Resources.vue';
 
 
 const router = new VueRouter({
@@ -31,9 +37,10 @@ const router = new VueRouter({
     base:__dirname,
     linkActiveClass: 'active',
     routes:[
-    	{path:'/students',component:HomeStudents, name:'HomeStudents' },
+    	{path:'/home-students',component:HomeStudents, name:'HomeStudents' },
     	{path:'/articles-students',component:ArticlesStudents, name:'ArticlesStudents' },
-    	{path:'/teachers',component:HomeTeachers, name:'HomeTeachers' }
+    	{path:'/home-teachers',component:HomeTeachers, name:'HomeTeachers' },
+    	{path:'/resource',component:Resource, name:'Resource' }
     ]
 });
 

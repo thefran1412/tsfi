@@ -29,7 +29,9 @@ Route::get('/home/', function () {
 //     return view('home');
 // });
 
-Route::get('/admin-login', 'HomeController@index');
+Route::get('/admin', 'HomeController@index');
+Route::get('/resource', 'HomeController@resource');
+
 
 Auth::routes();
 

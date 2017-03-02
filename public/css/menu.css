@@ -10,14 +10,14 @@ header{
 }
 
 .content-page-header{
-	padding-top: 137px;
+	padding-top: 155px;
 }
 
 .header-top-item{
-	padding: 15px;
+	padding: 8px 15px;
 	width: 100%;
 	background-color: #333333;
-	 color: #4FC08D; 
+	color: #4FC08D; 
 	font-family: Simplifica;
 }
 
@@ -50,14 +50,12 @@ header{
 .site-search input[type=search]{
 	transition: border 1s ease;
 	background-color:transparent;
+	font-family: "Raleway", sans-serif;
 	color:inherit;
 	border:1px solid rgba(255,255,255,0.2);
 	border-radius:0;margin:0 0 20px;
 	padding:5px;
 	padding-left:15px;
-	letter-spacing: 1px;
-    font-weight: bold;
-	font-size:1.2em;
 	display:block;
 	width:100%;
 	outline:0
@@ -144,5 +142,10 @@ header.header-light .site-search input[type=submit]{
 .user-type li a:hover{
 	text-decoration: none;
 	color: #4FC08D;
+}
+
+.footer-menu{
+	padding: 11px 15px;
+    background-color: #4FC08D;
 }
 

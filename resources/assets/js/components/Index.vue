@@ -5,7 +5,7 @@
                 <span>TSFI</span>
                 <form class="site-search" >
                       <div id="site-search-container">
-                        <input value="" type="search" id="site-search" placeholder=" Cerca el recurs...">
+                        <input value="" type="search" id="site-search" placeholder="Cerca el recurs...">
                       </div>
                       <button tabindex="2" type="submit">
                         <span class="a11y-only">Search</span>

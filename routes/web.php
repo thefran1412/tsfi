@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/home/', function () {
+Route::get('/events/', function () {
     return view('EventsHome');
 });
 

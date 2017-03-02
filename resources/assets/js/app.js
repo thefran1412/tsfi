@@ -31,9 +31,9 @@ const router = new VueRouter({
     base:__dirname,
     linkActiveClass: 'active',
     routes:[
-    	{path:'/events-students',component:HomeStudents, name:'HomeStudents' },
+    	{path:'/students',component:HomeStudents, name:'HomeStudents' },
     	{path:'/articles-students',component:ArticlesStudents, name:'ArticlesStudents' },
-    	{path:'/events-teachers',component:HomeTeachers, name:'HomeTeachers' }
+    	{path:'/teachers',component:HomeTeachers, name:'HomeTeachers' }
     ]
 });
 

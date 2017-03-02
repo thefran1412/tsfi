@@ -104,9 +104,9 @@
                     var typeUser = localStorage.getItem("typeUser");
                     
                     if(typeUser === 'student'){
-                        this.$router.push('/events-students')
+                        this.$router.push('/students')
                     }else{
-                        this.$router.push('/events-teachers')
+                        this.$router.push('/teachers')
                     }
                 }
             },

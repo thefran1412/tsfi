@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+     protected $loginPath = '/admin/login';  
     /**
      * Create a new controller instance.
      *

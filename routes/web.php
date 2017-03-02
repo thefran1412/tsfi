@@ -28,11 +28,11 @@ Route::get('/home/', function () {
 // Route::get('/login', function () {
 //     return view('home');
 // });
-
+//Auth::routes();
+Route::get('/admin/login', 'Auth\LoginController@index');
 Route::get('/admin', 'HomeController@index');
 Route::get('/resource', 'HomeController@resource');
 
 
-Auth::routes();
 
 

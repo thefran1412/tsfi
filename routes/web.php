@@ -31,7 +31,8 @@ Route::get('/tsfi/', function () {
 //Auth::routes();
 Route::get('/admin/login', 'Auth\LoginController@index');
 Route::get('/admin', 'HomeController@index');
-Route::get('/resource', 'HomeController@resource');
+Route::get('/resource/add', 'HomeController@resource');
+Route::get('/resource/list', 'HomeController@listResource');
 
 
 

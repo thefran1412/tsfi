@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Recursos;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-     protected $loginPath = '/admin/login';  
+//     protected $loginPath = '/admin/login';
     /**
      * Create a new controller instance.
      *
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     /**
@@ -35,6 +36,13 @@ class HomeController extends Controller
     public function resource()
     {
         return view('backend.addresource');
+    }
+    public function listResource()
+    {
+        $recursos = Recursos::paginate(10);
+
+
+        return view('backend.listResources', compact('recursos'));
     }
 
 }

@@ -1,6 +1,7 @@
 @extends('base')
 
 @section('content')
+
     <style type="text/css">
         .tg  {border-collapse:collapse;border-spacing:0;}
         .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
@@ -15,7 +16,7 @@
             @if($recurso->relevancia > 1)
 
                     <tr>
-                        <th class="tg-baqh" colspan="3"><h1>{{ $recurso->titol }}</h1></th>
+                        <th class="tg-baqh" colspan="3"><h2>{{ $recurso->titol }}</h2></th>
                     </tr>
                     <tr>
                         <td class="tg-baqh" colspan="3"><h3>{{ $recurso->subTitol }}</h3></td>
@@ -30,9 +31,53 @@
                     </tr>
         @endif
         @endforeach
+
         </table>
     </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row justify-content-md-center">
+                    <h2>{{ $recurso->titol }}</h2>
+            </div>
+        </div>
+        <div class="panel-body">Panel Content</div>
+    </div>
 
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-1">
+                {{ $recurso->titol }}
+            </div>
+            <div class="col-12 col-md-auto">
+                Variable width content
+            </div>
+            <div class="col col-lg-2">
+                3 of 3
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                1 of 3
+            </div>
+            <div class="col-12 col-md-auto">
+                Variable width content
+            </div>
+            <div class="col col-lg-2">
+                3 of 3
+            </div>
+        </div>
+        <div class="row align-items-end">
+            <div class="col">
+                One of three columns
+            </div>
+            <div class="col">
+                One of three columns
+            </div>
+            <div class="col">
+                One of three columns
+            </div>
+        </div>
+    </div>
 
 
 

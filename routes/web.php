@@ -35,9 +35,7 @@ Auth::routes();
 // });
 Route::get('/admin/login', 'Auth\LoginController@index');
 Route::get('/admin', 'HomeController@index');
-Route::get('/resource/add', 'HomeController@resource');
-Route::post('/resource/add', 'HomeController@storeResource');
-Route::get('/resource/list', 'HomeController@listResource');
+Route::get('/resource', 'HomeController@resource');
 
 
 

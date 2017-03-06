@@ -189,10 +189,6 @@
                         this.$router.push('/home-teachers')
                     }
                 }
-
-                if(localStorage.length < 2){
-                    window.location.href = "http://localhost:8000";
-                }
             },
             changeTypeUser: function (typeUser){
 

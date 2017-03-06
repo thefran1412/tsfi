@@ -15,6 +15,10 @@ class CreateVideoRecursTable extends Migration
     {
         Schema::create('video_recurs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('idTipus')->references('id')->on('tipus_videos');
+            $table->integer('idRecurs')->references('id')->on('recursos');
+            $table->string('urlVideo');
+            $table->string('titol');
             $table->timestamps();
         });
     }

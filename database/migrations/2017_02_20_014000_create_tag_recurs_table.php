@@ -15,6 +15,8 @@ class CreateTagRecursTable extends Migration
     {
         Schema::create('tag_recurs', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('idTag')->references('id')->on('tags');
+            $table->integer('idRecurs')->references('id')->on('recursos');
             $table->timestamps();
         });
     }

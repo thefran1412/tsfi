@@ -8,9 +8,16 @@
         <meta name="_token" content="{{ csrf_token() }}" />
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/menu.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url('css/slick.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url('css/slick-theme.css') }}">
+
+        <link rel="stylesheet" type="text/css" href="{{ url('css/multiselect.css') }}">
+
         <title>Laravel</title>
+
+        <script type="text/javascript">
+            if(localStorage.length < 2){
+                    window.location.href = "http://localhost:8000";
+                }
+        </script>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">

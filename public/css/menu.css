@@ -3,42 +3,34 @@
     src: url(/fonts/SIMPLIFICA.ttf);
 }
 
-#menu .header-item{
-	padding: 15px;
+header{
+	position: fixed;
+    z-index: 1030;
+    width: 100%;
+}
+
+.content-page-header{
+	padding-top: 155px;
+}
+
+.header-top-item{
+	padding: 8px 15px;
 	width: 100%;
 	background-color: #333333;
-	 color: #4FC08D; 
+	color: #4FC08D; 
 	font-family: Simplifica;
 }
 
-#menu .header-item span{
+.header-top-item span{
 	font-size: 3em;
     font-weight: bold; 
     letter-spacing: 6px; 
 }
 
-.header-item{
+.header-top-item{
 	-ms-flex:1 auto;
 	flex:1 auto;
 	display: table;
-}
-
-header>.header-item{
-	-ms-flex-preferred-size:auto;
-	flex-basis:auto;
-	-ms-flex-negative:0;
-	flex-shrink:0;
-	padding:1.25em 0
-}
-
-header>.header-search-container{
-	-webkit-box-ordinal-group:3;
-	-ms-flex-order:2;
-	order:2;
-	-webkit-box-flex:1;
-	-ms-flex-positive:1;
-	flex-grow:1;
-	width:auto;
 }
 
 .site-search{
@@ -58,14 +50,12 @@ header>.header-search-container{
 .site-search input[type=search]{
 	transition: border 1s ease;
 	background-color:transparent;
+	font-family: "Raleway", sans-serif;
 	color:inherit;
 	border:1px solid rgba(255,255,255,0.2);
 	border-radius:0;margin:0 0 20px;
 	padding:5px;
 	padding-left:15px;
-	letter-spacing: 1px;
-    font-weight: bold;
-	font-size:1.2em;
 	display:block;
 	width:100%;
 	outline:0
@@ -154,3 +144,73 @@ header.header-light .site-search input[type=submit]{
 	color: #4FC08D;
 }
 
+.footer-menu{
+	padding: 11px 15px;
+    background-color: #4FC08D;
+}
+
+footer{
+	background-color: #333;
+	padding: 15px 15px 0 15px;
+}
+
+footer h4{
+	font-weight: bold;
+    color: #FFF;
+}
+
+footer .entitats > div{
+	margin-bottom: 15px;
+}
+
+footer .entitats > div a{
+	text-decoration: none;
+    color: #fff;
+    transition:color 1s ease;
+}
+
+footer .entitats > div a:hover{
+	text-decoration: none;
+	color: #4FC08D;
+}
+
+footer .entitats > div a:focus{
+	text-decoration: none;
+	color: #4FC08D;
+}
+
+footer .contact span {
+	display: block;
+	color: #fff;
+}
+
+footer .contact span:nth-of-type(1){
+	margin-top: 15px;
+}
+
+footer .contact span a{
+	text-decoration: none;
+    color: #fff;
+    transition:color 1s ease;
+}
+
+footer .contact span a:hover{
+	text-decoration: none;
+	color: #4FC08D;
+}
+
+footer .contact span a:focus{
+	text-decoration: none;
+	color: #4FC08D;
+}
+
+footer .network a{
+	float: left;
+}
+
+footer .network img{
+	width: 40px;
+    margin-right: 20px;
+    margin-bottom: 25px;
+    margin-top: 15px;
+}

@@ -18,12 +18,25 @@ require('./bootstrap');
 Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 Vue.use(VueRouter);
 
+//Index
 import Index from './components/Index.vue';
 
+//Students
 import HomeStudents from './components/HomeStudents.vue';
 import ArticlesStudents from './components/ArticlesStudents.vue';
 
+//Categories
+import Events from './components/Events.vue';
+import Noticies from './components/Noticies.vue';
+import Tallers from './components/Tallers.vue';
+import Conferencies from './components/Conferencies.vue';
+
+
+//Teachers
 import HomeTeachers from './components/HomeTeachers.vue';
+
+//Recurso
+import Resource from './components/Resources.vue';
 
 
 const router = new VueRouter({
@@ -31,9 +44,14 @@ const router = new VueRouter({
     base:__dirname,
     linkActiveClass: 'active',
     routes:[
-    	{path:'/events-students',component:HomeStudents, name:'HomeStudents' },
-    	{path:'/articles-students',component:ArticlesStudents, name:'ArticlesStudents' },
-    	{path:'/events-teachers',component:HomeTeachers, name:'HomeTeachers' }
+    	{path:'/home-students',component:HomeStudents, name:'home-students' },
+    	{path:'/articles-students',component:ArticlesStudents, name:'articlesStudents' },
+    	{path:'/home-teachers',component:HomeTeachers, name:'home-teachers' },
+    	{path:'/resource',component:Resource, name:'resource' },
+        {path:'/events',component:Events, name:'events' },
+        {path:'/noticies',component:Noticies, name:'noticies' },
+        {path:'/tallers',component:Tallers, name:'tallers' },
+        {path:'/conferencies',component:Conferencies, name:'conferencies' }
     ]
 });
 

@@ -15,7 +15,12 @@ class CreatePodcastsTable extends Migration
     {
         Schema::create('podcasts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('descPodCasts', 200);
+            $table->string('podCast');
+            $table->string('ordre');
+            $table->integer('idRecurs')->references('id')->on('recursos');
             $table->timestamps();
+
         });
     }
 

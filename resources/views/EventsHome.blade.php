@@ -7,6 +7,9 @@
         <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
         <meta name="_token" content="{{ csrf_token() }}" />
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/menu.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/slick.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/slick-theme.css') }}">
         <title>Laravel</title>
 
         <!-- Fonts -->
@@ -16,10 +19,10 @@
     <body>
         <div class="flex-center position-ref full-height">
 
-            <div id="app" class="content">
+            <div id="appVue" class="content">
                 
             </div>
         </div>
-        <script src="/js/app.js"></script>
+        <script src="{{ URL::asset('/js/app.js') }}" ></script>
     </body>
 </html>

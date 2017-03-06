@@ -177,6 +177,8 @@
 
                     var typeUser = localStorage.getItem("typeUser");
 
+                    console.log(typeUser);
+
                     localStorage.removeItem("numType");
 
                     localStorage.setItem("numType", 1);
@@ -186,6 +188,10 @@
                     }else{
                         this.$router.push('/home-teachers')
                     }
+                }
+
+                if(localStorage.length < 2){
+                    window.location.href = "http://localhost:8000";
                 }
             },
             changeTypeUser: function (typeUser){

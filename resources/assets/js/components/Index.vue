@@ -133,39 +133,12 @@
         },
         methods:{
             typeUser(){
-
                 if(localStorage.length === 2){
 
                     var typeUser = localStorage.getItem("typeUser");
                     var pathURL = this.$refs.canvas.$el.hash;
 
                     this.correctUrlPageCategory(typeUser, pathURL);
-
-                    // if(typeUser === 'student'){
-                    //     this.type = 'students';
-                    //     console.log(pathURL);
-                    //     this.categories[0].category = 'home-students';
-
-                    //     if(pathURL.indexOf('#/') > -1 && pathURL !== '#/home-students'){
-                    //         var url  = pathURL.replace('#/', '');
-                    //         this.category.category = url;
-                    //         var cap = url.charAt(0).toUpperCase() + url.slice(1);;
-                    //         console.log(cap);
-                    //         this.category = { category: url, name: cap };
-                    //     }
-                    // }
-                    // if(typeUser === 'teacher'){
-
-                    //     this.type = 'teachers';
-
-                    //     this.categories[0].category = 'home-teachers';
-                    //     if(pathURL.indexOf('#/') > -1 && pathURL !== '#/home-teachers'){
-                    //         var url  = pathURL.replace('#/', '');
-                    //         this.category.category = url;
-                    //         var cap = url.charAt(0).toUpperCase() + url.slice(1);;
-                    //         this.category = { category: url, name: cap };
-                    //     }
-                    // }
                 }
 
             },
@@ -176,8 +149,6 @@
                 if(localStorage.length === 2 && Number(typeNum) === 0){
 
                     var typeUser = localStorage.getItem("typeUser");
-
-                    console.log(typeUser);
 
                     localStorage.removeItem("numType");
 
@@ -217,16 +188,11 @@
             },
             correctUrlPageCategory(typeUser, pathURL){
 
-
-
                 this.type = typeUser+'s';
                 this.categories[0].category = 'home-'+typeUser+'s';
 
-                console.log('hola');
-
                 if(pathURL.indexOf('#/') > -1 && pathURL !== '#/home-'+typeUser+'s'){
                     var url  = pathURL.replace('#/', '');
-                    //this.category.category = url;
                     var cap = url.charAt(0).toUpperCase() + url.slice(1);
 
                     this.category = { category: url, name: cap };

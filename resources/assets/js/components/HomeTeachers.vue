@@ -3,14 +3,7 @@
 		<h1>Hello Teacher</h1>
 	</div>
 </template>
-<style type="text/css">
-	img{
-		width: 100px;
-		margin: auto;
-		display: block;
-		margin-bottom: 10px;
-	}
-</style>
+
 
 <script>
 	/*export default{

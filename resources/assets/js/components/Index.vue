@@ -16,17 +16,19 @@
                      </button>
                 </form>
                 <div class="user-type">
-                    <li v-on:click="changeTypeUser('teacher')" v-if="type === 'students'"><router-link :to="{name: 'HomeTeachers'}">Alumnes</router-link></li>
-                    <li  v-on:click="changeTypeUser('student')" v-if="type === 'teachers'"><router-link :to="{name: 'HomeStudents'}">Professors</router-link></li>
+                    <li v-on:click="changeTypeUser('teacher')" v-if="type === 'students'"><router-link :to="{name: 'home-teachers'}">Alumnes</router-link></li>
+                    <li  v-on:click="changeTypeUser('student')" v-if="type === 'teachers'"><router-link :to="{name: 'home-students'}">Professors</router-link></li>
                 </div>
             </div>
             <div class="footer-menu">
                 <div class="container">
-                    <div class="col-md-6">
-                        <multiselect v-model="category" selected-label="Seleccionada" track-by="category" label="category" placeholder="Select one" :options="categories" :selected="selected" :searchable="false" :allow-empty="false"></multiselect>
+                    <div class="col-md-6" >
+                        <router-link ref="canvas" :to="{name: category.category}">
+                        <multiselect v-model="category" selected-label="Seleccionada" track-by="name" label="name" placeholder="Select one" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
+                        </router-link>
                     </div>
                     <div class="col-md-6">
-                        <multiselect v-model="value" :options="options" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="name" track-by="name"></multiselect>
+                        <multiselect v-model="value" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="name" track-by="name"></multiselect>
                     </div>
                </div>
             </div>
@@ -81,26 +83,14 @@
         data(){
             return{
                 type:'',
-                category: { category: 'Categories' },
+                category: { category: '', name: 'Totes les categories' },
                 categories: [
-                    { category: 'Categories' },
-                    { category: 'Events' },
-                    { category: 'Noticies' },
-                    { category: 'Tallers' },
-                    { category: 'Conferencies' }
+                    { category: '' , name: 'Totes les categories'},
+                    { category: 'events', name: 'Events' },
+                    { category: 'noticies', name: 'Noticies'},
+                    { category: 'tallers', name: 'Tallers'},
+                    { category: 'conferencies', name: 'Conferencies'}
                 ],
-                options: [
-                    { name: 'Vue.js' },
-                    { name: 'Rails' },
-                    { name: 'Sinatra' },
-                    { name: 'Laravel' },
-                    { name: 'Phoenix' },
-                    { name: 'Vue.js' },
-                    { name: 'Rails' },
-                    { name: 'Sinatra' },
-                    { name: 'Laravel' },
-                    { name: 'Phoenix' }
-                  ],
                 entities: [
                     { name: 'ADECAT', url: 'http://www.adecat.org/' },
                     { name: 'Ajuntament de BCN - Barcelona Activa', url: 'http://www.barcelonactiva.cat' },
@@ -137,6 +127,8 @@
         },
         created(){
             this.whatUserPage();
+        },
+        mounted(){
             this.typeUser();
         },
         methods:{
@@ -145,12 +137,35 @@
                 if(localStorage.length === 2){
 
                     var typeUser = localStorage.getItem("typeUser");
+                    var pathURL = this.$refs.canvas.$el.hash;
 
-                    if(typeUser === 'student'){
-                        this.type = 'students';
-                    }else{
-                        this.type = 'teachers';
-                    }
+                    this.correctUrlPageCategory(typeUser, pathURL);
+
+                    // if(typeUser === 'student'){
+                    //     this.type = 'students';
+                    //     console.log(pathURL);
+                    //     this.categories[0].category = 'home-students';
+
+                    //     if(pathURL.indexOf('#/') > -1 && pathURL !== '#/home-students'){
+                    //         var url  = pathURL.replace('#/', '');
+                    //         this.category.category = url;
+                    //         var cap = url.charAt(0).toUpperCase() + url.slice(1);;
+                    //         console.log(cap);
+                    //         this.category = { category: url, name: cap };
+                    //     }
+                    // }
+                    // if(typeUser === 'teacher'){
+
+                    //     this.type = 'teachers';
+
+                    //     this.categories[0].category = 'home-teachers';
+                    //     if(pathURL.indexOf('#/') > -1 && pathURL !== '#/home-teachers'){
+                    //         var url  = pathURL.replace('#/', '');
+                    //         this.category.category = url;
+                    //         var cap = url.charAt(0).toUpperCase() + url.slice(1);;
+                    //         this.category = { category: url, name: cap };
+                    //     }
+                    // }
                 }
 
             },
@@ -158,18 +173,14 @@
 
                 var typeNum = localStorage.getItem("numType");
 
-                console.log(typeNum);
-
                 if(localStorage.length === 2 && Number(typeNum) === 0){
 
                     var typeUser = localStorage.getItem("typeUser");
 
-                    console.log(typeNum);
-
                     localStorage.removeItem("numType");
 
                     localStorage.setItem("numType", 1);
-                    
+
                     if(typeUser === 'student'){
                         this.$router.push('/home-students')
                     }else{
@@ -189,9 +200,35 @@
 
                 this.whatUserPage();
                 this.typeUser();
+
+                if (typeUser === 'teacher') {
+                    this.category = { category: 'home-teachers', name: 'Totes les categories' };
+                };
+
+                if (typeUser === 'student') {
+                    this.category = { category: 'home-students', name: 'Totes les categories' };
+                };
+                
             },
             nameWithLang ({ name }) {
               return `${name}`
+            },
+            correctUrlPageCategory(typeUser, pathURL){
+
+
+
+                this.type = typeUser+'s';
+                this.categories[0].category = 'home-'+typeUser+'s';
+
+                console.log('hola');
+
+                if(pathURL.indexOf('#/') > -1 && pathURL !== '#/home-'+typeUser+'s'){
+                    var url  = pathURL.replace('#/', '');
+                    //this.category.category = url;
+                    var cap = url.charAt(0).toUpperCase() + url.slice(1);
+
+                    this.category = { category: url, name: cap };
+                }
             }
         }
     }

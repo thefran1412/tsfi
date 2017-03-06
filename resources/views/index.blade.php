@@ -6,6 +6,10 @@
             if(localStorage.length === 2){
 
                 var typeUser = localStorage.getItem("typeUser");
+
+                localStorage.removeItem("numType");
+
+                localStorage.setItem("numType", 0);
                 
                 if(typeUser === 'student'){
                     location.pathname = '/tsfi/';

@@ -25,6 +25,10 @@ import Index from './components/Index.vue';
 import HomeStudents from './components/HomeStudents.vue';
 import ArticlesStudents from './components/ArticlesStudents.vue';
 
+//categories
+
+import Events from './components/Events.vue';
+
 //Teachers
 import HomeTeachers from './components/HomeTeachers.vue';
 
@@ -37,10 +41,11 @@ const router = new VueRouter({
     base:__dirname,
     linkActiveClass: 'active',
     routes:[
-    	{path:'/home-students',component:HomeStudents, name:'HomeStudents' },
-    	{path:'/articles-students',component:ArticlesStudents, name:'ArticlesStudents' },
-    	{path:'/home-teachers',component:HomeTeachers, name:'HomeTeachers' },
-    	{path:'/resource',component:Resource, name:'Resource' }
+    	{path:'/home-students',component:HomeStudents, name:'home-students' },
+    	{path:'/articles-students',component:ArticlesStudents, name:'articlesStudents' },
+    	{path:'/home-teachers',component:HomeTeachers, name:'home-teachers' },
+    	{path:'/resource',component:Resource, name:'resource' },
+        {path:'/events',component:Events, name:'events' }
     ]
 });
 

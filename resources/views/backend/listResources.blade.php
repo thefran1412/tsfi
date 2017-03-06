@@ -12,31 +12,33 @@
     <h2>Recurso</h2>
     <div class="content">
         <table class=".table-striped">
-        @foreach($recursos as $recurso)
-            @if($recurso->relevancia > 1)
+            {{ $data['var'] or 'empty string' }}
+            {{--@if( false)--}}
+                {{--@foreach($recursos as $recurso)--}}
+                    {{--@if($recurso->relevancia > 1)--}}
 
-                    <tr>
-                        <th class="tg-baqh" colspan="3"><h2>{{ $recurso->titol }}</h2></th>
-                    </tr>
-                    <tr>
-                        <td class="tg-baqh" colspan="3"><h3>{{ $recurso->subTitol }}</h3></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-baqh" colspan="3"><p> {{ $recurso->descDetaill1 }}</p></td>
-                    </tr>
-                    <tr>
-                        <td class="tg-yw4l">{{ $recurso->creatPer }}</td>
-                        <td class="tg-yw4l">{{ $recurso->created_at}}</td>
-                        <td class="tg-yw4l">{{ $recurso->relevancia }}</td>
-                    </tr>
-        @endif
-        @endforeach
-
+                            {{--<tr>--}}
+                                {{--<th class="tg-baqh" colspan="3"><h2>{{ $recurso->titol }}</h2></th>--}}
+                            {{--</tr>--}}
+                            {{--<tr>--}}
+                                {{--<td class="tg-baqh" colspan="3"><h3>{{ $recurso->subTitol }}</h3></td>--}}
+                            {{--</tr>--}}
+                            {{--<tr>--}}
+                                {{--<td class="tg-baqh" colspan="3"><p> {{ $recurso->descDetaill1 }}</p></td>--}}
+                            {{--</tr>--}}
+                            {{--<tr>--}}
+                                {{--<td class="tg-yw4l">{{ $recurso->creatPer }}</td>--}}
+                                {{--<td class="tg-yw4l">{{ $recurso->created_at}}</td>--}}
+                                {{--<td class="tg-yw4l">{{ $recurso->relevancia }}</td>--}}
+                            {{--</tr>--}}
+                    {{--@endif--}}
+                {{--@endforeach--}}
+            {{--@endif--}}
         </table>
     </div>
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <div class="row justify-content-md-center">
+            <div class="row justify-content-lg-center">
                     <h2>{{ $recurso->titol }}</h2>
             </div>
         </div>
@@ -45,7 +47,7 @@
 
     <div class="container">
         <div class="row justify-content-md-center">
-            <div class="col col-lg-1">
+            <div class="col col-lg-2">
                 {{ $recurso->titol }}
             </div>
             <div class="col-12 col-md-auto">

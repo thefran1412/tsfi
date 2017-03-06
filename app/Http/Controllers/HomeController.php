@@ -35,14 +35,20 @@ class HomeController extends Controller
     }
     public function resource()
     {
-        return view('backend.addresource');
+        $page = "addresource";
+        return view("backend.addresource")->with(["page" => "addresource"]);
     }
     public function listResource()
     {
         $recursos = Recursos::paginate(10);
-
-
-        return view('backend.listResources', compact('recursos'));
+        $page = ["page" => "listresources"];
+        return view('backend.listResources', $page, compact('recursos'));
     }
+    public function storeResource()
+    {
+        $data = request()->only(['titol', 'subTitol', 'descDetaill1', 'creatPer']);
+        Recursos::create($data);
 
+        return redirect()->to('resource/list');
+    }
 }

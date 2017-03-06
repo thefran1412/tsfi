@@ -1,18 +1,17 @@
-<h1>Resources</h1>
-    <ul class="list-group">
-@foreach($notes as $note)
-    {{--<li>--}}
-    {{--@if(strlen($note->note) > 50)--}}
-    {{--<strong>--}}
-    {{--{{ substr($note->note, 0, 50) }} ...--}}
-    {{--</strong>--}}
-    {{--</li>--}}
-    {{--@else--}}
-    <li class="list-group-item">
-        {{ $note->note }}
-    </li>
-    {{--@endif--}}
-    @endforeach
-    </ul>
+@extends('base')
 
-    {!! $notes->render() !!}
+@section('content')
+
+    <div class="container">
+        <header class="row"></header>
+        <section class="row section1"></section>
+        <section class="row section2"></section>
+        <section class="row section1"></section>
+        <section class="row section2"></section>
+        <section class="row section1"></section>
+
+        <footer class="row"></footer>
+    </div>
+
+
+@endsection

@@ -1,0 +1,49 @@
+@extends('layouts.backend')
+
+@section('content')
+                    
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+                    <p>config</p>
+@endsection

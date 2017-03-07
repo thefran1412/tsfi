@@ -37,6 +37,8 @@ Route::get('/admin/login', 'Auth\LoginController@index');
 Route::get('/admin', 'HomeController@index');
 Route::get('/resource', 'HomeController@resource');
 
-
-
+Route::get('/admin/analytics', 'backend\Analytics@index');
+Route::get('/admin/recursos', 'backend\Recursos@index');
+Route::get('/admin/entidades', 'backend\Entidades@index');
+Route::get('/admin/config', 'backend\Backend@config');
 

@@ -56,11 +56,16 @@ div{
 	top: 70px;
 	width: 10%;
 	height: calc(100vh - 70px);
-	background-color: grey;
+	background-color: #333333;
 	display: inline-block;
+}
+.menu a{
+	color: white;
+	text-decoration: none; 
 }
 .content{
 	float: right;
 	width: 90%;
 	height: calc(100% - 70px);
+	margin-top: 70px;
 }

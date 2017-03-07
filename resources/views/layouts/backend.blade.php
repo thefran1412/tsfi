@@ -32,12 +32,12 @@
     {{-- HEADER END --}}
     <div class="menu">
         <ul>
-            <li><a href="#">Inici</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Recursos</a></li>
-            <li><a href="#">Entitats</a></li>
+            <li><a href="{{  action('backend\Backend@index') }}">Inici</a></li>
+            <li><a href="{{  action('backend\Analytics@index') }}">Analytics</a></li>
+            <li><a href="{{  action('backend\Recursos@index') }}">Recursos</a></li>
+            <li><a href="{{  action('backend\Entidades@index') }}">Entitats</a></li>
             <li><a href="#">Usuaris</a></li>
-            <li><a href="#">Configuració</a></li>
+            <li><a href="{{  action('backend\Backend@config') }}">Configuració</a></li>
         </ul>
     </div>
     <div class="content">

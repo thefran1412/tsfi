@@ -30,14 +30,7 @@
 		</div>
 	</div>
 </template>
-<style type="text/css">
-	img{
-		width: 100px;
-		margin: auto;
-		display: block;
-		margin-bottom: 10px;
-	}
-</style>
+
 
 <!-- $table->string('titol', 150);
             $table->string('subTitol', 250);

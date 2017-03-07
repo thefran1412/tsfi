@@ -6,10 +6,14 @@
             if(localStorage.length === 2){
 
                 var typeUser = localStorage.getItem("typeUser");
-                
+
+                localStorage.removeItem("numType");
+
+                localStorage.setItem("numType", 0);
                 if(typeUser === 'student'){
                     location.pathname = '/tsfi/';
-                }else{
+                }
+                else{
                     location.pathname = '/tsfi/';
                 }
             }
@@ -34,7 +38,7 @@
     </head>
     <body>
         <div class="home-container">
-            <a onclick="saveTypeLocalStorage('student')" href="{{ url('/tsfi/') }}">
+            <a onclick="saveTypeLocalStorage('student')">
                 <div class="student">
                     <h1>T.S.</h1>
                     <h2>Taula Sectorial</h2>
@@ -46,7 +50,7 @@
                     </div>
                 </div>
             </a>
-            <a onclick="saveTypeLocalStorage('teacher')" href="{{ url('/tsfi/') }}">
+            <a onclick="saveTypeLocalStorage('teacher')" >
                 <div class="teacher">
                     <h1>F.I.</h1>
                     <h2>Formació Industrial</h2>
@@ -60,14 +64,35 @@
         </div>
     </body>
     <script>
-
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+            });
+            return vars;
+        }
 
         function saveTypeLocalStorage(typeUser){
 
             if (window.localStorage) {
                 localStorage.setItem('typeUser', typeUser);
                 localStorage.setItem('numType', 0);
-            } else {
+                
+                var url = getUrlVars()["url"];
+                console.log(url);
+                var newurl = "http://localhost:8000/";
+
+                if (url !== undefined) {
+                    localStorage.removeItem("numType");
+                    localStorage.setItem("numType", 1);
+                    newurl = newurl+url;
+                }
+                else{
+                    newurl = newurl+'tsfi';
+                }
+                window.location.href = newurl;
+            } 
+            else {
               throw new Error('Tu Browser no soporta LocalStorage!');
             }
         }

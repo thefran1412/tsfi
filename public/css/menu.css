@@ -149,3 +149,68 @@ header.header-light .site-search input[type=submit]{
     background-color: #4FC08D;
 }
 
+footer{
+	background-color: #333;
+	padding: 15px 15px 0 15px;
+}
+
+footer h4{
+	font-weight: bold;
+    color: #FFF;
+}
+
+footer .entitats > div{
+	margin-bottom: 15px;
+}
+
+footer .entitats > div a{
+	text-decoration: none;
+    color: #fff;
+    transition:color 1s ease;
+}
+
+footer .entitats > div a:hover{
+	text-decoration: none;
+	color: #4FC08D;
+}
+
+footer .entitats > div a:focus{
+	text-decoration: none;
+	color: #4FC08D;
+}
+
+footer .contact span {
+	display: block;
+	color: #fff;
+}
+
+footer .contact span:nth-of-type(1){
+	margin-top: 15px;
+}
+
+footer .contact span a{
+	text-decoration: none;
+    color: #fff;
+    transition:color 1s ease;
+}
+
+footer .contact span a:hover{
+	text-decoration: none;
+	color: #4FC08D;
+}
+
+footer .contact span a:focus{
+	text-decoration: none;
+	color: #4FC08D;
+}
+
+footer .network a{
+	float: left;
+}
+
+footer .network img{
+	width: 40px;
+    margin-right: 20px;
+    margin-bottom: 25px;
+    margin-top: 15px;
+}

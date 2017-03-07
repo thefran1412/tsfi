@@ -1,8 +1,9 @@
 <template>
-	<div>
-		<h1>Articles Student</h1>
+	<div class="content-page-header">
+		<h1>Events</h1>
 	</div>
 </template>
+
 
 <script>
 	/*export default{

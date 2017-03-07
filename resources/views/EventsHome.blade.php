@@ -11,6 +11,13 @@
         <link rel="stylesheet" type="text/css" href="{{ url('css/multiselect.css') }}">
         <title>Laravel</title>
 
+        <script type="text/javascript">
+            if(localStorage.length < 2){
+                    var url = window.location.href;
+                    window.location.href = "http://localhost:8000/?url="+url.substring(22);
+                }
+        </script>
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 

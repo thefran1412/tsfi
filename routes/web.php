@@ -28,10 +28,14 @@ Route::get('/tsfi/', function () {
 // Route::get('/login', function () {
 //     return view('home');
 // });
-//Auth::routes();
+Auth::routes();
+
+// Route::get('/hola', function () {
+//     return 'hola';
+// });
 Route::get('/admin/login', 'Auth\LoginController@index');
-Route::get('/admin', 'HomeController@index');
-Route::get('/resource', 'HomeController@resource');
+Route::get('/admin', 'backend\Backend@index');
+Route::get('/resource', 'backend\Backend@resource');
 
 
 

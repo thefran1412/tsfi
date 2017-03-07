@@ -7,5 +7,8 @@ use App\Http\Controllers\Controller;
 
 class Entidades extends Controller
 {
-    //
+    public function index()
+    {
+    	return view('backend.entidades');
+    }
 }

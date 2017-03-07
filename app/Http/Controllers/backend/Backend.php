@@ -27,4 +27,8 @@ class Backend extends Controller
     {
         return view('backend.addresource');
     }
+    public function config()
+    {
+        return view('backend.config');
+    }
 }

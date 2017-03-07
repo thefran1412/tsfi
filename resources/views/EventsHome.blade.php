@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/menu.css') }}">
 
+        <link rel="stylesheet" type="text/css" href="{{ url('css/recursos.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/multiselect.css') }}">
 
         <title>Laravel</title>

@@ -1,0 +1,56 @@
+#appVue .container{
+	width:100%;
+}
+
+#appVue footer .container:last-child{
+	width:1170px;
+}
+
+.col-md-4{
+	padding-right: 0px;
+	padding-left: 0px;
+}
+.recurso{
+	position: relative;
+	height: 350px;
+}
+.recurso:hover{
+
+	transition: background-color .5s ease-in-out;
+}
+.recurso-content{
+	/*padding-top: 75px;*/
+	padding-top: 55px;
+	padding-left: 45px;
+	padding-right: 45px;
+
+}
+.recurso-content h2{
+	margin-top: 0;
+	line-height:1.1;
+	font-weight: bold;
+}
+
+.recurso-content h2 a{
+		text-decoration: none;
+	color: black;
+}
+
+.recurso-content h2 a:hover{
+		text-decoration: none;
+	color: black;
+}
+.recurso-meta{
+	position: absolute;
+	bottom: 40px;
+}
+.autor, .fecha{
+	text-transform: uppercase;
+}
+.autor{
+	font-size:13px;
+	line-height: 13px;
+}
+.fecha{
+	font-size:11px;
+}

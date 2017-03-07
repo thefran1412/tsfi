@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.backend')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,53 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    dash
+                    
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    <p>dash</p>
+                    
+
                 </div>
             </div>
         </div>

@@ -1,0 +1,66 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+html, body {
+    height: 100%;
+}
+div{
+	/*border: 1px solid black;*/
+}
+.header{
+	position: fixed;
+	width: 100%;
+	background-color: orange;
+	height: 70px;
+	box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+}
+.headerIcon, .headerSearch, .headerActions{
+	float: left;
+	height: 100%;	
+}
+.headerIcon{
+	width: 10%;
+	background-color: turquoise;
+}
+.headerSearch{
+	background-color: white;
+	width: 70%;
+}
+.headerActions{
+	background-color: grey;
+	width: 20%;
+	float: right;
+}
+.menu{
+	position: fixed;
+	left: 0;
+	top: 70px;
+	width: 10%;
+	height: calc(100vh - 70px);
+	background-color: grey;
+	display: inline-block;
+}
+.content{
+	float: right;
+	width: 90%;
+	height: calc(100% - 70px);
+}

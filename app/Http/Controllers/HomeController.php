@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Recursos;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Null_;
 
 class HomeController extends Controller
 {
@@ -40,9 +41,11 @@ class HomeController extends Controller
     }
     public function listResource()
     {
-        $recursos = Recursos::paginate(10);
+
+        $recursos=Recursos::paginate(10);
+//        dd($recursos);
         $page = ["page" => "listresources"];
-        return view('backend.listResources', $page, compact('recursos'));
+        return view('backend.listResources', compact('recursos'))->with(["page" => "listresources"]);
     }
     public function storeResource()
     {

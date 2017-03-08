@@ -1,3 +1,15 @@
 p {
     text-indent: 50px;
 }
+.alert {
+    width:60%;
+}
+
+#listrecurso .table{
+    max-width: 500px;
+}
+
+#listrecurso .table th {
+    text-align: center;
+    color :red;
+}

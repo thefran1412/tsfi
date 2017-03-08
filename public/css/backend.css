@@ -50,6 +50,10 @@ div{
 	width: 20%;
 	float: right;
 }
+.headerActions a{
+	color: white;
+	text-decoration: none;
+}
 .menu{
 	position: fixed;
 	left: 0;

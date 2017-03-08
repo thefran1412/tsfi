@@ -27,13 +27,20 @@
         <div class="headerSearch">
         <input type="text" name="search">
         </div>
-        <div class="headerActions">actions</div>
+        <div class="headerActions">
+            <a href="#" class="noti">Notificacions</a>
+            <a href="{{url('/')}}">Frontend</a>
+            {{-- LOGOUT --}}
+            <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+        </div>
     </div>
     {{-- HEADER END --}}
     <div class="menu">
         <ul>
             <li><a href="{{  action('backend\Backend@index') }}">Inici</a></li>
-            <li><a href="{{  action('backend\Analytics@index') }}">Analytics</a></li>
             <li><a href="{{  action('backend\Recursos@index') }}">Recursos</a></li>
             <li><a href="{{  action('backend\Recursos@add') }}">---Add</a></li>
             <li><a href="{{  action('backend\Categories@index') }}">---Categories</a></li>
@@ -42,6 +49,7 @@
             <li><a href="{{  action('backend\Entitats@add') }}">---Add</a></li>
             <li><a href="{{  action('backend\Usuaris@index') }}">Usuaris</a></li>
             <li><a href="{{  action('backend\Usuaris@add') }}">---Add</a></li>
+            <li><a href="{{  action('backend\Analytics@index') }}">Analytics</a></li>
             <li><a href="{{  action('backend\Backend@config') }}">Configuració</a></li>
         </ul>
     </div>

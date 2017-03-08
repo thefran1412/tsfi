@@ -1,19 +1,23 @@
 <template>
 	<div class="content-bottom-header">
 		<!-- <h1>RESOURCE</h1> -->
-		<div id="resource" >
+		<div id="resource">
 
-			<div class="col-xs-12 col-sm-8 col-lg-8 resource-body">
-				<h1 class="title-resource">PROVA TITOL</h1>
-				<!-- <div class="picture">PRUEBA imagen</div> -->
-				<img class="img-responsive" src="\img\image\imagenprueba.jpg" alt="prueba View" width="960" height="540">
-				<div class="subtitle">PRUEBA DE subTITULO</div>
-				<div class="descshort">PRUEBA DE descripcion corta</div>
-				<div class="desc1">PRUEBA DE descripcion larga y extensa 1</div>
-				<div class="desc2">PRUEBA DE descripcion larga y extensa 1</div>
+			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
+				<!--  clearfix visible-xs-block visible-sm-block visible-md-block visible-lg-block -->
+				<h1>PROVA TITOL</h1>
+				<img class="img-responsive" src="\img\image\imagenprueba.jpg" alt="prueba View"> <!-- width="960" height="540" -->
+				<h2>PROVA SUBTITOL De la plantilla del recurs de proves i bla, bla, bla, bla, bla...</h2>
+
+				<!-- class="descshort" -->
+				<p> <strong>DESCRIPCIO CURTA </strong> amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,</p>
+					<!-- desc1 -->
+				<p> <strong>DESCRIPCIO LLARGA 1! </strong> sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a 1</p>
+					<!-- desc2 -->
+				<p> <strong>DESCRIPCIO LLARGA 2!</strong> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a</p>
 			</div>
 
-			<div class="col-xs-12 col-sm-4 col-lg-4 resource-extras">
+			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 resource-extras">
 				<h1 class="title-data-sheet">FITXA TÈCNICA</h1>
 				<div class="dateini">date('dataInici');</div>
 				<div class="dateend">date('DdtaFinal');</div>

@@ -33,12 +33,25 @@ Auth::routes();
 // Route::get('/hola', function () {
 //     return 'hola';
 // });
+
+/* BACKEND */
 Route::get('/admin/login', 'Auth\LoginController@index');
-Route::get('/admin', 'HomeController@index');
-Route::get('/resource', 'HomeController@resource');
-
-Route::get('/admin/analytics', 'backend\Analytics@index');
-Route::get('/admin/recursos', 'backend\Recursos@index');
-Route::get('/admin/entidades', 'backend\Entidades@index');
+Route::get('/admin', 'backend\Backend@index');
+Route::get('/resource', 'backend\Backend@resource');
 Route::get('/admin/config', 'backend\Backend@config');
+Route::get('/admin/analytics', 'backend\Analytics@index');
 
+/* RECURSOS */
+Route::get('/admin/recursos', 'backend\Recursos@index');
+Route::get('/admin/recursos/add', 'backend\Recursos@add');
+Route::get('/admin/recursos', 'backend\Recursos@index');
+Route::get('/admin/recursos/categories', 'backend\Categories@index');
+Route::get('/admin/recursos/tags', 'backend\Tags@index');
+
+/* ENTIDADES */
+Route::get('/admin/entitats', 'backend\Entitats@index');
+Route::get('/admin/entitats/add', 'backend\Entitats@add');
+
+/* USUARIOS */
+Route::get('/admin/usuaris', 'backend\Usuaris@index');
+Route::get('/admin/usuaris/add', 'backend\Usuaris@add');

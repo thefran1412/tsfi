@@ -7,5 +7,8 @@ use App\Http\Controllers\Controller;
 
 class Tags extends Controller
 {
-    //
+	public function index()
+	{
+		return view('backend.recursos.tags');
+	}
 }

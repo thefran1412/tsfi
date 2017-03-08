@@ -35,8 +35,8 @@
             <li><a href="{{  action('backend\Backend@index') }}">Inici</a></li>
             <li><a href="{{  action('backend\Analytics@index') }}">Analytics</a></li>
             <li><a href="{{  action('backend\Recursos@index') }}">Recursos</a></li>
-            <li><a href="{{  action('backend\Entidades@index') }}">Entitats</a></li>
-            <li><a href="#">Usuaris</a></li>
+            <li><a href="{{  action('backend\Entitats@index') }}">Entitats</a></li>
+            <li><a href="{{  action('backend\Usuaris@index') }}">Usuaris</a></li>
             <li><a href="{{  action('backend\Backend@config') }}">Configuració</a></li>
         </ul>
     </div>

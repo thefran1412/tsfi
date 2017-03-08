@@ -1,30 +1,64 @@
 body {
 	min-width: 412px;
 }
-.resource-body {
-  float: left;
-  height: 600px;
-  /*background: #4FC08D;*/
-}
 .resource-extras {
   float: left;
-  height: 600px;
-  /*background: #333333;*/
+  /*height: auto;*/
 }
-.title-resource {
+/*First Column ** resource ** */
+.resource-body {
+  float: left;
+  /*height: auto;*/
+  /*background: #4FC08D;*/
+}
+
+.resource-body h1{
+  padding:  10px;
+  background: #4FC08D;
+  font-weight: bold;
+  /*background: #4FC08D;*/
+}
+
+.resource-body h2{
+  color: #4FC08D;
+}
+
+/*Second Column ** data-sheet & banner's ** */
+/*.resource-extras {
+  float: left;
+  height: auto;
+}*/
+.resource-extras h1{
+  padding:  10px;
+  background: #333333;
+  color: #4FC08D;
+  font-weight: bold;
+  /*background: #4FC08D;*/
+}
+
+
+/*.resource-extras {
+  float: left;
+  height: auto;*/
+  /*background: #333333;*/
+/*}
+*/
+/*.title-resource {
 	padding:  10px;
-	/*padding-top: 10px;
-	padding-left: 20px;*/
 	background: #4FC08D;
+	font-weight: bold;*/
 	/*#b0ff9d,
 	#1eaf66,*/
 	/*4FC08D*/
-}
-.title-data-sheet{
+/*}*/
+
+
+/*.title-data-sheet{
 	padding:  10px;
 	background: #333333;
 	color: #4FC08D;
-}
+	font-weight: bold;
+}*/
 .banners {
   float: left;
   width: 100%;

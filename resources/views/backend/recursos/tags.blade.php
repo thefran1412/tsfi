@@ -1,0 +1,49 @@
+@extends('layouts.backend')
+
+@section('content')
+                    
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+                    <p>tags</p>
+@endsection

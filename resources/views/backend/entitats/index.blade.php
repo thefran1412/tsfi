@@ -1,0 +1,49 @@
+@extends('layouts.backend')
+
+@section('content')
+                    
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+                    <p>entidades</p>
+@endsection

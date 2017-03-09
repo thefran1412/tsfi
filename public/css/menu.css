@@ -9,8 +9,10 @@ header{
     width: 100%;
 }
 
-.content-page-header{
+.content-bottom-header{
+	/*display: block;*/
 	padding-top: 155px;
+	/*margin-bottom: 100px;*/
 }
 
 .header-top-item{

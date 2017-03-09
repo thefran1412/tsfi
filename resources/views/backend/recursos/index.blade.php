@@ -2,48 +2,5 @@
 
 @section('content')
                     
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
-                    <p>recursos</p>
+                   <?php var_dump($recursos);?>
 @endsection

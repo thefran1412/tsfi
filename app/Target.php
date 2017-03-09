@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Recursos extends Model
+class Target extends Model
 {
-    protected $table = 'recursos';
+    protected $table = 'targets';
 }

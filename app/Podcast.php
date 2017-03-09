@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Podcasts extends Model
+class Podcast extends Model
 {
     //
     protected $table = 'podcasts';

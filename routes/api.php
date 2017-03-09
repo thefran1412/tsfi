@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::resource('entitats', 'Entitats');
+Route::resource('recursos', 'Recursos');
 
 Route::get('/user', function (Request $request) {
     return $request->user();

@@ -7,4 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Resource extends Model
 {
     protected $table = 'recursos';
+
+    protected $fillable = [
+    'id', 'titol', 'subTitol', 'descBreu', 'descDetaill1', 'descDetaill2', 'relevancia', 'dataInici', 'DdtaFinal', 'Gratuit', 'preuInferior', 'preuSuperior', 'dataPublicacio', 'visible', 'fotoResum', 'creatPer', 'idLocalitzacio'];
+
+    public function categoryResource(){
+    	return $this->belongsTo('App\CategoryResource');
+    }
 }

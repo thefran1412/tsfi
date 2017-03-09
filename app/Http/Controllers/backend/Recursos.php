@@ -7,8 +7,22 @@ use App\Http\Controllers\Controller;
 
 class Recursos extends Controller
 {
-    public function index()
+     protected $loginPath = '/admin/login';  
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-    	return view('backend.recursos');
+        $this->middleware('auth');
     }
+	public function index()
+	{
+		return view('backend.recursos.index');
+	}
+	public function add()
+	{
+		return view('backend.recursos.add');
+	}
 }

@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Entitats extends Model
+class Link extends Model
 {
     //
-    protected $table = 'entitats';
+    protected $table = 'link_recurs';
 }

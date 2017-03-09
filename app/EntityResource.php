@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EntitatRecurs extends Model
+class EntityResource extends Model
 {
     //
     protected $table = 'entitat_recurs';

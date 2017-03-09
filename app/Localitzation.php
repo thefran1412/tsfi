@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Localitzacions extends Model
+class Localitzation extends Model
 {
     //
     protected $table = 'localitzacions';

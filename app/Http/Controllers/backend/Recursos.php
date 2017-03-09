@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,18 +20,28 @@ class Recursos extends Controller
     }
 	public function index()
 	{
-		return view('backend.recursos.index');
+        $recursos = Resource::All();
+		return view('backend.recursos.index', compact('recursos'));
 	}
-	public function add()
+	public function storeResource()
 	{
-		return view('backend.recursos.add');
+
+//        $this->validate(request(), [
+//            'note' => ['required', 'max:200']
+//        ]);
+        $data = request()->only(['note']);
+        Resource::create($data);
+
+        return redirect()->to('notes');
+//		return view('backend.recursos.add');
 	}
     public function listRecurso()
     {
 
-        $recursos=Recursos::paginate(10);
+        $recursos=Resource::paginate(10);
 //        dd($recursos);
         $page = ["page" => "listresources"];
-        return view('backend.recursos.listResources',compact('recursos'))->with(["page" => "listresources"]);
+        return view('backend.recursos.listResources',compact('recursos'));
+//        return view('backend.recursos.listResources',compact('recursos'))->with(["page" => "listresources"]);
     }
 }

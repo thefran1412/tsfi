@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tags extends Model
+class Age extends Model
 {
-    protected $table = 'tags';
+    //
+    protected $table = 'edats';
 }

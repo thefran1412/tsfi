@@ -21,8 +21,16 @@ class Recursos extends Controller
 	{
 		return view('backend.recursos.index');
 	}
-	public function add()
+	public function store()
 	{
+
+//        $this->validate(request(), [
+//            'note' => ['required', 'max:200']
+//        ]);
+        $data = request()->only(['note']);
+        Recursos::create($data);
+
+        return redirect()->to('notes');
 		return view('backend.recursos.add');
 	}
     public function listRecurso()

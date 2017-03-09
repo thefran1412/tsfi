@@ -908,7 +908,6 @@
 	</div>
 </template>
 
-
 <script>
 
 	import Search from './Index.vue'; 

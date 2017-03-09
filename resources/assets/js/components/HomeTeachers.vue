@@ -57,7 +57,7 @@
 
     },
     created(){
-        
+      this.fetchResource();
     },
     mounted(){
         this.getResourceBackground();
@@ -66,7 +66,12 @@
         getResourceBackground() {
 
 
-        }
+        } ,  
+      fetchResource(){
+        this.$http.get('../api/recursos').then(response=>{
+            console.table(response.data);
+        })
+    },
     }
   }
 </script>

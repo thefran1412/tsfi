@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CategoriaRecurs extends Model
+class CategoryResource extends Model
 {
     //
     protected $table = 'categoria_recurs';

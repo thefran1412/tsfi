@@ -3,9 +3,9 @@
         <header>
             <div class="header-top-item header-search-container">
                 <span>TSFI</span>
-                <form class="site-search" >
+                <form class="site-search" v-on:submit.prevent="getWord">
                       <div id="site-search-container">
-                        <input value="" type="search" id="site-search" placeholder="Cerca el recurs...">
+                        <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
                       </div>
                       <button tabindex="2" type="submit">
                         <span class="a11y-only">Search</span>
@@ -15,6 +15,7 @@
                             </svg>
                      </button>
                 </form>
+                {{this.$root.search}}
                 <div class="user-type">
                     <li v-on:click="changeTypeUser('teacher')" v-if="type === 'students'"><router-link :to="{name: 'home-teachers'}">Alumnes</router-link></li>
                     <li  v-on:click="changeTypeUser('student')" v-if="type === 'teachers'"><router-link :to="{name: 'home-students'}">Professors</router-link></li>
@@ -75,14 +76,13 @@
             Multiselect
         },
         props:{
-            maxHeight: {
-                type: Number,
-                default: 162
-              },
+            
           },
         data(){
             return{
                 type:'',
+                search:null,
+                searchSubmit : '',
                 category: { category: '', name: 'Totes les categories' },
                 categories: [
                     { category: '' , name: 'Totes les categories'},
@@ -127,6 +127,7 @@
         },
         created(){
             this.whatUserPage();
+            this.fetchEntities();
         },
         mounted(){
             this.typeUser();
@@ -197,6 +198,17 @@
 
                     this.category = { category: url, name: cap };
                 }
+            },
+            fetchEntities(){
+                this.$http.get('../api/entitats').then(response=>{
+                    console.log(response.data);
+                })
+            },
+            getWord(){
+                this.searchSubmit = this.search;
+                //console.log(this.searchSubmit);
+                this.$emit('search', 2);
+                //this.vue.$emit('search', this.search);
             }
         }
     }

@@ -79,7 +79,6 @@
                 localStorage.setItem('numType', 0);
                 
                 var url = getUrlVars()["url"];
-                console.log(url);
                 var newurl = "http://localhost:8000/";
 
                 if (url !== undefined) {

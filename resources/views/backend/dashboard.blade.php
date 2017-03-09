@@ -1,17 +1,15 @@
-@extends('layouts.app')
-
+@extends('layouts.backend')
+@section('title', 'Dashboard')
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    dash
-                </div>
-            </div>
-        </div>
-    </div>
+@endsection
+@section('content')
+<div class="paper">
+     <div class="paper_title">
+          Hola
+     </div>
+     <div>
+          <p>{{$views}}</p>
+     </div>
 </div>
+
 @endsection

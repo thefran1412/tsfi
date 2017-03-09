@@ -1,6 +1,7 @@
 <template>
 	<div class="content-page-header">
 		<h1>Hello Student</h1>
+		{{this.$root.search}}
 		<div class="row">
 			<div class="col-md-4">
 				aksdjhakjsh
@@ -908,21 +909,22 @@
 </template>
 
 <script>
-	/*export default{
+
+	import Search from './Index.vue'; 
+
+	export default{
 		data(){
 			return{
 				users:[]
 			}
 		},
 		created(){
-			this.fetchUsers();
-		},
-		methods:{
-			fetchUsers(){
-				this.$http.get('api/users').then(response=>{
-					this.users = response.data.users;
-				})
-			}
+			this.$on('search', (pr) => {
+					console.log(pr);
+			});
+			// this.vue.$on('search', (pr) => {
+			// 		console.log(pr);
+			// });
 		}
-	}*/
+	}
 </script>

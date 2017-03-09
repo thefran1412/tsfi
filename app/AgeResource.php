@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LinkRecurs extends Model
+class AgeResource extends Model
 {
     //
-    protected $table = 'link_recurs';
+    protected $table = 'edats_recurs';
 }

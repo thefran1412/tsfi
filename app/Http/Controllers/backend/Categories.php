@@ -5,7 +5,7 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class Tags extends Controller
+class Categories extends Controller
 {
      protected $loginPath = '/admin/login';  
     /**
@@ -17,8 +17,8 @@ class Tags extends Controller
     {
         $this->middleware('auth');
     }
-	public function index()
-	{
-		return view('backend.recursos.tags');
-	}
+    public function index()
+    {
+    	return view('backend.recursos.categories');
+    }
 }

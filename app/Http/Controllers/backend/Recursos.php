@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,7 +20,8 @@ class Recursos extends Controller
     }
 	public function index()
 	{
-		return view('backend.recursos.index');
+        $recursos = Resource::All();
+		return view('backend.recursos.index', compact('recursos'));
 	}
 	public function store()
 	{

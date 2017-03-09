@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TargetRecurs extends Model
+class TargetResource extends Model
 {
     protected $table = 'target_recurs';
 }

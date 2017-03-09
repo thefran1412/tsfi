@@ -20,7 +20,8 @@ class Backend extends Controller
 
     public function index()
     {
-        return view('backend.dashboard');
+        $views = 0;
+        return view('backend.dashboard', ['views' => $views]);
     }
 
     public function resource()

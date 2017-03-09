@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tags extends Model
+class Target extends Model
 {
-    protected $table = 'tags';
+    protected $table = 'targets';
 }

@@ -47,6 +47,9 @@ Route::get('/admin/recursos/add', 'backend\Recursos@add');
 Route::get('/admin/recursos', 'backend\Recursos@index');
 Route::get('/admin/recursos/categories', 'backend\Categories@index');
 Route::get('/admin/recursos/tags', 'backend\Tags@index');
+Route::get('/resource/add', 'backend\Recursos@resource');
+Route::post('/resource/add', 'backend\Recursos@storeResource');
+Route::get('/resource/list', 'backend\Recursos@listRecurso');
 
 /* ENTIDADES */
 Route::get('/admin/entitats', 'backend\Entitats@index');

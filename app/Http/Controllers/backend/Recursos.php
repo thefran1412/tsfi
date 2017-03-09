@@ -25,4 +25,12 @@ class Recursos extends Controller
 	{
 		return view('backend.recursos.add');
 	}
+    public function listRecurso()
+    {
+
+        $recursos=Recursos::paginate(10);
+//        dd($recursos);
+        $page = ["page" => "listresources"];
+        return view('backend.recursos.listResources',compact('recursos'))->with(["page" => "listresources"]);
+    }
 }

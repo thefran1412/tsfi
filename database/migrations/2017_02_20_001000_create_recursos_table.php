@@ -18,8 +18,8 @@ class CreateRecursosTable extends Migration
             $table->string('titol', 150);
             $table->string('subTitol', 250);
             $table->string('descBreu', 500);
-            $table->string('descDetaill1');
-            $table->string('descDetaill2');
+            $table->string('descDetaill1',10000);
+            $table->string('descDetaill2',10000);
             $table->integer('relevancia');
             $table->date('dataInici');
             $table->date('DdtaFinal');

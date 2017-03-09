@@ -23,24 +23,25 @@ class Recursos extends Controller
         $recursos = Resource::All();
 		return view('backend.recursos.index', compact('recursos'));
 	}
-	public function store()
+	public function storeResource()
 	{
 
 //        $this->validate(request(), [
 //            'note' => ['required', 'max:200']
 //        ]);
         $data = request()->only(['note']);
-        Recursos::create($data);
+        Resource::create($data);
 
         return redirect()->to('notes');
-		return view('backend.recursos.add');
+//		return view('backend.recursos.add');
 	}
     public function listRecurso()
     {
 
-        $recursos=Recursos::paginate(10);
+        $recursos=Resource::paginate(10);
 //        dd($recursos);
         $page = ["page" => "listresources"];
-        return view('backend.recursos.listResources',compact('recursos'))->with(["page" => "listresources"]);
+        return view('backend.recursos.listResources',compact('recursos'));
+//        return view('backend.recursos.listResources',compact('recursos'))->with(["page" => "listresources"]);
     }
 }

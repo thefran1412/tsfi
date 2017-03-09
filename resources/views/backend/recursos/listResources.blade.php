@@ -1,4 +1,4 @@
-@extends('tsfi - copia.resources.views.base')
+@extends('layouts.backend')
 
 @section('content')
     <style type="text/css">

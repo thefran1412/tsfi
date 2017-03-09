@@ -50,7 +50,6 @@ La consola virtual que trae laravel por defecto se llama artisan, esta nos prove
 ##<a name="tinker"></a> Comandos usados en la consola virtual tinker:
 Dentro de artisan podemos ejecutar otra consola virtual que se conoce como __tinker__ esta nos permite interactuar con todas las clases y métodos que incluye nuestro proyecto, esto nos servirá para realizar pruebas de funcionamiento.
 * `\App\Note::truncate();` Elimina todo el contenido de una tabla.
-* `` Crea campos en la base de datos;
 
 #<a name="model"></a>Model
 Los modelos son las clases que definen a los datos alamcenodos en la base de datos estos se muestran como clases dentro de la carpeta `/app`, para crear un modelo usamos la comanda`php artisan make:model NombreDelModelo`, automaticamente laravel creará un modelo con este nombre dentro de la carpeta app `/app/NombreDelModelo`

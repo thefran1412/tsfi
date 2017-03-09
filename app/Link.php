@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LinkRecurs extends Model
+class Link extends Model
 {
     //
     protected $table = 'link_recurs';

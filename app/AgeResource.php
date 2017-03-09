@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ImatgeRecurs extends Model
+class AgeResource extends Model
 {
     //
-    protected $table = 'imatge_recurs';
+    protected $table = 'edats_recurs';
 }

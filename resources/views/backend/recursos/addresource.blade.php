@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('tsfi - copia.resources.views.base')
 
 @section('content')
     <div class="container" style="max-width: 600px;">

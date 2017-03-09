@@ -14,12 +14,12 @@ class CreateRecursosTable extends Migration
     public function up()
     {
         Schema::create('recursos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('titol', 150);
-            $table->string('subTitol', 250);
-            $table->string('descBreu', 500);
-            $table->string('descDetaill1',10000);
-            $table->string('descDetaill2',10000);
+            $table->increments('id',255);
+            $table->string('titol',255);
+            $table->string('subTitol');
+            $table->mediumText('descBreu');
+            $table->longText('descDetaill1');
+            $table->longText('descDetaill2');
             $table->integer('relevancia');
             $table->date('dataInici');
             $table->date('DdtaFinal');

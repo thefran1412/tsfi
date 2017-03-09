@@ -35,3 +35,16 @@ $factory->define(App\Resource::class, function (Faker\Generator $faker){
     ];
 
 });
+
+$factory->define(App\ImageResource::class, function (Faker\Generator $faker){
+
+    return[
+        'titol' => $faker->word,
+        'subTitol' => $faker->sentence,
+        'descDetaill1' => $faker->paragraph,
+        'relevancia' => $faker->randomDigit ,
+        'visible' => $faker->randomDigit,
+        'creatPer' => $faker->name
+    ];
+
+});

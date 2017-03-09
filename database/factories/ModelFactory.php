@@ -23,7 +23,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Recursos::class, function (Faker\Generator $faker){
+$factory->define(App\Resource::class, function (Faker\Generator $faker){
 
     return[
         'titol' => $faker->word,

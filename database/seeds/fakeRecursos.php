@@ -11,6 +11,6 @@ class fakeRecursos extends Seeder
      */
     public function run()
     {
-        factory(\App\Recursos::class)->times(10)->create();
+        factory(\App\Resource::class)->times(10)->create();
     }
 }

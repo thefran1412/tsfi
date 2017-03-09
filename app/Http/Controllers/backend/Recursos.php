@@ -20,12 +20,11 @@ class Recursos extends Controller
     }
 	public function index()
 	{
-        $recursos = Resource::All();
+        $recursos = Resource::paginate(10);
 		return view('backend.recursos.index', compact('recursos'));
 	}
-	public function storeResource()
+	public function store()
 	{
-
 //        $this->validate(request(), [
 //            'note' => ['required', 'max:200']
 //        ]);
@@ -35,13 +34,4 @@ class Recursos extends Controller
         return redirect()->to('notes');
 //		return view('backend.recursos.add');
 	}
-    public function listRecurso()
-    {
-
-        $recursos=Resource::paginate(10);
-//        dd($recursos);
-        $page = ["page" => "listresources"];
-        return view('backend.recursos.listResources',compact('recursos'));
-//        return view('backend.recursos.listResources',compact('recursos'))->with(["page" => "listresources"]);
-    }
 }

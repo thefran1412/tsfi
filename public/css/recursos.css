@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+@font-face {
+    font-family: Gotham;
+    src: url(../fonts/GothamNarrow-Black.otf);
+}
+
 #appVue .container{
 	width:100%;
 }
@@ -6,21 +13,43 @@
 	width:1170px;
 }
 
-.col-md-4{
+.recurso{
 	padding-right: 0px;
 	padding-left: 0px;
-}
-.recurso{
 	position: relative;
 	height: 350px;
-}
-.recurso:hover{
-
+	overflow: hidden;
+	background-color:white;
 	transition: background-color .5s ease-in-out;
 }
+
+.content-bottom-header .col-md-4{
+	padding: 0;
+}
+
+.content-bottom-header .col-md-4 h2{
+	font-size: 26px;
+}
+
+.recurso:hover{
+	background-color:rgba(0,0,0,.2);
+	transition: background-color .5s ease-in-out;
+	color: white;
+}
+
+.recurso:hover .fecha{
+	color: white;
+	transition: color .5s ease-in-out;
+}
+
+
+.recurso:hover a{
+	transition: color .5s ease-in-out;
+	color: white;
+}
 .recurso-content{
-	/*padding-top: 75px;*/
-	padding-top: 55px;
+	padding-top: 75px;
+/*	padding-top: 55px;*/
 	padding-left: 45px;
 	padding-right: 45px;
 
@@ -29,28 +58,62 @@
 	margin-top: 0;
 	line-height:1.1;
 	font-weight: bold;
+	font-family: Gotham;
 }
 
 .recurso-content h2 a{
-		text-decoration: none;
+	text-decoration: none;
 	color: black;
 }
 
 .recurso-content h2 a:hover{
-		text-decoration: none;
-	color: black;
+	text-decoration: none;
 }
 .recurso-meta{
 	position: absolute;
 	bottom: 40px;
+	font-family: 'Lato', sans-serif;
 }
 .autor, .fecha{
 	text-transform: uppercase;
 }
-.autor{
+.categoria{
+	margin-top: 12px;
+		text-transform: capitalize;
+}
+.categoria:hover a{
+	color: #5accbb;
+}
+.autor a, .categoria a{
 	font-size:13px;
 	line-height: 13px;
+	color: black;
+	text-decoration: none;
 }
 .fecha{
 	font-size:11px;
+	    color: black;
+}
+.recurso-foto{
+	background-position: 50% 50%;
+	position:absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	transition:all .5s ease-in;
+	background-size:cover;
+
+	background-image: url('/images/Prueba-700x394.jpg');
+}
+
+.no-image{
+	background-color: #7b7d7e;
+	z-index: -1;
+	transition:all .5s ease-in;
+}
+
+.recurso:hover .recurso-foto {
+	transform:scale(1.02);	
 }

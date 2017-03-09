@@ -1,77 +1,72 @@
 <template>
-	<div class="content-page-header">
+	<div class="content-bottom-header">
 
       <div class="row">
         
-
-        <div class="col-md-4">
+        <!-- Empieza recurso -->
+        <div class="col-md-4" v-for="r in recursos">
             <div class="recurso">
               <div class="recurso-content">
                 <h2>
-                  <a href="www.google.com" title="Hola">Una de bravas: un evento para conseguir la igualdad de oportunidades en la industria creativa española</a>
+                  <a v-bind:href="r.urlRecurso">
+                      {{r.titulo}}</a>
+                  </a>
                 </h2>
                 <div class="recurso-meta">
                     <div class="autor">
-                      Mariángeles García
+                      <a href="#">
+                        {{r.autor}}
+                      </a>
                     </div>
                     <div class="fecha">
-                      06 marzo 2017
+                      {{r.fecha}}
                     </div>
                     <div class="categoria">
-                      Feina
+                      <a v-bind:href="'#/'+r.categoria">
+                        {{r.categoria}}
+                      </a>
                     </div>
                 </div>
-                <div class="recurso-foto">
-                  
+                
+                <div class="recurso-foto"> <!-- data-syle="background-image: url('\public\images\Prueba\Prueba-700x394.jpg');"  
+                style="\public\images\Prueba\Prueba-700x394.jpg"
+                   -->
                 </div>
               </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="recurso">
-              <div class="recurso-content">
-                <h2>
-                  <a href="www.google.com" title="Hola">Una de bravas: un evento para conseguir la igualdad de oportunidades en la industria creativa española</a>
-                </h2>
-                <div class="recurso-meta">
-                  <div class="autor">
-                    Mariángeles García
-                  </div>
-                  <div class="fecha">
-                    06 marzo 2017
-                  </div>
-                  <div class="categoria">
-                    Feina
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="recurso">
-              <div class="recurso-content">
-                <h2>
-                  <a href="www.google.com" title="Hola">Una de bravas: la</a>
-                </h2>
-                <div class="recurso-meta">
-                  <div class="autor">
-                    Mariángeles García
-                  </div>
-                  <div class="fecha">
-                    06 marzo 2017
-                  </div>
-                  <div class="categoria">
-                    Feina
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
+        <!-- Acaba recurso -->
+
       </div>
     </div>
 	</div>
 </template>
 
 <script>
+  export default{
 
+    data(){
+
+      return{
+
+          recursos:[
+            {urlRecurso: "#" ,titulo: "La esencia de los ‘spaghetti western’ en unos títulos de crédito", autor: "ignasi ballart", fecha: "17/04/2017", categoria:"events", image: "/images/Prueba-700x394.jpg"},
+            {urlRecurso: "#", titulo: "La esencia de los ‘spaghetti western’ en unos títulos de crédito", autor: "carlos ruiz", fecha: "05/03/2016", categoria:"noticies", image: "/images/Prueba-700x394.jpg"}
+          ]
+        }
+
+    },
+    created(){
+        
+    },
+    mounted(){
+        this.getResourceBackground();
+    },
+    methods:{
+        getResourceBackground() {
+
+
+        }
+    }
+  }
 </script>

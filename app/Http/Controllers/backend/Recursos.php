@@ -20,7 +20,7 @@ class Recursos extends Controller
     {
         $this->log = new Logger($log);
         $this->log->pushHandler(new StreamHandler(
-            'C:\Users\nicof\PhpstormProjects\POO\tsfi\logs\logger.log', Logger::INFO));
+            'C:\wamp64\www\tsfi\logs\logger.log', Logger::INFO));
     }
 
      protected $loginPath = '/admin/login';  

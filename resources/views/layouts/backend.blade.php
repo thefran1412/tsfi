@@ -57,7 +57,9 @@
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
-         $('#myTable').DataTable();
+         $('#aprovados').DataTable();
+         $('#pendientes').DataTable();
+         $('#reportados').DataTable();
     } );
 </script>
 <script>

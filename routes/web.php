@@ -43,10 +43,3 @@ Route::get('/admin/entitats/add', 'backend\Entitats@add');
 /* USUARIOS */
 Route::get('/admin/usuaris', 'backend\Usuaris@index');
 Route::get('/admin/usuaris/add', 'backend\Usuaris@add');
-
-
-Route::get('/admin/api/test', function ()
-{
-	return Datatables::eloquent(App\Resource::query())->make(true);
-
-});

@@ -1,7 +1,7 @@
 <template>
 	<div class="content-bottom-header">
 
-      <div class="row">
+      <div class="row squares-resources">
         
         <!-- Empieza recurso -->
         <div class="col-md-4" v-for="r in recursos">
@@ -57,7 +57,7 @@
 
     },
     created(){
-        
+      this.fetchResource();
     },
     mounted(){
         this.getResourceBackground();
@@ -66,7 +66,12 @@
         getResourceBackground() {
 
 
-        }
+        } ,  
+      fetchResource(){
+        this.$http.get('../api/recursos').then(response=>{
+            console.table(response.data);
+        })
+    },
     }
   }
 </script>

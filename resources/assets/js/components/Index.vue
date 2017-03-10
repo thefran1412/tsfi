@@ -15,23 +15,46 @@
                             </svg>
                      </button>
                 </form>
-                {{this.$root.search}}
-                <div class="user-type">
+               <!--  <div class="user-type">
                     <li v-on:click="changeTypeUser('teacher')" v-if="type === 'students'"><router-link :to="{name: 'home-teachers'}">Alumnes</router-link></li>
                     <li  v-on:click="changeTypeUser('student')" v-if="type === 'teachers'"><router-link :to="{name: 'home-students'}">Professors</router-link></li>
-                </div>
+                </div> -->
             </div>
             <div class="footer-menu">
                 <div class="container">
-                    <div class="col-md-6" >
-                        <router-link ref="canvas" :to="{name: category.category}">
-                        <multiselect v-model="category" selected-label="Seleccionada" track-by="name" label="name" placeholder="Select one" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
-                        </router-link>
+                    <div class="row">
+                        <div class="col-md-4" >
+                            <router-link ref="canvas" :to="{name: category.category}">
+                            <multiselect v-model="category" selected-label="Seleccionada" track-by="name" label="name" placeholder="Select one" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
+                            </router-link>
+                        </div>
+                        <div class="col-md-4">
+                            <multiselect v-model="value" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="name" track-by="name"></multiselect>
+                        </div>
+                        <div class="col-md-2 user-type">
+                            <li v-on:click="typeUser('#/enviar-recurs')" >
+                                <router-link :to="{name: 'enviar-recurs'}">
+                                    <span>Enviar</span>
+                                    <span>Recurs</span>
+                                </router-link>
+                            </li>
+                        </div>
+                        <div class="col-md-2 user-type">
+                            <li v-on:click="changeTypeUser('teacher')" v-if="type === 'students'">
+                                <router-link :to="{name: 'home-teachers'}">
+                                    <span>Estudiants i</span>
+                                    <span>Pares</span>
+                                </router-link>
+                            </li>
+                            <li  v-on:click="changeTypeUser('student')" v-if="type === 'teachers'">
+                                <router-link :to="{name: 'home-students'}">
+                                    <span>Orientadors i</span>
+                                    <span>Professors</span>
+                                </router-link>
+                            </li>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <multiselect v-model="value" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="name" track-by="name"></multiselect>
-                    </div>
-               </div>
+                </div>
             </div>
         </header>
         <div class="container">
@@ -133,11 +156,17 @@
             this.typeUser();
         },
         methods:{
-            typeUser(){
+            typeUser(defaultPath){
+
+                var typeUser = localStorage.getItem("typeUser");
+                var pathURL = this.$refs.canvas.$el.hash;
+
                 if(localStorage.length === 2){
 
-                    var typeUser = localStorage.getItem("typeUser");
-                    var pathURL = this.$refs.canvas.$el.hash;
+                    if(defaultPath){
+                        pathURL = defaultPath;
+                    }
+
 
                     this.correctUrlPageCategory(typeUser, pathURL);
                 }
@@ -207,7 +236,7 @@
             getWord(){
                 this.searchSubmit = this.search;
                 //console.log(this.searchSubmit);
-                this.$emit('search', 2);
+                //this.$broadcast('search', 2);
                 //this.vue.$emit('search', this.search);
             }
         }

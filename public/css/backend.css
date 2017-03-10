@@ -32,6 +32,7 @@ div{
 	background-color: orange;
 	height: 70px;
 	box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+	z-index: 10;
 }
 .headerIcon, .headerSearch, .headerActions{
 	float: left;
@@ -62,6 +63,7 @@ div{
 	height: calc(100vh - 70px);
 	background-color: #333333;
 	display: inline-block;
+	z-index: 10;
 }
 .menu a{
 	color: white;

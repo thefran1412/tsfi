@@ -11,14 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link href="/css/app.css" rel="stylesheet">
     <link href="/css/backend.css" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
 </head>
 <body>
     {{-- HEADER START --}}
@@ -42,7 +37,7 @@
         <ul>
             <li><a href="{{  action('backend\Backend@index') }}">Inici</a></li>
             <li><a href="{{  action('backend\Recursos@index') }}">Recursos</a></li>
-            <li><a href="{{  action('backend\Recursos@store') }}">---Add</a></li>
+            <li><a href="{{  action('backend\Recursos@add') }}">---Add</a></li>
             <li><a href="{{  action('backend\Categories@index') }}">---Categories</a></li>
             <li><a href="{{  action('backend\Tags@index') }}">---Tags</a></li>
             <li><a href="{{  action('backend\Entitats@index') }}">Entitats</a></li>
@@ -57,4 +52,19 @@
         @yield('content')
     </div>
 </body>
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+         $('#aprovados').DataTable();
+         $('#pendientes').DataTable();
+         $('#reportados').DataTable();
+    } );
+</script>
+<script>
+    window.Laravel = <?php echo json_encode([
+        'csrfToken' => csrf_token(),
+    ]); ?>
+</script>
 </html>

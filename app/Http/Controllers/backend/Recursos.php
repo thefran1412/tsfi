@@ -22,8 +22,9 @@ class Recursos extends Controller
 	{
 		return view('backend.recursos.index');
 	}
-	public function store()
+	public function add()
 	{
+		return view('backend.recursos.add');
 //        $this->validate(request(), [
 //            'note' => ['required', 'max:200']
 //        ]);
@@ -31,6 +32,5 @@ class Recursos extends Controller
         Resource::create($data);
 
         return redirect()->to('notes');
-//		return view('backend.recursos.add');
 	}
 }

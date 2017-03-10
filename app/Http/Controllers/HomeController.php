@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Recursos;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Null_;
 
 class HomeController extends Controller
 {
-     protected $loginPath = '/admin/login';  
+//     protected $loginPath = '/admin/login';
     /**
      * Create a new controller instance.
      *
@@ -14,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     /**
@@ -34,7 +36,22 @@ class HomeController extends Controller
     }
     public function resource()
     {
-        return view('backend.addresource');
+        $page = "addresource";
+        return view("backend.addresource")->with(["page" => "addresource"]);
     }
+    public function listResource()
+    {
 
+        $recursos=Recursos::paginate(10);
+//        dd($recursos);
+        $page = ["page" => "listresources"];
+        return view('backend.listResources', compact('recursos'))->with(["page" => "listresources"]);
+    }
+    public function storeResource()
+    {
+        $data = request()->only(['titol', 'subTitol', 'descDetaill1', 'creatPer']);
+        Recursos::create($data);
+
+        return redirect()->to('resource/list');
+    }
 }

@@ -1,5 +1,14 @@
 <?php
 
+
+
+use Illuminate\Support\Facades\Log;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+// create a log channel
+
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -10,6 +19,13 @@
 | database. Just tell the factory how a default model should look.
 |
 */
+$log = new Logger('Fakers ->');
+$log->pushHandler(new StreamHandler('logs/logger.log', Logger::INFO));
+$root = "C:\\Users\\nicof\\PhpstormProjects\\POO";
+$path = "\\tsfi\\tests\\_data\\images";
+$images  = scandir($root.$path);
+$imgpath = "http://localhost:8000/img/resource/";
+
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\User::class, function (Faker\Generator $faker) {
@@ -24,14 +40,21 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Resource::class, function (Faker\Generator $faker){
-
+    $log = new Logger('Fakers ->');
+    $log->pushHandler(new StreamHandler('logs/logger.log', Logger::INFO));
+    $root = "C:\\Users\\nicof\\PhpstormProjects\\POO";
+    $path = "\\tsfi\\tests\\_data\\images";
+    $images  = scandir($root.$path);
+    $imgpath = "http://localhost:8000/img/resource/";
+    $log->info('Faking Resource');
     return[
         'titol' => $faker->word,
         'subTitol' => $faker->sentence,
         'descDetaill1' => $faker->paragraph,
         'relevancia' => $faker->randomDigit ,
         'visible' => $faker->randomDigit,
-        'creatPer' => $faker->name
+        'creatPer' => $faker->name,
+        'fotoResum'=> ($imgpath.strval($images[rand (2 ,21 )]))
     ];
 
 });

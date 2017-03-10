@@ -32,6 +32,7 @@ Route::get('/admin/analytics', 'backend\Analytics@index');
 /* RECURSOS */
 Route::get('/admin/recursos', 'backend\Recursos@index');
 Route::get('/admin/recursos/add', 'backend\Recursos@add');
+Route::get('/admin/recursos/{id}/edit', 'backend\Recursos@edit');
 Route::post('/admin/recursos/add', 'backend\Recursos@store');
 Route::get('/admin/recursos/categories', 'backend\Categories@index');
 Route::get('/admin/recursos/tags', 'backend\Tags@index');
@@ -43,10 +44,3 @@ Route::get('/admin/entitats/add', 'backend\Entitats@add');
 /* USUARIOS */
 Route::get('/admin/usuaris', 'backend\Usuaris@index');
 Route::get('/admin/usuaris/add', 'backend\Usuaris@add');
-
-
-Route::get('/admin/api/test', function ()
-{
-	return Datatables::eloquent(App\Resource::query())->make(true);
-
-});

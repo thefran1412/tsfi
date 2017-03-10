@@ -34,7 +34,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-3" for="pwd">Descripción detallada:</label>
                 <div class="col-sm-9">
-                    <textarea name="descDetaill1" type="text" class="form-control input-sm" id="pwd" rows="5">
+                    <textarea name="descDetaill1" type="text" class="form-control input-sm" id="summernote" rows="5">
                         {{ old('descDetaill1') }}
                     </textarea>
                 </div>
@@ -46,4 +46,17 @@
             </div>
         </form>
     </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                height: 200,                 // set editor height
+                minHeight: 200,             // set minimum height of editor
+                maxHeight: 500,             // set maximum height of editor
+                focus: true,              // set focus to editable area after initializing summernote
+                lang: 'es-ES'
+            });
+        });
+    </script>
 @endsection

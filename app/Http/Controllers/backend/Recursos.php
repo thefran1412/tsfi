@@ -20,7 +20,7 @@ class Recursos extends Controller
     {
         $this->log = new Logger($log);
         $this->log->pushHandler(new StreamHandler(
-            'C:\Users\nicof\PhpstormProjects\POO\tsfi\logs\logger.log', Logger::INFO));
+            'C:\wamp64\www\tsfi\logs\logger.log', Logger::INFO));
     }
 
      protected $loginPath = '/admin/login';  
@@ -36,7 +36,8 @@ class Recursos extends Controller
 	public function index()
 	{
 		$r = Resource::All();
-        return view('backend.recursos.index', ['resources' => $r]);
+        $v = Resource::where('visible', 0)->get();
+        return view('backend.recursos.index', ['resources' => $r, 'pendents' => $v]);
 	}
 	public function add()
 	{
@@ -52,7 +53,11 @@ class Recursos extends Controller
         Resource::create($data);
         return redirect()->to('admin/recursos');
 	}
-
+    public function edit($id)
+    {
+        $info = Resource::find($id);
+        return view('backend.recursos.edit',  ['info' => $info]);
+    }
     private function setInfoLog(Logger $log, $message)
     {
         $log->info($message);

@@ -1,6 +1,5 @@
 <template>
 	<div class="content-bottom-header">
-
       <div class="row squares-resources">
         
         <!-- Empieza recurso -->
@@ -8,22 +7,22 @@
             <div class="recurso">
               <div class="recurso-content">
                 <h2>
-                  <a v-bind:href="r.urlRecurso">
-                      {{r.titulo}}</a>
+                  <a v-bind:href="'#/'+ r.id">
+                      {{r.titol}}</a>
                   </a>
                 </h2>
                 <div class="recurso-meta">
                     <div class="autor">
                       <a href="#">
-                        {{r.autor}}
+                        {{r.creatPer}}
                       </a>
                     </div>
                     <div class="fecha">
-                      {{r.fecha}}
+                      {{r.dataPublicacio}}
                     </div>
                     <div class="categoria">
-                      <a v-bind:href="'#/'+r.categoria">
-                        {{r.categoria}}
+                      <a v-bind:href="'#/'+r.nom">
+                        {{r.nom}}
                       </a>
                     </div>
                 </div>
@@ -49,10 +48,7 @@
 
       return{
 
-          recursos:[
-            {urlRecurso: "#" ,titulo: "La esencia de los ‘spaghetti western’ en unos títulos de crédito", autor: "ignasi ballart", fecha: "17/04/2017", categoria:"events", image: "/images/Prueba-700x394.jpg"},
-            {urlRecurso: "#", titulo: "La esencia de los ‘spaghetti western’ en unos títulos de crédito", autor: "carlos ruiz", fecha: "05/03/2016", categoria:"noticies", image: "/images/Prueba-700x394.jpg"}
-          ]
+          recursos:[]
         }
 
     },
@@ -69,7 +65,7 @@
         } ,  
       fetchResource(){
         this.$http.get('../api/recursos').then(response=>{
-            console.table(response.data);
+            this.recursos = response.data.resources;
         })
     },
     }

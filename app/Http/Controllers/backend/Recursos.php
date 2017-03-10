@@ -5,9 +5,24 @@ namespace App\Http\Controllers\backend;
 use App\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+
 
 class Recursos extends Controller
 {
+    protected  $log;
+
+
+    public function setLog($log)
+    {
+        $this->log = new Logger($log);
+        $this->log->pushHandler(new StreamHandler(
+            'C:\Users\nicof\PhpstormProjects\POO\tsfi\logs\logger.log', Logger::INFO));
+    }
+
      protected $loginPath = '/admin/login';  
     /**
      * Create a new controller instance.
@@ -28,8 +43,17 @@ class Recursos extends Controller
     }
 	public function store()
 	{
-        $data = request()->only(['autor']);
+	    $this->setLog('Resource store');
+
+        echo gettype($this->log), "\n";
+        $data = request()->intersect(['titol','subTitol','descDetaill1','creatPer']);
+        $this->setInfoLog($this->log,'data->   '.implode("\n",$data));
         Resource::create($data);
-        return redirect()->to('notes');
+        return redirect()->to('admin/recursos');
 	}
+
+    private function setInfoLog(Logger $log, $message)
+    {
+        $log->info($message);
+    }
 }

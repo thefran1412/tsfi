@@ -2,11 +2,11 @@
 
 @section('content')
     <style type="text/css">
-        .tg  {border-collapse:collapse;border-spacing:0;}
-        .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-        .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-        .tg-baqh{text-align:center;vertical-align:top}
-        .tg-yw4l{vertical-align:top}
+        p {text-indent: 50px;}
+        .alert {width:60%;}
+        #listrecurso .table{max-width: 500px;}
+        #listrecurso .table th {text-align: center;color :red;}
+        td img{text-align: center;}
     </style>
     <h2>Recurso</h2>
     <div class="content" id="listrecurso">
@@ -32,6 +32,9 @@
                                 <td class="tg-baqh" colspan="3">{{$recurso->descDetaill1}}</td>
                             </tr>
                             <tr>
+                                <td class="tg-baqh" colspan="3"  align="center"><img src="{{$recurso->fotoResum}}" width="250px" align="middle"></td>
+                            </tr>
+                            <tr>
                                 <td class="tg-yw4l">{{$recurso->creatPer}}</td>
                                 <td class="tg-yw4l">{{$recurso->created_at}}</td>
                                 <td class="tg-yw4l">{{$recurso->relevancia}}</td>
@@ -41,7 +44,7 @@
                     @endif
                 @endforeach
         </table>
+            {!! $recursos->render() !!}
     </div>
-{!! $recursos->render() !!}
 @endif
 @endsection

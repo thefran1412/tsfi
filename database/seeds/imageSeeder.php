@@ -11,6 +11,6 @@ class imageSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(\App\ImageResource::class)->times(10)->create();
     }
 }

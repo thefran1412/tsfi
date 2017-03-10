@@ -31,6 +31,7 @@ Route::get('/admin/analytics', 'backend\Analytics@index');
 /* RECURSOS */
 Route::get('/admin/recursos', 'backend\Recursos@index');
 Route::get('/admin/recursos/add', 'backend\Recursos@add');
+Route::post('/admin/recursos/add', 'backend\Recursos@store');
 Route::get('/admin/recursos/categories', 'backend\Categories@index');
 Route::get('/admin/recursos/tags', 'backend\Tags@index');
 

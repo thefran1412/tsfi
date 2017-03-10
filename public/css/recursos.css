@@ -5,14 +5,6 @@
     src: url(../fonts/GothamNarrow-Black.otf);
 }
 
-#appVue .container{
-	width:100%;
-}
-
-#appVue footer .container:last-child{
-	width:1170px;
-}
-
 .recurso{
 	padding-right: 0px;
 	padding-left: 0px;
@@ -23,9 +15,6 @@
 	transition: background-color .5s ease-in-out;
 }
 
-.content-bottom-header .col-md-4{
-	padding: 0;
-}
 
 .content-bottom-header .col-md-4 h2{
 	font-size: 26px;
@@ -120,4 +109,9 @@
 
 .recurso:hover .recurso-foto {
 	transform:scale(1.02);	
+}
+
+
+.squares-resources .col-md-4{
+	padding: 0;
 }

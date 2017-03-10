@@ -1,5 +1,5 @@
 <template>
-	<div class="content-page-header">
+	<div class="content-bottom-header">
 		<h1>Conferencies</h1>
 	</div>
 </template>

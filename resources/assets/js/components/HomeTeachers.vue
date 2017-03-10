@@ -1,7 +1,7 @@
 <template>
 	<div class="content-bottom-header">
 
-      <div class="row">
+      <div class="row squares-resources">
         
         <!-- Empieza recurso -->
         <div class="col-md-4" v-for="r in recursos">

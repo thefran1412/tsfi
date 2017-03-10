@@ -57,16 +57,7 @@
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#myTable').DataTable( {
-            "processing": true,
-            "serverSide": true,
-            "ajax": "api/test",
-            "columns":[
-                {data: 'titol'},
-                {data: 'subTitol'},
-                {data: 'descDetaill1'}
-            ]
-        } );
+         $('#myTable').DataTable();
     } );
 </script>
 <script>

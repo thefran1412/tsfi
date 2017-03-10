@@ -20,7 +20,8 @@ class Recursos extends Controller
     }
 	public function index()
 	{
-		return view('backend.recursos.index');
+		$r = Resource::All();
+        return view('backend.recursos.index', ['resources' => $r]);
 	}
 	public function add()
 	{

@@ -16,8 +16,19 @@
                     <th>Titol</th>
                     <th>Subtitol</th>
                     <th>Descripció</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
+            <tbody>
+                @foreach($resources as $resource)
+                    <tr>
+                        <th>{{$resource->titol}}</th>
+                        <th>{{$resource->subTitol}}</th>
+                        <th>{{$resource->descDetaill1}}</th>
+                        <th>Hola</th>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 @endsection

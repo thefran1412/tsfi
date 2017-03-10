@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('index');
 });
@@ -46,4 +47,5 @@ Route::get('/admin/usuaris/add', 'backend\Usuaris@add');
 Route::get('/admin/api/test', function ()
 {
 	return Datatables::eloquent(App\Resource::query())->make(true);
+
 });

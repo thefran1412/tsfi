@@ -19,4 +19,14 @@ class Recursos extends Controller
         ]);
     }
 
+ 	public function getResource() {
+
+	// $resources = Resource::all();
+    	$resources = Resource::join("categoria_recurs","categoria_recurs.id","=","recursos.idRecurs")
+    	->get();
+
+	return response()->json([
+            'resources' => $resources
+        ]);
+    }
 }

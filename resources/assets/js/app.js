@@ -51,7 +51,7 @@ const router = new VueRouter({
     	{path:'/home-students',component:HomeStudents, name:'home-students' },
     	{path:'/articles-students',component:ArticlesStudents, name:'articlesStudents' },
     	{path:'/home-teachers',component:HomeTeachers, name:'home-teachers' },
-    	{path:'/resource',component:Resource, name:'resource' },
+    	{path:'/resource/:id',component:Resource, name:'resource' },
         {path:'/events',component:Events, name:'events' },
         {path:'/noticies',component:Noticies, name:'noticies' },
         {path:'/tallers',component:Tallers, name:'tallers' },

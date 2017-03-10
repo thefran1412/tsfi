@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,11 +9,20 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
     <link href="/css/backend.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    {{-- Summer Note --}}
+    <link href="/js/sumer_note/summernote.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+    {{-- End Summer Note--}}
 </head>
 <body>
     {{-- HEADER START --}}
@@ -53,8 +62,14 @@
     </div>
 </body>
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+
+{{--Summer Note--}}
+
+<script src="/js/sumer_note/summernote.min.js"></script>
+<script src="/js/sumer_note/summernote-es-ES.js"></script>
+{{--End Summer Note scripts--}}
+
 <script>
     $(document).ready(function() {
          $('#aprovados').DataTable();

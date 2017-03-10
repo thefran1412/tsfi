@@ -1,6 +1,5 @@
 <template>
 	<div class="content-bottom-header">
-
       <div class="row squares-resources">
         
         <!-- Empieza recurso -->

@@ -10,7 +10,6 @@
                     <th>Titol</th>
                     <th>Subtitol</th>
                     <th>Descripció</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +18,6 @@
                         <th><a href="{{action('backend\Recursos@edit', ['id' => $pendent->id])}}">{{$pendent->titol}}</a></th>
                         <th>{{$pendent->subTitol}}</th>
                         <th>{{$pendent->descDetaill1}}</th>
-                        <th>Hola</th>
                     </tr>
                 @endforeach
             </tbody>

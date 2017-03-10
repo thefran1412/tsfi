@@ -55,7 +55,8 @@ class Recursos extends Controller
 	}
     public function edit($id)
     {
-        return $id;
+        $info = Resource::find($id);
+        return view('backend.recursos.edit',  ['info' => $info]);
     }
     private function setInfoLog(Logger $log, $message)
     {

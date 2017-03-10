@@ -36,7 +36,8 @@ class Recursos extends Controller
 	public function index()
 	{
 		$r = Resource::All();
-        return view('backend.recursos.index', ['resources' => $r]);
+        $v = Resource::where('visible', 0)->get();
+        return view('backend.recursos.index', ['resources' => $r, 'pendents' => $v]);
 	}
 	public function add()
 	{
@@ -52,7 +53,10 @@ class Recursos extends Controller
         Resource::create($data);
         return redirect()->to('admin/recursos');
 	}
-
+    public function edit($id)
+    {
+        return $id;
+    }
     private function setInfoLog(Logger $log, $message)
     {
         $log->info($message);

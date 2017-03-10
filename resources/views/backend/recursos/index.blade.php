@@ -14,11 +14,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($resources as $resource)
+                @foreach($pendents as $pendent)
                     <tr>
-                        <th>{{$resource->titol}}</th>
-                        <th>{{$resource->subTitol}}</th>
-                        <th>{{$resource->descDetaill1}}</th>
+                        <th><a href="{{action('backend\Recursos@edit', ['id' => $pendent->id])}}">{{$pendent->titol}}</a></th>
+                        <th>{{$pendent->subTitol}}</th>
+                        <th>{{$pendent->descDetaill1}}</th>
                         <th>Hola</th>
                     </tr>
                 @endforeach

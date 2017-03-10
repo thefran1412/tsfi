@@ -58,3 +58,4 @@ $factory->define(App\Resource::class, function (Faker\Generator $faker){
     ];
 
 });
+

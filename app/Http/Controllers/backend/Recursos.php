@@ -20,8 +20,7 @@ class Recursos extends Controller
     }
 	public function index()
 	{
-        $recursos = Resource::paginate(10);
-		return view('backend.recursos.index', compact('recursos'));
+		return view('backend.recursos.index');
 	}
 	public function store()
 	{

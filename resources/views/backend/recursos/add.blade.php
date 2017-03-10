@@ -1,6 +1,7 @@
 @extends('layouts.backend')
 
 @section('content')
+    
     <div class="container" style="max-width: 600px;">
         <div class="panel panel-primary">
             <div class="panel-heading">

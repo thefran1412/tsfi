@@ -11,14 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link href="/css/app.css" rel="stylesheet">
     <link href="/css/backend.css" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
 </head>
 <body>
     {{-- HEADER START --}}
@@ -57,4 +52,26 @@
         @yield('content')
     </div>
 </body>
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable( {
+            "processing": true,
+            "serverSide": true,
+            "ajax": "api/test",
+            "columns":[
+                {data: 'titol'},
+                {data: 'subTitol'},
+                {data: 'descDetaill1'}
+            ]
+        } );
+    } );
+</script>
+<script>
+    window.Laravel = <?php echo json_encode([
+        'csrfToken' => csrf_token(),
+    ]); ?>
+</script>
 </html>

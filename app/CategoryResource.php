@@ -11,8 +11,4 @@ class CategoryResource extends Model
     protected $fillable = [
     'id', 'idCategoria', 'idRecurs'];
 
-        public function category(){
-    	return $this->belongsTo('App\Category')
-    }
-
 }

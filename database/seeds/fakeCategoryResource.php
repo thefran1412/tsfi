@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class fakeCategoryResource extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(fakeRecursos::class);
-         $this->call(fakeCategroyResource::class);
+        factory(\App\CategoryResource::class)->times(10)->create();
     }
 }

@@ -35,3 +35,11 @@ $factory->define(App\Resource::class, function (Faker\Generator $faker){
     ];
 
 });
+
+$factory->define(App\CategoryResource::class, function (Faker\Generator $faker){
+
+    return[
+        'idCategoria' => $faker->randomDigit
+    ];
+
+});

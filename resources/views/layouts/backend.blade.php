@@ -37,7 +37,7 @@
         <ul>
             <li><a href="{{  action('backend\Backend@index') }}">Inici</a></li>
             <li><a href="{{  action('backend\Recursos@index') }}">Recursos</a></li>
-            <li><a href="{{  action('backend\Recursos@store') }}">---Add</a></li>
+            <li><a href="{{  action('backend\Recursos@add') }}">---Add</a></li>
             <li><a href="{{  action('backend\Categories@index') }}">---Categories</a></li>
             <li><a href="{{  action('backend\Tags@index') }}">---Tags</a></li>
             <li><a href="{{  action('backend\Entitats@index') }}">Entitats</a></li>

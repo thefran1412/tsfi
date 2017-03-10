@@ -1,5 +1,5 @@
 <template>
-	<div class="content-page-header">
+	<div class="content-bottom-header">
 		<h1>Hello Student</h1>
 		{{this.$root.search}}
 		<div class="row">
@@ -907,7 +907,6 @@
 
 	</div>
 </template>
-
 
 <script>
 

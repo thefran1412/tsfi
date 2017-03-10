@@ -21,6 +21,10 @@ Vue.use(VueRouter);
 //Index
 import Index from './components/Index.vue';
 
+//SendResource
+
+import EnviarRecurs from './components/EnviarRecurs.vue';
+
 //Students
 import HomeStudents from './components/HomeStudents.vue';
 import ArticlesStudents from './components/ArticlesStudents.vue';
@@ -51,7 +55,8 @@ const router = new VueRouter({
         {path:'/events',component:Events, name:'events' },
         {path:'/noticies',component:Noticies, name:'noticies' },
         {path:'/tallers',component:Tallers, name:'tallers' },
-        {path:'/conferencies',component:Conferencies, name:'conferencies' }
+        {path:'/conferencies',component:Conferencies, name:'conferencies' },
+        {path:'/enviar-recurs',component:EnviarRecurs, name:'enviar-recurs' }
     ]
 });
 

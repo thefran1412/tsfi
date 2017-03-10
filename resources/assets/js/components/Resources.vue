@@ -1,7 +1,7 @@
 <template>
-	<div class="content-bottom-header">
+	<div class="content-bottom-header" >
 		<!-- <h1>RESOURCE</h1> -->
-		<div id="resource">
+		<div id="resource" class="container">
 
 			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
 				<!--  clearfix visible-xs-block visible-sm-block visible-md-block visible-lg-block -->

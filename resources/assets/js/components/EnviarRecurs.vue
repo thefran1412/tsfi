@@ -1,6 +1,6 @@
 <template>
 	<div class="content-bottom-header">
-		<h1>Tallers</h1>
+		<h1>Enviar Recurs</h1>
 	</div>
 </template>
 

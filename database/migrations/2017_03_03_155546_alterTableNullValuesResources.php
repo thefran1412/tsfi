@@ -42,6 +42,12 @@ class AlterTableNullValuesResources extends Migration
      */
     public function down()
     {
+        DB::statement('DELETE FROM recursos WHERE (subTitol IS NULL OR subTitol = "")AND (descBreu IS NULL OR descBreu = "")
+        AND (descDetaill1 IS NULL OR descDetaill1 = "")AND (descDetaill2 IS NULL OR descDetaill2 = "")AND relevancia IS NULL
+        AND dataInici IS NULL AND DdtaFinal IS NULL AND Gratuit IS NULL AND (preuInferior IS NULL OR preuInferior = 0)
+        AND (preuSuperior IS NULL OR preuSuperior = 0) AND dataPublicacio IS NULL AND visible IS NULL AND (fotoResum IS NULL OR fotoResum = "")
+        AND (creatPer IS NULL OR creatPer = "") AND (idLocalitzacio IS NULL OR idLocalitzacio = 0);');
+
         DB::statement('ALTER TABLE recursos MODIFY subTitol varchar(250) NOT NULL;');
         DB::statement('ALTER TABLE recursos MODIFY descBreu varchar(500) NOT NULL;');
         DB::statement('ALTER TABLE recursos MODIFY descDetaill1 varchar(255) NOT  NULL;');

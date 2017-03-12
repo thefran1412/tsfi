@@ -21,7 +21,8 @@
 	position: relative;
 	height: 350px;
 	overflow: hidden;
-	background-color:white;
+	background-color:red;
+	transition: background-color .5s ease-in-out;
 }
 
 

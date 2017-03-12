@@ -12,8 +12,7 @@
         <transition-group
           name="animate-css"
           mode="in-out"
-          enter-active-class="animated fadeInUp"
-          leave-active-class="animated fadeOutUp">
+          enter-active-class="animated fadeInUp">
           <div class="col-md-4" v-for="r in getSearchTitle" :key="r.id">
             <div class="recurso">
               <div class="recurso-content">
@@ -47,10 +46,9 @@
         </transition-group>
 
         <!-- Acaba recurso -->
-        <div class="clear-right" v-if="getSearchTitle.length && loading"></div>
       </div>
     </div>
-	</div>
+  </div>
 </template>
 
 <script>

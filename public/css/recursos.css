@@ -15,6 +15,15 @@
 	transition: background-color .5s ease-in-out;
 }
 
+.clear-right{
+	padding-right: 0px;
+	padding-left: 0px;
+	position: relative;
+	height: 350px;
+	overflow: hidden;
+	background-color:white;
+}
+
 
 .content-bottom-header .col-md-4 h2{
 	font-size: 26px;
@@ -37,6 +46,7 @@
 	color: white;
 }
 .recurso-content{
+	text-align: left;
 	padding-top: 75px;
 /*	padding-top: 55px;*/
 	padding-left: 45px;
@@ -97,8 +107,8 @@
 	z-index: -1;
 	transition:all .5s ease-in;
 	background-size:cover;
-
-	background-image: url('/images/Prueba-700x394.jpg');
+	
+	/*background-image: url('/images/Prueba-700x394.jpg');*/
 }
 
 .no-image{
@@ -108,10 +118,23 @@
 }
 
 .recurso:hover .recurso-foto {
-	transform:scale(1.02);	
+	transform:scale(1.02);
 }
 
 
 .squares-resources .col-md-4{
 	padding: 0;
+}
+
+.squares-resources {
+	text-align: center;
+}
+
+.resource-not-found{
+	font-size: 6em;
+    display: table-cell;
+    table-layout: fixed;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    width: 50%;
 }

@@ -3,7 +3,7 @@
         <header>
             <div class="header-top-item header-search-container">
                 <span>TSFI</span>
-                <form class="site-search" v-on:submit.prevent="getWord">
+                <form class="site-search" >
                       <div id="site-search-container">
                         <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
                       </div>
@@ -104,7 +104,7 @@
         data(){
             return{
                 type:'',
-                search:null,
+                search:'',
                 searchSubmit : '',
                 category: { category: '', name: 'Totes les categories' },
                 categories: [
@@ -157,6 +157,8 @@
         },
         methods:{
             typeUser(defaultPath){
+
+                console.log(this.$root.correctCategory);
 
                 var typeUser = localStorage.getItem("typeUser");
                 var pathURL = this.$refs.canvas.$el.hash;
@@ -232,12 +234,6 @@
                 this.$http.get('../api/entitats').then(response=>{
                     console.log(response.data);
                 })
-            },
-            getWord(){
-                this.searchSubmit = this.search;
-                //console.log(this.searchSubmit);
-                //this.$broadcast('search', 2);
-                //this.vue.$emit('search', this.search);
             }
         }
     }

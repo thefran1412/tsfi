@@ -13,7 +13,9 @@ class Recursos extends Controller
 
     	$resources = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.id")
     	->join("categories as c","c.id","=","cr.idCategoria")
-    	->select("recursos.id","recursos.titol","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nom")
+        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.id")
+        ->join("entitats as e", "er.idEntitat", "=", "e.id")
+    	->select("recursos.id","recursos.titol","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nom","e.nom")
     	->get();
 
 	return response()->json([

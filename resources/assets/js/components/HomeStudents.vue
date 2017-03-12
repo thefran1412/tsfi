@@ -78,6 +78,7 @@
       fetchResource(){
         this.$http.get('../api/recursos').then(response=>{
             this.recursos = response.data.resources;
+            console.log(this.recursos);
             this.loading = true;
         });
       },
@@ -90,7 +91,22 @@
     },
     computed:{
       getSearchTitle(){
-        return this.recursos.filter((recurso) => recurso.titol.includes(this.$root.search))
+
+        var searchWord = this.$root.search;
+        var searchEntity = this.$root.entity.name;
+
+        if(searchEntity === 'Totes'){
+              searchEntity = '';
+        }
+
+        return this.recursos
+            .filter(function(item) {
+                return item.titol.includes(searchWord); 
+            })
+            .filter(function(item) {
+                return item.nom.includes(searchEntity);
+            })
+
       }
     }
   }

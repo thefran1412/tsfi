@@ -16,6 +16,14 @@ class Resource extends Model
     }
 
     public function category(){
-	return $this->belongsTo('App\Category');
+		return $this->belongsTo('App\Category');
+    }
+
+    public function entityResource(){
+		return $this->belongsTo('App\EntityResource');
+    }
+
+    public function entity(){
+		return $this->belongsTo('App\Entity');
     }
 }

@@ -64,11 +64,14 @@
             </tbody>
         </table>
     </div>
-<script>
-    $(document).ready(function() {
-         $('#aprovados').DataTable();
-         $('#pendientes').DataTable();
-         $('#reportados').DataTable();
-    } );
-</script>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+             $('#aprovados').DataTable();
+             $('#pendientes').DataTable();
+             $('#reportados').DataTable();
+        } );
+    </script>
 @endsection

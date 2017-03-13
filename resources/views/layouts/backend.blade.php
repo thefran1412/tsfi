@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/backend.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
 
     {{-- End Summer Note--}}
 </head>
@@ -54,6 +55,7 @@
 </body>
 
 <!-- Scripts -->
+ <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
  <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 {{--Summer Note--}}
 <link href="/js/sumer_note/summernote.css" rel="stylesheet">
@@ -64,6 +66,7 @@
 <script src="/js/sumer_note/summernote.min.js"></script>
 <script src="/js/sumer_note/summernote-es-ES.js"></script>
 {{--End Summer Note scripts--}}
+@yield('script')
 
 <script>
     window.Laravel = <?php echo json_encode([

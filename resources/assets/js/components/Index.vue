@@ -3,7 +3,7 @@
         <header>
             <div class="header-top-item header-search-container">
                 <span>TSFI</span>
-                <form class="site-search" v-on:submit.prevent="getWord">
+                <form class="site-search" >
                       <div id="site-search-container">
                         <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
                       </div>
@@ -15,21 +15,17 @@
                             </svg>
                      </button>
                 </form>
-               <!--  <div class="user-type">
-                    <li v-on:click="changeTypeUser('teacher')" v-if="type === 'students'"><router-link :to="{name: 'home-teachers'}">Alumnes</router-link></li>
-                    <li  v-on:click="changeTypeUser('student')" v-if="type === 'teachers'"><router-link :to="{name: 'home-students'}">Professors</router-link></li>
-                </div> -->
             </div>
             <div class="footer-menu">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4" >
-                            <router-link ref="canvas" :to="{name: category.category}">
-                            <multiselect v-model="category" selected-label="Seleccionada" track-by="name" label="name" placeholder="Select one" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
+                            <router-link ref="canvas" :to="{name: category.category}" >
+                            <multiselect v-model="category" selected-label="Seleccionada" track-by="name" label="name" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                             </router-link>
                         </div>
                         <div class="col-md-4">
-                            <multiselect v-model="value" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="name" track-by="name"></multiselect>
+                            <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="name" track-by="name"  :allow-empty="false"></multiselect>
                         </div>
                         <div class="col-md-2 user-type">
                             <li v-on:click="typeUser('#/enviar-recurs')" >
@@ -104,8 +100,9 @@
         data(){
             return{
                 type:'',
-                search:null,
+                search:'',
                 searchSubmit : '',
+                entity: { name: ''},
                 category: { category: '', name: 'Totes les categories' },
                 categories: [
                     { category: '' , name: 'Totes les categories'},
@@ -115,6 +112,7 @@
                     { category: 'conferencies', name: 'Conferencies'}
                 ],
                 entities: [
+                    { name:'Totes', url:''},
                     { name: 'ADECAT', url: 'http://www.adecat.org/' },
                     { name: 'Ajuntament de BCN - Barcelona Activa', url: 'http://www.barcelonactiva.cat' },
                     { name: "Ajuntament de BCN - Institut Municipal d'Informàtica", url: 'http://ajuntament.barcelona.cat/imi/ca' },
@@ -139,7 +137,7 @@
                     { name: 'LEITAT', url: 'http://www.leitat.org/castellano/' },
                     { name: 'Pacte Industrial de la Regió Metropolitana de BCN', url: 'http://www.pacteindustrial.org/' },
                     { name: 'PIMEC', url: 'https://www.pimec.org/' },
-                    { name: 'Salessians de Sarrià', url: 'http://www.salesianssarria.com/' },
+                    { name: 'Salesians de Sarria', url: 'http://www.salesianssarria.com/' },
                     { name: 'SANDVIK', url: 'http://www.home.sandvik/en/' },
                     { name: 'Schneider', url: 'http://www.schneider-electric.es/es/' },
                     { name: 'SEAT', url: 'http://www.seat.es' },
@@ -176,6 +174,8 @@
 
                 var typeNum = localStorage.getItem("numType");
 
+                this.search = '';
+
                 if(localStorage.length === 2 && Number(typeNum) === 0){
 
                     var typeUser = localStorage.getItem("typeUser");
@@ -192,6 +192,8 @@
                 }
             },
             changeTypeUser: function (typeUser){
+
+                this.search = '';
 
                 localStorage.removeItem("typeUser");
 
@@ -213,9 +215,6 @@
                 };
                 
             },
-            nameWithLang ({ name }) {
-              return `${name}`
-            },
             correctUrlPageCategory(typeUser, pathURL){
 
                 this.type = typeUser+'s';
@@ -232,12 +231,6 @@
                 this.$http.get('../api/entitats').then(response=>{
                     console.log(response.data);
                 })
-            },
-            getWord(){
-                this.searchSubmit = this.search;
-                //console.log(this.searchSubmit);
-                //this.$broadcast('search', 2);
-                //this.vue.$emit('search', this.search);
             }
         }
     }

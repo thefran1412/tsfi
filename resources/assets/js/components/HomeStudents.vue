@@ -1,12 +1,22 @@
 <template>
 <div class="content-bottom-header">
-      <div class="row squares-resources">   
+      <div class="row squares-resources">
+        <transition
+              name="animate"
+              mode="in-out"
+              enter-active-class="animated fadeInUp">
+            <span class="resource-not-found" v-if="!getSearchTitle.length && loading" :key="notfound">No em trobat el recurs...</span>
+        </transition>
         <!-- Empieza recurso -->
-        <div class="col-md-4" v-for="r in recursos">
+        <transition-group
+          name="animate-css"
+          mode="in-out"
+          enter-active-class="animated fadeInUp">
+          <div class="col-md-4" v-for="r in getSearchTitle" :key="r.id">
             <div class="recurso">
               <div class="recurso-content">
                 <h2>
-                  <a v-bind:href="'#/'+ r.id">
+                  <a v-bind:href="'#/resource/'+ r.id">
                       {{r.titol}}</a>
                   </a>
                 </h2>
@@ -20,23 +30,27 @@
                       {{r.dataPublicacio}}
                     </div>
                     <div class="categoria">
-                      <a v-bind:href="'#/'+r.nom">
-                        {{r.nom}}
+                      <a v-on:click="getCategory(r.nomCategoria)" v-bind:href="'#/'+r.nomCategoria">
+                        {{r.nomCategoria}}
                       </a>
+                    </div>
+                    <div class="fecha">
+                        {{r.nomEntitat}}
                     </div>
                 </div>
                 
-                <div class="recurso-foto"> <!-- data-syle="background-image: url('\public\images\Prueba\Prueba-700x394.jpg');"  
-                style="\public\images\Prueba\Prueba-700x394.jpg"
-                   -->
+                <div class="recurso-foto" :style="{ backgroundImage: 'url(' + r.fotoResum + ')' }"> 
                 </div>
               </div>
             </div>
         </div>
+
+        </transition-group>
+
         <!-- Acaba recurso -->
       </div>
     </div>
-	</div>
+  </div>
 </template>
 
 <script>
@@ -45,13 +59,15 @@
     data(){
 
       return{
-
-          recursos:[]
+          recursos:[],
+          loading:false,
+          correctCategory:''
         }
 
     },
     created(){
-      this.fetchResource();
+      this.fetchResource(this.$route.params.id);
+      
     },
     mounted(){
         this.getResourceBackground();
@@ -61,11 +77,43 @@
 
 
         } ,  
-      fetchResource(){
-        this.$http.get('../api/recursos').then(response=>{
+      fetchResource(typeUser){
+
+        typeUser = 'student';
+
+        this.$http.get('../api/typeuser/'+typeUser).then(response=>{
             this.recursos = response.data.resources;
-        })
+            console.log(this.recursos);
+            this.$root.search = '';
+            this.loading = true;
+        });
+      },
+      getCategory: function(value){
+
+        var cap = value.charAt(0).toUpperCase() + value.slice(1);
+        this.$root.category = { category: value, name: cap };
+      }
+      
     },
+    computed:{
+      getSearchTitle(){
+
+        var searchWord = this.$root.search;
+        var searchEntity = this.$root.entity.name;
+
+        if(searchEntity === 'Totes'){
+              searchEntity = '';
+        }
+
+        return this.recursos
+            .filter(function(item) {
+                return item.titol.includes(searchWord); 
+            })
+            .filter(function(item) {
+                return item.nomEntitat.includes(searchEntity);
+            })
+
+      }
     }
   }
 </script>

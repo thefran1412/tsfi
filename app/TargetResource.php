@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class TargetResource extends Model
 {
     protected $table = 'target_recurs';
+    protected $fillable = ['id', 'idRecurs', 'idTarget'];
 }

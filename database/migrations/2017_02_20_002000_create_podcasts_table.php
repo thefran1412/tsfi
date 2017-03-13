@@ -17,7 +17,7 @@ class CreatePodcastsTable extends Migration
             $table->increments('id');
             $table->string('descPodCasts', 200);
             $table->string('podCast');
-            $table->int('ordre');
+            $table->integer('ordre');
             $table->integer('idRecurs')->references('id')->on('recursos');
             $table->timestamps();
 

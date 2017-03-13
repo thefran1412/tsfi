@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
         <meta name="_token" content="{{ csrf_token() }}" />
+        <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
+
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/menu.css') }}">
 

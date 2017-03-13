@@ -1,5 +1,4 @@
 @extends('layouts.backend')
-
 @section('content')
 
     <div class="content" id="listrecurso">
@@ -65,4 +64,14 @@
             </tbody>
         </table>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+             $('#aprovados').DataTable();
+             $('#pendientes').DataTable();
+             $('#reportados').DataTable();
+        } );
+    </script>
 @endsection

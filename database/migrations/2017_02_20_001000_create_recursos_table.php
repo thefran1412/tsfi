@@ -22,7 +22,7 @@ class CreateRecursosTable extends Migration
             $table->longText('descDetaill2');
             $table->integer('relevancia');
             $table->date('dataInici');
-            $table->date('DdtaFinal');
+            $table->date('dataFinal');
             $table->boolean('Gratuit');
             $table->double('preuInferior', 15, 2);
             $table->double('preuSuperior', 15, 2);

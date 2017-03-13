@@ -31,9 +31,12 @@
                       {{r.dataPublicacio}}
                     </div>
                     <div class="categoria">
-                      <a v-on:click="getCategory(r.nom)" v-bind:href="'#/'+r.nom">
-                        {{r.nom}}
+                      <a v-on:click="getCategory(r.nomCategoria)" v-bind:href="'#/'+r.nomCategoria">
+                        {{r.nomCategoria}}
                       </a>
+                    </div>
+                    <div class="fecha">
+                        {{r.nomEntitat}}
                     </div>
                 </div>
                 
@@ -79,6 +82,7 @@
         this.$http.get('../api/recursos').then(response=>{
             this.recursos = response.data.resources;
             console.log(this.recursos);
+            this.$root.search = '';
             this.loading = true;
         });
       },
@@ -104,7 +108,7 @@
                 return item.titol.includes(searchWord); 
             })
             .filter(function(item) {
-                return item.nom.includes(searchEntity);
+                return item.nomEntitat.includes(searchEntity);
             })
 
       }

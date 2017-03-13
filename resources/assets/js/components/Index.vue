@@ -20,7 +20,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4" >
-                            <router-link ref="canvas" :to="{name: category.category}">
+                            <router-link ref="canvas" :to="{name: category.category}" >
                             <multiselect v-model="category" selected-label="Seleccionada" track-by="name" label="name" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                             </router-link>
                         </div>
@@ -156,8 +156,6 @@
         methods:{
             typeUser(defaultPath){
 
-                console.log(this.$root.correctCategory);
-
                 var typeUser = localStorage.getItem("typeUser");
                 var pathURL = this.$refs.canvas.$el.hash;
 
@@ -176,6 +174,8 @@
 
                 var typeNum = localStorage.getItem("numType");
 
+                this.search = '';
+
                 if(localStorage.length === 2 && Number(typeNum) === 0){
 
                     var typeUser = localStorage.getItem("typeUser");
@@ -192,6 +192,8 @@
                 }
             },
             changeTypeUser: function (typeUser){
+
+                this.search = '';
 
                 localStorage.removeItem("typeUser");
 
@@ -212,9 +214,6 @@
                     this.category = { category: 'home-students', name: 'Totes les categories' };
                 };
                 
-            },
-            nameWithLang ({ name }) {
-              return `${name}`
             },
             correctUrlPageCategory(typeUser, pathURL){
 

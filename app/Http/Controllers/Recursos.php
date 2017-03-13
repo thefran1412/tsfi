@@ -15,7 +15,7 @@ class Recursos extends Controller
     	->join("categories as c","c.id","=","cr.idCategoria")
         ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.id")
         ->join("entitats as e", "er.idEntitat", "=", "e.id")
-    	->select("recursos.id","recursos.titol","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nom","e.nom")
+    	->select("recursos.id","recursos.titol","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat")
     	->get();
 
 	return response()->json([

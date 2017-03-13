@@ -61,22 +61,16 @@
         @yield('content')
     </div>
 </body>
+
 <!-- Scripts -->
-
-
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+ <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 {{--Summer Note--}}
 
 <script src="/js/sumer_note/summernote.min.js"></script>
 <script src="/js/sumer_note/summernote-es-ES.js"></script>
 {{--End Summer Note scripts--}}
 
-<script>
-    $(document).ready(function() {
-         $('#aprovados').DataTable();
-         $('#pendientes').DataTable();
-         $('#reportados').DataTable();
-    } );
-</script>
 <script>
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),

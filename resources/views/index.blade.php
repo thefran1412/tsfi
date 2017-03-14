@@ -89,6 +89,7 @@
                 else{
                     newurl = newurl+'tsfi';
                 }
+                console.log(newurl);
                 window.location.href = newurl;
             } 
             else {

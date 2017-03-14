@@ -9,14 +9,17 @@ use Illuminate\Support\Facades\DB;
 
 class Recursos extends Controller
 {
-    public function index() {
+    public function index(Request $request, $typeuser) {
 
-    	$resources = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.id")
-    	->join("categories as c","c.id","=","cr.idCategoria")
-        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.id")
-        ->join("entitats as e", "er.idEntitat", "=", "e.id")
-    	->select("recursos.id","recursos.titol","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat")
-    	->get();
+    	$resources = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.recurs_id")
+    	->join("categories as c","c.categoria_id","=","cr.idCategoria")
+        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.recurs_id")
+        ->join("entitats as e", "er.idEntitat", "=", "e.entitat_id")
+        ->join("target_recurs", "target_recurs.idRecurs", "=", "recursos.recurs_id")
+        ->join("targets","targets.targets_id","=","target_recurs.idTarget")
+    	->select("recursos.recurs_id","recursos.titolRecurs","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat", "targets.codiTarget")
+    	->where("targets.codiTarget","=", $typeuser)
+        ->get();
 
 	return response()->json([
             'resources' => $resources
@@ -25,24 +28,25 @@ class Recursos extends Controller
 
  	public function getResource(Request $request, $id) {
         // $resources = Resource::findOrFail($id);
-	// $resources = Resource::all();
-    	$resources = Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.id")
-        ->join("categories as c","c.id","=","cr.idCategoria")
-        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.id")
-        ->join("entitats as e", "er.idEntitat", "=", "e.id")
-        ->join("link_recurs as lr","lr.id","=","recursos.id")
-        ->join("imatge_recurs as ir","ir.id","=","recursos.id")
-        ->join("podcasts as po","po.id","=","recursos.id")
-        ->join("video_recurs as vr","vr.idRecurs","=","recursos.id")
-        ->join("tipus_videos as tv","tv.id","=","vr.idTipus")
-        ->join("edats_recurs as edr","edr.idRecurs","=","recursos.id")
-        ->join("edats as ed","ed.id","=","edr.idEdat")
-        ->where("recursos.id","=",$id)
-        ->select("recursos.titol")
-         ->get();
+    	$resource = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.recurs_id")
+        ->join("categories as c","c.categoria_id","=","cr.idCategoria")
+        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.recurs_id")
+        ->join("entitats as e", "er.idEntitat", "=", "e.entitat_id")
+        ->join("target_recurs", "target_recurs.idRecurs", "=", "recursos.recurs_id")
+        ->join("targets","targets.targets_id","=","target_recurs.idTarget")
+        ->join("edats_recurs","edats_recurs.idRecurs","=","recursos.recurs_id")
+        ->join("edats","edats_recurs.idEdat","=","edats.edats_id")
+        ->join("video_recurs","video_recurs.idRecurs","=","recursos.recurs_id")
+        ->join("localitzacions","localitzacions.localitzacions_id","=","recursos.idLocalitzacio")
+        ->join("imatge_recurs","imatge_recurs.idRecurs","=","recursos.recurs_id")
+        ->join("podcasts","podcasts.idRecurs","=","recursos.recurs_id")
+        ->select("recursos.recurs_id","recursos.titolRecurs","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat","targets.codiTarget","edats.codiEdat","edats.descEdat","video_recurs.urlVideo","localitzacions.latitud","localitzacions.longitud", "imatge_recurs.descImatge", "podcasts.descPodCasts")
+        ->where("recursos.recurs_id","=", $id)
+        ->get();
+
 
 	return response()->json([
-            'resources' => $resources
+            'resource' => $resource
         ]);
     }
 }

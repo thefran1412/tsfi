@@ -39,10 +39,12 @@ class Recursos extends Controller
         $v = Resource::where('visible', 0)->get();
         return view('backend.recursos.index', ['resources' => $r, 'pendents' => $v]);
 	}
+
 	public function add()
 	{
 		return view('backend.recursos.add');
     }
+
 	public function store()
 	{
 	    $this->setLog('Resource store');
@@ -53,11 +55,22 @@ class Recursos extends Controller
         Resource::create($data);
         return redirect()->to('admin/recursos');
 	}
+
     public function edit($id)
     {
-        $info = Resource::find($id);
-        return view('backend.recursos.edit',  ['info' => $info]);
+        $recurs = Resource::find($id);
+        return view('backend.recursos.edit',  ['recurs' => $recurs]);
     }
+    public function update($id)
+    {
+        echo 'hola ';
+        //var_dump($request);
+        // $recurs = Resource::find($id);
+        // $recurs->fill($request->all());
+        // $recurs->store();
+        // return Redirect::to('admin/recursos');
+    }
+
     private function setInfoLog(Logger $log, $message)
     {
         $log->info($message);

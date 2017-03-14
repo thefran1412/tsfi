@@ -7,59 +7,78 @@ use Illuminate\Database\Eloquent\Model;
 class Resource extends Model
 {
     protected $table = 'recursos';
+    protected $primaryKey = 'recurs_id';
+    public $timestamps = false;
 
     protected $fillable = [
-    'id', 'titol', 'subTitol', 'descBreu', 'descDetaill1', 'descDetaill2', 'relevancia', 'dataInici', 'DdtaFinal', 'Gratuit', 'preuInferior', 'preuSuperior', 'dataPublicacio', 'visible', 'fotoResum', 'creatPer', 'idLocalitzacio'];
+    'recurs_id', 'titolRecurs', 'subTitol', 'descBreu', 'descDetaill1', 'descDetaill2', 'relevancia', 'dataInici', 'dataFinal', 'gratuit', 'preuInferior', 'preuSuperior', 'dataPublicacio', 'visible', 'fotoResum', 'creatPer', 'idLocalitzacio'];
 
     public function age(){
-        return $this->belongsTo('App\Age');
+    	return $this->hasMany('App\CategoryResource');
     }
     public function ageResource(){
         return $this->belongsTo('App\AgeResource');
     }
     public function category(){
-        return $this->belongsTo('App\Category');
+		return $this->hasMany('App\Category');
     }
     public function categoryResource(){
         return $this->belongsTo('App\CategoryResource');
+		return $this->hasMany('App\EntityResource');
     }
     public function entity(){
-        return $this->belongsTo('App\Entity');
+		return $this->hasMany('App\Entity');
     }
-    public function entityResource(){
-        return $this->belongsTo('App\EntityResource');
-    }
-    public function imageResource(){
-        return $this->belongsTo('App\ImageResource');
-    }
-    public function link(){
-        return $this->belongsTo('App\Link');
-    }
-    public function localitzacion(){
-        return $this->belongsTo('App\Localitzation');
-    }
-    public function podcast(){
-        return $this->belongsTo('App\Podcast');
-    }
-    public function socialMedia(){
-        return $this->belongsTo('App\SocialMedia');
-    }
-    public function tag(){
-        return $this->belongsTo('App\Tag');
-    }
-    public function tagResource(){
-        return $this->belongsTo('App\TagResource');
-    }
-    public function target(){
-        return $this->belongsTo('App\Target');
-    }
+
     public function targetResource(){
-        return $this->belongsTo('App\TargetResource');
+        return $this->hasMany('App\TargetResource');
     }
+
+    public function targets(){
+        return $this->hasMany('App\Targets');
+    }
+
+    public function age(){
+        return $this->hasMany('App\Age');
+    }
+
+    public function ageResource(){
+        return $this->hasMany('App\AgeResource');
+    }
+
+    public function link(){
+        return $this->hasMany('App\Link');
+    }
+
+    public function imageResource(){
+        return $this->hasMany('App\ImageResource');
+    }
+
+    public function location(){
+        return $this->hasMany('App\Location');
+    }
+
+    public function podcast(){
+        return $this->hasMany('App\Podcast');
+    }
+
+    public function socialMedia(){
+        return $this->hasMany('App\SocialMedia');
+    }
+
+    public function tag(){
+        return $this->hasMany('App\Tag');
+    }
+
+    public function tagResource(){
+        return $this->hasMany('App\TagResource');
+    }
+
     public function videoResource(){
-        return $this->belongsTo('App\VideoResource');
+        return $this->hasMany('App\VideoResource');
     }
+
     public function videoType(){
-        return $this->belongsTo('App\VideoType');
+        return $this->hasMany('App\VideoType');
     }
 }

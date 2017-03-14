@@ -2,16 +2,16 @@
 
 @section('content')
 
-<h1>{{$recurs->titol}}</h1>
+<h1>{{$recurs->titolRecurs}}</h1>
 
-{!!Form::model($recurs, ['action'=> ['backend\Recursos@update', $recurs->id], 'method' =>'PUT'])!!}
+{!!Form::model($recurs, ['action'=> ['backend\Recursos@update', $recurs->recurs_id], 'method' =>'PUT'])!!}
     <div>
         {!!Form::label('creatPer', 'Autor: ')!!}
         {!!Form::text('creatPer', null, ['class' => 'form-controll', 'placeholder' => 'Introdueix el sub titol'])!!}
     </div>
     <div>
-        {!!Form::label('titol', 'Titol: ')!!}
-        {!!Form::text('titol', null, ['class' => 'form-controll', 'placeholder' => 'Introdueix el titol'])!!}
+        {!!Form::label('titolRecurs', 'Titol: ')!!}
+        {!!Form::text('titolRecurs', null, ['class' => 'form-controll', 'placeholder' => 'Introdueix el titol'])!!}
     </div>
     <div>
         {!!Form::label('subTitol', 'Sub Titol: ')!!}
@@ -42,8 +42,8 @@
         {!!Form::date('dataFinal', null, ['class' => 'form-controll', 'placeholder' => 'Introdueix data final'])!!}
     </div>
     <div>
-        {!!Form::label('Gratuit', 'Gratuit: ')!!}
-        {!!Form::number('Gratuit', null, ['class' => 'form-controll', 'placeholder' => 'Introdueix gratuit'])!!}
+        {!!Form::label('gratuit', 'Gratuit: ')!!}
+        {!!Form::number('gratuit', null, ['class' => 'form-controll', 'placeholder' => 'Introdueix gratuit'])!!}
     </div>
     <div>
         {!!Form::label('preuInferior', 'Preu Inferior: ')!!}
@@ -61,4 +61,6 @@
         {!!Form::submit('Guardar canvis', ['class' => 'form-controll'])!!}
     </div>
 {!!Form::close()!!}
+
+{{-- <a href="{{ route('backend.recursos.update', $recurs->recurs_id) }}">edit</a> --}}
 @endsection

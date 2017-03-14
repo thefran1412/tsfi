@@ -61,14 +61,14 @@ class Recursos extends Controller
         $recurs = Resource::find($id);
         return view('backend.recursos.edit',  ['recurs' => $recurs]);
     }
-    public function update($id)
+    public function update($id, Request $request)
     {
-        echo 'hola ';
+        //echo 'hola ';
         //var_dump($request);
-        // $recurs = Resource::find($id);
-        // $recurs->fill($request->all());
-        // $recurs->store();
-        // return Redirect::to('admin/recursos');
+        $recurs = Resource::find($id);
+        $recurs->fill($request->all());
+        $recurs->save();
+        return redirect('admin/recursos');
     }
 
     private function setInfoLog(Logger $log, $message)

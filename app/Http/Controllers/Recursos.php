@@ -28,7 +28,6 @@ class Recursos extends Controller
 
  	public function getResource(Request $request, $id) {
 
-	$resources = Resource::all();
     	$resource = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.recurs_id")
         ->join("categories as c","c.categoria_id","=","cr.idCategoria")
         ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.recurs_id")
@@ -47,7 +46,7 @@ class Recursos extends Controller
 
 
 	return response()->json([
-            'resource' => $resources
+            'resource' => $resource
         ]);
     }
 }

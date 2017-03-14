@@ -13,18 +13,19 @@ class Resource extends Model
     protected $fillable = [
     'recurs_id', 'titolRecurs', 'subTitol', 'descBreu', 'descDetaill1', 'descDetaill2', 'relevancia', 'dataInici', 'dataFinal', 'gratuit', 'preuInferior', 'preuSuperior', 'dataPublicacio', 'visible', 'fotoResum', 'creatPer', 'idLocalitzacio'];
 
-    public function categoryResource(){
+    public function age(){
     	return $this->hasMany('App\CategoryResource');
     }
-
+    public function ageResource(){
+        return $this->belongsTo('App\AgeResource');
+    }
     public function category(){
 		return $this->hasMany('App\Category');
     }
-
-    public function entityResource(){
+    public function categoryResource(){
+        return $this->belongsTo('App\CategoryResource');
 		return $this->hasMany('App\EntityResource');
     }
-
     public function entity(){
 		return $this->hasMany('App\Entity');
     }

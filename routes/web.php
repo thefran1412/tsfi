@@ -30,13 +30,13 @@ Route::get('/admin/config', 'backend\Backend@config');
 Route::get('/admin/analytics', 'backend\Analytics@index');
 
 /* RECURSOS */
-Route::resource('admin/recursos/', 'backend\Recursos');
+//Route::resource('admin/recursos', 'backend\Recursos');
 
 Route::get('/admin/recursos', 'backend\Recursos@index');
 Route::get('/admin/recursos/add', 'backend\Recursos@add');
 Route::get('/admin/recursos/{id}/edit', 'backend\Recursos@edit');
 // Route::get('/admin/recursos/update', 'backend\Recursos@update');
-// Route::post('/admin/recursos/update', 'backend\Recursos@update');
+Route::put('/admin/recursos/{recurso}', 'backend\Recursos@update');
 Route::post('/admin/recursos/add', 'backend\Recursos@store');
 Route::get('/admin/recursos/categories', 'backend\Categories@index');
 Route::get('/admin/recursos/tags', 'backend\Tags@index');

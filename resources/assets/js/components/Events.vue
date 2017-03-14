@@ -13,7 +13,7 @@
           name="animate-css"
           mode="in-out"
           enter-active-class="animated fadeInUp">
-          <div class="col-md-4" v-for="r in getSearchTitle" :key="r.id">
+          <div class="col-md-4" v-for="r in getSearchTitle" :key="r.recurs_id">
             <div class="recurso">
               <div class="recurso-content">
                 <h2>
@@ -78,8 +78,11 @@
 
 
         } ,  
-      fetchResource(){
-        this.$http.get('../api/recursos').then(response=>{
+      fetchResource(category){
+
+        category = 'events';
+
+        this.$http.get('../api/typeuser/'+category).then(response=>{
             this.recursos = response.data.resources;
             console.log(this.recursos);
             this.$root.search = '';
@@ -105,7 +108,7 @@
 
         return this.recursos
             .filter(function(item) {
-                return item.titol.includes(searchWord); 
+                return item.titolRecurs.includes(searchWord); 
             })
             .filter(function(item) {
                 return item.nomEntitat.includes(searchEntity);

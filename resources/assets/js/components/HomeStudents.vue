@@ -44,9 +44,7 @@
               </div>
             </div>
         </div>
-
         </transition-group>
-
         <!-- Acaba recurso -->
       </div>
     </div>

@@ -7,7 +7,8 @@
 				<!--  clearfix visible-xs-block visible-sm-block visible-md-block visible-lg-block -->
 				<h1>PROVA TITOL</h1>
 				<img class="img-responsive" src="\img\image\imagenprueba.jpg" alt="prueba View"> <!-- width="960" height="540" -->
-				<h2>PROVA SUBTITOL De la plantilla del recurs de proves i bla, bla, bla, bla, bla...</h2>
+				<h2 v-for="r in recurso">{{r.subTitol}}</h2>
+				<pre>{{this.recurso}}</pre>
 
 				<!-- class="descshort" -->
 				<p> <strong>DESCRIPCIO CURTA </strong> am wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,</p>
@@ -42,7 +43,7 @@
 					<h3>Direcció</h3>
 					<p>Calle estroncio 15-21, 3-4</p>
 				</div>
-				
+
 				<div class="banners">
 					<h1>Banner</h1>
 				</div>
@@ -57,7 +58,7 @@
 		data(){
 			return{
 				image:'',
-				users:[]
+				recurso:{}
 			}
 		},
 		created(){
@@ -65,9 +66,10 @@
 		},
 		methods:{
 			fetchResource: function(id){
-				this.$http.get('api/recursos/'+id).then(function(response){
-					// this.users = response.data.users;ç
-					console.log(response);
+				console.log(id);
+				this.$http.get('../api/recursos/'+id).then(function(response){
+					this.recurso = response.data.resources;
+					console.log(this.recurso);
 				});
 			}
 		}

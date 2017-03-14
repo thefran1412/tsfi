@@ -13,45 +13,36 @@ class Resource extends Model
     protected $fillable = [
     'recurs_id', 'titolRecurs', 'subTitol', 'descBreu', 'descDetaill1', 'descDetaill2', 'relevancia', 'dataInici', 'dataFinal', 'gratuit', 'preuInferior', 'preuSuperior', 'dataPublicacio', 'visible', 'fotoResum', 'creatPer', 'idLocalitzacio'];
 
-    public function age(){
-    	return $this->hasMany('App\CategoryResource');
-    }
-    public function ageResource(){
-        return $this->belongsTo('App\AgeResource');
-    }
     public function category(){
-		return $this->hasMany('App\Category');
+        return $this->hasMany('App\Category');
     }
+
     public function categoryResource(){
-        return $this->belongsTo('App\CategoryResource');
-		return $this->hasMany('App\EntityResource');
-    }
-    public function entity(){
-		return $this->hasMany('App\Entity');
-    }
-
-    public function targetResource(){
-        return $this->hasMany('App\TargetResource');
-    }
-
-    public function targets(){
-        return $this->hasMany('App\Targets');
+        return $this->hasMany('App\EntityResource');
     }
 
     public function age(){
-        return $this->hasMany('App\Age');
+    	return $this->hasMany('App\Age');
     }
 
     public function ageResource(){
         return $this->hasMany('App\AgeResource');
     }
 
-    public function link(){
-        return $this->hasMany('App\Link');
+    public function entity(){
+		return $this->hasMany('App\Entity');
+    }
+
+    public function entityresource(){
+        return $this->hasMany('App\EntityResource');
     }
 
     public function imageResource(){
         return $this->hasMany('App\ImageResource');
+    }
+
+    public function link(){
+        return $this->hasMany('App\Link');
     }
 
     public function location(){
@@ -60,6 +51,10 @@ class Resource extends Model
 
     public function podcast(){
         return $this->hasMany('App\Podcast');
+    }
+
+    public function resource(){
+        return $this->hasMany('App\Resource');
     }
 
     public function socialMedia(){
@@ -74,11 +69,19 @@ class Resource extends Model
         return $this->hasMany('App\TagResource');
     }
 
-    public function videoResource(){
-        return $this->hasMany('App\VideoResource');
+    public function targets(){
+        return $this->hasMany('App\Targets');
+    }
+
+    public function targetResource(){
+        return $this->hasMany('App\TargetResource');
     }
 
     public function videoType(){
         return $this->hasMany('App\VideoType');
+    }
+
+    public function videoResource(){
+        return $this->hasMany('App\VideoResource');
     }
 }

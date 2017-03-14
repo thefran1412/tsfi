@@ -14,7 +14,7 @@
             <tbody>
                 @foreach($pendents as $pendent)
                     <tr>
-                        <th><a href="{{action('backend\Recursos@edit', ['id' => $pendent->id])}}">{{$pendent->titol}}</a></th>
+                        <th><a href="{{action('backend\Recursos@edit', ['id' => $pendent->recurs_id])}}">{{$pendent->titolRecurs}}</a></th>
                         <th>{{$pendent->subTitol}}</th>
                         <th>{{$pendent->descDetaill1}}</th>
                     </tr>
@@ -34,7 +34,7 @@
             <tbody>
                 @foreach($resources as $resource)
                     <tr>
-                        <th>{{$resource->titol}}</th>
+                        <th>{{$resource->titolRecurs}}</th>
                         <th>{{$resource->subTitol}}</th>
                         <th>{{$resource->descDetaill1}}</th>
                         <th>Hola</th>
@@ -55,7 +55,7 @@
             <tbody>
                 @foreach($resources as $resource)
                     <tr>
-                        <th>{{$resource->titol}}</th>
+                        <th>{{$resource->titolRecurs}}</th>
                         <th>{{$resource->subTitol}}</th>
                         <th>{{$resource->descDetaill1}}</th>
                         <th>Hola</th>

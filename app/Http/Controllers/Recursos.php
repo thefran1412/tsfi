@@ -18,7 +18,9 @@ class Recursos extends Controller
         ->join("target_recurs", "target_recurs.idRecurs", "=", "recursos.recurs_id")
         ->join("targets","targets.targets_id","=","target_recurs.idTarget")
     	->select("recursos.recurs_id","recursos.titolRecurs","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat", "targets.codiTarget")
-    	->where("targets.codiTarget","=", $typeuser)
+    	//->where("targets.codiTarget","=", $typeuser)
+        // ->where("c.nomCategoria","like","%%")
+        ->where("c.nomCategoria","=",$typeuser)
         ->get();
 
 	return response()->json([

@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Targets extends Model
 {
     protected $table = 'targets';
-    protected $fillable = ['id', 'codi', 'target'];
+    protected $fillable = ['targets_id', 'codiTarget', 'target'];
 }

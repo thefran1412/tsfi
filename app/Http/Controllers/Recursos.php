@@ -11,14 +11,14 @@ class Recursos extends Controller
 {
     public function index(Request $request, $typeuser) {
 
-    	$resources = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.id")
-    	->join("categories as c","c.id","=","cr.idCategoria")
-        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.id")
-        ->join("entitats as e", "er.idEntitat", "=", "e.id")
-        ->join("target_recurs", "target_recurs.idRecurs", "=", "recursos.id")
-        ->join("targets","targets.id","=","target_recurs.idTarget")
-    	->select("recursos.id","recursos.titol","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat", "targets.codi")
-    	->where("targets.codi","=", $typeuser)
+    	$resources = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.recurs_id")
+    	->join("categories as c","c.categoria_id","=","cr.idCategoria")
+        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.recurs_id")
+        ->join("entitats as e", "er.idEntitat", "=", "e.entitat_id")
+        ->join("target_recurs", "target_recurs.idRecurs", "=", "recursos.recurs_id")
+        ->join("targets","targets.targets_id","=","target_recurs.idTarget")
+    	->select("recursos.recurs_id","recursos.titolRecurs","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat", "targets.codiTarget")
+    	->where("targets.codiTarget","=", $typeuser)
         ->get();
 
 	return response()->json([
@@ -26,14 +26,28 @@ class Recursos extends Controller
         ]);
     }
 
- 	public function getResource() {
+ 	public function getResource(Request $request, $id) {
 
-	// $resources = Resource::all();
-    	$resources = Resource::join("categoria_recurs","categoria_recurs.idRecurs","=","recursos.id")
-    	->get();
+	$resources = Resource::all();
+    	$resource = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.recurs_id")
+        ->join("categories as c","c.categoria_id","=","cr.idCategoria")
+        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.recurs_id")
+        ->join("entitats as e", "er.idEntitat", "=", "e.entitat_id")
+        ->join("target_recurs", "target_recurs.idRecurs", "=", "recursos.recurs_id")
+        ->join("targets","targets.targets_id","=","target_recurs.idTarget")
+        ->join("edats_recurs","edats_recurs.idRecurs","=","recursos.recurs_id")
+        ->join("edats","edats_recurs.idEdat","=","edats.edats_id")
+        ->join("video_recurs","video_recurs.idRecurs","=","recursos.recurs_id")
+        ->join("localitzacions","localitzacions.localitzacions_id","=","recursos.idLocalitzacio")
+        ->join("imatge_recurs","imatge_recurs.idRecurs","=","recursos.recurs_id")
+        ->join("podcasts","podcasts.idRecurs","=","recursos.recurs_id")
+        ->select("recursos.recurs_id","recursos.titolRecurs","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat","targets.codiTarget","edats.codiEdat","edats.descEdat","video_recurs.urlVideo","localitzacions.latitud","localitzacions.longitud", "imatge_recurs.descImatge", "podcasts.descPodCasts")
+        ->where("recursos.recurs_id","=", $id)
+        ->get();
+
 
 	return response()->json([
-            'resources' => $resources
+            'resource' => $resources
         ]);
     }
 }

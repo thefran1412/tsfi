@@ -19,6 +19,7 @@ Route::resource('recursos', 'Recursos');
 Route::get('recursos/{recurso}', 'Recursos@getResource')->name('recurso.getResource');
 Route::get('typeuser/{typeUser}', 'Recursos@index')->name('recurso.index');
 
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');

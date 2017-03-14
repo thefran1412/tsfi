@@ -220,12 +220,15 @@
                 this.type = typeUser+'s';
                 this.categories[0].category = 'home-'+typeUser+'s';
 
-                if(pathURL.indexOf('#/') > -1 && pathURL !== '#/home-'+typeUser+'s'){
-                    var url  = pathURL.replace('#/', '');
-                    var cap = url.charAt(0).toUpperCase() + url.slice(1);
+                if(pathURL.indexOf('resource') < 0) {
+                    if(pathURL.indexOf('#/') > -1 && pathURL !== '#/home-'+typeUser+'s'){
+                        var url  = pathURL.replace('#/', '');
+                        var cap = url.charAt(0).toUpperCase() + url.slice(1);
 
-                    this.category = { category: url, name: cap };
+                        this.category = { category: url, name: cap };
+                    }
                 }
+                
             },
             fetchEntities(){
                 this.$http.get('../api/entitats').then(response=>{

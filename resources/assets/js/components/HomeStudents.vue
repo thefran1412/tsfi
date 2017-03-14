@@ -12,12 +12,12 @@
           name="animate-css"
           mode="in-out"
           enter-active-class="animated fadeInUp">
-          <div class="col-md-4" v-for="r in getSearchTitle" :key="r.id">
+          <div class="col-md-4" v-for="r in getSearchTitle" :key="r.recurs_id">
             <div class="recurso">
               <div class="recurso-content">
                 <h2>
                   <a v-bind:href="'#/resource/'+ r.id">
-                      {{r.titol}}</a>
+                      {{r.titolRecurs}}</a>
                   </a>
                 </h2>
                 <div class="recurso-meta">
@@ -107,7 +107,7 @@
 
         return this.recursos
             .filter(function(item) {
-                return item.titol.includes(searchWord); 
+                return item.titolRecurs.includes(searchWord); 
             })
             .filter(function(item) {
                 return item.nomEntitat.includes(searchEntity);

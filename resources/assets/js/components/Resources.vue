@@ -3,9 +3,9 @@
 		<!-- <h1>RESOURCE</h1> -->
 		<div id="resource" class="container">
 
-			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
+			<div v-if="resource" class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
 				<!--  clearfix visible-xs-block visible-sm-block visible-md-block visible-lg-block -->
-				<h1>PROVA TITOL</h1>
+				<h1>{{resource[0].titolRecurs}}</h1>
 				<img class="img-responsive" src="\img\image\imagenprueba.jpg" alt="prueba View"> <!-- width="960" height="540" -->
 				<h2>PROVA SUBTITOL De la plantilla del recurs de proves i bla, bla, bla, bla, bla...</h2>
 
@@ -57,7 +57,7 @@
 		data(){
 			return{
 				image:'',
-				users:[]
+				resource:null
 			}
 		},
 		created(){
@@ -65,9 +65,9 @@
 		},
 		methods:{
 			fetchResource: function(id){
-				this.$http.get('api/recursos/'+id).then(function(response){
-					// this.users = response.data.users;ç
-					console.log(response);
+				this.$http.get('../api/recursos/'+id).then(function(response){
+					this.resource = response.data.resource;
+					console.log(this.resource);
 				});
 			}
 		}

@@ -8,4 +8,6 @@ class EntityResource extends Model
 {
     //
     protected $table = 'entitat_recurs';
+    protected $fillable = [
+    'entitat_recurs_id', 'idEntitat', 'idRecurs'];
 }

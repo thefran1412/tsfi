@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-3" for="email">Título:</label>
                 <div class="col-sm-9">
-                    <input name="titol" type="text" class="form-control" id="title" placeholder="Título" required>
+                    <input name="titolRecurs" type="text" class="form-control" id="title" placeholder="Título" required>
                 </div>
             </div>
             <div class="form-group">

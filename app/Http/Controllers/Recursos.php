@@ -30,25 +30,67 @@ class Recursos extends Controller
 
  	public function getResource(Request $request, $id) {
         // $resources = Resource::findOrFail($id);
-    	$resource = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.recurs_id")
-        ->join("categories as c","c.categoria_id","=","cr.idCategoria")
-        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.recurs_id")
-        ->join("entitats as e", "er.idEntitat", "=", "e.entitat_id")
-        ->join("target_recurs", "target_recurs.idRecurs", "=", "recursos.recurs_id")
-        ->join("targets","targets.targets_id","=","target_recurs.idTarget")
-        ->join("edats_recurs","edats_recurs.idRecurs","=","recursos.recurs_id")
-        ->join("edats","edats_recurs.idEdat","=","edats.edats_id")
-        ->join("video_recurs","video_recurs.idRecurs","=","recursos.recurs_id")
-        ->join("localitzacions","localitzacions.localitzacions_id","=","recursos.idLocalitzacio")
-        ->join("imatge_recurs","imatge_recurs.idRecurs","=","recursos.recurs_id")
-        ->join("podcasts","podcasts.idRecurs","=","recursos.recurs_id")
-        ->select("recursos.recurs_id","recursos.titolRecurs","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat","targets.codiTarget","edats.codiEdat","edats.descEdat","video_recurs.urlVideo","localitzacions.latitud","localitzacions.longitud", "imatge_recurs.descImatge", "podcasts.descPodCasts")
+    	$resource = \App\Resource::join("localitzacions as lo","lo.localitzacions_id","=","recursos.idLocalitzacio")
+        ->select
+        ("recursos.recurs_id",
+            "recursos.creatPer",
+            "recursos.dataFinal",
+            "recursos.dataInici",
+            "recursos.dataPublicacio",
+            "recursos.descBreu",
+            "recursos.descDetaill1",
+            "recursos.descDetaill2",
+            "recursos.fotoResum",
+            "recursos.gratuit",
+            "recursos.preuInferior",
+            "recursos.preuSuperior",
+            "recursos.relevancia",
+            "recursos.subtitol",
+            "recursos.titolRecurs",
+            "lo.latitud",
+            "lo.longitud")
         ->where("recursos.recurs_id","=", $id)
+        ->get();
+
+        $link = \App\Link::join("recursos as re","re.recurs_id","=","link_recurs.idRecurs")
+        ->select("link_recurs.link")
+        ->where("re.recurs_id","=", $id)
+        ->get();
+
+        $imatge = \App\ImageResource::join("recursos as re","re.recurs_id","=","imatge_recurs.idRecurs")
+        ->select("imatge_recurs.imatge")
+        ->where("re.recurs_id","=", $id)
+        ->get();
+
+        $podcasts = \App\Podcast::join("recursos as re","re.recurs_id","=","podcasts.idRecurs")
+        ->select("podcasts.podCast")
+        ->where("re.recurs_id","=", $id)
+        ->get();
+
+        $video = \App\VideoResource::join("recursos as re","re.recurs_id","=","video_recurs.idRecurs")
+        ->join("tipus_videos as tvi","tvi.tipus_videos_id","=","video_recurs.idTipus")
+        ->select("video_recurs.urlVideo",
+            "video_recurs.titolVideoRecurs",
+            "tvi.plataforma")
+        ->where("re.recurs_id","=", $id)
+        ->get();
+
+        $ages = \App\AgeResource::join("recursos as re","re.recurs_id","=","edats_recurs.idRecurs")
+        ->join("edats","edats.edats_id","=","edats_recurs.idEdat")
+        ->select("edats.codiEdat",
+            "edats.descEdat")
+        ->where("re.recurs_id","=", $id)
+        ->orderby("edats.edats_id")
         ->get();
 
 
 	return response()->json([
-            'resource' => $resource
+            'resource'  => $resource,
+            'link'      => $link,
+            'imatge'    => $imatge,
+            'podcasts'  => $podcasts,
+            'video'     => $video,
+            'ages'      => $ages
         ]);
     }
 }

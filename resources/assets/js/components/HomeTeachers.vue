@@ -105,14 +105,23 @@
               searchEntity = '';
         }
 
+        function normalize(text){
+            return text.toLowerCase()
+                .replace(/á/g, 'a')
+                .replace(/é/g, 'e')
+                .replace(/í/g, 'i')
+                .replace(/ó/g, 'o')
+                .replace(/ú/g, 'u');
+        }
+
         return this.recursos.filter(function(item) {
 
-                if(!item.titolRecurs.includes(searchWord)){
-                    return item.creatPer.includes(searchWord) ;
-                }else{
-                    return item.titolRecurs.includes(searchWord) ; 
-                }
-
+              if(!normalize(item.titolRecurs).includes(normalize(searchWord))){
+                  return normalize(item.creatPer).includes(normalize(searchWord));
+              }else{
+                  return normalize(item.titolRecurs).includes(normalize(searchWord)); 
+              }
+              
             }).filter(function(item) {
                 return item.entity[0].nomEntitat.includes(searchEntity);
             })

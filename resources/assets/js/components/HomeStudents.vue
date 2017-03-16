@@ -30,12 +30,12 @@
                       {{r.dataPublicacio}}
                     </div>
                     <div class="categoria">
-                      <a v-on:click="getCategory(r.nomCategoria)" v-bind:href="'#/'+r.nomCategoria">
-                        {{r.nomCategoria}}
+                      <a v-on:click="getCategory(r.category[0].nomCategoria)" v-bind:href="'#/'+r.category[0].nomCategoria">
+                        {{r.category[0].nomCategoria}}
                       </a>
                     </div>
                     <div class="fecha">
-                        {{r.nomEntitat}}
+                        {{r.entity[0].nomEntitat}}
                     </div>
                 </div>
                 
@@ -44,7 +44,9 @@
               </div>
             </div>
         </div>
+
         </transition-group>
+
         <!-- Acaba recurso -->
       </div>
     </div>
@@ -77,12 +79,12 @@
         } ,  
       fetchResource(typeUser){
 
-        typeUser = 'student';
+        typeUser = 'IS NOT NULL';
 
         this.$http.get('../api/typeuser/'+typeUser).then(response=>{
             this.recursos = response.data.resources;
-            console.log(this.recursos);
             this.$root.search = '';
+
             this.loading = true;
         });
       },
@@ -103,12 +105,16 @@
               searchEntity = '';
         }
 
-        return this.recursos
-            .filter(function(item) {
-                return item.titolRecurs.includes(searchWord); 
-            })
-            .filter(function(item) {
-                return item.nomEntitat.includes(searchEntity);
+        return this.recursos.filter(function(item) {
+
+                if(!item.titolRecurs.includes(searchWord)){
+                    return item.creatPer.includes(searchWord) ;
+                }else{
+                    return item.titolRecurs.includes(searchWord) ; 
+                }
+
+            }).filter(function(item) {
+                return item.entity[0].nomEntitat.includes(searchEntity);
             })
 
       }

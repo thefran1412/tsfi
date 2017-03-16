@@ -11,21 +11,15 @@ class Recursos extends Controller
 {
     public function index(Request $request, $typeuser) {
 
-    	$resources = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.recurs_id")
-    	->join("categories as c","c.categoria_id","=","cr.idCategoria")
-        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.recurs_id")
-        ->join("entitats as e", "er.idEntitat", "=", "e.entitat_id")
-        ->join("target_recurs", "target_recurs.idRecurs", "=", "recursos.recurs_id")
-        ->join("targets","targets.targets_id","=","target_recurs.idTarget")
-    	->select("recursos.recurs_id","recursos.titolRecurs","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat", "targets.codiTarget")
-    	//->where("targets.codiTarget","=", $typeuser)
-        // ->where("c.nomCategoria","like","%%")
-        ->where("c.nomCategoria","=",$typeuser)
-        ->get();
+        $resources = Resource::with('categoryResource','category','entityResource',
+            'entity','targetResource', 'targets')->
+            whereHas('targets', function ($query) use ($typeuser) {
+                    $query->where('targets.codiTarget','=', $typeuser);
+            })->get();
 
-	return response()->json([
-            'resources' => $resources
-        ]);
+    	return response()->json([
+                'resources' => $resources,
+            ]);
     }
 
  	public function getResource(Request $request, $id) {

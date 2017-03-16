@@ -14,11 +14,11 @@ class Resource extends Model
     'recurs_id', 'titolRecurs', 'subTitol', 'descBreu', 'descDetaill1', 'descDetaill2', 'relevancia', 'dataInici', 'dataFinal', 'gratuit', 'preuInferior', 'preuSuperior', 'dataPublicacio', 'visible', 'fotoResum', 'creatPer', 'idLocalitzacio'];
 
     public function category(){
-        return $this->hasMany('App\Category');
+        return $this->hasMany('App\Category','categoria_id');
     }
 
     public function categoryResource(){
-        return $this->hasMany('App\EntityResource');
+        return $this->hasMany('App\EntityResource','idRecurs');
     }
 
     public function age(){
@@ -30,15 +30,15 @@ class Resource extends Model
     }
 
     public function entity(){
-		return $this->hasMany('App\Entity');
+		return $this->hasMany('App\Entity','entitat_id');
     }
 
-    public function entityresource(){
-        return $this->hasMany('App\EntityResource');
+    public function entityResource(){
+        return $this->hasMany('App\EntityResource','idRecurs');
     }
 
     public function imageResource(){
-        return $this->hasMany('App\ImageResource');
+        return $this->hasMany('App\ImageResource', 'imatge_recurs_id');
     }
 
     public function link(){
@@ -70,11 +70,11 @@ class Resource extends Model
     }
 
     public function targets(){
-        return $this->hasMany('App\Targets');
+        return $this->hasMany('App\Targets', 'targets_id');
     }
 
     public function targetResource(){
-        return $this->hasMany('App\TargetResource');
+        return $this->hasMany('App\TargetResource', 'idRecurs');
     }
 
     public function videoType(){

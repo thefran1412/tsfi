@@ -79,7 +79,7 @@
         } ,  
       fetchResource(typeUser){
 
-        typeUser = 'IS NOT NULL';
+        typeUser = 'student';
 
         this.$http.get('../api/typeuser/'+typeUser).then(response=>{
             this.recursos = response.data.resources;

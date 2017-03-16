@@ -9,25 +9,24 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    
     <!-- Styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/backend.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    @yield('css')
 
-    {{-- End Summer Note--}}
 </head>
 <body>
     {{-- HEADER START --}}
     <div class="header">
         <div class="headerIcon">T.S.F.I</div>
-        <div class="headerSearch">
-        <input type="text" name="search">
-        </div>
+{{--         <div class="headerSearch">
+        </div> --}}
         <div class="headerActions">
-            <a href="#" class="noti">Notificacions</a>
             <a href="{{url('/')}}">Frontend</a>
+            <a href="#" class="noti"><img src="/img/noti.png"></a>
             {{-- LOGOUT --}}
-            <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+            <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">admin<img src="/img/down.png" class="dropdown"></a>
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>
@@ -35,7 +34,7 @@
     </div>
     {{-- HEADER END --}}
     <div class="menu">
-        <ul>
+        <ul class="nav navbar-nav">
             <li><a href="{{  action('backend\Backend@index') }}">Inici</a></li>
             <li><a href="{{  action('backend\Recursos@index') }}">Recursos</a></li>
             <li><a href="{{  action('backend\Recursos@add') }}">---Add</a></li>
@@ -50,27 +49,21 @@
         </ul>
     </div>
     <div class="content">
+    <div class="page-header">
+        <h1>@yield('titol')</h1>
+    </div>
         @yield('content')
     </div>
 </body>
 
 <!-- Scripts -->
- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
- <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-{{--Summer Note--}}
-<link href="/js/sumer_note/summernote.css" rel="stylesheet">
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
-<script src="/js/sumer_note/summernote.min.js"></script>
-<script src="/js/sumer_note/summernote-es-ES.js"></script>
-{{--End Summer Note scripts--}}
-@yield('script')
+ <script src="/js/jquery.min.js"></script>
+ <script type="/js/bootstrap.min.js"></script>
 
 <script>
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),
     ]); ?>
 </script>
+@yield('script')
 </html>

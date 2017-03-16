@@ -1,5 +1,13 @@
 @extends('layouts.backend')
 
+@section('css')
+    <link href="/js/sumer_note/summernote.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+@endsection
+
+@section('titol', 'Afegir Recurs')
+
 @section('content')
     
     <div class="container" style="max-width: 600px;">
@@ -49,6 +57,13 @@
 @endsection
 
 @section('script')
+    {{--Summer Note--}}
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+    <script src="/js/sumer_note/summernote.min.js"></script>
+    <script src="/js/sumer_note/summernote-es-ES.js"></script>
+    {{--End Summer Note scripts--}}
+    
     <script type="text/javascript">
         $(document).ready(function() {
             $('#summernote').summernote({

@@ -98,39 +98,3 @@ div{
 	width: 30px;
 	padding-left: 10px;
 }
-
-
-/*OTHER*/
-
-.section{
-	background-color: white;
-    border-radius: 3px;
-    /*box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);*/
-    margin: 20px 10px;
-    overflow: hidden;
-}
-
-.sectionHeader{
-	background-color: #6F8294;
-	width: 100%;
-	padding: 10px 20px;
-}
-.sectionHeader h2, .sectionHeader i{
-	display: inline-block;
-	line-height: 50px;
-	
-}
-.sectionHeader i {
-	float: right;
-	font-size: 40px;
-}
-
-.sectionBody{
-    padding: 10px;
-
-}
-
-.table{
-	background-color: white;
-	border-radius: 3px;
-}

@@ -3,7 +3,7 @@
 @section('titol', 'Recursos')
 @section('css')
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="/css/datatables.css">
 @endsection
 
 @section('script')
@@ -11,9 +11,9 @@
     <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
-             $('#aprovados').DataTable();
              $('#pendientes').DataTable();
              $('#reportados').DataTable();
+             $('#aprovados').DataTable();
         } );
     </script>
 @endsection
@@ -26,7 +26,7 @@
                 <i class="fa fa-angle-down"></i>    
             </div>
             <div class="sectionBody">
-                <table id="pendientes" class="table table-striped" cellspacing="0" width="100%">
+                <table id="pendientes" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
                     <thead >
                         <tr>
                             <th>Titol</th>
@@ -46,53 +46,59 @@
                 </table>
             </div>
         </div>
+
         <div class="section">
-            <h2>Reportados</h2>
-            <hr>
-            <table id="reportados" class="table table-bordered table-responsive">
-                <thead >
-                    <tr>
-                        <th>Titol</th>
-                        <th>Subtitol</th>
-                        <th>Autor</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($resources as $resource)
+            <div class="sectionHeader">
+                <h2>Reportados</h2>
+                <i class="fa fa-angle-down"></i>    
+            </div>
+            <div class="sectionBody">
+                <table id="reportados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
+                    <thead >
                         <tr>
-                            <th><a href="{{action('backend\Recursos@edit', ['id' => $resource->recurs_id])}}">{{$resource->titolRecurs}}</a></th>
-                            <th>{{$resource->subTitol}}</th>
-                            <th>{{$resource->creatPer}}</th>
-                            <th>Hola</th>
+                            <th>Titol</th>
+                            <th>Subtitol</th>
+                            <th>Autor</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($resources as $resource)
+                            <tr>
+                                <th><a href="{{action('backend\Recursos@edit', ['id' => $resource->recurs_id])}}">{{$resource->titolRecurs}}</a></th>
+                                <th>{{$resource->subTitol}}</th>
+                                <th>{{$resource->creatPer}}</th>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
+
         <div class="section">
-            <h2>Aprovados</h2>
-            <hr>
-            <table id="aprovados" class="table table-bordered table-responsive">
-                <thead >
-                    <tr>
-                        <th>Titol</th>
-                        <th>Subtitol</th>
-                        <th>Autor</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($resources as $resource)
+            <div class="sectionHeader">
+                <h2>Aprovados</h2>
+                <i class="fa fa-angle-down"></i>    
+            </div>
+            <div class="sectionBody">
+                <table id="aprovados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
+                    <thead >
                         <tr>
-                            <th><a href="{{action('backend\Recursos@edit', ['id' => $resource->recurs_id])}}">{{$resource->titolRecurs}}</a></th>
-                            <th>{{$resource->subTitol}}</th>
-                            <th>{{$resource->creatPer}}</th>
-                            <th>Hola</th>
+                            <th>Titol</th>
+                            <th>Subtitol</th>
+                            <th>Autor</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($resources as $resource)
+                            <tr>
+                                <th><a href="{{action('backend\Recursos@edit', ['id' => $resource->recurs_id])}}">{{$resource->titolRecurs}}</a></th>
+                                <th>{{$resource->subTitol}}</th>
+                                <th>{{$resource->creatPer}}</th>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 @endsection

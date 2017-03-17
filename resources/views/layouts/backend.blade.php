@@ -12,8 +12,8 @@
     
     <!-- Styles -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/backend.css" rel="stylesheet">
     <link href="/css/font-awesome.css" rel="stylesheet">
+    <link href="/css/backend.css" rel="stylesheet">
     @yield('css')
 
 </head>

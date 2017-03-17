@@ -5,46 +5,53 @@ namespace App\Http\Controllers;
 use App\Resource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+// use App\Entity;
 
 
 class Recursos extends Controller
 {
     public function index(Request $request, $typeuser) {
 
-        $resources = Resource::with('categoryResource','category','entityResource',
-            'entity','targetResource', 'targets')->
-            whereHas('targets', function ($query) use ($typeuser) {
-                    $query->where('targets.codiTarget','=', $typeuser);
-            })->get();
+        $resources = \App\Entity::with('socialMedia', 'resource')->get();
+
+        // $resources = Resource::with('category')->
+        //     whereHas('category', function ($query) use ($typeuser) {
+        //             $query->where('nomCategoria','=', 'events');
+        //     })->get();
 
     	return response()->json([
-                'resources' => $resources,
+                'resources' => $resources
             ]);
     }
 
+
+
  	public function getResource(Request $request, $id) {
+        $resource = Resource::with('location')
+            ->where("recursos.recurs_id","=", $id)
+            ->get();
         // $resources = Resource::findOrFail($id);
-    	$resource = \App\Resource::join("localitzacions as lo","lo.localitzacions_id","=","recursos.idLocalitzacio")
-        ->select
-        ("recursos.recurs_id",
-            "recursos.creatPer",
-            "recursos.dataFinal",
-            "recursos.dataInici",
-            "recursos.dataPublicacio",
-            "recursos.descBreu",
-            "recursos.descDetaill1",
-            "recursos.descDetaill2",
-            "recursos.fotoResum",
-            "recursos.gratuit",
-            "recursos.preuInferior",
-            "recursos.preuSuperior",
-            "recursos.relevancia",
-            "recursos.subtitol",
-            "recursos.titolRecurs",
-            "lo.latitud",
-            "lo.longitud")
-        ->where("recursos.recurs_id","=", $id)
-        ->get();
+    	// $resource = \App\Resource::join("localitzacions as lo","lo.localitzacions_id","=","recursos.idLocalitzacio")
+     //    ->select
+     //    ("recursos.recurs_id",
+     //        "recursos.creatPer",
+     //        "recursos.dataFinal",
+     //        "recursos.dataInici",
+     //        "recursos.dataPublicacio",
+     //        "recursos.descBreu",
+     //        "recursos.descDetaill1",
+     //        "recursos.descDetaill2",
+     //        "recursos.fotoResum",
+     //        "recursos.gratuit",
+     //        "recursos.preuInferior",
+     //        "recursos.preuSuperior",
+     //        "recursos.relevancia",
+     //        "recursos.subtitol",
+     //        "recursos.titolRecurs",
+     //        "lo.latitud",
+     //        "lo.longitud")
+     //    ->where("recursos.recurs_id","=", $id)
+     //    ->get();
 
         $link = \App\Link::join("recursos as re","re.recurs_id","=","link_recurs.idRecurs")
         ->select("link_recurs.link")

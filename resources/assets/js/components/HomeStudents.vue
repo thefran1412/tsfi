@@ -66,7 +66,7 @@
 
     },
     created(){
-      this.fetchResource(this.$route.params.id);
+      this.fetchResource(this.$route.params.id, this.$route.params.category);
       
     },
     mounted(){
@@ -77,11 +77,12 @@
 
 
         } ,  
-      fetchResource(typeUser){
+      fetchResource(typeUser, category){
 
         typeUser = 'student';
+        //category = 'events'
 
-        this.$http.get('../api/typeuser/'+typeUser).then(response=>{
+        this.$http.get('../api/typeuser/'+typeUser+'/'+category).then(response=>{
             this.recursos = response.data.resources;
             this.$root.search = '';
 
@@ -89,7 +90,6 @@
         });
       },
       getCategory: function(value){
-
         var cap = value.charAt(0).toUpperCase() + value.slice(1);
         this.$root.category = { category: value, name: cap };
       }

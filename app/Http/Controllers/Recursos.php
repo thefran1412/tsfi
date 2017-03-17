@@ -9,18 +9,27 @@ use Illuminate\Support\Facades\DB;
 
 class Recursos extends Controller
 {
-    public function index(Request $request, $typeuser) {
+    public function index(Request $request, $typeuser, $category) {
+
+
+        if(isset($category)){
+            $category = "'%'";
+        }
+
+        //echo $category;
 
         $resources = Resource::with('categoryResource','category','entityResource',
             'entity','targetResource', 'targets')->
             whereHas('targets', function ($query) use ($typeuser) {
-                    $query->where('targets.codiTarget','=', $typeuser);
+                    $query->where('codiTarget','=', $typeuser );
             })->get();
 
     	return response()->json([
                 'resources' => $resources,
             ]);
     }
+
+    
 
  	public function getResource(Request $request, $id) {
         // $resources = Resource::findOrFail($id);

@@ -8,6 +8,7 @@ class Age extends Model
 {
     //
     protected $table = 'edats';
+    protected $primaryKey = 'edats_id';
 
     protected $fillable = ['edats_id', 'codiEdat', 'descEdat'];
 }

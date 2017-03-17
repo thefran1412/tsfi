@@ -70,7 +70,7 @@ class Resource extends Model
     }
 
     public function targets(){
-        return $this->hasMany('App\Targets', 'targets_id');
+        return $this->hasMany('App\Target', 'targets_id');
     }
 
     public function targetResource(){

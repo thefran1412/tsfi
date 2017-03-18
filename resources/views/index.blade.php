@@ -87,10 +87,10 @@
                     newurl = newurl+url;
                 }
                 else{
-                    newurl = newurl+'tsfi';
+                    newurl = newurl+'tsfi#/'+typeUser+'/home';
                 }
                 console.log(newurl);
-                //window.location.href = newurl;
+                window.location.href = newurl;
             } 
             else {
               throw new Error('Tu Browser no soporta LocalStorage!');

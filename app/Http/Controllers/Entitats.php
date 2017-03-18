@@ -10,7 +10,7 @@ class Entitats extends Controller
 {
     public function index() {
 
-    	$entities = Entity::all();
+    	$entities = Entity::select('entitats.nomEntitat','entitats.link')->get();
 
     	return response()->json([
                 'entities' => $entities

@@ -13,11 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::resource('categories', 'Categories');
 Route::resource('entitats', 'Entitats');
 Route::resource('recursos', 'Recursos');
 
 Route::get('recursos/{recurso}', 'Recursos@getResource')->name('recurso.getResource');
-Route::get('typeuser/{typeUser}', 'Recursos@index')->name('recurso.index');
+Route::get('typeuser/{typeUser}/{category}', 'Recursos@index')->name('recurso.index');
 
 
 Route::get('/user', function (Request $request) {

@@ -234,6 +234,7 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
 .sectionHeader i {
 	float: right;
 	font-size: 40px;
+    transition: transform .5s ease;
 }
 
 .sectionBody{
@@ -254,4 +255,10 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
 }
 .odd{
 	background-color: #F3F5F7;
+}
+
+.rotate {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    transition: transform .5s ease;
 }

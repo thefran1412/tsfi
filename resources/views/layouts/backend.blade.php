@@ -60,7 +60,7 @@
 <!-- Scripts -->
  <script src="/js/jquery.min.js"></script>
  <script type="/js/bootstrap.min.js"></script>
-
+ <script src="/js/backend.js"></script>
 <script>
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),

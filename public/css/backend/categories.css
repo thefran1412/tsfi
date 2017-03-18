@@ -4,7 +4,6 @@ div{
 .leftCreate{
 	display: inline-block;
 	width: 30%;
-	height: 200px;
 	background-color: white;
 	border-radius: 4px;
 	overflow: hidden;
@@ -18,6 +17,12 @@ div{
 	width: 100%;
 	padding: 10px 20px;
 	color: white;
+}
+.createBody{
+	padding: 10px;
+}
+.createBody div{
+	padding: 10px;
 }
 .createHeader h2 {
 	line-height: 50px;

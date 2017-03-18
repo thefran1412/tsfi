@@ -23,4 +23,21 @@ class Categories extends Controller
     	$c = Category::All();
         return view('backend.recursos.categories', ['categories' => $c]);
     }
+
+    public function store(Request $request)
+    {
+        \App\Category::Create([
+            'nomCategoria' => $request['nom'],
+            'codiCategoria' => $request['codi'],
+            'descCategoria' => $request['desc']
+        ]);
+        return redirect('admin/categories');
+    }
+
+    public function destroy($id)
+    {
+        \App\Category::destroy($id);
+        return redirect('admin/categories');
+        
+    }
 }

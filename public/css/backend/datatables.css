@@ -250,9 +250,10 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
 	 border-collapse:collapse;
 }
 .table th{
-	line-height: 50px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+	/*line-height: 50px !important;*/
 	border: none !important;
-	font-size: 15px;
 }
 .odd{
 	background-color: #F3F5F7;
@@ -262,4 +263,10 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
     transition: transform .5s ease;
+}
+.actions{
+    width: 200px;
+}
+.actions form{
+    display: inline-block;
 }

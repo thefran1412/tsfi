@@ -66,7 +66,7 @@
 
     },
     created(){
-      this.fetchResource(this.$route.params.id, this.$route.params.category);
+      this.fetchResource(this.$route.params.id);
       
     },
     mounted(){
@@ -82,7 +82,7 @@
         typeUser = 'teacher';
         //category = 'events'
 
-        this.$http.get('../api/typeuser/'+typeUser+'/'+category).then(response=>{
+        this.$http.get('../api/typeuser/'+typeUser).then(response=>{
             this.recursos = response.data.resources;
             this.$root.search = '';
 

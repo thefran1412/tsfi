@@ -29,7 +29,7 @@ div{
 .header{
 	position: fixed;
 	width: 100%;
-	background-color: orange;
+	background-color: white;
 	height: 70px;
 	box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
 	z-index: 10;
@@ -40,20 +40,26 @@ div{
 }
 .headerIcon{
 	width: 10%;
-	background-color: turquoise;
+	background-color: #009CDF;
+	text-align: center;
+	line-height: 70px;
+	font-size: 30px;
 }
 .headerSearch{
 	background-color: white;
 	width: 70%;
 }
 .headerActions{
+	padding: 22px;
 	background-color: grey;
 	width: 20%;
 	float: right;
+	text-align: right;
 }
 .headerActions a{
 	color: white;
 	text-decoration: none;
+	margin-left: 25px;
 }
 .menu{
 	position: fixed;
@@ -61,17 +67,34 @@ div{
 	top: 70px;
 	width: 10%;
 	height: calc(100vh - 70px);
-	background-color: #333333;
+	background-color: #313942;
 	display: inline-block;
 	z-index: 10;
 }
 .menu a{
-	color: white;
+	color: #9299A2;
 	text-decoration: none; 
+}
+.menu ul li{
+	width: 100%;
+}
+.menu i{
+	margin-right: 15px;
 }
 .content{
 	float: right;
 	width: 90%;
-	height: calc(100% - 70px);
+	background-color: #EFF3F6;
 	margin-top: 70px;
+	padding: 10px;
+}
+.noti img{
+	width: 30px;
+}
+.home img {
+	width: 30px;	
+}
+.dropdown{
+	width: 30px;
+	padding-left: 10px;
 }

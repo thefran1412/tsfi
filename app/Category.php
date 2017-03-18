@@ -11,4 +11,9 @@ class Category extends Model
 
     protected $fillable = [
     'categoria_id', 'codiCategoria', 'descCategoria', 'nomCategoria'];
+
+    public function resource(){
+        return $this->belongsToMany('App\Resource','categoria_recurs','idCategoria','idRecurs');
+        // ;
+    }
 }

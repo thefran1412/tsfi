@@ -11,4 +11,8 @@ class Age extends Model
     protected $primaryKey = 'edats_id';
 
     protected $fillable = ['edats_id', 'codiEdat', 'descEdat'];
+
+    public function resource(){
+    	return $this->belongsToMany('App\Resource','edats_recurs','idEdat','idRecurs');
+    }
 }

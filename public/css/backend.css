@@ -87,6 +87,7 @@ div{
 	background-color: #EFF3F6;
 	margin-top: 70px;
 	padding: 10px;
+	min-height: calc(100% - 70px);
 }
 .noti img{
 	width: 30px;

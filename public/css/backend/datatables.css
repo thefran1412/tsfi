@@ -224,16 +224,17 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
 	background-color: #6F8294;
 	width: 100%;
 	padding: 10px 20px;
+    cursor: pointer;
 }
 .sectionHeader h2, .sectionHeader i{
-	display: inline-block;
-	line-height: 50px;
-	color: white;
-	
+    display: inline-block;
+    line-height: 50px;
+    color: white;
+    
 }
 .sectionHeader i {
-	float: right;
-	font-size: 40px;
+    float: right;
+    font-size: 40px;
     transition: transform .5s ease;
 }
 

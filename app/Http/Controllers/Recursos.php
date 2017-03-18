@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\DB;
 // use App\Entity;
 class Recursos extends Controller
 {
-    public function index(Request $request, $typeuser) {
+    public function index(Request $request, $typeuser, $category) {
 
         $resources = Resource::with('category','targets','entity')->
             whereHas('targets', function ($query) use ($typeuser) {
                     $query->where('codiTarget','=', $typeuser);
+            })->whereHas('category', function ($query) use ($category) {
+                    $query->where('nomCategoria','=', $category);
             })->get();
 
         return response()->json([

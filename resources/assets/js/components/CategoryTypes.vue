@@ -59,41 +59,19 @@
     data(){
 
       return{
-          recursos:[],
           loading:false,
           correctCategory:''
         }
 
     },
     created(){
-      this.fetchResource(this.$route.params.id);
       
     },
     mounted(){
-        this.getResourceBackground();
+  
     },
     methods:{
-        getResourceBackground() {
 
-
-        } ,  
-      fetchResource(typeUser, category){
-
-        typeUser = 'teacher';
-        //category = 'events'
-
-        this.$http.get('../api/typeuser/'+typeUser).then(response=>{
-            this.recursos = response.data.resources;
-            this.$root.search = '';
-
-            this.loading = true;
-        });
-      },
-      getCategory: function(value){
-        var cap = value.charAt(0).toUpperCase() + value.slice(1);
-        this.$root.category = { category: value, name: cap };
-      }
-      
     },
     computed:{
       getSearchTitle(){
@@ -114,7 +92,7 @@
                 .replace(/ú/g, 'u');
         }
 
-        return this.recursos.filter(function(item) {
+        return this.$root.recursos.filter(function(item) {
 
               if(!normalize(item.titolRecurs).includes(normalize(searchWord))){
                   return normalize(item.creatPer).includes(normalize(searchWord));

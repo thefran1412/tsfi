@@ -51,13 +51,11 @@ div{
 }
 .headerActions{
 	padding: 22px;
-	background-color: grey;
 	width: 20%;
 	float: right;
 	text-align: right;
 }
 .headerActions a{
-	color: white;
 	text-decoration: none;
 	margin-left: 25px;
 }
@@ -90,10 +88,10 @@ div{
 	min-height: calc(100% - 70px);
 }
 .noti img{
-	width: 30px;
+	width: 25px;
 }
 .home img {
-	width: 30px;	
+	width: 25px;	
 }
 .dropdown{
 	width: 30px;

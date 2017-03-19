@@ -9,7 +9,7 @@ class Categories extends Controller
 {
     public function index() {
 
-    	$categories = Category::select('categories.codiCategoria','categories.nomCategoria')->get();
+    	$categories = Category::select('categories.categoria_id','categories.codiCategoria','categories.nomCategoria')->get();
 
     	return response()->json([
                 'categories' => $categories

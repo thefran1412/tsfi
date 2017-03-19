@@ -138,7 +138,7 @@
 
                 console.log(value);
 
-                if(localStorage.length === 2 && Number(typeNum) === 0 && value !== undefined){
+                if(localStorage.length === 2 && Number(typeNum) === 0){
 
                     var typeUser = localStorage.getItem("typeUser");
 
@@ -185,6 +185,7 @@
             fetchEntities(){
                 this.$http.get('../api/entitats').then(response=>{
                     this.entities = response.data.entities;
+                    console.log(this.entities);
                 })
             },
             fetchCategories(){
@@ -193,10 +194,8 @@
                 })
             },
             fetchResource(typeUser, category){
-
                 this.$http.get('../api/typeuser/'+typeUser+'/'+category).then(response=>{
                     this.recursos = response.data.resources;
-                    console.log(this.recursos);
                     this.search = '';
                     this.loading = true;
                 });

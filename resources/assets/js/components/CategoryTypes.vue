@@ -5,14 +5,14 @@
               name="animate"
               mode="in-out"
               enter-active-class="animated fadeInUp">
-            <span class="resource-not-found" v-if="!getSearchTitle.length && loading" :key="notfound">No em trobat el recurs...</span>
+            <span class="resource-not-found" v-if="!this.$root.recursos.length && loading" :key="notfound">No em trobat el recurs...</span>
         </transition>
         <!-- Empieza recurso -->
         <transition-group
           name="animate-css"
           mode="in-out"
           enter-active-class="animated fadeInUp">
-          <div class="col-md-4" v-for="r in getSearchTitle" :key="r.recurs_id">
+          <div class="col-md-4" v-for="r in this.$root.recursos" :key="r.recurs_id">
             <div class="recurso">
               <div class="recurso-content">
                 <h2>
@@ -30,16 +30,16 @@
                       {{r.dataPublicacio}}
                     </div>
                     <div class="categoria">
-                      <a v-on:click="getCategory(r.category[0].nomCategoria)" v-bind:href="'#/'+r.category[0].nomCategoria">
+                      <a v-on:click="getCategory(r.category[0].nomCategoria)" v-bind:href="'#/'+typeUserUrl+'/'+r.category[0].nomCategoria">
                         {{r.category[0].nomCategoria}}
                       </a>
                     </div>
-                    <div class="fecha">
+                    <div v-if="r.entity[0]" class="fecha">
                         {{r.entity[0].nomEntitat}}
                     </div>
                 </div>
                 
-                <div class="recurso-foto" :style="{ backgroundImage: 'url(' + r.fotoResum + ')' }"> 
+                <div class="recurso-foto" :style="{ backgroundImage: 'url('+'/images/' + r.fotoResum + ')' }"> 
                 </div>
               </div>
             </div>
@@ -60,7 +60,8 @@
 
       return{
           loading:false,
-          correctCategory:''
+          correctCategory:'',
+          typeUserUrl: this.$route.params.typeuser
         }
 
     },
@@ -71,7 +72,12 @@
   
     },
     methods:{
+        getCategory: function(value){
+          console.log('hola');
 
+          var cap = value.charAt(0).toUpperCase() + value.slice(1);
+          this.$root.category = { codiCategoria: cap, nomCategoria: value };
+        }
     },
     computed:{
       getSearchTitle(){
@@ -92,17 +98,17 @@
                 .replace(/ú/g, 'u');
         }
 
-        return this.$root.recursos.filter(function(item) {
+        // return this.$root.recursos.filter(function(item) {
 
-              if(!normalize(item.titolRecurs).includes(normalize(searchWord))){
-                  return normalize(item.creatPer).includes(normalize(searchWord));
-              }else{
-                  return normalize(item.titolRecurs).includes(normalize(searchWord)); 
-              }
+        //       if(!normalize(item.titolRecurs).includes(normalize(searchWord))){
+        //           return normalize(item.creatPer).includes(normalize(searchWord));
+        //       }else{
+        //           return normalize(item.titolRecurs).includes(normalize(searchWord)); 
+        //       }
               
-            }).filter(function(item) {
-                return item.entity[0].nomEntitat.includes(searchEntity);
-            })
+        //     }).filter(function(item) {
+        //         return item.entity[0].nomEntitat.includes(searchEntity);
+        //     })
 
       }
     }

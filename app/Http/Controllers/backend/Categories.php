@@ -21,7 +21,7 @@ class Categories extends Controller
     public function index()
     {
     	$c = Category::All();
-        return view('backend.recursos.categories', ['categories' => $c]);
+        return view('backend.categories.index', ['categories' => $c]);
     }
 
     public function store(Request $request)
@@ -38,6 +38,22 @@ class Categories extends Controller
     {
         \App\Category::destroy($id);
         return redirect('admin/categories');
-        
+
+    }
+
+    public function edit($id = NULL)
+    {
+        if ($id == NULL) {
+            return redirect('admin/categories');
+        }
+        $c = Category::find($id);
+        return view('backend.categories.edit',  ['categoria' => $c]);
+    }
+    public function update($id, Request $request)
+    {
+        $recurs = Category::find($id);
+        $recurs->fill($request->all());
+        $recurs->save();
+        return redirect('admin/categories');
     }
 }

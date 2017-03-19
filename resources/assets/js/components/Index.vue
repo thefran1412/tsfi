@@ -23,10 +23,10 @@
                             <multiselect v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                         </div>
                         <div class="col-md-4">
-                            <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="name" track-by="name"  :allow-empty="false"></multiselect>
+                            <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="nomEntitat" track-by="nomEntitat"  :allow-empty="false"></multiselect>
                         </div>
                         <div class="col-md-2 user-type">
-                            <li v-on:click="typeUser('#/enviar-recurs')" >
+                            <li v-on:click="typeUser('Envians un recurs')" >
                                 <router-link :to="{name: 'enviar-recurs'}">
                                     <span>Enviar</span>
                                     <span>Recurs</span>
@@ -104,7 +104,7 @@
             }
         },
         created(){
-            this.whatUserPage();
+            this.whatUserPage(this.$route.params.typeuser);
             this.fetchCategories();
             this.fetchEntities();
             this.correctSelectCategory(this.$route.params.category);
@@ -114,10 +114,15 @@
             this.typeUser();
         },
         methods:{
-            typeUser(){
+            typeUser(value){
 
                 var typeUser = localStorage.getItem("typeUser");
-                
+
+                if(value){
+                    this.recursos = [];
+                    this.category = { codiCategoria:value , nomCategoria: 'enviar-recurs' };
+                }
+
                 if(typeUser === 'student'){
                     this.type = 'student';
                 }
@@ -125,13 +130,15 @@
                     this.type = 'teacher';
                 }
             },
-            whatUserPage(){
+            whatUserPage(value){
 
                 var typeNum = localStorage.getItem("numType");
 
                 this.search = '';
 
-                if(localStorage.length === 2 && Number(typeNum) === 0){
+                console.log(value);
+
+                if(localStorage.length === 2 && Number(typeNum) === 0 && value !== undefined){
 
                     var typeUser = localStorage.getItem("typeUser");
 
@@ -165,11 +172,12 @@
 
             },
             correctSelectCategory(routeParam){
-
-                if(routeParam !== 'home'){
+                if(routeParam !== 'home' && routeParam !== undefined){
                     var cap = routeParam.charAt(0).toUpperCase() + routeParam.slice(1);
                     this.category = { codiCategoria: cap, nomCategoria: routeParam };
-                }else{
+                }
+
+                if(routeParam !== undefined){
                     this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
                 }
 
@@ -188,6 +196,7 @@
 
                 this.$http.get('../api/typeuser/'+typeUser+'/'+category).then(response=>{
                     this.recursos = response.data.resources;
+                    console.log(this.recursos);
                     this.search = '';
                     this.loading = true;
                 });
@@ -195,9 +204,13 @@
         },
         watch: {
           'category': function(v) {
-            var typeUser = localStorage.getItem("typeUser");
-            this.$router.push('/'+typeUser + '/' + v.nomCategoria)
-            this.fetchResource(this.$route.params.typeuser, v.nomCategoria);
+
+            if(v.nomCategoria !== 'enviar-recurs'){
+                var typeUser = localStorage.getItem("typeUser");
+                this.$router.push('/'+typeUser + '/' + v.nomCategoria)
+                this.fetchResource(this.$route.params.typeuser, v.nomCategoria);
+            }
+
            }
        }
     }

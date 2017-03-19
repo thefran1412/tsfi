@@ -3,14 +3,14 @@
 		<h1>Enviar Recurs</h1>
 		<form @submit.prevent="submitForm" ref="enviarRecurs" method="post" enctype="multipart/form-data">
 			<div class="form-group">
-				<label for="titol">Títol:</label>
-				<input class="form-control title" type="text" id="titol" name="titol" placeholder="Títol">
+				<label for="titolRecurs">Títol:</label>
+				<input class="form-control title" type="text" id="titolRecurs" name="titolRecurs" placeholder="Títol">
 			</div>
 			<div class="form-group">
-				<label for="subtitol">Subtítol:</label>
-				<input class="form-control title" type="text" id="subtitol" name="subtitol" placeholder="Subtítol">
+				<label for="subTitol">Subtítol:</label>
+				<input class="form-control title" type="text" id="subTitol" name="subTitol" placeholder="Subtítol">
 			</div>
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label for="categoria">Escull una categoria:</label>
 				<select class="selectpicker" id="categoria">
 				  <option>Events</option>
@@ -18,14 +18,14 @@
 				  <option>Conferencies</option>
 				  <option>Noticies</option>
 				</select>
+			</div> -->
+			<div class="form-group">
+			  <label for="descBreu">Descripció breu:</label>
+			  <textarea class="form-control" type="text" id="descBreu" name="descBreu"></textarea>
 			</div>
 			<div class="form-group">
-			  <label for="descripciobreu">Descripció breu:</label>
-			  <textarea class="form-control" rows="5" id="descripciobreu"></textarea>
-			</div>
-			<div class="form-group">
-			  <label for="descripcio">Descripció:</label>
-			  <textarea class="form-control" rows="5" id="descripcio"></textarea>
+			  <label for="descDetaill1">Descripció:</label>
+			  <textarea class="form-control" type="text" id="descDetaill1" name="descDetaill1"></textarea>
 			</div>
 			<div class="form-group">
 				<div v-if="!image">
@@ -35,7 +35,7 @@
 					<img :src="image" />
 					<button @click="removeImageOne">Remove image</button>
 				</div>
-				<input name="image" type="file" @change="onFileChange($event,1)">
+				<input name="image" type="image" alt="hol" @change="onFileChange($event,1)">
 			</div>
 			<div class="form-group">
 				<div v-if="!image2">
@@ -108,11 +108,11 @@
 				console.log(form);
 				console.log(formdata);
 
-				// this.$http.post('api/submit', formdata).then((response) =>{
-				// 	this.$router.push({path:'/', query:{alert:'Resource Send'}})
-				// },(response)=>{
-					
-				// });
+				this.$http.post('../api/submit', formdata).then((response) =>{
+					this.$router.push({path:'/student/home', query:{alert:'User Create'}})
+				},(response)=>{
+					console.log(response);
+				});
 			}
 		}
 	}

@@ -16,7 +16,7 @@
             <div class="recurso">
               <div class="recurso-content">
                 <h2>
-                  <a v-bind:href="'#/resource/'+ r.id">
+                  <a v-bind:href="'#/resource/'+ r.recurs_id">
                       {{r.titolRecurs}}</a>
                   </a>
                 </h2>

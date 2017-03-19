@@ -12,6 +12,10 @@ class ImageResource extends Model
     protected $fillable = [
     'imatge_recurs_id', 'titolImatge', 'descImatge', 'imatge', 'ordre', 'idRecurs'];
 
+    public function getFileAttribute($photo){
+    	return $this->uploads . $photo;
+    }
+
     public function resource(){
         return $this->belongsTo('App\Resource');
     }

@@ -3,13 +3,13 @@
 @section('titol', 'Categories')
 
 @section('css')
-     <link rel="stylesheet" href="/css/backend/datatables.css">
-     <link rel="stylesheet" href="/css/backend/crud.css">
+     <link rel="stylesheet" href="{{ URL::asset('/css/backend/datatables.css') }}">
+     <link rel="stylesheet" href="{{ URL::asset('/css/backend/crud.css') }}">
 @endsection
 
 @section('script')
-         <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+         <script src="{{ URL::asset('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(document).ready(function() {
              $('#categories').DataTable();

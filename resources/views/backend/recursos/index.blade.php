@@ -2,13 +2,13 @@
 
 @section('titol', 'Recursos')
 @section('css')
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> --}}
-    <link rel="stylesheet" href="/css/backend/datatables.css">
+    {{-- <link rel="stylesheet" href="{{ URL::asset('https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ URL::asset('/css/backend/datatables.css') }}">
 @endsection
 
 @section('script')
-    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
+    <script src="{{ URL::asset('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(document).ready(function() {
              $('#pendientes').DataTable();

@@ -11,9 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     
     <!-- Styles -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/font-awesome.css" rel="stylesheet">
-    <link href="/css/backend.css" rel="stylesheet">
+    <link href="{{ URL::asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/backend.css') }}" rel="stylesheet">
     @yield('css')
 
 </head>
@@ -43,7 +43,7 @@
             <li><a href="{{  action('backend\Tags@index') }}"><i class="fa fa-tag"></i>Tags</a></li>
             <li><a href="{{  action('backend\Entitats@index') }}"><i class="fa fa-building"></i>Entitats</a></li>
             {{-- <li><a href="{{  action('backend\Entitats@add') }}">---Add</a></li> --}}
-            <li><a href="{{  action('backend\Usuaris@index') }}"><i class="fa fa-user"></i>Usuaris</a></li>
+            {{-- <li><a href="{{  action('backend\Usuaris@index') }}"><i class="fa fa-user"></i>Usuaris</a></li> --}}
             {{-- <li><a href="{{  action('backend\Usuaris@add') }}">---Add</a></li> --}}
             <li><a href="{{  action('backend\Analytics@index') }}"><i class="fa fa-bar-chart"></i>Analytics</a></li>
             <li><a href="{{  action('backend\Backend@config') }}"><i class="fa fa-cog"></i>Configuració</a></li>
@@ -58,9 +58,10 @@
 </body>
 
 <!-- Scripts -->
- <script src="/js/jquery.min.js"></script>
- <script type="/js/bootstrap.min.js"></script>
- <script src="/js/backend.js"></script>
+{{-- http://g3s2aw.sdslab.cat/projects/public_tsfi2 --}}
+ <script src="{{ URL::asset('/js/jquery.min.js') }}"></script>
+ <script type="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
+ <script src="{{ URL::asset('/js/backend.js') }}"></script>
 <script>
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),

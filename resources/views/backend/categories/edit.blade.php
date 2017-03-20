@@ -3,8 +3,8 @@
 @section('titol', 'Editar categories')
 
 @section('css')
-     <link rel="stylesheet" href="/css/backend/datatables.css">
-     <link rel="stylesheet" href="/css/backend/crud.css">
+     <link rel="stylesheet" href="{{ URL::asset('/css/backend/datatables.css') }}">
+     <link rel="stylesheet" href="{{ URL::asset('/css/backend/crud.css') }}">
 @endsection
 
 @section('content')

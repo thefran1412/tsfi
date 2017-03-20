@@ -20,18 +20,29 @@
 <body>
     {{-- HEADER START --}}
     <div class="header">
+
+        {{-- ICON --}}
         <div class="headerIcon">T.S.F.I</div>
-{{--         <div class="headerSearch">
-        </div> --}}
+
+        {{-- ROUTE --}}
+        <div class="headerRoute">
+            <h2>@yield('titol')</h2>
+        </div>
+
+        {{-- ACTIONS --}}
         <div class="headerActions">
-            <a title="Veure Pàgina" href="{{url('/')}}" class="home"><img src="/img/home.png"></a>
-            <a title="Notificacions" href="#" class="noti"><img alt="Notificacions" src="/img/noti.png"></a>
+            {{-- FRONTEND --}}
+            <a title="Veure Pàgina" href="{{url('/')}}" class="home"><i class="fa fa-globe"></i><!-- <img src="/img/home.png"> --></a>
+            {{-- NOTIFICATIONS --}}
+            <a title="Notificacions" href="#" class="noti"><i class="fa fa-bell-o"></i><!-- <img alt="Notificacions" src="/img/noti.png"> --></a>
             {{-- LOGOUT --}}
-            <a title="Més opcions" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">admin<img src="/img/down.png" class="dropdown"></a>
+            <a title="Més opcions" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">admin<i class="fa fa-angle-down dropdown"></i><!-- <img src="/img/down.png" > --></a>
+            
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>
         </div>
+
     </div>
     {{-- HEADER END --}}
     <div class="menu">
@@ -50,9 +61,6 @@
         </ul>
     </div>
     <div class="content">
-    <div class="page-header">
-        <h1>@yield('titol')</h1>
-    </div>
         @yield('content')
     </div>
 </body>

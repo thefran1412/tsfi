@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('titol', 'Categories')
+@section('titol', 'Tags')
 
 @section('css')
      <link rel="stylesheet" href="/css/backend/datatables.css">
@@ -12,7 +12,7 @@
     <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
-             $('#categories').DataTable();
+             $('#tags').DataTable();
         } );
     </script>
 @endsection
@@ -20,21 +20,17 @@
 @section('content')
      <div class="leftCreate">
           <div class="createHeader">
-               <h2>Afegir Categoria</h2>
+               <h2>Afegir Tag</h2>
           </div>
           <div class="createBody">
-            {!!Form::open(['action' => 'backend\Categories@store', 'method' => 'post'])!!}
+            {!!Form::open(['action' => 'backend\Tags@store', 'method' => 'post'])!!}
               <div>
                   {!!Form::label('nom', 'Nom: ')!!}
-                  {!!Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Nom de la categoria'])!!}
+                  {!!Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Nom del tag'])!!}
               </div>
               <div>
                   {!!Form::label('desc', 'Descripció: ')!!}
-                  {!!Form::textarea('desc', null, ['class' => 'form-control', 'placeholder' => 'Descripció de la categoria'])!!}
-              </div>
-              <div>
-                  {!!Form::label('codi', 'Codi: ')!!}
-                  {!!Form::text('codi', null, ['class' => 'form-control', 'placeholder' => 'Codi de la categoria'])!!}
+                  {!!Form::textarea('desc', null, ['class' => 'form-control', 'placeholder' => 'Descripció del tag'])!!}
               </div>
               <div>
                   {!!Form::submit('Guardar canvis', ['class' => 'btn btn-primary'])!!}
@@ -49,25 +45,23 @@
                 <i class="fa fa-angle-down"></i>    
             </div>
             <div class="sectionBody">
-                <table id="categories" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
+                <table id="tags" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
                     <thead >
                         <tr>
                             <th>Nom</th>
                             <th>Descripció</th>
-                            <th>Codi</th>
                             <th>Accions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($categories as $categoria)
+                        @foreach($tags as $tag)
                             <tr>
-                              <th><a href="{{action('backend\Categories@edit', ['id' => $categoria->categoria_id])}}">{{$categoria->nomCategoria}}</a></th>
-                              <th>{{$categoria->descCategoria}}</th>
-                              <th>{{$categoria->codiCategoria}}</th>
+                              <th><a href="{{action('backend\Tags@edit', ['id' => $tag->tag_id])}}">{{$tag->nomTags}}</a></th>
+                              <th>{{$tag->descTag}}</th>
                               <th>
                                 <div class="actions">
-                                  <a title="Editar" href="{{action('backend\Categories@edit', ['id' => $categoria->categoria_id])}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                                  {!!Form::open(['action' => ['backend\Categories@destroy', $categoria->categoria_id], 'method' => 'delete'])!!}
+                                  <a title="Editar" href="{{action('backend\Tags@edit', ['id' => $tag->tags_id])}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                  {!!Form::open(['action' => ['backend\Tags@destroy', $tag->tags_id], 'method' => 'delete'])!!}
                                   {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
                                   {!!Form::close()!!}
                                 </div>

@@ -4,7 +4,7 @@
 
 @section('css')
      <link rel="stylesheet" href="/css/backend/datatables.css">
-     <link rel="stylesheet" href="/css/backend/categories.css">
+     <link rel="stylesheet" href="/css/backend/crud.css">
 @endsection
 
 @section('content')

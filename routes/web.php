@@ -45,6 +45,9 @@ Route::resource('/admin/categories', 'backend\Categories');
 /* TAGS */
 Route::resource('/admin/tags', 'backend\Tags');
 
+/* ENTITATS */
+Route::resource('/admin/entitats', 'backend\Entitats');
+
 
 /* ENTIDADES */
 Route::get('/admin/entitats', 'backend\Entitats@index');

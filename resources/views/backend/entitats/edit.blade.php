@@ -1,6 +1,6 @@
 @extends('layouts.backend')
 
-@section('titol', 'Afegir Entitat')
+@section('titol', 'Editar categories')
 
 @section('css')
      <link rel="stylesheet" href="{{ URL::asset('/css/backend/datatables.css') }}">
@@ -10,17 +10,17 @@
 @section('content')
      <div class="leftCreate">
           <div class="createHeader">
-               <h2>Afegir entitat</h2>
+               <h2>Editar</h2>
           </div>
           <div class="createBody">
-            {!!Form::open(['action' => 'backend\Entitats@store', 'method' => 'post'])!!}
+            {!!Form::model($entitat, ['action' => ['backend\Entitats@update', $entitat->entitat_id], 'method' => 'put'])!!}
               <div>
-                  {!!Form::label('nom', 'Nom: ')!!}
-                  {!!Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Nom de la entitat'])!!}
+                  {!!Form::label('nomEntitat', 'Nom: ')!!}
+                  {!!Form::text('nomEntitat', null, ['class' => 'form-control', 'placeholder' => 'Nom de la entitat'])!!}
               </div>
               <div>
-                  {!!Form::label('desc', 'Descripció: ')!!}
-                  {!!Form::textarea('desc', null, ['class' => 'form-control', 'placeholder' => 'Descripció de la entitat'])!!}
+                  {!!Form::label('adreca', 'Descripció: ')!!}
+                  {!!Form::text('adreca', null, ['class' => 'form-control', 'placeholder' => 'Descripció del entitat'])!!}
               </div>
               <div>
                   {!!Form::submit('Guardar canvis', ['class' => 'btn btn-primary'])!!}

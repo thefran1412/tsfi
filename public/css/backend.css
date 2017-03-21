@@ -30,11 +30,11 @@ div{
 	position: fixed;
 	width: 100%;
 	background-color: white;
-	height: 70px;
+	height: 40px;
 	box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
 	z-index: 10;
 }
-.headerIcon, .headerSearch, .headerActions{
+.headerIcon, .headerRoute, .headerActions{
 	float: left;
 	height: 100%;	
 }
@@ -42,15 +42,20 @@ div{
 	width: 10%;
 	background-color: #009CDF;
 	text-align: center;
-	line-height: 70px;
+	line-height: 40px;
 	font-size: 30px;
 }
-.headerSearch{
-	background-color: white;
-	width: 70%;
+.headerRoute{
+	/*width: 70%;*/
+	padding: 10px;
+}
+.headerRoute h2 {
+	display: inline-block;
+	font-size: 20px;
 }
 .headerActions{
-	padding: 22px;
+	padding: 11px;
+	padding-right: 20px;
 	width: 20%;
 	float: right;
 	text-align: right;
@@ -62,9 +67,9 @@ div{
 .menu{
 	position: fixed;
 	left: 0;
-	top: 70px;
+	top: 40px;
 	width: 10%;
-	height: calc(100vh - 70px);
+	height: calc(100vh - 40px);
 	background-color: #313942;
 	display: inline-block;
 	z-index: 10;
@@ -83,9 +88,9 @@ div{
 	float: right;
 	width: 90%;
 	background-color: #EFF3F6;
-	margin-top: 70px;
+	margin-top: 40px;
 	padding: 10px;
-	min-height: calc(100% - 70px);
+	min-height: calc(100% - 40px);
 }
 .noti img{
 	width: 25px;

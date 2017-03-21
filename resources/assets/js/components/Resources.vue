@@ -39,8 +39,10 @@
 					<p>{{resource[0].creatPer}}</p>
 				</div>
 				<div class="extras">
-				<h3>Direcció</h3>
+					<h3>Direcció</h3>
 					<p>Calle estroncio 15-21, 3-4</p>
+					<h3>twitter</h3>
+					<p>{{socialMedia[0].social_media.twitter}}</p>
 				</div>
 
 				<div class="banners">
@@ -51,13 +53,13 @@
 	</div>
 </template>
 
-
 <script>
 	export default{
 		data(){
 			return{
 				image:'',
-				resource:null
+				resource:null,
+				socialMedia:null
 			}
 		},
 		created(){
@@ -67,7 +69,9 @@
 			fetchResource: function(id){
 				this.$http.get('../api/recursos/'+id).then(function(response){
 					this.resource = response.data.resource;
+					this.socialMedia = response.data.socialMedia;
 					console.log(this.resource);
+					console.log(this.socialMedia);
 					console.log(this.recurso);
 				});
 			}

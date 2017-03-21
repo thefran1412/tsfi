@@ -15,7 +15,7 @@
 
 @section('content')
      <div class="create">
-            {!!Form::open(['action' => 'backend\Entitats@store', 'method' => 'post'])!!}
+            {!!Form::open(['action' => 'backend\Entitats@store', 'method' => 'post', 'id' => 'create'])!!}
               <div class="paper">
                   <div>
                     {!!Form::label('nom', 'Nom: ')!!}
@@ -26,24 +26,25 @@
                     {!!Form::text('link', null, ['class' => 'form-control', 'placeholder' => 'Enllaç a la pàgina web'])!!}
                   </div>
                   <div>
-                    {!!Form::label('desc', 'És membre: ')!!}
+                    {!!Form::label('esMembre', 'És membre: ')!!}
                     {!!Form::checkbox('esMembre', null, ['class' => 'form-control', 'placeholder' => 'Es membre'])!!}
                   </div>
               </div>
               <div class="paper">
                   <div>
-                    {!!Form::label('desc', 'Telèfon 1: ')!!}
+                    {!!Form::label('telf1', 'Telèfon 1: ')!!}
                     {!!Form::number('telf1', null, ['class' => 'form-control', 'placeholder' => 'Telefon de la entitat 1'])!!}
                   </div>
                   <div>
-                    {!!Form::label('desc', 'Telèfon 2: ')!!}
+                    {!!Form::label('telf2', 'Telèfon 2: ')!!}
                     {!!Form::number('telf2', null, ['class' => 'form-control', 'placeholder' => 'Telefon de la entitat 2'])!!}
                   </div>
                 </div>
                 <div class="paper">
                   <div class="upload">
-                    {!!Form::label('desc', 'Logo: ')!!}
-                    {!!Form::file('logo', null, ['class' => 'form-control', 'placeholder' => 'Logo'])!!}
+                    {!!Form::label('logo', 'Logo: ')!!}
+                    <input type="file" name="logo" accept="image/*" class="form-control">
+                    {{-- {!!Form::file('logo', null, ['class' => 'form-control', 'placeholder' => 'Logo', 'accept' => 'image/*'])!!} --}}
                   </div>
 
               </div>

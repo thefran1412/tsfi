@@ -1,3 +1,32 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$("#create").submit(function(e){
+  e.preventDefault();
+  if(validate()){
+
+  }
+}); 
+
+function validate() {
+  $(".form-control").each(function( index ) {
+    console.log( index + ": " + $( this ).val() );
+  });
+}
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 41.627619, lng: 2},

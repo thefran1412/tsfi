@@ -8,6 +8,11 @@
      <link rel="stylesheet" href="{{ URL::asset('/css/backend/add.css') }}">
 @endsection
 
+@section('script')
+  <script src="{{ URL::asset('/js/createEntity.js') }}"></script>
+  <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
+@endsection
+
 @section('content')
      <div class="create">
             {!!Form::open(['action' => 'backend\Entitats@store', 'method' => 'post'])!!}
@@ -44,13 +49,17 @@
               </div>
               <div class="paper">
                   {!!Form::label('desc', 'Adreça: ')!!}
-                  {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat'])!!}
+                  {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
 
-                  <iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJhwzf5aSipBIRVKZl89WuF0c&key=AIzaSyC4_7SNfNuNIVeW8vwguS8QheTX0v3Bll0" allowfullscreen></iframe>
+              <div class="map"><div id="map"></div></div>
+              <div id="infowindow-content">
+                <span id="place-name" class="title"></span>
+                <br>Place ID <span id="place-id"></span><br>
+                <span id="place-address"></span>
               </div>
               <div class="air">
                   {!!Form::submit('Guardar canvis', ['class' => 'btn btn-primary'])!!}
               </div>
-          {!!Form::close()!!}
-     </div>
+                    {!!Form::close()!!}
+               </div>
 @endsection

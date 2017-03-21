@@ -8,6 +8,7 @@ class Resource extends Model
     public $timestamps = false;
     protected $fillable = [
     'recurs_id', 'titolRecurs', 'subTitol', 'descBreu', 'descDetaill1', 'descDetaill2', 'relevancia', 'dataInici', 'dataFinal', 'gratuit', 'preuInferior', 'preuSuperior', 'dataPublicacio', 'visible', 'fotoResum', 'creatPer', 'idLocalitzacio'];
+    // Funciones (Relaciones)
     public function category(){ // OK
         return $this->belongsToMany('App\Category','categoria_recurs','idRecurs','idCategoria');
         // ->withTimestamps();
@@ -30,10 +31,6 @@ class Resource extends Model
     public function podcast(){ //OK
         return $this->hasMany('App\Podcast','idRecurs');
     }
-    // public function socialMedia(){
-    //     return $this->hasManyThrough('App\SocialMedia','App\Entity','entitat_id','entitat_recurs','idRecurs','idEntitat');
-    //     // hasMany('App\SocialMedia','social_id');
-    // }
     public function tag(){ //OK
         return $this->belongsToMany('App\Tag','tag_recurs','idRecurs','idTag');
     }

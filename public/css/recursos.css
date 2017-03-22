@@ -30,7 +30,7 @@
 	font-size: 26px;
 }
 
-.recurso:hover{
+.recurso:hover {
 	background-color:rgba(0,0,0,.2);
 	transition: background-color .5s ease-in-out;
 	color: white;
@@ -46,6 +46,9 @@
 	transition: color .5s ease-in-out;
 	color: white;
 }
+
+
+
 .recurso-content{
 	text-align: left;
 	padding-top: 75px;
@@ -83,10 +86,13 @@
 	margin-top: 12px;
 		text-transform: capitalize;
 }
-.categoria:hover a{
+
+.categoria:hover a, .categoria:hover i{
 	color: #4FC08D;
 	transition: none;
 }
+
+
 .autor a, .categoria a{
 	font-size:13px;
 	line-height: 13px;

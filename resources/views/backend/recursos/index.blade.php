@@ -1,6 +1,10 @@
 @extends('layouts.backend')
 
-@section('titol', 'Recursos')
+@section('titol')
+  <i class="fa fa-angle-right"></i>
+  <a href="{{ action('backend\Recursos@index') }}">Recursos</a>
+@endsection
+
 @section('css')
     {{-- <link rel="stylesheet" href="{{ URL::asset('https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ URL::asset('/css/backend/datatables.css') }}">

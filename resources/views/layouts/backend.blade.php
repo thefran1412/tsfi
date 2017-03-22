@@ -9,44 +9,55 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    
     <!-- Styles -->
-    <link href="/css/backend.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <link href="{{ URL::asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/backend.css') }}" rel="stylesheet">
+    @yield('css')
 
-    {{-- End Summer Note--}}
 </head>
 <body>
     {{-- HEADER START --}}
     <div class="header">
+
+        {{-- ICON --}}
         <div class="headerIcon">T.S.F.I</div>
-        <div class="headerSearch">
-        <input type="text" name="search">
+
+        {{-- ROUTE --}}
+        <div class="headerRoute">
+            <h2>@yield('titol')</h2>
         </div>
+
+        {{-- ACTIONS --}}
         <div class="headerActions">
-            <a href="#" class="noti">Notificacions</a>
-            <a href="{{url('/')}}">Frontend</a>
+            {{-- FRONTEND --}}
+            <a title="Veure Pàgina" href="{{url('/')}}" class="home"><i class="fa fa-globe"></i><!-- <img src="/img/home.png"> --></a>
+            {{-- NOTIFICATIONS --}}
+            <a title="Notificacions" href="#" class="noti"><i class="fa fa-bell-o"></i><!-- <img alt="Notificacions" src="/img/noti.png"> --></a>
             {{-- LOGOUT --}}
-            <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+            <a title="Més opcions" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">admin<i class="fa fa-angle-down dropdown"></i><!-- <img src="/img/down.png" > --></a>
+            
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>
         </div>
+
     </div>
     {{-- HEADER END --}}
     <div class="menu">
-        <ul>
-            <li><a href="{{  action('backend\Backend@index') }}">Inici</a></li>
-            <li><a href="{{  action('backend\Recursos@index') }}">Recursos</a></li>
-            <li><a href="{{  action('backend\Recursos@add') }}">---Add</a></li>
-            <li><a href="{{  action('backend\Categories@index') }}">---Categories</a></li>
-            <li><a href="{{  action('backend\Tags@index') }}">---Tags</a></li>
-            <li><a href="{{  action('backend\Entitats@index') }}">Entitats</a></li>
-            <li><a href="{{  action('backend\Entitats@add') }}">---Add</a></li>
-            <li><a href="{{  action('backend\Usuaris@index') }}">Usuaris</a></li>
-            <li><a href="{{  action('backend\Usuaris@add') }}">---Add</a></li>
-            <li><a href="{{  action('backend\Analytics@index') }}">Analytics</a></li>
-            <li><a href="{{  action('backend\Backend@config') }}">Configuració</a></li>
+        <ul class="nav navbar-nav">
+            <li><a href="{{  action('backend\Backend@index') }}"><i class="fa fa-home"></i>Inici</a></li>
+            <li><a href="{{  action('backend\Recursos@index') }}"><i class="fa fa-file-text"></i>Recursos</a></li>
+            {{-- <li><a href="{{  action('backend\Recursos@add') }}">---Add</a></li> --}}
+            <li><a href="{{  action('backend\Categories@index') }}"><i class="fa fa-archive"></i>Categories</a></li>
+            <li><a href="{{  action('backend\Tags@index') }}"><i class="fa fa-tag"></i>Tags</a></li>
+            <li><a href="{{  action('backend\Entitats@index') }}"><i class="fa fa-building"></i>Entitats</a></li>
+            {{-- <li><a href="{{  action('backend\Entitats@add') }}">---Add</a></li> --}}
+            {{-- <li><a href="{{  action('backend\Usuaris@index') }}"><i class="fa fa-user"></i>Usuaris</a></li> --}}
+            {{-- <li><a href="{{  action('backend\Usuaris@add') }}">---Add</a></li> --}}
+            <li><a href="{{  action('backend\Analytics@index') }}"><i class="fa fa-bar-chart"></i>Analytics</a></li>
+            <li><a href="{{  action('backend\Backend@config') }}"><i class="fa fa-cog"></i>Configuració</a></li>
         </ul>
     </div>
     <div class="content">
@@ -55,22 +66,14 @@
 </body>
 
 <!-- Scripts -->
- <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
- <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-{{--Summer Note--}}
-<link href="/js/sumer_note/summernote.css" rel="stylesheet">
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
-<script src="/js/sumer_note/summernote.min.js"></script>
-<script src="/js/sumer_note/summernote-es-ES.js"></script>
-{{--End Summer Note scripts--}}
-@yield('script')
-
+{{-- http://g3s2aw.sdslab.cat/projects/public_tsfi2 --}}
+ <script src="{{ URL::asset('/js/jquery.min.js') }}"></script>
+ <script type="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
+ <script src="{{ URL::asset('/js/backend.js') }}"></script>
 <script>
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),
     ]); ?>
 </script>
+@yield('script')
 </html>

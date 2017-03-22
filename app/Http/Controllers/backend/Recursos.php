@@ -50,7 +50,7 @@ class Recursos extends Controller
 	    $this->setLog('Resource store');
 
         echo gettype($this->log), "\n";
-        $data = request()->intersect(['titol','subTitol','descDetaill1','creatPer']);
+        $data = request()->intersect(['titolRecurs','subTitol','descDetaill1','creatPer']);
         $this->setInfoLog($this->log,'data->   '.implode("\n",$data));
         Resource::create($data);
         return redirect()->to('admin/recursos');

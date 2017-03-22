@@ -8,6 +8,15 @@ class ImageResource extends Model
 {
     //
     protected $table = 'imatge_recurs';
+    protected $primaryKey = 'imatge_recurs_id';
     protected $fillable = [
     'imatge_recurs_id', 'titolImatge', 'descImatge', 'imatge', 'ordre', 'idRecurs'];
+
+    public function getFileAttribute($photo){
+    	return $this->uploads . $photo;
+    }
+
+    public function resource(){
+        return $this->belongsTo('App\Resource');
+    }
 }

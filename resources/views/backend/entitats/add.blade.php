@@ -1,49 +1,66 @@
 @extends('layouts.backend')
 
+@section('titol', 'Afegir Entitat')
+
+@section('css')
+     <link rel="stylesheet" href="{{ URL::asset('/css/backend/datatables.css') }}">
+     {{-- <link rel="stylesheet" href="{{ URL::asset('/css/backend/crud.css') }}"> --}}
+     <link rel="stylesheet" href="{{ URL::asset('/css/backend/add.css') }}">
+@endsection
+
+@section('script')
+  <script src="{{ URL::asset('/js/createEntity.js') }}"></script>
+  <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
+@endsection
+
 @section('content')
-                    
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
-                    <p>entidades > add</p>
+     <div class="create">
+            {!!Form::open(['action' => 'backend\Entitats@store', 'method' => 'post', 'id' => 'create'])!!}
+              <div class="paper">
+                  <div>
+                    {!!Form::label('nom', 'Nom: ')!!}
+                    {!!Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Nom de la entitat'])!!}
+                  </div>
+                  <div>
+                    {!!Form::label('link', 'Enllaç pàgina web: ')!!}
+                    {!!Form::text('link', null, ['class' => 'form-control', 'placeholder' => 'Enllaç a la pàgina web'])!!}
+                  </div>
+                  <div>
+                    {!!Form::label('esMembre', 'És membre: ')!!}
+                    {!!Form::checkbox('esMembre', null, ['class' => 'form-control', 'placeholder' => 'Es membre'])!!}
+                  </div>
+              </div>
+              <div class="paper">
+                  <div>
+                    {!!Form::label('telf1', 'Telèfon 1: ')!!}
+                    {!!Form::number('telf1', null, ['class' => 'form-control', 'placeholder' => 'Telefon de la entitat 1'])!!}
+                  </div>
+                  <div>
+                    {!!Form::label('telf2', 'Telèfon 2: ')!!}
+                    {!!Form::number('telf2', null, ['class' => 'form-control', 'placeholder' => 'Telefon de la entitat 2'])!!}
+                  </div>
+                </div>
+                <div class="paper">
+                  <div class="upload">
+                    {!!Form::label('logo', 'Logo: ')!!}
+                    <input type="file" name="logo" accept="image/*" class="form-control">
+                    {{-- {!!Form::file('logo', null, ['class' => 'form-control', 'placeholder' => 'Logo', 'accept' => 'image/*'])!!} --}}
+                  </div>
+
+              </div>
+              <div class="paper">
+                  {!!Form::label('desc', 'Adreça: ')!!}
+                  {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
+
+              <div class="map"><div id="map"></div></div>
+              <div id="infowindow-content">
+                <span id="place-name" class="title"></span>
+                <br>Place ID <span id="place-id"></span><br>
+                <span id="place-address"></span>
+              </div>
+              <div class="air">
+                  {!!Form::submit('Guardar canvis', ['class' => 'btn btn-primary'])!!}
+              </div>
+                    {!!Form::close()!!}
+               </div>
 @endsection

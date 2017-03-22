@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Category;
 
 class Categories extends Controller
 {
@@ -19,6 +20,40 @@ class Categories extends Controller
     }
     public function index()
     {
-    	return view('backend.recursos.categories');
+    	$c = Category::All();
+        return view('backend.categories.index', ['categories' => $c]);
+    }
+
+    public function store(Request $request)
+    {
+        \App\Category::Create([
+            'nomCategoria' => $request['nom'],
+            'codiCategoria' => $request['codi'],
+            'descCategoria' => $request['desc']
+        ]);
+        return redirect('admin/categories');
+    }
+
+    public function destroy($id)
+    {
+        \App\Category::destroy($id);
+        return redirect('admin/categories');
+
+    }
+
+    public function edit($id = NULL)
+    {
+        if ($id == NULL) {
+            return redirect('admin/categories');
+        }
+        $c = Category::find($id);
+        return view('backend.categories.edit',  ['categoria' => $c]);
+    }
+    public function update($id, Request $request)
+    {
+        $recurs = Category::find($id);
+        $recurs->fill($request->all());
+        $recurs->save();
+        return redirect('admin/categories');
     }
 }

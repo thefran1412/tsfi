@@ -1,5 +1,9 @@
 <?php
 
+use App\Resource;
+use App\ImageResource;
+use App\TargetResource;
+use App\CategoryResource;
 use Illuminate\Http\Request;
 
 /*
@@ -13,11 +17,12 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::resource('categories', 'Categories');
 Route::resource('entitats', 'Entitats');
 Route::resource('recursos', 'Recursos');
 
 Route::get('recursos/{recurso}', 'Recursos@getResource')->name('recurso.getResource');
-Route::get('typeuser/{typeUser}', 'Recursos@index')->name('recurso.index');
+Route::get('typeuser/{typeUser}/{category}', 'Recursos@index')->name('recurso.index');
 
 
 Route::get('/user', function (Request $request) {
@@ -25,4 +30,46 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 
+Route::post('submit', function(Request $request){
 
+	$input = $request->only('titolRecurs','subTitol','descBreu','descDetaill1', 'fotoResum');
+	$selectCategory = $request->only('categoria');
+	$selectTypeUser = $request->only('target');
+
+
+	if($file = $request->file('image')){
+		$name = time() . $file->getClientOriginalName();
+		$file->move('images',$name);
+		$input['fotoResum'] = $name;
+	}
+
+	$prueba = Resource::create($input);
+	$insertedId = $prueba->recurs_id;
+
+	if($selectTypeUser['target'] === 'Estudiants'){
+		TargetResource::create(['idRecurs' => $insertedId, 'idTarget' => 2]);
+	}
+
+	if($selectTypeUser['target'] === 'Professors'){
+		TargetResource::create(['idRecurs' => $insertedId, 'idTarget' => 1]);
+	}
+
+	$category_id = $selectCategory['categoria'];
+
+	CategoryResource::create(['idCategoria' => $category_id, 'idRecurs' => $insertedId]);
+
+	if($file = $request->file('image2')){
+		$name = time() . $file->getClientOriginalName();
+		$file->move('images',$name);
+		$photo = ImageResource::create(['titolImatge'=>'','descImatge'=>'','imatge' => $name ,'ordre'=>1,'idRecurs' => $insertedId]);
+	}
+
+	if($file = $request->file('image3')){
+		$name = time() . $file->getClientOriginalName();
+		$file->move('images',$name);
+		$photo = ImageResource::create(['titolImatge'=>'','descImatge'=>'','imatge' => $name, 'ordre'=>2, 'idRecurs' => $insertedId]);
+	}
+
+	return response()->json(['success' => true, 'message' => 'images uploaded']);
+
+})->name('submit');

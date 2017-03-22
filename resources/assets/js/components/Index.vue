@@ -2,26 +2,22 @@
     <div id="appVue">
         <header>
             <div class="header-top-item header-search-container">
+
                 <div class="row">
                     <div class="col-md-1" >
-                        <li v-on:click="changeTypeUser('teacher')" v-if="type === 'teachers'">
-                            <router-link :to="{name: 'home-teachers'}">
+                        <li v-on:click="changeTypeUser('teacher')" v-if="type === 'teacher'">
                                 <span class="title">TSFI</span>
-                            </router-link>
                         </li>
-                        <li  v-on:click="changeTypeUser('student')" v-if="type === 'students'">
-                            <router-link :to="{name: 'home-students'}">
+                        <li  v-on:click="changeTypeUser('student')" v-if="type === 'student'">
                                 <span class="title">TSFI</span>
-                            </router-link>
                         </li>
                         </div>
                         <div class="col-md-3">
                             <div class="selects">
-                                <router-link ref="canvas" :to="{name: category.category}" >
-                                <multiselect v-model="category" selected-label="Seleccionada" track-by="name" label="name" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
-                                </router-link>
-                            </div>
+                                <multiselect v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
+                            </div>   
                         </div>
+
           
                     <div class="col-md-3">
                         <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="name" track-by="name"  :allow-empty="false"></multiselect>
@@ -41,28 +37,24 @@
                             </form>
                     </div>
                     <div class="col-md-2 user-type">
-                        <li v-on:click="typeUser('#/enviar-recurs')">
+                        <li v-on:click="typeUser('Envians un recurs')">
                             <router-link :to="{name: 'enviar-recurs'}">
                                 <i class="fa fa-paper-plane-o" aria-hidden="true" title="Enviar recurs"></i>
                             </router-link>
                         </li>
-                        <li v-on:click="changeTypeUser('teacher')" v-if="type === 'students'">
-                            <router-link :to="{name: 'home-teachers'}">
+                        <li v-on:click="changeTypeUser('teacher')" v-if="type === 'student'">
                                 <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
-                            </router-link>
                         </li>
-                        <li  v-on:click="changeTypeUser('student')" v-if="type === 'teachers'">
-                            <router-link :to="{name: 'home-students'}">
+                        <li  v-on:click="changeTypeUser('student')" v-if="type === 'teacher'">
                                 <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
-                            </router-link>
                         </li>
                     </div>
                 </div>   
                 <span class="profile">
-                    <li v-if="type === 'students'">
+                    <li v-if="type === 'student'">
                         Estudiants i Pares
                     </li>
-                    <li v-if="type === 'teachers'">
+                    <li v-if="type === 'teacher'">
                         Orientadors i Professors  
                     </li>
                 </span>
@@ -93,7 +85,7 @@
                         <h4>Entitats Col·laboradores :</h4>
                     </div>
                     <div class="col-md-4" v-for="e in entities">
-                        <a v-bind:href="e.url" target="_blank">{{ e.name }}</a>
+                        <a v-bind:href="e.link" target="_blank">{{ e.nomEntitat }}</a>
                     </div>
                 </div>
             </div>
@@ -104,88 +96,60 @@
 <script>
 
     import Multiselect from 'vue-multiselect';
+    import InfiniteLoading from 'vue-infinite-loading';
+    import { EventBus } from '../app.js';
+
 
     export default{
-        components: {
-            Multiselect
-        },
-        props:{
-            
-          },
         data(){
             return{
                 type:'',
                 search:'',
                 searchSubmit : '',
                 entity: { name: ''},
-                category: { category: '', name: 'Totes les categories' },
-                categories: [
-                    { category: '' , name: 'Totes les categories'},
-                    { category: 'events', name: 'Events' },
-                    { category: 'noticies', name: 'Noticies'},
-                    { category: 'tallers', name: 'Tallers'},
-                    { category: 'conferencies', name: 'Conferencies'}
-                ],
-                entities: [
-                    { name:'Totes', url:''},
-                    { name: 'ADECAT', url: 'http://www.adecat.org/' },
-                    { name: 'Ajuntament de BCN - Barcelona Activa', url: 'http://www.barcelonactiva.cat' },
-                    { name: "Ajuntament de BCN - Institut Municipal d'Informàtica", url: 'http://ajuntament.barcelona.cat/imi/ca' },
-                    { name: 'Anna Ginorella de Mundet', url: 'http://agmundet.es/wp/' },
-                    { name: 'ASEITEC - CECOT', url: 'http://www.aseitec.org/' },
-                    { name: 'Cambra de Comerç de BCN', url: 'http://www.cambrabcn.org/es/' },
-                    { name: "Col.legi d'Enginyers Industrials de Catalunya - COEIC", url: 'http://www.eic.cat/' },
-                    { name: 'Comissons Obreres - CCOO', url: 'http://www.ccoo.cat/' },
-                    { name: "Consorci d'Educació", url: 'http://www.edubcn.cat/ca/' },
-                    { name: 'Fira de Barcelona', url: 'http://www.firabarcelona.com/ca' },
-                    { name: 'Fundació BCN FP', url: 'http://www.fundaciobcnfp.cat' },
-                    { name: 'Fundació EURECAT', url: 'http://www.adecat.org/' },
-                    { name: 'Gencat - ACCIÓ', url: 'http://accio.gencat.cat/cat/' },
-                    { name: "Gencat - Departament d'Ensenyament", url: 'http://ensenyament.gencat.cat/ca/inici/' },
-                    { name: "Gencat - Direcció General d'Industria", url: 'http://empresa.gencat.cat/ca/inici/' },
-                    { name: "Gencat - Empresa i Coneixement CTTI", url: 'http://empresa.gencat.cat/ca/inici/' },
-                    { name: 'Grup SIMON', url: 'http://www.grupsimon.com/ca' },
-                    { name: 'Gutmar', url: 'http://www.gutmar.com/index.php?lang=ca' },
-                    { name: 'Industria21', url: 'http://www.industria21.cat/' },
-                    { name: 'Institut Escola del Treball', url: 'http://www.escoladeltreball.org/ca' },
-                    { name: 'Jesuïtes Clot', url: 'http://www.clot.fje.edu/' },
-                    { name: 'LEITAT', url: 'http://www.leitat.org/castellano/' },
-                    { name: 'Pacte Industrial de la Regió Metropolitana de BCN', url: 'http://www.pacteindustrial.org/' },
-                    { name: 'PIMEC', url: 'https://www.pimec.org/' },
-                    { name: 'Salesians de Sarria', url: 'http://www.salesianssarria.com/' },
-                    { name: 'SANDVIK', url: 'http://www.home.sandvik/en/' },
-                    { name: 'Schneider', url: 'http://www.schneider-electric.es/es/' },
-                    { name: 'SEAT', url: 'http://www.seat.es' },
-                    { name: 'Unió General dels Treballadors - UGT', url: 'http://www.ugt.cat/' },
-                    { name: 'Unió Patronal Metal.lúrgica - UPM', url: 'http://www.upm.org.es/' }
-                  ]
+                recursos:[],
+                category: { codiCategoria: 'Totes les Categories', nomCategoria: 'home' },
+                categories: [],
+                entities: [],
+                prueba:null,
+                typeUserUrl: this.$route.params.typeuser,
+                typeCategory:this.$route.params.category,
+                page:1
             }
         },
         created(){
-            this.whatUserPage();
+            this.whatUserPage(this.$route.params.typeuser);
+            this.fetchCategories();
             this.fetchEntities();
+            //this.onInfinite(this.$route.params.typeuser, this.$route.params.category);
+            this.correctSelectCategory(this.$route.params.category);
+            //this.fetchResource(this.$route.params.typeuser, this.$route.params.category);
         },
         mounted(){
             this.typeUser();
+
         },
         methods:{
-            typeUser(defaultPath){
+            typeUser(value){
 
                 var typeUser = localStorage.getItem("typeUser");
-                var pathURL = this.$refs.canvas.$el.hash;
 
-                if(localStorage.length === 2){
+                // if(value){
+                //     this.recursos = [];
+                //     this.$nextTick(() => {
+                //         this.prueba.$emit('$InfiniteLoading:reset');
+                //     });
+                //     this.category = { codiCategoria:value , nomCategoria: 'enviar-recurs' };
+                // }
 
-                    if(defaultPath){
-                        pathURL = defaultPath;
-                    }
-
-
-                    this.correctUrlPageCategory(typeUser, pathURL);
+                if(typeUser === 'student'){
+                    this.type = 'student';
                 }
-
+                if(typeUser === 'teacher'){
+                    this.type = 'teacher';
+                }
             },
-            whatUserPage(){
+            whatUserPage(value){
 
                 var typeNum = localStorage.getItem("numType");
 
@@ -200,9 +164,9 @@
                     localStorage.setItem("numType", 1);
 
                     if(typeUser === 'student'){
-                        this.$router.push('/home-students')
+                        this.$router.push('/student/home')
                     }else{
-                        this.$router.push('/home-teachers')
+                        this.$router.push('/teacher/home')
                     }
                 }
             },
@@ -214,43 +178,105 @@
 
                 localStorage.setItem("typeUser", typeUser);
 
+                var typeActUser = localStorage.getItem("typeUser");
+
+
                 localStorage.removeItem("numType");
 
                 localStorage.setItem("numType", 0);
 
-                this.whatUserPage();
+                
+
+                this.recursos = [];
+                this.$nextTick(() => {
+                    this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                    this.page = 1;
+                    this.$router.push('/'+typeUser+'/home');
+                    //this.onInfinite(this.$route.params.typeuser, this.$route.params.category);
+                });
+
                 this.typeUser();
+                this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
 
-                if (typeUser === 'teacher') {
-                    this.category = { category: 'home-teachers', name: 'Totes les categories' };
-                };
-
-                if (typeUser === 'student') {
-                    this.category = { category: 'home-students', name: 'Totes les categories' };
-                };
-                
             },
-            correctUrlPageCategory(typeUser, pathURL){
-
-                this.type = typeUser+'s';
-                this.categories[0].category = 'home-'+typeUser+'s';
-
-                if(pathURL.indexOf('resource') < 0) {
-                    if(pathURL.indexOf('#/') > -1 && pathURL !== '#/home-'+typeUser+'s'){
-                        var url  = pathURL.replace('#/', '');
-                        var cap = url.charAt(0).toUpperCase() + url.slice(1);
-
-                        this.category = { category: url, name: cap };
-                    }
+            correctSelectCategory(routeParam){
+                if(routeParam !== 'home' && routeParam !== undefined){
+                    var cap = routeParam.charAt(0).toUpperCase() + routeParam.slice(1);
+                    this.category = { codiCategoria: cap, nomCategoria: routeParam };
                 }
-                
+
+                if(routeParam !== undefined){
+                    this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
+                }
+
             },
             fetchEntities(){
                 this.$http.get('../api/entitats').then(response=>{
-                    console.log(response.data);
+                    this.entities = response.data.entities;
                 })
-            }
-        }
+            },
+            fetchCategories(){
+                this.$http.get('../api/categories').then(response=>{
+                    this.categories = response.data.categories;
+                })
+            },
+            fetchResource(typeUser, category){
+                this.$http.get('../api/typeuser/'+this.type+'/'+category).then(response=>{
+                    this.recursos = response.data.resources;
+                    this.search = '';
+                    this.loading = true;
+                });
+              },
+             onInfinite(typeUser, typeCategory) {
+
+                    console.log('hola');
+                  var route = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
+
+
+                  this.$http.get(route , {
+
+                  }).then((res) => {
+                    if (res.data.resources.length ) {
+                      this.recursos = this.recursos.concat(res.data.resources);
+                          this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                          if (this.recursos.length / 20 === 10) {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                          }
+                          this.page++;
+                    } else {
+                      this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                    }
+
+                  });
+                },
+                dispatchAction(v){
+                    this.recursos = [];
+                    if(v.nomCategoria !== 'enviar-recurs'){
+                        var typeUser = localStorage.getItem("typeUser");
+                        
+                        
+                        this.$nextTick(() => {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                            this.page = 1;
+                            this.$router.push('/'+typeUser + '/' + v.nomCategoria)
+                            //this.onInfinite(typeUser, v.nomCategoria);
+                        });
+                        // console.log('index', 'hola');
+                        // this.$emit('test');
+                    }
+                }
+        },
+        watch: {
+          category: function(v) {
+
+            
+
+           }
+       },
+       components: {
+            Multiselect,
+            InfiniteLoading
+        },
     }
 
 </script>

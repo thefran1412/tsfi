@@ -7,41 +7,42 @@
 				<!--  clearfix visible-xs-block visible-sm-block visible-md-block visible-lg-block -->
 				<h1>{{resource[0].titolRecurs}}</h1>
 				<img class="img-responsive" src="\img\image\imagenprueba.jpg" alt="prueba View"> <!-- width="960" height="540" -->
-				<h2 v-for="r in recurso">{{r.subTitol}}</h2>
-				<pre>{{this.recurso}}</pre>
-
+				<h2>{{resource[0].subtitol}}</h2>
+				<!-- <pre>{{this.recurso}}</pre> -->
 				<!-- class="descshort" -->
-				<p> <strong>DESCRIPCIO CURTA </strong> am wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,</p>
+				<p><strong>{{resource[0].descBreu}}</strong></p>
 					<!-- desc1 -->
-				<p> <strong>DESCRIPCIO LLARGA 1! </strong> sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a 1</p>
+				<p>{{resource[0].descDetaill1}}</p>
 					<!-- desc2 -->
-				<p> <strong>DESCRIPCIO LLARGA 2!</strong> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a</p>
+				<p>{{resource[0].descDetaill2}}</p>
 			</div>
 
-			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 resource-extras">
+			<div v-if="resource" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 resource-extras">
 				<h1>FITXA TÈCNICA</h1>
 				<div>
 					<h3>Data inicial i final</h3>
-					<p>08/03/2017</p>
-					<p>31/03/2021</p>
+					<p>{{resource[0].dataInici}}</p>
+					<p>{{resource[0].dataFinal}}</p>
 				</div>
 				<div>
 					<h3>Preu</h3>
-					<p>gratuit</p>
-					<p>0 €</p>
-					<p>2500 €</p>
+					<p>{{resource[0].gratuit}}</p>
+					<p>{{resource[0].preuInferior}} €</p>
+					<p>{{resource[0].preuSuperior}} €</p>
 				</div>
 				<div>
 					<h3>Data de publicació</h3>
-					<p>07/03/2017</p>
+					<p>{{resource[0].dataPublicacio}}</p>
 				</div>
 				<div class="extras">
 					<h3>Publicat per</h3>
-					<p>Adrián Gallego Luque</p>
+					<p>{{resource[0].creatPer}}</p>
 				</div>
 				<div class="extras">
 					<h3>Direcció</h3>
 					<p>Calle estroncio 15-21, 3-4</p>
+					<h3>twitter</h3>
+					<p>{{socialMedia[0].social_media.twitter}}</p>
 				</div>
 
 				<div class="banners">
@@ -52,13 +53,13 @@
 	</div>
 </template>
 
-
 <script>
 	export default{
 		data(){
 			return{
 				image:'',
-				resource:null
+				resource:null,
+				socialMedia:null
 			}
 		},
 		created(){
@@ -68,7 +69,9 @@
 			fetchResource: function(id){
 				this.$http.get('../api/recursos/'+id).then(function(response){
 					this.resource = response.data.resource;
+					this.socialMedia = response.data.socialMedia;
 					console.log(this.resource);
+					console.log(this.socialMedia);
 					console.log(this.recurso);
 				});
 			}

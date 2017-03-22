@@ -38,8 +38,15 @@ Route::get('/admin/recursos/{id}/edit', 'backend\Recursos@edit');
 // Route::get('/admin/recursos/update', 'backend\Recursos@update');
 Route::put('/admin/recursos/{recurso}', 'backend\Recursos@update');
 Route::post('/admin/recursos/add', 'backend\Recursos@store');
-Route::get('/admin/recursos/categories', 'backend\Categories@index');
-Route::get('/admin/recursos/tags', 'backend\Tags@index');
+
+/* CATEGORIES */
+Route::resource('/admin/categories', 'backend\Categories');
+
+/* TAGS */
+Route::resource('/admin/tags', 'backend\Tags');
+
+/* ENTITATS */
+Route::resource('/admin/entitats', 'backend\Entitats');
 
 
 /* ENTIDADES */

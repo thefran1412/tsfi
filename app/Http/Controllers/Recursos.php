@@ -1,54 +1,60 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Resource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-
+use Carbon\Carbon;
+// use App\Entity;
 class Recursos extends Controller
 {
-    public function index(Request $request, $typeuser) {
+    public function index(Request $request, $typeuser, $category) {
 
-    	$resources = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.recurs_id")
-    	->join("categories as c","c.categoria_id","=","cr.idCategoria")
-        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.recurs_id")
-        ->join("entitats as e", "er.idEntitat", "=", "e.entitat_id")
-        ->join("target_recurs", "target_recurs.idRecurs", "=", "recursos.recurs_id")
-        ->join("targets","targets.targets_id","=","target_recurs.idTarget")
-    	->select("recursos.recurs_id","recursos.titolRecurs","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat", "targets.codiTarget")
-    	->where("targets.codiTarget","=", $typeuser)
-        // // ->where("c.nomCategoria","like","%%")
-        // ->orwhere("c.nomCategoria","=",$typeuser)
-        ->get();
+        if($category === 'home'){
+            $category = '%';
+        }
 
-	return response()->json([
-            'resources' => $resources
-        ]);
+        $resources = Resource::with('category','targets','entity')->
+            whereHas('targets', function ($query) use ($typeuser) {
+                    $query->where('codiTarget','=', $typeuser);
+            })->whereHas('category', function ($query) use ($category) {
+                    $query->where('nomCategoria','LIKE', $category);
+            })->paginate(20)->items();
+        return response()->json([
+                'resources' => $resources
+            ]);
+        
     }
-
- 	public function getResource(Request $request, $id) {
-        // $resources = Resource::findOrFail($id);
-    	$resource = \App\Resource::join("categoria_recurs as cr","cr.idRecurs","=","recursos.recurs_id")
-        ->join("categories as c","c.categoria_id","=","cr.idCategoria")
-        ->join("entitat_recurs as er", "er.idRecurs", "=", "recursos.recurs_id")
-        ->join("entitats as e", "er.idEntitat", "=", "e.entitat_id")
-        ->join("target_recurs", "target_recurs.idRecurs", "=", "recursos.recurs_id")
-        ->join("targets","targets.targets_id","=","target_recurs.idTarget")
-        ->join("edats_recurs","edats_recurs.idRecurs","=","recursos.recurs_id")
-        ->join("edats","edats_recurs.idEdat","=","edats.edats_id")
-        ->join("video_recurs","video_recurs.idRecurs","=","recursos.recurs_id")
-        ->join("localitzacions","localitzacions.localitzacions_id","=","recursos.idLocalitzacio")
-        ->join("imatge_recurs","imatge_recurs.idRecurs","=","recursos.recurs_id")
-        ->join("podcasts","podcasts.idRecurs","=","recursos.recurs_id")
-        ->select("recursos.recurs_id","recursos.titolRecurs","recursos.subTitol","recursos.creatPer","recursos.dataPublicacio","recursos.fotoResum","c.nomCategoria","e.nomEntitat","targets.codiTarget","edats.codiEdat","edats.descEdat","video_recurs.urlVideo","localitzacions.latitud","localitzacions.longitud", "imatge_recurs.descImatge", "podcasts.descPodCasts")
-        ->where("recursos.recurs_id","=", $id)
-        ->get();
-
-
-	return response()->json([
-            'resource' => $resource
+    public function getResource(Request $request, $id) {
+        $resource = Resource::with('category',
+                                    'age',
+                                    'entity',
+                                    'imageResource',
+                                    'link',
+                                    'location',
+                                    'podcast',
+                                    'tag',
+                                    'targets',
+                                    'videoResource',
+                                    'videoType')
+            ->where('recursos.recurs_id','=', $id)
+            ->get();
+        $socialMedia = \App\Entity::with('socialMedia','resource')
+            ->whereHas('resource', function ($query) use ($id) {
+                        $query->where('idRecurs','=', $id);
+                })
+            ->get();
+        // $dateIni = Carbon::now();;
+        // $dateEnd = $dateIni;
+        // $datePub = $dateIni;
+        $dateIni = $resource[0]->dataInici->format('d-m-Y');
+        $dateEnd = $resource[0]->dataFinal->format('d-m-Y');
+        $datePub = $resource[0]->dataPublicacio->format('d-m-Y');
+    return response()->json([
+            'resource'  => $resource,
+            'socialMedia' => $socialMedia,
+            'dateIni' => $dateIni,
+            'dateEnd' => $dateEnd,
+            'datePub' => $datePub
         ]);
     }
 }

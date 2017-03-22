@@ -1,5 +1,13 @@
 @extends('layouts.backend')
 
+@section('css')
+    <link href="{{ URL::asset('/js/sumer_note/summernote.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css') }}" rel="stylesheet">
+@endsection
+
+@section('titol', 'Afegir Recurs')
+
 @section('content')
     
     <div class="container" style="max-width: 600px;">
@@ -22,7 +30,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-3" for="email">Título:</label>
                 <div class="col-sm-9">
-                    <input name="titol" type="text" class="form-control" id="title" placeholder="Título" required>
+                    <input name="titolRecurs" type="text" class="form-control" id="title" placeholder="Título" required>
                 </div>
             </div>
             <div class="form-group">
@@ -46,8 +54,16 @@
             </div>
         </form>
     </div>
+@endsection
 
-
+@section('script')
+    {{--Summer Note--}}
+    <script src="{{ URL::asset('http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js') }}"></script>
+    <script src="{{ URL::asset('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js') }}"></script>
+    <script src="{{ URL::asset('/js/sumer_note/summernote.min.js') }}"></script>
+    <script src="{{ URL::asset('/js/sumer_note/summernote-es-ES.js') }}"></script>
+    {{--End Summer Note scripts--}}
+    
     <script type="text/javascript">
         $(document).ready(function() {
             $('#summernote').summernote({

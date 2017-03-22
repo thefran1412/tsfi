@@ -29,49 +29,76 @@ div{
 .header{
 	position: fixed;
 	width: 100%;
-	background-color: orange;
-	height: 70px;
+	background-color: white;
+	height: 40px;
 	box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
 	z-index: 10;
 }
-.headerIcon, .headerSearch, .headerActions{
+.headerIcon, .headerRoute, .headerActions{
 	float: left;
 	height: 100%;	
 }
 .headerIcon{
 	width: 10%;
-	background-color: turquoise;
+	background-color: #009CDF;
+	text-align: center;
+	line-height: 40px;
+	font-size: 30px;
 }
-.headerSearch{
-	background-color: white;
-	width: 70%;
+.headerRoute{
+	/*width: 70%;*/
+	padding: 10px;
+}
+.headerRoute h2 {
+	display: inline-block;
+	font-size: 20px;
 }
 .headerActions{
-	background-color: grey;
+	padding: 11px;
+	padding-right: 20px;
 	width: 20%;
 	float: right;
+	text-align: right;
 }
 .headerActions a{
-	color: white;
 	text-decoration: none;
+	margin-left: 25px;
 }
 .menu{
 	position: fixed;
 	left: 0;
-	top: 70px;
+	top: 40px;
 	width: 10%;
-	height: calc(100vh - 70px);
-	background-color: #333333;
+	height: calc(100vh - 40px);
+	background-color: #313942;
 	display: inline-block;
 	z-index: 10;
 }
 .menu a{
-	color: white;
+	color: #9299A2;
 	text-decoration: none; 
+}
+.menu ul li{
+	width: 100%;
+}
+.menu i{
+	margin-right: 15px;
 }
 .content{
 	float: right;
 	width: 90%;
-	height: calc(100% - 70px);
-	margin-top: 70px;
+	background-color: #EFF3F6;
+	margin-top: 40px;
+	padding: 10px;
+	min-height: calc(100% - 40px);
+}
+.noti img{
+	width: 25px;
+}
+.home img {
+	width: 25px;	
+}
+.dropdown{
+	width: 30px;
+	padding-left: 10px;
 }

@@ -3,49 +3,63 @@
 		<h1>Enviar Recurs</h1>
 		<form @submit.prevent="submitForm" ref="enviarRecurs" method="post" enctype="multipart/form-data">
 			<div class="form-group">
-				<label for="titol">Títol:</label>
-				<input class="form-control title" type="text" id="titol" name="titol" placeholder="Títol">
+				<label for="titolRecurs">Títol:</label>
+				<input class="form-control title" type="text" id="titolRecurs" name="titolRecurs" placeholder="Títol" required>
 			</div>
 			<div class="form-group">
-				<label for="subtitol">Subtítol:</label>
-				<input class="form-control title" type="text" id="subtitol" name="subtitol" placeholder="Subtítol">
+				<label for="subTitol">Subtítol:</label>
+				<input class="form-control title" type="text" id="subTitol" name="subTitol" placeholder="Subtítol" required>
 			</div>
 			<div class="form-group">
 				<label for="categoria">Escull una categoria:</label>
-				<select class="selectpicker" id="categoria">
-				  <option>Events</option>
-				  <option>Tallers</option>
-				  <option>Conferencies</option>
-				  <option>Noticies</option>
+				<select v-if="listCategories" class="form-control selectpicker" type="text" id="categoria" name="categoria">
+				  <option v-for="ls in listCategories" :value="ls.categoria_id">{{ls.codiCategoria}}</option>
 				</select>
 			</div>
 			<div class="form-group">
-			  <label for="descripciobreu">Descripció breu:</label>
-			  <textarea class="form-control" rows="5" id="descripciobreu"></textarea>
+				<label for="target">Aquí va dirigit:</label>
+				<select class="form-control selectpicker" type="text" id="target" name="target">
+				  <option>Estudiants</option>
+				  <option>Professors</option>
+				</select>
 			</div>
 			<div class="form-group">
-			  <label for="descripcio">Descripció:</label>
-			  <textarea class="form-control" rows="5" id="descripcio"></textarea>
+			  <label for="descBreu" required>Descripció breu:</label>
+			  <textarea class="form-control" type="text" id="descBreu" name="descBreu"></textarea>
+			</div>
+			<div class="form-group">
+			  <label for="descDetaill1">Descripció:</label>
+			  <textarea class="form-control" type="text" id="descDetaill1" name="descDetaill1"></textarea>
 			</div>
 			<div class="form-group">
 				<div v-if="!image">
-					<h4>Selecciona la imatge de portada del recurs:</h4>
+					<h4>Selecciona l'imatge de portada del recurs:</h4>
 				</div>
 				<div v-if="image">
 					<img :src="image" />
-					<button @click="removeImageOne">Remove image</button>
+					<button @click="removeImage(1)">Remove image</button>
 				</div>
 				<input name="image" type="file" @change="onFileChange($event,1)">
 			</div>
 			<div class="form-group">
 				<div v-if="!image2">
-					<h4>Selecciona la imatge que hi anirà l'article:</h4>
+					<h4>Selecciona la primera imatge que hi anirà dins de l'article:</h4>
 				</div>
 				<div v-if="image2">
 					<img :src="image2" />
-					<button @click="removeImageTwo">Remove image</button>
+					<button @click="removeImage(2)">Remove image</button>
 				</div>
 				<input name="image2" type="file" @change="onFileChange($event,2)">
+			</div>
+			<div class="form-group">
+				<div v-if="!image3">
+					<h4>Selecciona la segona imatge que hi anirà dins de l'article:</h4>
+				</div>
+				<div v-if="image3">
+					<img :src="image3" />
+					<button @click="removeImage(3)">Remove image</button>
+				</div>
+				<input name="image3" type="file" @change="onFileChange($event,3)">
 			</div>
 			<button class="btn btn-primary" type="submit">Enviar Recurs</button>
 		</form>
@@ -58,10 +72,31 @@
 		data(){
 			return{
 				image:'',
-				image2: ''
+				image2: '',
+				image3: '',
+				listCategories: []
 			}
 		},
+		created(){
+            this.fetchEntities();
+        },
 		methods:{
+			fetchEntities(){
+	            this.$http.get('../api/categories').then(response=>{
+	                var p=[];
+					response.data.categories.forEach(function(c){
+						//console.log(this.listCategories);
+						console.log(c.categoria_id !== 6);
+							if(c.categoria_id !== 6){
+								p.push(c);
+							}
+					});
+
+					this.listCategories = p;
+					console.log(this.listCategories);
+
+	            })
+            },
 			onFileChange(e, imgNum){
 
 				var files = e.target.files || e.dataTransfer.files;
@@ -92,14 +127,28 @@
 					}
 				}
 
-				
+				if(imgNum === 3){
+					reader.onload = (e) => {
+						this.image3 = e.target.result;
+					}
+				}
+
 				reader.readAsDataURL(file);
 			},
-			removeImageOne: function (e){
-				this.image = '';
-			},
-			removeImageTwo: function (e){
-				this.image2 = '';
+			removeImage: function (v){
+
+				if (v === 1) {
+					this.image = '';
+				};
+
+				if (v === 2) {
+					this.image2 = '';
+				};
+
+				if (v === 3) {
+					this.image3 = '';
+				};
+				
 			},
 			submitForm: function(){
 				var form = this.$refs.enviarRecurs;
@@ -108,11 +157,11 @@
 				console.log(form);
 				console.log(formdata);
 
-				// this.$http.post('api/submit', formdata).then((response) =>{
-				// 	this.$router.push({path:'/', query:{alert:'Resource Send'}})
-				// },(response)=>{
-					
-				// });
+				this.$http.post('../api/submit', formdata).then((response) =>{
+					//this.$router.push({path:'/student/home', query:{alert:'User Create'}})
+				},(response)=>{
+					console.log(response);
+				});
 			}
 		}
 	}

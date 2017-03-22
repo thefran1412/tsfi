@@ -41,10 +41,12 @@ Route::post('/admin/recursos/add', 'backend\Recursos@store');
 
 /* CATEGORIES */
 Route::resource('/admin/categories', 'backend\Categories');
-// Route::get('/admin/categories', 'backend\Categories@index');
-// Route::post('/admin/categories', 'backend\Categories@store');
 
-Route::get('/admin/recursos/tags', 'backend\Tags@index');
+/* TAGS */
+Route::resource('/admin/tags', 'backend\Tags');
+
+/* ENTITATS */
+Route::resource('/admin/entitats', 'backend\Entitats');
 
 
 /* ENTIDADES */

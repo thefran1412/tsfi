@@ -265,7 +265,7 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
     transition: transform .5s ease;
 }
 .actions{
-    width: 200px;
+    width: 120px;
 }
 .actions form{
     display: inline-block;

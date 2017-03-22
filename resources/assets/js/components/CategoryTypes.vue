@@ -12,7 +12,7 @@
           name="animate-css"
           mode="in-out"
           enter-active-class="animated fadeInUp">
-          <div class="col-md-4" v-for="r in this.$root.recursos" :key="r.recurs_id">
+          <div class="col-md-4" v-for="(r, key) in this.$root.recursos" :key="r.recurs_id">
             <div class="recurso">
               <div class="recurso-content">
                 <h2>
@@ -44,8 +44,12 @@
               </div>
             </div>
         </div>
-
         </transition-group>
+        <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading" >
+            <span slot="no-more">
+              There is no more Hacker News :(
+            </span>
+        </infinite-loading>
 
         <!-- Acaba recurso -->
       </div>
@@ -54,14 +58,18 @@
 </template>
 
 <script>
+
+import InfiniteLoading from 'vue-infinite-loading';
+import { EventBus } from '../app.js';
+
   export default{
-
     data(){
-
       return{
           loading:false,
-          correctCategory:'',
-          typeUserUrl: this.$route.params.typeuser
+          correctCategory:'asda',
+          recursos:[],
+          typeUserUrl: this.$route.params.typeuser,
+          typeCategory:this.$route.params.category
         }
 
     },
@@ -69,15 +77,20 @@
       
     },
     mounted(){
-  
+
     },
     methods:{
+        onInfinite(){
+          this.$parent.onInfinite(this.$route.params.typeuser, this.$route.params.category);
+        },
         getCategory: function(value){
-          console.log('hola');
 
           var cap = value.charAt(0).toUpperCase() + value.slice(1);
           this.$root.category = { codiCategoria: cap, nomCategoria: value };
         }
+      },
+    components: {
+            InfiniteLoading
     },
     computed:{
       getSearchTitle(){

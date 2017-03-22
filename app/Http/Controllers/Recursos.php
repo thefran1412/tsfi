@@ -17,7 +17,7 @@ class Recursos extends Controller
                     $query->where('codiTarget','=', $typeuser);
             })->whereHas('category', function ($query) use ($category) {
                     $query->where('nomCategoria','LIKE', $category);
-            })->get();
+            })->paginate(20)->items();
 
         return response()->json([
                 'resources' => $resources

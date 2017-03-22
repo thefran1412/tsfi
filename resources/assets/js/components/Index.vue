@@ -20,7 +20,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4" >
-                            <multiselect v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
+                            <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                         </div>
                         <div class="col-md-4">
                             <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="nomEntitat" track-by="nomEntitat"  :allow-empty="false"></multiselect>
@@ -83,14 +83,11 @@
 <script>
 
     import Multiselect from 'vue-multiselect';
+    import InfiniteLoading from 'vue-infinite-loading';
+    import { EventBus } from '../app.js';
+
 
     export default{
-        components: {
-            Multiselect
-        },
-        props:{
-            
-          },
         data(){
             return{
                 type:'',
@@ -100,28 +97,37 @@
                 recursos:[],
                 category: { codiCategoria: 'Totes les Categories', nomCategoria: 'home' },
                 categories: [],
-                entities: []
+                entities: [],
+                prueba:null,
+                typeUserUrl: this.$route.params.typeuser,
+                typeCategory:this.$route.params.category,
+                page:1
             }
         },
         created(){
             this.whatUserPage(this.$route.params.typeuser);
             this.fetchCategories();
             this.fetchEntities();
+            //this.onInfinite(this.$route.params.typeuser, this.$route.params.category);
             this.correctSelectCategory(this.$route.params.category);
-            this.fetchResource(this.$route.params.typeuser, this.$route.params.category);
+            //this.fetchResource(this.$route.params.typeuser, this.$route.params.category);
         },
         mounted(){
             this.typeUser();
+
         },
         methods:{
             typeUser(value){
 
                 var typeUser = localStorage.getItem("typeUser");
 
-                if(value){
-                    this.recursos = [];
-                    this.category = { codiCategoria:value , nomCategoria: 'enviar-recurs' };
-                }
+                // if(value){
+                //     this.recursos = [];
+                //     this.$nextTick(() => {
+                //         this.prueba.$emit('$InfiniteLoading:reset');
+                //     });
+                //     this.category = { codiCategoria:value , nomCategoria: 'enviar-recurs' };
+                // }
 
                 if(typeUser === 'student'){
                     this.type = 'student';
@@ -135,8 +141,6 @@
                 var typeNum = localStorage.getItem("numType");
 
                 this.search = '';
-
-                console.log(value);
 
                 if(localStorage.length === 2 && Number(typeNum) === 0){
 
@@ -161,12 +165,23 @@
 
                 localStorage.setItem("typeUser", typeUser);
 
+                var typeActUser = localStorage.getItem("typeUser");
+
+
                 localStorage.removeItem("numType");
 
                 localStorage.setItem("numType", 0);
 
-                this.$router.push('/'+typeUser+'/home');
-                this.fetchResource(typeUser, 'home');
+                
+
+                this.recursos = [];
+                this.$nextTick(() => {
+                    this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                    this.page = 1;
+                    this.$router.push('/'+typeUser+'/home');
+                    //this.onInfinite(this.$route.params.typeuser, this.$route.params.category);
+                });
+
                 this.typeUser();
                 this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
 
@@ -185,7 +200,6 @@
             fetchEntities(){
                 this.$http.get('../api/entitats').then(response=>{
                     this.entities = response.data.entities;
-                    console.log(this.entities);
                 })
             },
             fetchCategories(){
@@ -194,24 +208,62 @@
                 })
             },
             fetchResource(typeUser, category){
-                this.$http.get('../api/typeuser/'+typeUser+'/'+category).then(response=>{
+                this.$http.get('../api/typeuser/'+this.type+'/'+category).then(response=>{
                     this.recursos = response.data.resources;
                     this.search = '';
                     this.loading = true;
                 });
               },
+             onInfinite(typeUser, typeCategory) {
+
+                    console.log('hola');
+                  var route = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
+
+
+                  this.$http.get(route , {
+
+                  }).then((res) => {
+                    if (res.data.resources.length ) {
+                      this.recursos = this.recursos.concat(res.data.resources);
+                          this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                          if (this.recursos.length / 20 === 10) {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                          }
+                          this.page++;
+                    } else {
+                      this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                    }
+
+                  });
+                },
+                dispatchAction(v){
+                    this.recursos = [];
+                    if(v.nomCategoria !== 'enviar-recurs'){
+                        var typeUser = localStorage.getItem("typeUser");
+                        
+                        
+                        this.$nextTick(() => {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                            this.page = 1;
+                            this.$router.push('/'+typeUser + '/' + v.nomCategoria)
+                            //this.onInfinite(typeUser, v.nomCategoria);
+                        });
+                        // console.log('index', 'hola');
+                        // this.$emit('test');
+                    }
+                }
         },
         watch: {
-          'category': function(v) {
+          category: function(v) {
 
-            if(v.nomCategoria !== 'enviar-recurs'){
-                var typeUser = localStorage.getItem("typeUser");
-                this.$router.push('/'+typeUser + '/' + v.nomCategoria)
-                this.fetchResource(this.$route.params.typeuser, v.nomCategoria);
-            }
+            
 
            }
-       }
+       },
+       components: {
+            Multiselect,
+            InfiniteLoading
+        },
     }
 
 </script>

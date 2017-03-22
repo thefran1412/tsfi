@@ -26,7 +26,7 @@
 
         {{-- ROUTE --}}
         <div class="headerRoute">
-            <h2>@yield('titol')</h2>
+            <h2><a href="{{ action('backend\Backend@index') }}"><i class="fa fa-home"></i></a>@yield('titol')</h2>
         </div>
 
         {{-- ACTIONS --}}

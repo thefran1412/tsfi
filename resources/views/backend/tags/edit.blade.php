@@ -1,6 +1,11 @@
 @extends('layouts.backend')
 
-@section('titol', 'Editar categories')
+@section('titol')
+  <i class="fa fa-angle-right"></i>
+  <a href="{{ action('backend\Tags@index') }}">Tags</a>
+  <i class="fa fa-angle-right"></i>
+  <a href="{{ action('backend\Tags@edit', ['id' => $tag->tags_id]) }}">Editar</a>
+@endsection
 
 @section('css')
      <link rel="stylesheet" href="{{ URL::asset('/css/backend/datatables.css') }}">

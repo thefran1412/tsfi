@@ -8,11 +8,9 @@ use Carbon\Carbon;
 class Recursos extends Controller
 {
     public function index(Request $request, $typeuser, $category) {
-
         if($category === 'home'){
             $category = '%';
         }
-
         $resources = Resource::with('category','targets','entity')->
             whereHas('targets', function ($query) use ($typeuser) {
                     $query->where('codiTarget','=', $typeuser);
@@ -22,7 +20,6 @@ class Recursos extends Controller
         return response()->json([
                 'resources' => $resources
             ]);
-        
     }
     public function getResource(Request $request, $id) {
         $resource = Resource::with('category',

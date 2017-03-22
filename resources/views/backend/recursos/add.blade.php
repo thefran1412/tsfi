@@ -6,7 +6,12 @@
     <link href="{{ URL::asset('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css') }}" rel="stylesheet">
 @endsection
 
-@section('titol', 'Afegir Recurs')
+@section('titol')
+  <i class="fa fa-angle-right"></i>
+  <a href="{{ action('backend\Recursos@index') }}">Recursos</a>
+  <i class="fa fa-angle-right"></i>
+  <a href="{{ action('backend\Recursos@add') }}">Afegir</a>
+@endsection
 
 @section('content')
     

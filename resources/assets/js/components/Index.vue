@@ -48,8 +48,6 @@
                                 <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                             </div>   
                         </div>
-
-          
                     <div class="col-md-3">
                         <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="codiCategoria" track-by="codiCategoria"  :allow-empty="false"></multiselect>
                     </div>
@@ -127,7 +125,6 @@
 <script>
 
     import Multiselect from 'vue-multiselect';
-    import InfiniteLoading from 'vue-infinite-loading';
     import { EventBus } from '../app.js';
 
 
@@ -145,8 +142,7 @@
                 prueba:null,
                 typeUserUrl: this.$route.params.typeuser,
                 typeCategory:this.$route.params.category,
-                page:1,
-                route:null,
+                page:1
             }
         },
         created(){
@@ -219,31 +215,19 @@
 
                 this.typeUser();
 
-                
-
                 this.recursos = [];
                 this.$nextTick(() => {
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
                     this.$router.push('/'+typeUser+'/home');
-                    var URLactual = window.location.hash;
-                    console.log(URLactual);
-                    var cont = 0;
-                    var pr;
-                    if(URLactual.indexOf(typeUser)>0 && cont===0){
-                        pr = true;
-                        cont++;
-                    }
 
-                    if(pr){
-                        this.onInfinite(typeActUser, 'home');
-                    }
-                    
+                    $("html, body").animate({ scrollTop: 20 }, "slow");
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
                     
                 });
 
                 
-                //this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
+                this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
 
             },
             correctSelectCategory(routeParam){
@@ -276,55 +260,43 @@
               },
              onInfinite(typeUser, typeCategory) {
 
-                  console.log(this.route);
+                  var route = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
 
-                  var nroute = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
-
-                  if(this.route !== nroute){
-
-                    this.route = nroute;
-
-                          this.$http.get(this.route , {
-
-                          }).then((res) => {
-                            if (res.data.resources.length ) {
-                              this.recursos = this.recursos.concat(res.data.resources);
-                                  this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
-                                  if (this.recursos.length / 20 === 10) {
-                                    this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
-                                  }
-                                  this.page++;
-                            } else {
-                              this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
-                            }
-
-                          });
-                    }else{
-                        console.log('errorconsole.log(this.route);');
+                  this.$http.get( route , {
+                        // params: {
+                        //   category: this.category.nomCategoria,
+                        // },
+                  }).then((res) => {
+                    if (res.data.resources.length ) {
+                      this.recursos = this.recursos.concat(res.data.resources);
+                          this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                          if (this.recursos.length / 20 === 10) {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                          }
+                          this.page++;
+                    } else {
+                      this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
                     }
+
+                  });
                 },
                 dispatchAction(v){
-                    console.log(v);
+
                     this.recursos = [];
-                    if(v.nomCategoria !== 'enviar-recurs'){
-                        var typeUser = localStorage.getItem("typeUser");
-                        
+                    var typeUser = localStorage.getItem("typeUser");
+                    this.$router.push('/'+typeUser + '/' + v.nomCategoria);
+                    // if(v.nomCategoria !== 'enviar-recurs'){}
                         this.$nextTick(() => {
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                             this.page = 1;
-                            if(v.nomCategoria !== 'home'){
-                                //this.onInfinite(typeUser, v.nomCategoria);
-                            }
-                            this.$router.push('/'+typeUser + '/' + v.nomCategoria)
                         });
-                        // console.log('index', 'hola');
-                        // this.$emit('test');
-                    }
+
+                       $("html, body").animate({ scrollTop: 20 }, "slow");
+                       $("html, body").animate({ scrollTop: 0 }, "slow");
                 }
         },
        components: {
-            Multiselect,
-            InfiniteLoading
+            Multiselect
         },
     }
 

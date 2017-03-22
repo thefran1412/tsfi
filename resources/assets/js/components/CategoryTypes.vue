@@ -1,5 +1,7 @@
 <template>
 <div class="content-bottom-header">
+      <span class="resource-not-found" v-if="!this.$root.recursos.length === 0" >No em trobat el recurs...</span>
+      <!-- <div class="prueba" v-if="this.$root.recursos.length === 0" ></div> -->
       <div class="row squares-resources">
         <transition
               name="animate"
@@ -57,6 +59,15 @@
     </div>
   </div>
 </template>
+<style type="text/css">
+  
+  .prueba{
+    height: 200px;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: red;
+  }
+</style>
 
 <script>
 

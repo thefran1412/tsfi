@@ -30,6 +30,7 @@
                       {{r.dataPublicacio}}
                     </div>
                     <div class="categoria">
+                      <i class="fa fa-archive" aria-hidden="true"></i>
                       <a v-on:click="getCategory(r.category[0].nomCategoria)" v-bind:href="'#/'+typeUserUrl+'/'+r.category[0].nomCategoria">
                         {{r.category[0].nomCategoria}}
                       </a>

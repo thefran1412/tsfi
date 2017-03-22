@@ -1,8 +1,13 @@
 @extends('layouts.backend')
 
-@section('content')
+@section('titol')
+  <i class="fa fa-angle-right"></i>
+  <a href="{{ action('backend\Recursos@index') }}">Recursos</a>
+  <i class="fa fa-angle-right"></i>
+  <a href="{{ action('backend\Recursos@edit', ['id' => $recurs->recurs_id]) }}">Editar</a>
+@endsection
 
-<h1>{{$recurs->titolRecurs}}</h1>
+@section('content')
 
 {!!Form::model($recurs, ['action'=> ['backend\Recursos@update', $recurs->recurs_id], 'method' =>'PUT'])!!}
     <div>

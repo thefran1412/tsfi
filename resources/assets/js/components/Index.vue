@@ -2,7 +2,8 @@
     <div id="appVue">
         <header>
             <div class="header-top-item header-search-container">
-                <span>TSFI</span>
+
+               <!--  <span>TSFI</span>
                 <form class="site-search" >
                       <div id="site-search-container">
                         <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
@@ -31,20 +32,63 @@
                                     <span>Enviar</span>
                                     <span>Recurs</span>
                                 </router-link>
-                            </li>
+                            </li> -->
+
+                <div class="row">
+                    <div class="col-md-1" >
+                        <li v-on:click="changeTypeUser('teacher')" v-if="type === 'teacher'">
+                                <span class="title">TSFI</span>
+                        </li>
+                        <li  v-on:click="changeTypeUser('student')" v-if="type === 'student'">
+                                <span class="title">TSFI</span>
+                        </li>
                         </div>
-                        <div class="col-md-2 user-type">
-                            <li v-on:click="changeTypeUser('teacher')" v-if="type === 'student'">
-                                <span>Estudiants i</span>
-                                <span>Pares</span>
-                            </li>
-                            <li  v-on:click="changeTypeUser('student')" v-if="type === 'teacher'">
-                                <span>Orientadors i</span>
-                                <span>Professors</span>
-                            </li>
+                        <div class="col-md-3">
+                            <div class="selects">
+                                <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
+                            </div>   
                         </div>
+
+          
+                    <div class="col-md-3">
+                        <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="codiCategoria" track-by="codiCategoria"  :allow-empty="false"></multiselect>
                     </div>
-                </div>
+                    <div class="col-md-3">
+                            <form class="site-search" >
+                              <div id="site-search-container">
+                                <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
+                              </div>
+                              <button tabindex="2" type="submit">
+                                <span class="a11y-only">Search</span>
+                                    <svg class="icon-search" viewBox="0 0 34 34" fill="none" stroke="currentColor">
+                                        <ellipse stroke-width="3" cx="16" cy="15" rx="12" ry="12"></ellipse>
+                                        <path d="M26 26 l 8 8" stroke-width="3" stroke-linecap="square"></path>
+                                    </svg>
+                             </button>
+                            </form>
+                    </div>
+                    <div class="col-md-2 user-type">
+                        <li v-on:click="typeUser('Envians un recurs')">
+                            <router-link :to="{name: 'enviar-recurs'}">
+                                <i class="fa fa-paper-plane-o" aria-hidden="true" title="Enviar recurs"></i>
+                            </router-link>
+                        </li>
+                        <li v-on:click="changeTypeUser('teacher')" v-if="type === 'student'">
+                                <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
+                        </li>
+                        <li  v-on:click="changeTypeUser('student')" v-if="type === 'teacher'">
+                                <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
+                        </li>
+                    </div>
+                </div>   
+                <span class="profile">
+                    <li v-if="type === 'student'">
+                        Estudiants i Pares
+                    </li>
+                    <li v-if="type === 'teacher'">
+                        Orientadors i Professors  
+                    </li>
+                </span>
             </div>
         </header>
         <div class="container">

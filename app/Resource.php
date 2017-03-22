@@ -6,8 +6,31 @@ class Resource extends Model
     protected $table = 'recursos';
     protected $primaryKey = 'recurs_id';
     public $timestamps = false;
-    protected $fillable = [
-    'recurs_id', 'titolRecurs', 'subTitol', 'descBreu', 'descDetaill1', 'descDetaill2', 'relevancia', 'dataInici', 'dataFinal', 'gratuit', 'preuInferior', 'preuSuperior', 'dataPublicacio', 'visible', 'fotoResum', 'creatPer', 'idLocalitzacio'];
+    protected $fillable = ['recurs_id',
+                            'titolRecurs',
+                            'subTitol',
+                            'descBreu',
+                            'descDetaill1',
+                            'descDetaill2',
+                            'relevancia',
+                            'dataInici',
+                            'dataFinal',
+                            'gratuit',
+                            'preuInferior',
+                            'preuSuperior',
+                            'dataPublicacio',
+                            'visible',
+                            'fotoResum',
+                            'creatPer',
+                            'idLocalitzacio'];
+
+    protected $dates = ['created_at',
+                            'updated_at',
+                            'deleted_at',
+                            'dataInici',
+                            'dataFinal',
+                            'dataPublicacio'];
+
     // Funciones (Relaciones)
     public function category(){ // OK
         return $this->belongsToMany('App\Category','categoria_recurs','idRecurs','idCategoria');

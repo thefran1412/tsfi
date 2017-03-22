@@ -45,7 +45,7 @@ fieldset[disabled] .multiselect {
 .multiselect,
 .multiselect__input,
 .multiselect__single {
-  font-family: inherit;
+  font-family: "Raleway", sans-serif;
   font-size: 14px;
   -ms-touch-action: manipulation;
       touch-action: manipulation;
@@ -55,12 +55,13 @@ fieldset[disabled] .multiselect {
   display: block;
   position: relative;
   width: 100%;
-  min-height: 40px;
+  min-height: 3.125em;
   text-align: left;
   color: #35495E;
 }
 .multiselect * {
   box-sizing: border-box;
+  font-size: 12px;
 }
 .multiselect:focus {
   outline: none;
@@ -86,9 +87,9 @@ fieldset[disabled] .multiselect {
   position: relative;
   display: inline-block;
   min-height: 20px;
-  line-height: 20px;
+  line-height: 25px;
   border: none;
-  background-color: #4FC08D;
+  background-color: #333333;
   color: #fff;
   /*border-radius: 5px;*/
   padding: 1px 0 0 5px;
@@ -115,12 +116,12 @@ fieldset[disabled] .multiselect {
   margin-bottom: 8px;
 }
 .multiselect__tags {
-  min-height: 40px;
+  min-height: 3.125em;
   display: block;
   padding: 8px 40px 0 8px;
   /*border-radius: 5px;*/
-  border: 1px solid #E8E8E8;
-  background-color: #4FC08D;
+  border: 1px solid rgba(255,255,255,0.2);
+/*  background-color: #4FC08D;*/
   cursor: pointer;
 }
 .multiselect__tag {

@@ -1,6 +1,9 @@
 @extends('layouts.backend')
 
-@section('titol', 'Tags')
+@section('titol')
+  <i class="fa fa-angle-right"></i>
+  <a href="{{ action('backend\Tags@index') }}">Tags</a>
+@endsection
 
 @section('css')
      <link rel="stylesheet" href="{{ URL::asset('/css/backend/datatables.css') }}">

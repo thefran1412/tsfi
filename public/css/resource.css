@@ -13,7 +13,7 @@ body {
 .resource-body h1{
   padding:  10px;
   background: #4FC08D;
-  /*color: #333333;*/
+  color: #333333;
   font-weight: bold;
 }
 
@@ -43,7 +43,32 @@ body {
   border-bottom-width: 2px;
 }
 
+.socialMedia i{
+ /*margin-left: 17%;*/
+  color: #333333;
+}
+
+.socialMedia i:hover{
+    color: #4FC08D;
+    transition: color .5s ease-in-out;
+}
+
 .resource-extras p {
+  padding: 10px;
+  text-align: left;
+  /*background: #4FC08D;*/
+  /*border-radius: 5px;*/
+  /*color: #333333;*/
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.resource-extras-tag p {
   padding: 10px;
   text-align: center;
   background: #4FC08D;
@@ -71,12 +96,18 @@ body {
   .resource-extras p {
     width: 46.5%;
   }
+  .socialMedia i{
+    margin-left: 17%;
+  }
 }
 
 /* Landscape tablets and medium desktops */
 @media (min-width: 992px) and (max-width: 1199px) {
   .resource-extras p {
     width: 45.5%;
+  }
+  .socialMedia i{
+    margin-left: 17%;
   }
 }
 
@@ -85,6 +116,9 @@ body {
   .resource-extras p {
     width: 96%;
   }
+  .socialMedia i{
+    margin-left: 12%;
+  }
 }
 
 /* Landscape phones and portrait tablets */
@@ -92,12 +126,18 @@ body {
   .resource-extras p {
     width: 47%;
   }
+  .socialMedia i{
+    margin-left: 19%;
+  }
 }
 
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
   .resource-extras p {
     width: 46.5%;
+  }
+  .socialMedia i{
+    margin-left: 17%;
   }
 }
 

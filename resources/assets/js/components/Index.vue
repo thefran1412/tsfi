@@ -92,9 +92,8 @@
 </template>
 
 <script>
-
     import Multiselect from 'vue-multiselect';
-
+    import { EventBus } from '../app.js';
 
     export default{
         data(){
@@ -123,13 +122,10 @@
         },
         mounted(){
             this.typeUser();
-
         },
         methods:{
             typeUser(value){
-
                 var typeUser = localStorage.getItem("typeUser");
-
                 // if(value){
                 //     this.recursos = [];
                 //     this.$nextTick(() => {
@@ -137,7 +133,6 @@
                 //     });
                 //     this.category = { codiCategoria:value , nomCategoria: 'enviar-recurs' };
                 // }
-
                 if(typeUser === 'student'){
                     this.type = 'student';
                 }
@@ -146,19 +141,12 @@
                 }
             },
             whatUserPage(value){
-
                 var typeNum = localStorage.getItem("numType");
-
                 this.search = '';
-
                 if(localStorage.length >= 2 && Number(typeNum) === 0){
-
                     var typeUser = localStorage.getItem("typeUser");
-
                     localStorage.removeItem("numType");
-
                     localStorage.setItem("numType", 1);
-
                     if(typeUser === 'student'){
                         this.$router.push('/student/home')
                     }else{
@@ -167,48 +155,35 @@
                 }
             },
             changeTypeUser: function (typeUser){
-
                 this.search = '';
-
                 localStorage.removeItem("typeUser");
-
                 localStorage.setItem("typeUser", typeUser);
-
                 var typeActUser = localStorage.getItem("typeUser");
-
-
                 localStorage.removeItem("numType");
-
                 localStorage.setItem("numType", 0);
                 
                 this.$router.push('/'+typeUser+'/home');
 
                 this.typeUser();
-
                 this.recursos = [];
                 this.$nextTick(() => {
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
 
-                    $("html, body").animate({ scrollTop: 20 }, "slow");
-                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    this.animationScroll();
                     
                 });
-
                 
                 this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
-
             },
             correctSelectCategory(routeParam){
                 if(routeParam !== 'home' && routeParam !== undefined){
                     var cap = routeParam.charAt(0).toUpperCase() + routeParam.slice(1);
                     this.category = { codiCategoria: cap, nomCategoria: routeParam };
                 }
-
                 if(routeParam !== undefined){
                     this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
                 }
-
             },
             fetchEntities(){
                 this.$http.get('../api/entitats').then(response=>{
@@ -228,9 +203,7 @@
                 });
               },
              onInfinite(typeUser, typeCategory) {
-
                   var route = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
-
                   this.$http.get( route , {
                         // params: {
                         //   category: this.category.nomCategoria,
@@ -246,11 +219,9 @@
                     } else {
                       this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
                     }
-
                   });
                 },
                 dispatchAction(v){
-
                     this.recursos = [];
                     var typeUser = localStorage.getItem("typeUser");
                     this.$router.push('/'+typeUser + '/' + v.nomCategoria);
@@ -260,13 +231,15 @@
                             this.page = 1;
                         });
 
-                       $("html, body").animate({ scrollTop: 20 }, "slow");
-                       $("html, body").animate({ scrollTop: 0 }, "slow");
+                       this.animationScroll();
+                },
+                animationScroll(){
+                    $("html, body").animate({ scrollTop: 20 }, "slow");
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
                 }
         },
        components: {
             Multiselect
         },
     }
-
 </script>

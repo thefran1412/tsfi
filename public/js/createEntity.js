@@ -1,4 +1,4 @@
-$("#create").submit(function(e){
+/*$("#create").submit(function(e){
   e.preventDefault();
   if(valid()){
     console.log('form is good to go!');
@@ -7,7 +7,7 @@ $("#create").submit(function(e){
     console.log('There is somme error');
   }
 }); 
-
+*/
 
 
 

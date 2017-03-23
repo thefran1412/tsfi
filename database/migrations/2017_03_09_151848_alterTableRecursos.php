@@ -17,22 +17,21 @@ class alterTableRecursos extends Migration
 //        Schema::table('recursos', function(Blueprint $table) {
 //            $table->string('descBreu')->nullable(true);
 //        });
-
-        DB::statement('ALTER TABLE recursos MODIFY subTitol varchar(250) NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY descBreu varchar(500) NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY descDetaill1 varchar(255) NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY descDetaill2 varchar(255) NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY subTitol VARCHAR(250) NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY descBreu MEDIUMTEXT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY descDetaill1 LONGTEXT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY descDetaill2 LONGTEXT NULL;');
         DB::statement('ALTER TABLE recursos MODIFY relevancia int(11) NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY dataInici date NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY DdtaFinal date NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY Gratuit tinyint(1) NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY preuInferior double(15,2)	 NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY preuSuperior double(15,2) NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY dataPublicacio datetime NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY visible tinyint(1) NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY fotoResum varchar(255) NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY creatPer varchar(255) NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY idLocalitzacio int(11) NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY dataInici DATE NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY dataFinal DATE NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY Gratuit TINYINT(1) NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY preuInferior DOUBLE(15,2)	 NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY preuSuperior DOUBLE(15,2) NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY dataPublicacio DATETIME NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY visible TINYINT(1) NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY fotoResum VARCHAR(255) NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY creatPer VARCHAR(255) NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY idLocalitzacio INT(11) NULL;');
     }
 
     /**
@@ -42,21 +41,21 @@ class alterTableRecursos extends Migration
      */
     public function down()
     {
-        DB::statement('ALTER TABLE recursos MODIFY subTitol varchar(250) NOT NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY descBreu varchar(500) NOT NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY descDetaill1 varchar(255) NOT  NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY descDetaill2 varchar(255) NOT  NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY relevancia int(11) NOT  NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY dataInici date NOT  NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY DdtaFinal date  NOT NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY Gratuit tinyint(1) NOT NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY preuInferior double(15,2) NOT  NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY preuSuperior double(15,2) NOT NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY dataPublicacio datetime NOT  NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY visible tinyint(1) NOT NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY fotoResum varchar(255) NOT NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY creatPer varchar(255) NOT NULL;');
-        DB::statement('ALTER TABLE recursos MODIFY idLocalitzacio int(11) NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY subTitol VARCHAR(250) NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY descBreu MEDIUMTEXT NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY descDetaill1 LONGTEXT NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY descDetaill2 LONGTEXT NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY relevancia int(11) NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY dataInici DATE NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY dataFinal DATE NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY Gratuit TINYINT(1) NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY preuInferior DOUBLE(15,2)	 NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY preuSuperior DOUBLE(15,2) NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY dataPublicacio DATETIME NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY visible TINYINT(1) NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY fotoResum VARCHAR(255) NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY creatPer VARCHAR(255) NOT NULL;');
+        DB::statement('ALTER TABLE recursos MODIFY idLocalitzacio INT(11) NOT NULL;');
 
     }
 }

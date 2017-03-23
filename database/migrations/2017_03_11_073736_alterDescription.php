@@ -23,6 +23,6 @@ class AlterDescription extends Migration
      */
     public function down()
     {
-        DB::statement('ALTER TABLE recursos MODIFY descDetaill1 TEXT(255) ;');
+        DB::statement('ALTER TABLE recursos MODIFY descDetaill1 TEXT(20844) ;');
     }
 }

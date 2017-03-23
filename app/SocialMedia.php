@@ -10,7 +10,7 @@ class SocialMedia extends Model
     protected $primaryKey = 'social_id';
     protected $fillable = ['social_id', 'instagram', 'facebook', 'twitter', 'idEntitat'];
 
-	public function socialMedia(){
-        return $this->belongsTo('App\Entity','entitat_id');
-    }
+	// public function socialMedia(){
+ //        return $this->belongsTo('App\Entity','entitat_id');
+ //    }
 }

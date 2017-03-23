@@ -6,7 +6,7 @@
 			<div v-if="resource" class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
 				<!--  clearfix visible-xs-block visible-sm-block visible-md-block visible-lg-block -->
 				<h1>{{resource[0].titolRecurs}}</h1>
-				<img class="img-responsive" :src="'/img/image/'+ resource[0].fotoResum" alt="prueba View"> 
+				<img class="img-responsive" :src="'/img/image/'+ resource[0].fotoResum" alt="prueba View">
 				<!-- width="960" height="540" -->
 
 				<h2>{{resource[0].subtitol}}</h2>
@@ -38,7 +38,7 @@
 					<h3>Data de publicació</h3>
 					<p>{{datePub}}</p>
 				</div>
-				<!-- <pre>{{this.socialMedia[0].social_media}}</pre> -->
+				<!-- <pre>{{this.resource[0].entitats}}</pre> -->
 				<div  v-if="socialMedia[0].social_media" class="extras">
 					<h3>Direcció</h3>
 					<p>Calle estroncio 15-21, 3-4</p>
@@ -47,10 +47,10 @@
 						   <i class="fa fa-twitter fa-3x"></i>
 						</a>
 						<a class="socialMedia" :href="'https://www.facebook.com/'+ socialMedia[0].social_media.facebook">
-						  <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
+						  <i class="fa fa-facebook fa-3x"></i>
 						</a>
 						<a class="socialMedia" :href="'https://www.instagram.com/'+ socialMedia[0].social_media.instagram">
-						  <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
+						  <i class="fa fa-instagram fa-3x"></i>
 						</a>
 				</div>
 
@@ -68,7 +68,6 @@
 			return{
 				image:'',
 				resource:null,
-				socialMedia:null,
 				dateIni:null,
 				dateEnd:null,
 				datePub:null
@@ -81,16 +80,14 @@
 			fetchResource: function(id){
 				this.$http.get('../api/recursos/'+id).then(function(response){
 					this.resource = response.data.resource;
-					this.socialMedia = response.data.socialMedia;
 					this.dateIni = response.data.dateIni;
 					this.dateEnd = response.data.dateEnd;
 					this.datePub = response.data.datePub;
-					//console.log(this.resource);
-					console.log(this.socialMedia);
-					// console.log(this.recurso);
-					// console.log(this.dateIni);
-					// console.log(this.dateEnd);
-					// console.log(this.datePub);
+					console.log(this.resource);
+					console.log(this.recurso);
+					console.log(this.dateIni);
+					console.log(this.dateEnd);
+					console.log(this.datePub);
 				});
 			}
 		}

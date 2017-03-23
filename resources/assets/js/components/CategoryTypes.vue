@@ -60,7 +60,6 @@
 <script>
 
 import InfiniteLoading from 'vue-infinite-loading';
-import { EventBus } from '../app.js';
 
   export default{
     data(){

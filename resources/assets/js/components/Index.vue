@@ -94,7 +94,7 @@
 <script>
     import Multiselect from 'vue-multiselect';
     import { EventBus } from '../app.js';
-
+    
     export default{
         data(){
             return{

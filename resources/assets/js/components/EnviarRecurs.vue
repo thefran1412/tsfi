@@ -1,5 +1,5 @@
 <template>
-	<div class="content-bottom-header container">
+	<div class="content-bottom-header container content-send-resource">
 		<h1>Enviar Recurs</h1>
 		<form @submit.prevent="submitForm" ref="enviarRecurs" method="post" enctype="multipart/form-data">
 			<div class="form-group">
@@ -10,18 +10,24 @@
 				<label for="subTitol">Subtítol:</label>
 				<input class="form-control title" type="text" id="subTitol" name="subTitol" placeholder="Subtítol" required>
 			</div>
-			<div class="form-group">
-				<label for="categoria">Escull una categoria:</label>
-				<select v-if="listCategories" class="form-control selectpicker" type="text" id="categoria" name="categoria">
-				  <option v-for="ls in listCategories" :value="ls.categoria_id">{{ls.codiCategoria}}</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label for="target">Aquí va dirigit:</label>
-				<select class="form-control selectpicker" type="text" id="target" name="target">
-				  <option>Estudiants</option>
-				  <option>Professors</option>
-				</select>
+			<div class="row">
+				<div class="col-md-6">
+				<div class="form-group">
+						<label for="categoria">Escull una categoria:</label>
+						<select v-if="listCategories" class="form-control selectpicker" type="text" id="categoria" name="categoria">
+						  <option v-for="ls in listCategories" :value="ls.categoria_id">{{ls.codiCategoria}}</option>
+						</select>
+				</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+							<label for="target">Aquí va dirigit:</label>
+							<select class="form-control selectpicker" type="text" id="target" name="target">
+							  <option>Estudiants</option>
+							  <option>Professors</option>
+							</select>
+					</div>
+				</div>
 			</div>
 			<div class="form-group">
 			  <label for="descBreu" required>Descripció breu:</label>
@@ -31,37 +37,47 @@
 			  <label for="descDetaill1">Descripció:</label>
 			  <textarea class="form-control" type="text" id="descDetaill1" name="descDetaill1"></textarea>
 			</div>
-			<div class="form-group">
-				<div v-if="!image">
-					<h4>Selecciona l'imatge de portada del recurs:</h4>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<div v-if="!image">
+							<h4>Selecciona l'imatge de portada del recurs:</h4>
+						</div>
+						<div v-if="image">
+							<img :src="image" />
+							<button class="remove-image" @click="removeImage(1)">Eliminar imatge</button>
+						</div>
+						<input name="image" type="file" @change="onFileChange($event,1)">
+					</div>
 				</div>
-				<div v-if="image">
-					<img :src="image" />
-					<button @click="removeImage(1)">Remove image</button>
+				<div class="col-md-4">
+					<div class="form-group">
+						<div v-if="!image2">
+							<h4>Selecciona la primera imatge que hi anirà dins de l'article:</h4>
+						</div>
+						<div v-if="image2">
+							<img :src="image2" />
+							<button class="remove-image" @click="removeImage(2)">Eliminar imatge</button>
+						</div>
+						<input name="image2" type="file" @change="onFileChange($event,2)">
+					</div>
 				</div>
-				<input name="image" type="file" @change="onFileChange($event,1)">
+				<div class="col-md-4">
+					<div class="form-group">
+						<div v-if="!image3">
+							<h4>Selecciona la segona imatge que hi anirà dins de l'article:</h4>
+						</div>
+						<div v-if="image3">
+							<img :src="image3" />
+							<button class="remove-image" @click="removeImage(3)">Eliminar imatge</button>
+						</div>
+						<input name="image3" type="file" @change="onFileChange($event,3)">
+					</div>
+				<div></div>
 			</div>
-			<div class="form-group">
-				<div v-if="!image2">
-					<h4>Selecciona la primera imatge que hi anirà dins de l'article:</h4>
-				</div>
-				<div v-if="image2">
-					<img :src="image2" />
-					<button @click="removeImage(2)">Remove image</button>
-				</div>
-				<input name="image2" type="file" @change="onFileChange($event,2)">
-			</div>
-			<div class="form-group">
-				<div v-if="!image3">
-					<h4>Selecciona la segona imatge que hi anirà dins de l'article:</h4>
-				</div>
-				<div v-if="image3">
-					<img :src="image3" />
-					<button @click="removeImage(3)">Remove image</button>
-				</div>
-				<input name="image3" type="file" @change="onFileChange($event,3)">
-			</div>
-			<button class="btn btn-primary" type="submit">Enviar Recurs</button>
+			<div class="col-md-12 button-send">
+				<button class="btn btn-primary" type="submit">Enviar Recurs</button>
+			</div>	
 		</form>
 	</div>
 </template>
@@ -102,7 +118,7 @@
 				var files = e.target.files || e.dataTransfer.files;
 
 				if(files.length===1){
-					if(files[0].type === 'image/png' || files[0].type === 'image/jpg'){
+					if(files[0].type === 'image/png' || files[0].type === 'image/jpeg'){
 							return this.createImage(files[0], imgNum);
 					}else{
 						alert("L'arxiu a de ser .jpg o .png");

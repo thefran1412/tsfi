@@ -28,7 +28,7 @@
                   </div>
                   <div>
                     {!!Form::label('link', 'Enllaç pàgina web: ')!!}
-                    {!!Form::text('link', null, ['class' => 'form-control', 'placeholder' => 'Enllaç a la pàgina web'])!!}
+                    {!!Form::text('link', null, ['class' => 'form-control', 'placeholder' => 'Enllaç a la pàgina web', 'id' => 'url'])!!}
                   </div>
                   <div>
                     {!!Form::label('esMembre', 'És membre: ')!!}
@@ -38,11 +38,11 @@
               <div class="paper">
                   <div>
                     {!!Form::label('telf1', 'Telèfon 1: ')!!}
-                    {!!Form::number('telf1', null, ['class' => 'form-control', 'placeholder' => 'Telefon de la entitat 1'])!!}
+                    {!!Form::number('telf1', null, ['class' => 'form-control', 'placeholder' => 'Telefon de la entitat 1', 'id' => 'phone'])!!}
                   </div>
                   <div>
                     {!!Form::label('telf2', 'Telèfon 2: ')!!}
-                    {!!Form::number('telf2', null, ['class' => 'form-control', 'placeholder' => 'Telefon de la entitat 2'])!!}
+                    {!!Form::number('telf2', null, ['class' => 'form-control', 'placeholder' => 'Telefon de la entitat 2', 'id' => 'phone'])!!}
                   </div>
                 </div>
                 <div class="paper">

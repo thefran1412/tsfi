@@ -3,37 +3,6 @@
         <header>
             <div class="header-top-item header-search-container">
 
-               <!--  <span>TSFI</span>
-                <form class="site-search" >
-                      <div id="site-search-container">
-                        <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
-                      </div>
-                      <button tabindex="2" type="submit">
-                        <span class="a11y-only">Search</span>
-                            <svg class="icon-search" viewBox="0 0 34 34" fill="none" stroke="currentColor">
-                                <ellipse stroke-width="3" cx="16" cy="15" rx="12" ry="12"></ellipse>
-                                <path d="M26 26 l 8 8" stroke-width="3" stroke-linecap="square"></path>
-                            </svg>
-                     </button>
-                </form>
-            </div>
-            <div class="footer-menu">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4" >
-                            <multiselect @select="dispatchAction" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" ></multiselect>
-                        </div>
-                        <div class="col-md-4">
-                            <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="nomEntitat" track-by="nomEntitat"  :allow-empty="false"></multiselect>
-                        </div>
-                        <div class="col-md-2 user-type">
-                            <li v-on:click="typeUser('Envians un recurs')" >
-                                <router-link :to="{name: 'enviar-recurs'}">
-                                    <span>Enviar</span>
-                                    <span>Recurs</span>
-                                </router-link>
-                            </li> -->
-
                 <div class="row">
                     <div class="col-md-1" >
                         <li v-on:click="changeTypeUser('teacher')" v-if="type === 'teacher'">
@@ -212,6 +181,8 @@
                 localStorage.removeItem("numType");
 
                 localStorage.setItem("numType", 0);
+                
+                this.$router.push('/'+typeUser+'/home');
 
                 this.typeUser();
 
@@ -219,7 +190,6 @@
                 this.$nextTick(() => {
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
-                    this.$router.push('/'+typeUser+'/home');
 
                     $("html, body").animate({ scrollTop: 20 }, "slow");
                     $("html, body").animate({ scrollTop: 0 }, "slow");

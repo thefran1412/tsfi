@@ -46,9 +46,9 @@ class Recursos extends Controller
         // $dateIni = Carbon::now();;
         // $dateEnd = $dateIni;
         // $datePub = $dateIni;
-        $dateIni = $resource[0]->dataInici->format('d-m-Y');
-        $dateEnd = $resource[0]->dataFinal->format('d-m-Y');
-        $datePub = $resource[0]->dataPublicacio->format('d-m-Y');
+        $dateIni = $resource[0]->dataInici->format('d/m/Y');
+        $dateEnd = $resource[0]->dataFinal->format('d/m/Y');
+        $datePub = $resource[0]->dataPublicacio->format('d/m/Y');
     return response()->json([
             'resource'  => $resource,
             'socialMedia' => $socialMedia,

@@ -39,17 +39,17 @@
 					<p>{{datePub}}</p>
 				</div>
 				<!-- <pre>{{this.resource[0].entitats}}</pre> -->
-				<div  v-if="socialMedia[0].social_media" class="extras">
+				<div  v-if="resource[0].entitats !== 0" class="extras">
 					<h3>Direcció</h3>
 					<p>Calle estroncio 15-21, 3-4</p>
 					<h3>Xarxes Socials</h3>
-						<a class="socialMedia" :href="'https://twitter.com/'+ socialMedia[0].social_media.twitter">
+						<a class="socialMedia" :href="'https://twitter.com/'+ resource[0].entitats.twitter">
 						   <i class="fa fa-twitter fa-3x"></i>
 						</a>
-						<a class="socialMedia" :href="'https://www.facebook.com/'+ socialMedia[0].social_media.facebook">
+						<a class="socialMedia" :href="'https://www.facebook.com/'+ resource[0].entitats.facebook">
 						  <i class="fa fa-facebook fa-3x"></i>
 						</a>
-						<a class="socialMedia" :href="'https://www.instagram.com/'+ socialMedia[0].social_media.instagram">
+						<a class="socialMedia" :href="'https://www.instagram.com/'+ resource[0].entitats.instagram">
 						  <i class="fa fa-instagram fa-3x"></i>
 						</a>
 				</div>

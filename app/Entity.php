@@ -12,7 +12,7 @@ class Entity extends Model
     protected $fillable = ['entitat_id', 'nomEntitat', 'adreca', 'telf1', 'telf2', 'link', 'logo', 'descRecurs', 'esMembre', 'idLocalitzacio', 'facebook', 'twitter', 'idEntitat'];
 
     public function resource(){
-        return $this->belongsToMany('App\Resource','entitat_recurs','idEntitat','idRecurs');
+        return $this->hasMany('App\Resource','entitat_recurs','idEntitat','idRecurs');
     }
 
     // public function socialMedia(){

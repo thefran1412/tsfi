@@ -61,7 +61,19 @@
         </ul>
     </div>
     <div class="content">
-        @yield('content')
+      @if(count($errors) > 0)
+        <div class="row">
+            @foreach($errors->all() as $error)
+              <div class="alert alert-danger fade in alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">&times;</a>
+                <strong>Error!</strong> {{ $error }}
+              </div>
+            @endforeach
+        </div>
+    @endif
+    
+    @yield('content')
+    
     </div>
 </body>
 

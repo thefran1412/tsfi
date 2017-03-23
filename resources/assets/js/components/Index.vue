@@ -93,12 +93,8 @@
 
 <script>
     import Multiselect from 'vue-multiselect';
-<<<<<<< HEAD
     import { EventBus } from '../app.js';
-=======
 
-
->>>>>>> 625fbdd7055087c5979df06462fd7909fc8171d6
     export default{
         data(){
             return{
@@ -173,8 +169,8 @@
                 this.$nextTick(() => {
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
-                    $("html, body").animate({ scrollTop: 20 }, "slow");
-                    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+                    this.animationScroll();
                     
                 });
                 
@@ -234,8 +230,12 @@
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                             this.page = 1;
                         });
-                       $("html, body").animate({ scrollTop: 20 }, "slow");
-                       $("html, body").animate({ scrollTop: 0 }, "slow");
+
+                       this.animationScroll();
+                },
+                animationScroll(){
+                    $("html, body").animate({ scrollTop: 20 }, "slow");
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
                 }
         },
        components: {

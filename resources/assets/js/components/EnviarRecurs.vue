@@ -1,5 +1,5 @@
 <template>
-	<div class="content-bottom-header">
+	<div class="content-bottom-header container">
 		<h1>Enviar Recurs</h1>
 		<form @submit.prevent="submitForm" ref="enviarRecurs" method="post" enctype="multipart/form-data">
 			<div class="form-group">

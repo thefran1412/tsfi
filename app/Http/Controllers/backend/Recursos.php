@@ -10,12 +10,9 @@ use Illuminate\Support\Facades\Session;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-
-
 class Recursos extends Controller
 {
     protected  $log;
-
 
     public function setLog($log)
     {

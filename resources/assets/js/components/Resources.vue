@@ -21,42 +21,37 @@
 
 			<div v-if="resource" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 resource-extras">
 				<h1>FITXA TÈCNICA</h1>
-				<div>
+				<div class="resource-extras-tag">
 					<h3>Data inicial i final</h3>
 					<p>{{dateIni}}</p>
 					<p>{{dateEnd}}</p>
 				</div>
-				<div>
+				<div class="resource-extras-tag">
 					<h3>Preu</h3>
-					<p>{{resource[0].gratuit}}</p>
-					<p>{{resource[0].preuInferior}} €</p>
-					<p>{{resource[0].preuSuperior}} €</p>
+					<p v-if="resource[0].gratuit === 1">gratuït</p>
+					<p v-if="resource[0].gratuit === 0">{{resource[0].preuInferior}} €</p>
+					<p v-if="resource[0].gratuit === 0">{{resource[0].preuSuperior}} €</p>
 				</div>
-				<div>
+				<div class="extras resource-extras-tag">
+					<h3>Publicat per</h3>
+					<p>{{resource[0].creatPer}}</p>
 					<h3>Data de publicació</h3>
 					<p>{{datePub}}</p>
 				</div>
-				<div class="extras">
-					<h3>Publicat per</h3>
-					<p>{{resource[0].creatPer}}</p>
-				</div>
-				<div class="extras">
+				<!-- <pre>{{this.socialMedia[0].social_media}}</pre> -->
+				<div  v-if="socialMedia[0].social_media" class="extras">
 					<h3>Direcció</h3>
 					<p>Calle estroncio 15-21, 3-4</p>
 					<h3>Xarxes Socials</h3>
-					<!-- <a class="btn btn-default" :href="socialMedia[0].social_media.twitter" aria-label="true"> -->
-					  <i class="fa fa-twitter" aria-hidden="true"></i>
-					<!-- </a> -->
-					<!-- <a class="btn btn-default" :href="socialMedia[0].social_media.facebook" aria-label="true"> -->
-					  <i class="fa fa-facebook" aria-hidden="true"></i>
-					<!-- </a> -->
-					<!-- <a class="btn btn-default" :href="socialMedia[0].social_media.instagram" aria-label="true"> -->
-					  <i class="fa fa-instagram" aria-hidden="true"></i>
-					<!-- </a> -->
-					<!-- 
-					<i class="fa fa-camera-retro"></i>{{socialMedia[0].social_media.twitter}}</p>
-					<p>{{socialMedia[0].social_media.facebook}}</p>
-					<p>{{socialMedia[0].social_media.instagram}}</p> -->
+						<a class="socialMedia" :href="'https://twitter.com/'+ socialMedia[0].social_media.twitter">
+						   <i class="fa fa-twitter fa-3x"></i>
+						</a>
+						<a class="socialMedia" :href="'https://www.facebook.com/'+ socialMedia[0].social_media.facebook">
+						  <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
+						</a>
+						<a class="socialMedia" :href="'https://www.instagram.com/'+ socialMedia[0].social_media.instagram">
+						  <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
+						</a>
 				</div>
 
 				<div class="banners">
@@ -90,11 +85,12 @@
 					this.dateIni = response.data.dateIni;
 					this.dateEnd = response.data.dateEnd;
 					this.datePub = response.data.datePub;
-					console.log(this.resource);
-					console.log(this.recurso);
-					console.log(this.dateIni);
-					console.log(this.dateEnd);
-					console.log(this.datePub);
+					//console.log(this.resource);
+					console.log(this.socialMedia);
+					// console.log(this.recurso);
+					// console.log(this.dateIni);
+					// console.log(this.dateEnd);
+					// console.log(this.datePub);
 				});
 			}
 		}

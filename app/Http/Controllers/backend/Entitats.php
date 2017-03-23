@@ -31,11 +31,14 @@ class Entitats extends Controller
 
     public function store(Request $request)
     {
-        \App\Entity::Create([
-            'nomEntitat' => $request['nom'],
-            'descEntitat' => $request['desc']
-        ]);
-        return redirect('admin/entitats');
+        $this->validateEntity($request);
+        
+            \App\Entity::Create([
+                'nomEntitat' => $request['nom'],
+                'descEntitat' => $request['desc']
+            ]);
+            return redirect('admin/entitats');
+
     }
 
     public function destroy($id)
@@ -60,5 +63,22 @@ class Entitats extends Controller
         $recurs->fill($request->all());
         $recurs->save();
         return redirect('admin/entitats');
+    }
+    private function validateEntity($request)
+    {
+        $this->validate($request, [
+            'nom' => 'required|max:255',
+            
+            'telf1' => 'required|min:9|max:9',
+            'telf2' => 'min:9|max:9',
+                        
+            'link' => 'url|max:255',
+            'facebook' => 'url|max:255',
+            'twitter' => 'url|max:255',
+            'instagram' => 'url|max:255',
+
+            'logo' => 'required',
+            'adreca' => 'max:255',
+        ]);
     }
 }

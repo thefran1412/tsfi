@@ -3,22 +3,53 @@
         <header>
             <div class="header-top-item header-search-container">
 
+               <!--  <span>TSFI</span>
+                <form class="site-search" >
+                      <div id="site-search-container">
+                        <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
+                      </div>
+                      <button tabindex="2" type="submit">
+                        <span class="a11y-only">Search</span>
+                            <svg class="icon-search" viewBox="0 0 34 34" fill="none" stroke="currentColor">
+                                <ellipse stroke-width="3" cx="16" cy="15" rx="12" ry="12"></ellipse>
+                                <path d="M26 26 l 8 8" stroke-width="3" stroke-linecap="square"></path>
+                            </svg>
+                     </button>
+                </form>
+            </div>
+            <div class="footer-menu">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4" >
+                            <multiselect @select="dispatchAction" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" ></multiselect>
+                        </div>
+                        <div class="col-md-4">
+                            <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="nomEntitat" track-by="nomEntitat"  :allow-empty="false"></multiselect>
+                        </div>
+                        <div class="col-md-2 user-type">
+                            <li v-on:click="typeUser('Envians un recurs')" >
+                                <router-link :to="{name: 'enviar-recurs'}">
+                                    <span>Enviar</span>
+                                    <span>Recurs</span>
+                                </router-link>
+                            </li> -->
+
                 <div class="row">
                     <div class="col-md-1" >
-                        <li v-on:click="changeTypeUser('teacher')" v-if="type === 'teacher'">
+                        <!-- <li v-on:click="changeTypeUser('teacher')" v-if="type === 'teacher'">
                                 <span class="title">TSFI</span>
                         </li>
                         <li  v-on:click="changeTypeUser('student')" v-if="type === 'student'">
                                 <span class="title">TSFI</span>
-                        </li>
+                        </li> -->
                         </div>
                         <div class="col-md-3">
                             <div class="selects">
-                                <multiselect v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
+                                <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                             </div>   
                         </div>
                     <div class="col-md-3">
-                        <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="name" track-by="name"  :allow-empty="false"></multiselect>
+                        <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="codiCategoria" track-by="codiCategoria"  :allow-empty="false"></multiselect>
                     </div>
                     <div class="col-md-3">
                             <form class="site-search" >
@@ -112,7 +143,8 @@
                 prueba:null,
                 typeUserUrl: this.$route.params.typeuser,
                 typeCategory:this.$route.params.category,
-                page:1
+                page:1,
+                route:null,
             }
         },
         created(){
@@ -153,7 +185,7 @@
 
                 this.search = '';
 
-                if(localStorage.length === 2 && Number(typeNum) === 0){
+                if(localStorage.length >= 2 && Number(typeNum) === 0){
 
                     var typeUser = localStorage.getItem("typeUser");
 
@@ -183,6 +215,8 @@
 
                 localStorage.setItem("numType", 0);
 
+                this.typeUser();
+
                 
 
                 this.recursos = [];
@@ -190,11 +224,24 @@
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
                     this.$router.push('/'+typeUser+'/home');
-                    //this.onInfinite(this.$route.params.typeuser, this.$route.params.category);
+                    var URLactual = window.location.hash;
+                    console.log(URLactual);
+                    var cont = 0;
+                    var pr;
+                    if(URLactual.indexOf(typeUser)>0 && cont===0){
+                        pr = true;
+                        cont++;
+                    }
+
+                    if(pr){
+                        this.onInfinite(typeActUser, 'home');
+                    }
+                    
+                    
                 });
 
-                this.typeUser();
-                this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
+                
+                //this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
 
             },
             correctSelectCategory(routeParam){
@@ -227,50 +274,52 @@
               },
              onInfinite(typeUser, typeCategory) {
 
-                    console.log('hola');
-                  var route = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
+                  console.log(this.route);
 
+                  var nroute = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
+                
+                  if(this.route !== nroute){
 
-                  this.$http.get(route , {
+                    this.route = nroute;
 
-                  }).then((res) => {
-                    if (res.data.resources.length ) {
-                      this.recursos = this.recursos.concat(res.data.resources);
-                          this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
-                          if (this.recursos.length / 20 === 10) {
-                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
-                          }
-                          this.page++;
-                    } else {
-                      this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                          this.$http.get(this.route , {
+
+                          }).then((res) => {
+                            if (res.data.resources.length ) {
+                              this.recursos = this.recursos.concat(res.data.resources);
+                                  this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
+                                  if (this.recursos.length / 20 === 10) {
+                                    this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                                  }
+                                  this.page++;
+                            } else {
+                              this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
+                            }
+
+                          });
+                    }else{
+                        console.log('errorconsole.log(this.route);');
                     }
-
-                  });
                 },
                 dispatchAction(v){
+                    console.log(v);
                     this.recursos = [];
                     if(v.nomCategoria !== 'enviar-recurs'){
                         var typeUser = localStorage.getItem("typeUser");
                         
-                        
                         this.$nextTick(() => {
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                             this.page = 1;
+                            if(v.nomCategoria !== 'home'){
+                                //this.onInfinite(typeUser, v.nomCategoria);
+                            }
                             this.$router.push('/'+typeUser + '/' + v.nomCategoria)
-                            //this.onInfinite(typeUser, v.nomCategoria);
                         });
                         // console.log('index', 'hola');
                         // this.$emit('test');
                     }
                 }
         },
-        watch: {
-          category: function(v) {
-
-            
-
-           }
-       },
        components: {
             Multiselect,
             InfiniteLoading

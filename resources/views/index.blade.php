@@ -3,7 +3,7 @@
 
         function whatPage(){
 
-            if(localStorage.length === 2){
+            if(localStorage.length >= 2){
 
                 var typeUser = localStorage.getItem("typeUser");
 

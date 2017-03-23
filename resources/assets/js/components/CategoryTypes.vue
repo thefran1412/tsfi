@@ -48,7 +48,7 @@
         </transition-group>
         <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading" >
             <span slot="no-more">
-              There is no more Hacker News :(
+              No n'hi han més recursos.
             </span>
         </infinite-loading>
 
@@ -61,7 +61,6 @@
 <script>
 
 import InfiniteLoading from 'vue-infinite-loading';
-import { EventBus } from '../app.js';
 
   export default{
     data(){
@@ -70,7 +69,8 @@ import { EventBus } from '../app.js';
           correctCategory:'asda',
           recursos:[],
           typeUserUrl: this.$route.params.typeuser,
-          typeCategory:this.$route.params.category
+          typeCategory:this.$route.params.category,
+          num:0
         }
 
     },
@@ -82,7 +82,8 @@ import { EventBus } from '../app.js';
     },
     methods:{
         onInfinite(){
-          this.$parent.onInfinite(this.$route.params.typeuser, this.$route.params.category);
+          console.log('hola CategoryTypes.vue');
+              this.$parent.onInfinite(this.$route.params.typeuser, this.$route.params.category);
         },
         getCategory: function(value){
 

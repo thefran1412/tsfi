@@ -1,5 +1,7 @@
 <template>
 <div class="content-bottom-header">
+      <span class="resource-not-found" v-if="!this.$root.recursos.length === 0" >No em trobat el recurs...</span>
+      <!-- <div class="prueba" v-if="this.$root.recursos.length === 0" ></div> -->
       <div class="row squares-resources">
         <transition
               name="animate"
@@ -30,6 +32,7 @@
                       {{r.dataPublicacio}}
                     </div>
                     <div class="categoria">
+                      <i class="fa fa-archive" aria-hidden="true"></i>
                       <a v-on:click="getCategory(r.category[0].nomCategoria)" v-bind:href="'#/'+typeUserUrl+'/'+r.category[0].nomCategoria">
                         {{r.category[0].nomCategoria}}
                       </a>
@@ -47,7 +50,7 @@
         </transition-group>
         <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading" >
             <span slot="no-more">
-              There is no more Hacker News :(
+              No n'hi han més recursos.
             </span>
         </infinite-loading>
 
@@ -56,6 +59,15 @@
     </div>
   </div>
 </template>
+<style type="text/css">
+  
+  .prueba{
+    height: 200px;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: red;
+  }
+</style>
 
 <script>
 
@@ -68,7 +80,8 @@ import InfiniteLoading from 'vue-infinite-loading';
           correctCategory:'asda',
           recursos:[],
           typeUserUrl: this.$route.params.typeuser,
-          typeCategory:this.$route.params.category
+          typeCategory:this.$route.params.category,
+          num:0
         }
 
     },
@@ -80,7 +93,8 @@ import InfiniteLoading from 'vue-infinite-loading';
     },
     methods:{
         onInfinite(){
-          this.$parent.onInfinite(this.$route.params.typeuser, this.$route.params.category);
+          console.log('hola CategoryTypes.vue');
+              this.$parent.onInfinite(this.$route.params.typeuser, this.$route.params.category);
         },
         getCategory: function(value){
 

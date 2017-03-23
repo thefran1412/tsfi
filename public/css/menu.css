@@ -9,7 +9,6 @@ header{
     width: 100%;
 }
 
-
 #appVue > .container:nth-of-type(1){
 	width:100%;
 }
@@ -19,22 +18,38 @@ header{
 }
 
 .content-bottom-header{
-
-	padding-top: 149px;
+	padding-top: 89px;
 }
 
 .header-top-item{
-	padding: 8px 15px;
+	padding: 22px 15px 7px;
 	width: 100%;
 	background-color: #333333;
 	color: #4FC08D; 
 	font-family: Simplifica;
+	line-height: normal;
+	list-style: none;
 }
 
-.header-top-item span{
+.header-top-item .title{
 	font-size: 3em;
     font-weight: bold; 
     letter-spacing: 6px; 
+    color: #4FC08D;
+}
+
+.header-top-item a:hover, .header-top-item a:focus {
+    text-decoration: none;
+}
+
+.header-top-item .profile{
+	font-size: 1em;
+    letter-spacing: 1px;
+    list-style: none;
+}
+
+.header-top-item .category{
+
 }
 
 .header-top-item{
@@ -45,7 +60,7 @@ header{
 
 .site-search{
 	position:relative;
-    width: 66%;
+    width: 25%;
     display: table-cell;
     vertical-align: middle;
 }
@@ -68,7 +83,9 @@ header{
 	padding-left:15px;
 	display:block;
 	width:100%;
-	outline:0
+	outline:0;
+	min-height:3.6em;
+	font-size: 12px;
 }
 
 .site-search input[type=search]:focus{
@@ -78,9 +95,9 @@ header{
 .site-search [type=submit]{
 	outline:0px;
 	position:absolute;
-	top:13px;
-	right:0;
-	height:34px;
+    top: -3px;
+    right: 3px;
+	height:3.6em;
 	width:34px;
 	padding:6px;
 	margin-bottom:0px;
@@ -129,17 +146,47 @@ header.header-light .site-search input[type=submit]{
 	clip:rect(1px 1px 1px 1px);
 }
 
+.fa-paper-plane-o{
+	font-size: 30px !important;
+    float: left;
+    padding-left: 48.25px;
+    color: #4FC08D;
+}
+
+.fa-paper-plane-o:hover{
+    color: white;
+    transition: color .5s ease-in-out;
+}
+
+.fa-pied-piper{
+    font-size: 30px !important;
+    padding-right: 17px;
+    color: #4FC08D;
+}
+
+.fa-pied-piper:hover{
+    color: white;
+    transition: color .5s ease-in-out;
+}
+
 .user-type{
+	display:table;
 	text-align: center;
 	/*background-color: #78617f;*/
    /* background-color: rgb(92, 143, 132);*/
-   	background-color: #54839a;
-    padding: 11px 15px;
+   	/*background-color: #54839a;*/
+
     transition:background-color 1s ease;
+    height: 3.125em;
+}
+
+.user-type li{
+	display: table-cell;
+	vertical-align: middle;
 }
 
 .user-type:hover{
-	background-color: #50a79d;
+	/*background-color: #50a79d;*/
 	/*background-color: #78617f;*/
 	/*background-color: #4FC08D;*/
 
@@ -156,6 +203,7 @@ header.header-light .site-search input[type=submit]{
 
 .user-type li a span{
 	display: block;
+	float: right;
 }
 
 .user-type li a{

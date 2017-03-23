@@ -43,8 +43,20 @@
 				<div class="extras">
 					<h3>Direcció</h3>
 					<p>Calle estroncio 15-21, 3-4</p>
-					<h3>twitter</h3>
-					<p>{{socialMedia[0].social_media.twitter}}</p>
+					<h3>Xarxes Socials</h3>
+					<!-- <a class="btn btn-default" :href="socialMedia[0].social_media.twitter" aria-label="true"> -->
+					  <i class="fa fa-twitter" aria-hidden="true"></i>
+					<!-- </a> -->
+					<!-- <a class="btn btn-default" :href="socialMedia[0].social_media.facebook" aria-label="true"> -->
+					  <i class="fa fa-facebook" aria-hidden="true"></i>
+					<!-- </a> -->
+					<!-- <a class="btn btn-default" :href="socialMedia[0].social_media.instagram" aria-label="true"> -->
+					  <i class="fa fa-instagram" aria-hidden="true"></i>
+					<!-- </a> -->
+					<!-- 
+					<i class="fa fa-camera-retro"></i>{{socialMedia[0].social_media.twitter}}</p>
+					<p>{{socialMedia[0].social_media.facebook}}</p>
+					<p>{{socialMedia[0].social_media.instagram}}</p> -->
 				</div>
 
 				<div class="banners">
@@ -83,12 +95,6 @@
 					console.log(this.dateIni);
 					console.log(this.dateEnd);
 					console.log(this.datePub);
-					// console.log(this.resource);
-					// console.log(this.socialMedia);
-					// var date = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
-					//var date = Date.UTC(this.resource[0].dataPublicacio);
-					// console.log(date);
-					// console.log(date.toLocaleDateString('en-GB'));
 				});
 			}
 		}

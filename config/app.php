@@ -124,6 +124,10 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+
+    /*Alias para el formulario*/
+
+    'Form'=> 'Illuminate\Html\FormFacade',
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -134,7 +138,6 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-
     'providers' => [
 
         /*

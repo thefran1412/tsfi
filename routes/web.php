@@ -37,7 +37,7 @@ Route::get('/admin/recursos/add', 'backend\Recursos@add');
 Route::get('/admin/recursos/{id}/edit', 'backend\Recursos@edit');
 // Route::get('/admin/recursos/update', 'backend\Recursos@update');
 Route::put('/admin/recursos/{recurso}', 'backend\Recursos@update');
-Route::post('/admin/recursos/add', 'backend\Recursos@store');
+Route::post('/admin/recursos/add', ['as' => 'resource_store','uses' => 'backend\Recursos@store']);
 
 /* CATEGORIES */
 Route::resource('/admin/categories', 'backend\Categories');

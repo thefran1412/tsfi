@@ -13,9 +13,9 @@ class EntityV2 extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE entitats ADD facebook string;');
-        DB::statement('ALTER TABLE entitats ADD twitter string;');
-        DB::statement('ALTER TABLE entitats ADD facebook string;');
+        DB::statement('ALTER TABLE entitats ADD facebook varchar(250);');
+        DB::statement('ALTER TABLE entitats ADD twitter varchar(250);');
+        DB::statement('ALTER TABLE entitats ADD instagram varchar(250);');
 
         DB::statement('DROP TABLE social_medias;');
     }
@@ -27,9 +27,9 @@ class EntityV2 extends Migration
      */
     public function down()
     {
-        DB::statement('ALTER TABLE entitats DROP facebook string;');
-        DB::statement('ALTER TABLE entitats DROP twitter string;');
-        DB::statement('ALTER TABLE entitats DROP facebook string;');
+        DB::statement('ALTER TABLE entitats DROP facebook varchar(250);');
+        DB::statement('ALTER TABLE entitats DROP twitter varchar(250);');
+        DB::statement('ALTER TABLE entitats DROP instagram varchar(250);');
 
         Schema::create('social_medias', function (Blueprint $table) {
             $table->increments('idSocial');

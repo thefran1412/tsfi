@@ -3,37 +3,6 @@
         <header>
             <div class="header-top-item header-search-container">
 
-               <!--  <span>TSFI</span>
-                <form class="site-search" >
-                      <div id="site-search-container">
-                        <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
-                      </div>
-                      <button tabindex="2" type="submit">
-                        <span class="a11y-only">Search</span>
-                            <svg class="icon-search" viewBox="0 0 34 34" fill="none" stroke="currentColor">
-                                <ellipse stroke-width="3" cx="16" cy="15" rx="12" ry="12"></ellipse>
-                                <path d="M26 26 l 8 8" stroke-width="3" stroke-linecap="square"></path>
-                            </svg>
-                     </button>
-                </form>
-            </div>
-            <div class="footer-menu">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4" >
-                            <multiselect @select="dispatchAction" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" ></multiselect>
-                        </div>
-                        <div class="col-md-4">
-                            <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="nomEntitat" track-by="nomEntitat"  :allow-empty="false"></multiselect>
-                        </div>
-                        <div class="col-md-2 user-type">
-                            <li v-on:click="typeUser('Envians un recurs')" >
-                                <router-link :to="{name: 'enviar-recurs'}">
-                                    <span>Enviar</span>
-                                    <span>Recurs</span>
-                                </router-link>
-                            </li> -->
-
                 <div class="row">
                     <div class="col-md-1" >
                         <li v-on:click="changeTypeUser('teacher')" v-if="type === 'teacher'">
@@ -123,10 +92,8 @@
 </template>
 
 <script>
-
     import Multiselect from 'vue-multiselect';
     import { EventBus } from '../app.js';
-
 
     export default{
         data(){
@@ -155,13 +122,10 @@
         },
         mounted(){
             this.typeUser();
-
         },
         methods:{
             typeUser(value){
-
                 var typeUser = localStorage.getItem("typeUser");
-
                 // if(value){
                 //     this.recursos = [];
                 //     this.$nextTick(() => {
@@ -169,7 +133,6 @@
                 //     });
                 //     this.category = { codiCategoria:value , nomCategoria: 'enviar-recurs' };
                 // }
-
                 if(typeUser === 'student'){
                     this.type = 'student';
                 }
@@ -178,19 +141,12 @@
                 }
             },
             whatUserPage(value){
-
                 var typeNum = localStorage.getItem("numType");
-
                 this.search = '';
-
                 if(localStorage.length >= 2 && Number(typeNum) === 0){
-
                     var typeUser = localStorage.getItem("typeUser");
-
                     localStorage.removeItem("numType");
-
                     localStorage.setItem("numType", 1);
-
                     if(typeUser === 'student'){
                         this.$router.push('/student/home')
                     }else{
@@ -199,47 +155,35 @@
                 }
             },
             changeTypeUser: function (typeUser){
-
                 this.search = '';
-
                 localStorage.removeItem("typeUser");
-
                 localStorage.setItem("typeUser", typeUser);
-
                 var typeActUser = localStorage.getItem("typeUser");
-
-
                 localStorage.removeItem("numType");
-
                 localStorage.setItem("numType", 0);
+                
+                this.$router.push('/'+typeUser+'/home');
 
                 this.typeUser();
-
                 this.recursos = [];
                 this.$nextTick(() => {
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
-                    this.$router.push('/'+typeUser+'/home');
 
-                    $("html, body").animate({ scrollTop: 20 }, "slow");
-                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    this.animationScroll();
                     
                 });
-
                 
                 this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
-
             },
             correctSelectCategory(routeParam){
                 if(routeParam !== 'home' && routeParam !== undefined){
                     var cap = routeParam.charAt(0).toUpperCase() + routeParam.slice(1);
                     this.category = { codiCategoria: cap, nomCategoria: routeParam };
                 }
-
                 if(routeParam !== undefined){
                     this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
                 }
-
             },
             fetchEntities(){
                 this.$http.get('../api/entitats').then(response=>{
@@ -259,9 +203,7 @@
                 });
               },
              onInfinite(typeUser, typeCategory) {
-
                   var route = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
-
                   this.$http.get( route , {
                         // params: {
                         //   category: this.category.nomCategoria,
@@ -277,11 +219,9 @@
                     } else {
                       this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
                     }
-
                   });
                 },
                 dispatchAction(v){
-
                     this.recursos = [];
                     var typeUser = localStorage.getItem("typeUser");
                     this.$router.push('/'+typeUser + '/' + v.nomCategoria);
@@ -291,13 +231,15 @@
                             this.page = 1;
                         });
 
-                       $("html, body").animate({ scrollTop: 20 }, "slow");
-                       $("html, body").animate({ scrollTop: 0 }, "slow");
+                       this.animationScroll();
+                },
+                animationScroll(){
+                    $("html, body").animate({ scrollTop: 20 }, "slow");
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
                 }
         },
        components: {
             Multiselect
         },
     }
-
 </script>

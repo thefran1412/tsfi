@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Http\Controllers\Validators\ImageValidator;
 use App\Resource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ use Monolog\Handler\StreamHandler;
 
 class Recursos extends Controller
 {
-    protected  $log;
+    protected $log;
 
     public function setLog($log)
     {
@@ -21,7 +22,8 @@ class Recursos extends Controller
             'C:\wamp64\www\tsfi\logs\logger.log', Logger::INFO));
     }
 
-     protected $loginPath = '/admin/login';  
+    protected $loginPath = '/admin/login';
+
     /**
      * Create a new controller instance.
      *
@@ -31,70 +33,64 @@ class Recursos extends Controller
     {
         $this->middleware('auth');
     }
-	public function index()
-	{
-		$r = Resource::All();
+
+    public function index()
+    {
+        $r = Resource::All();
         $v = Resource::where('visible', 0)->get();
         return view('backend.recursos.index', ['resources' => $r, 'pendents' => $v]);
-	}
-
-	public function add()
-	{
-        $current_time = Carbon::now()->format('Y-m-d');
-		return view('backend.recursos.add',  ['current_time' => $current_time]);
     }
 
+    public function add()
+    {
+        $current_time = Carbon::now()->format('Y-m-d');
+        return view('backend.recursos.add', ['current_time' => $current_time]);
+    }
+
+//    public function validateImage(Request $request)
+//    {
+//        // Condicionales de arriba a abajo
+//        // Comprueva si request tiene un archivo para subir
+//        // Comprueba el tamaño del archivo no exceda 2mb
+//        // Comprueba si el archivo es una imagen
+//        // Comprueba la extensión de la imagen entre jpg, jpeg y png
+//        $uploadOk = false;
+//        if ($request->hasFile('fotoResum')) {
+//            $extension = '.'.$request->file('fotoResum')->getClientOriginalExtension();
+//            dump(strval(bcdiv($request->file('fotoResum')->getSize()/1024,1,1)).'KB');
+//            $imagefiletype = $request->file('fotoResum')->getClientOriginalExtension();
+//            $target_dir = base_path() . '\public\img\image\\';
+//            $hash_name = hash('md5',time() . $request->file('fotoResum')->getClientOriginalName()). $extension;
+//            $target_file= $target_dir . $hash_name;
+//            dump($target_file);
+//
+//            if(bcdiv($request->file('fotoResum')->getSize()/1024,1,1)< 2048){
+//                dump('la imagen ha de ser mas pequeña que 2MB');
+//                $uploadOk=true;
+//            }
+//            if(substr($request->file('fotoResum')->getMimeType(), 0, 5) === 'image') {
+//                dump('no es una imagen');
+//                $uploadOk=true;
+//            }
+//            if($imagefiletype == 'jpg' or $imagefiletype == 'png' or $imagefiletype == 'jpeg'){
+//                $uploadOk = true;
+//            }
+//            while(file_exists($target_file)){
+//                dump('igual');
+//                $target_file = hash('md5',$target_file).$extension;
+//            }
+//        }
+//
+//
+//        return $uploadOk;
+//    }
 	public function store(Request $request)
 	{
-        $request->file('fotoResum')->getSize();
-        exit(dump($request->hasFile('fotoResum')));
-        if ($request->hasFile('fotoResum')) {
-            $extension = '.'.$request->file('fotoResum')->getClientOriginalExtension();
-            dump(strval(bcdiv($request->file('fotoResum')->getSize()/1024,1,1)).'KB');
-            $uploadOk = 1;
-            $target_dir = base_path() . '\public\img\image\\';
-            $hash_name = hash('md5',time() . $request->file('fotoResum')->getClientOriginalName()). $extension;
-            $target_file= $target_dir . $hash_name;
-            dump($target_file);
-
-
-            if(bcdiv($request->file('fotoResum')->getSize()/1024,1,1)> 2048){
-                dump('la imagen ha de ser mas pequeña que 2MB');
-                $uploadOk=0;
-            }
-            if(substr($request->file('fotoResum')->getMimeType(), 0, 5) !== 'image') {
-                dump('no es una imagen');
-                $uploadOk=0;
-            }
-
-            while(file_exists($target_file)){
-                dump('igual');
-                $target_file = hash('md5',$target_file).$extension;
-            }
-           $i = 5/0;
-            if ($uploadOk >0){
-
-            }else{
-                dump('Algo ha ido mal');
-            }
-        }
-//        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-//        $uploadOk = 0;
-//        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-//        // Check if image file is a actual image or fake image
-//        // Check if file already exists
-//        // Check file size
-//        if ($_FILES["fileToUpload"]["size"] > 500000) {
-//            echo "Sorry, your file is too large.";
-//            $uploadOk = 0;
-//        }
-//        // Allow certain file formats
-//        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-//            && $imageFileType != "gif" ) {
-//            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-//            $uploadOk = 0;
-//        }
-//        // Check if $uploadOk is set to 0 by an error
+        $validateimage = new ImageValidator($request);
+	    dump($validateimage->validateImage());
+	    $error = 5/0;
+//        $this->validateEntity($request);
+        //        // Check if $uploadOk is set to 0 by an error
 //        if ($uploadOk == 0) {
 //            echo "Sorry, your file was not uploaded.";
 //        // if everything is ok, try to upload file
@@ -147,5 +143,22 @@ class Recursos extends Controller
     private function setInfoLog(Logger $log, $message)
     {
         $log->info($message);
+    }
+    private function validateEntity($request)
+    {
+        $this->validate($request, [
+            'nom' => 'required|max:255',
+
+            'telf1' => 'required|min:9|max:9',
+            'telf2' => 'min:9|max:9',
+
+            'link' => 'url|max:255',
+            'facebook' => 'url|max:255',
+            'twitter' => 'url|max:255',
+            'instagram' => 'url|max:255',
+
+            'logo' => 'required',
+            'adreca' => 'max:255',
+        ]);
     }
 }

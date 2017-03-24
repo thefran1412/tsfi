@@ -26,7 +26,7 @@
             </div>
         </div>
         @include('partials.errors')
-        {!! Form::open(array('route' => 'resource_store', 'class' => 'form')) !!}
+        {!! Form::open(array('route' => 'resource_store', 'class' => 'form', 'files' => true)) !!}
             <div class="form-group row">
                 {!! Form::label('Título del Recurso', null, array(
                         'class'=>'control-label col-sm-2')) !!}
@@ -82,7 +82,7 @@
                         array('name'=>'descDetaill2',
                                 'class'=>'form-control input-sm summernote')) !!}
                 </div>
-            </div>Form::number('name', 'value');
+            </div>
             <div class="form-group row">
                 {!! Form::label('Relevancia:', null,
                         array('class'=>'control-label col-sm-2')) !!}
@@ -96,7 +96,7 @@
             </div>
             <div class="form-group row">
                 {!! Form::label('Fecha inicial', null,
-                        array('class'=>'control-label col-sm-1')) !!}
+                        array('class'=>'control-label col-sm-2')) !!}
                 <div class="col-sm-2">
                     {!! Form::date('name', "{{ $current_time }}",
                         array('name'=>'dataInici',
@@ -105,46 +105,46 @@
                                 'min'=>"{{ $current_time }}")) !!}
                 </div>
                 {!! Form::label('Fecha Final', null,
-                        array('class'=>'control-label col-sm-1')) !!}
+                        array('class'=>'control-label col-sm-2')) !!}
                 <div class="col-sm-2">
                     {!! Form::date('name', "{{ $current_time }}",
                         array('name'=>'dataFinal',
                                 'class'=>'form-control',
-                                'id'=>'dataInici',
-                                'min'=>"{{ $current_time }}")) !!}
+                                'id'=>'dataFinal',
+                                'min'=>$current_time)) !!}
                 </div>
-                <label class="control-label col-sm-3" for="dataFinal">Fecha final</label>
+            </div>
+            <div class="form-group row">
+                {!! Form::label('Gratuit', null,
+                        array('class'=>'control-label col-sm-1')) !!}
+                <div class="col-sm-1">
+                    {!! Form::checkbox('name', null, false,
+                        array('name'=>'gratuit',
+                                'id'=>'id_gratuit')) !!}
+                </div>
+                {!! Form::label('Precio menos que:', null,
+                        array('class'=>'control-label col-sm-2')) !!}
                 <div class="col-sm-2">
-                    <input id="dataFinal" type="date" name="dataFinal" min="{{ $current_time }}" value="{{ $current_time }}">
+                    {!! Form::number('name', null,
+                        array('name'=>'preuInferior',
+                                'class'=>'form-control number',
+                                'placeholder'=>'€',
+                                'min'=>'0' )) !!}
+                </div>
+                {!! Form::label('Precio mas que:', null,
+                        array('class'=>'control-label col-sm-2')) !!}
+                <div class="col-sm-2">
+                    {!! Form::number('name', null,
+                        array('name'=>'preuSuperior',
+                                'class'=>'form-control number',
+                                'placeholder'=>'€',
+                                'min'=>'0' )) !!}
                 </div>
             </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-1">
-                        <div class="checkbox">
-                            <label>
-                                <input id="id_gratuit" name="gratuit" type="checkbox" value="">Gratuit
-                            </label>
-                        </div>
-                    </div>
-                    <label class="control-label col-sm-2" for="preuInferior">Precio menos que:</label>
-                    <div class="col-sm-2">
-                        <input type="number" placeholder="&#8364;" class="form-control input-sm number" min="0" id="preuInferior" name="preuInferior">
-                    </div>
-                    <label class="control-label col-sm-2" for="preuSuperior">Precio mas que:</label>
-                    <div class="col-md-2 col-0-offset-2">
-                        <input type="number" placeholder="&#8364;" class="form-control input-sm number" min="0" id="preuSuperior" name="preuSuperior">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-5">
-                        <div class="checkbox">
-                            Selecciona una imagen para subirla:
-                                <input type="file" name="fotoResum" id="fileToUpload">
-                        </div>
-                    </div>
+            <div class="form-group row">
+                <div class="col-sm-8">
+                        Selecciona una imagen para subirla:
+                        {!! Form::file('fotoResum') !!}
                 </div>
             </div>
             <div class="form-group">
@@ -154,40 +154,6 @@
             </div>
         </form>
     </div>
-
-    <h1>Contact TODOParrot</h1>
-
-    <ul>
-        @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-
-
-
-
-
-    <div class="form-group">
-        {!! Form::label('Your E-mail Address') !!}
-        {!! Form::text('email', null,
-            array('required',
-                  'class'=>'form-control',
-                  'placeholder'=>'Your e-mail address')) !!}
-    </div>
-
-    <div class="form-group">
-        {!! Form::label('Your Message') !!}
-        {!! Form::textarea('message', null,
-            array('required',
-                  'class'=>'form-control',
-                  'placeholder'=>'Your message')) !!}
-    </div>
-
-    <div class="form-group row">
-        {!! Form::submit('Crear',
-          array('class'=>'btn btn-primary')) !!}
-    </div>
-    {!! Form::close() !!}
 
 @endsection
 

@@ -39,7 +39,11 @@
 					<p>{{datePub}}</p>
 				</div>
 				<!-- <pre>{{this.resource[0].entitats}}</pre> -->
+<<<<<<< HEAD
 				<div v-if="resource[0].entity !== 0" class="extras">
+=======
+				<div  v-if="resource[0].entity[0] !== 0" class="extras">
+>>>>>>> 7408e340fd00c3118bc0bb57b28d9673b97dff6e
 					<h3>Direcció</h3>
 					<p>Calle estroncio 15-21, 3-4</p>
 					<h3>Xarxes Socials</h3>

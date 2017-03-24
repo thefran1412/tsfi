@@ -39,7 +39,7 @@
 					<p>{{datePub}}</p>
 				</div>
 				<!-- <pre>{{this.resource[0].entitats}}</pre> -->
-				<div  v-if="resource[0].entity !== 0" class="extras">
+				<div  v-if="resource[0].entity[0] !== 0" class="extras">
 					<h3>Direcció</h3>
 					<p>Calle estroncio 15-21, 3-4</p>
 					<h3>Xarxes Socials</h3>

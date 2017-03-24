@@ -14,4 +14,8 @@ class Entity extends Model
     public function resource(){
         return $this->hasMany('App\Resource','entitat_recurs','idEntitat','idRecurs');
     }
+
+    // public function socialMedia(){
+    //     return $this->hasOne('App\SocialMedia','idEntitat');
+    // }
 }

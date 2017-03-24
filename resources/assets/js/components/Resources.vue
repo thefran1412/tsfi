@@ -38,7 +38,8 @@
 					<h3>Data de publicació</h3>
 					<p>{{datePub}}</p>
 				</div>
-				<div  v-if="resource[0].entitats !== 0" class="extras">
+				<!-- <pre>{{this.resource[0].entitats}}</pre> -->
+				<div  v-if="resource[0].entity !== 0" class="extras">
 					<h3>Direcció</h3>
 					<p>Calle estroncio 15-21, 3-4</p>
 					<h3>Xarxes Socials</h3>
@@ -83,6 +84,7 @@
 					this.dateEnd = response.data.dateEnd;
 					this.datePub = response.data.datePub;
 					console.log(this.resource);
+					//console.log(this.recurso);
 					console.log(this.dateIni);
 					console.log(this.dateEnd);
 					console.log(this.datePub);

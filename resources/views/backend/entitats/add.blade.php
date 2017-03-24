@@ -70,7 +70,7 @@
               </div>
               <div class="paper">
                   {!!Form::label('desc', 'Adreça: ')!!}
-                  {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
+                  {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat'])!!}
 
               <div class="map"><div id="map"></div></div>
               <div id="infowindow-content">

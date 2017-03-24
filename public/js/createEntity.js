@@ -1,13 +1,16 @@
-/*$("#create").submit(function(e){
-  e.preventDefault();
-  if(valid()){
-    console.log('form is good to go!');
-  }
-  else{
-    console.log('There is somme error');
+$("#create").submit(function(e){
+  if ($("#pac-input").is(":focus")) {
+    console.log($("#pac-input").is(":focus"));
+    e.preventDefault();
   }
 }); 
-*/
+
+
+
+$( "#pac-input" ).focus(function() {
+  
+});
+
 
 
 

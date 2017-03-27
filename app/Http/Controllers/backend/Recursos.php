@@ -42,13 +42,16 @@ class Recursos extends Controller
         $recurso = new Resource;
         $this->setLog('Resource store');
         $inputimage = 'fotoResum';
+        dump($request->hasFile($inputimage));
         if ($request->hasFile($inputimage)) {
             $validateimage = new ImageValidator($request, $inputimage);
+            dump($validateimage);
             if ($validateimage->validateImage(null,4000)){
                 $validateimage->saveImage();
                 $this->setInfoLog($this->log,sprintf('Se guardó la imagen "%s" en la carpeta "%s"',
                     $validateimage->getHashName(), $validateimage->getTargetFile()));
                 $this->fotoResum = $validateimage->getTargetFile();
+                dump($validateimage->getTargetFile());
             }else{
                 $validateimage->errorUpoad();
             }
@@ -70,7 +73,7 @@ class Recursos extends Controller
             'visible' => setDefaults($request,'visible'),
             'fotoResum' => $this->fotoResum
         ]);
-
+dump($this->fotoResum);
         exit();
         $this->setInfoLog($this->log,'data->   '.implode("\n",$data));
         Resource::create($data);

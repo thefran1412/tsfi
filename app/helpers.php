@@ -9,10 +9,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-function setDefaults(Request $request, $field)
+function setDefaults(Request $request, $field, $table)
 {
     $default = null;
-    $type = (DB::connection()->getDoctrineColumn('recursos', $field)->getType()->getName());
+    $type = (DB::connection()->getDoctrineColumn($table, $field)->getType()->getName());
     if (!$request[$field]){
         if ($type == "integer" or $type=="float"){
             $default = 0;
@@ -30,7 +30,7 @@ function setDefaults(Request $request, $field)
     return $default;
 }
 
-function getCorrectDate($date)
+function getCorrectDate($date = null)
 {
     if (!$date){
         $date = Carbon::now()->format('Y-m-d');

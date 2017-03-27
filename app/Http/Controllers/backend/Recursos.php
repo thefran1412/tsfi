@@ -5,8 +5,11 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Validators\ImageValidator;
 use App\Resource;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
@@ -14,24 +17,12 @@ use Monolog\Handler\StreamHandler;
 class Recursos extends Controller
 {
     protected $log;
-
-    public function setLog($log)
-    {
-        $this->log = new Logger($log);
-        $this->log->pushHandler(new StreamHandler(
-            'C:\wamp64\www\tsfi\logs\logger.log', Logger::INFO));
-    }
-
     protected $loginPath = '/admin/login';
+    protected $fotoResum;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
 
     public function index()
@@ -46,91 +37,45 @@ class Recursos extends Controller
         $current_time = Carbon::now()->format('Y-m-d');
         return view('backend.recursos.add', ['current_time' => $current_time]);
     }
-
-//    public function validateImage(Request $request)
-//    {
-//        // Condicionales de arriba a abajo
-//        // Comprueva si request tiene un archivo para subir
-//        // Comprueba el tamaño del archivo no exceda 2mb
-//        // Comprueba si el archivo es una imagen
-//        // Comprueba la extensión de la imagen entre jpg, jpeg y png
-//        $uploadOk = false;
-//        if ($request->hasFile('fotoResum')) {
-//            $extension = '.'.$request->file('fotoResum')->getClientOriginalExtension();
-//            dump(strval(bcdiv($request->file('fotoResum')->getSize()/1024,1,1)).'KB');
-//            $imagefiletype = $request->file('fotoResum')->getClientOriginalExtension();
-//            $target_dir = base_path() . '\public\img\image\\';
-//            $hash_name = hash('md5',time() . $request->file('fotoResum')->getClientOriginalName()). $extension;
-//            $target_file= $target_dir . $hash_name;
-//            dump($target_file);
-//
-//            if(bcdiv($request->file('fotoResum')->getSize()/1024,1,1)< 2048){
-//                dump('la imagen ha de ser mas pequeña que 2MB');
-//                $uploadOk=true;
-//            }
-//            if(substr($request->file('fotoResum')->getMimeType(), 0, 5) === 'image') {
-//                dump('no es una imagen');
-//                $uploadOk=true;
-//            }
-//            if($imagefiletype == 'jpg' or $imagefiletype == 'png' or $imagefiletype == 'jpeg'){
-//                $uploadOk = true;
-//            }
-//            while(file_exists($target_file)){
-//                dump('igual');
-//                $target_file = hash('md5',$target_file).$extension;
-//            }
-//        }
-//
-//
-//        return $uploadOk;
-//    }
-	public function store(Request $request)
-	{
-        if ($request->hasFile('fotoResum')) {
-            # code...
-            $validateimage = new ImageValidator($request, 'fotoResum');
-    	    var_dump($validateimage->validateImage());
+    public function store(Request $request)
+    {
+        $recurso = new Resource;
+        $this->setLog('Resource store');
+        $inputimage = 'fotoResum';
+        if ($request->hasFile($inputimage)) {
+            $validateimage = new ImageValidator($request, $inputimage);
+            if ($validateimage->validateImage(null,4000)){
+                $validateimage->saveImage();
+                $this->setInfoLog($this->log,sprintf('Se guardó la imagen "%s" en la carpeta "%s"',
+                    $validateimage->getHashName(), $validateimage->getTargetFile()));
+                $this->fotoResum = $validateimage->getTargetFile();
+            }else{
+                $validateimage->errorUpoad();
+            }
         }
-        else{
-            echo 'no hay archiva';
-        }
-        exit();
-	    // $error = 5/0;
-//        $this->validateEntity($request);
-        //        // Check if $uploadOk is set to 0 by an error
-//        if ($uploadOk == 0) {
-//            echo "Sorry, your file was not uploaded.";
-//        // if everything is ok, try to upload file
-//        } else {
-//            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-//                echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-//            } else {
-//                echo "Sorry, there was an error uploading your file.";
-//            }
-//        }
-	    $this->setLog('Resource store');
-        echo gettype($this->log), "\n";
-        $data = $request->intersect([
-            'titolRecurs',
-            'subTitol',
-            'descBreu',
-            'descDetaill1',
-            'descDetaill2',
-            'relevancia',
-            'dataInici',
-            'dataFinal',
-            'gratuit',
-            'preuInferior',
-            'preuSuperior',
-            'dataPublicacio',
-            'visible',
-            'fotoResum',
-            'creatPer'
+        \App\Resource::Create([
+            'titolRecurs' => $request['titolRecurs'],
+            'subTitol' => setDefaults($request, 'subTitol'),
+            'descBreu' => setDefaults($request, 'descBreu'),
+            'creatPer' => setDefaults($request, 'creatPer'),
+            'descDetaill1' => setDefaults($request, 'descDetaill1'),
+            'descDetaill2' => setDefaults($request, 'descDetaill2'),
+            'relevancia' => setDefaults($request, 'relevancia'),
+            'dataInici' => getCorrectDate($request['dataInici']),
+            'dataFinal' => getCorrectDate($request['dataFinal']),
+            'gratuit' => setDefaults($request, 'gratuit'),
+            'preuInferior' => setDefaults($request, 'preuInferior'),
+            'preuSuperior' => setDefaults($request, 'preuSuperior'),
+            'dataPublicacio' => getCorrectDate($request['dataPublicacio']),
+            'visible' => setDefaults($request,'visible'),
+            'fotoResum' => $this->fotoResum
         ]);
+
+        exit();
         $this->setInfoLog($this->log,'data->   '.implode("\n",$data));
         Resource::create($data);
         return redirect()->to('admin/recursos');
-	}
+    }
 
     public function edit($id)
     {
@@ -145,11 +90,6 @@ class Recursos extends Controller
         $recurs->fill($request->all());
         $recurs->save();
         return redirect('admin/recursos');
-    }
-
-    private function setInfoLog(Logger $log, $message)
-    {
-        $log->info($message);
     }
     private function validateEntity($request)
     {
@@ -167,5 +107,15 @@ class Recursos extends Controller
             'logo' => 'required',
             'adreca' => 'max:255',
         ]);
+    }
+    private function setInfoLog(Logger $log, $message)
+    {
+        $log->info($message);
+    }
+    public function setLog($log)
+    {
+        $this->log = new Logger($log);
+        $this->log->pushHandler(new StreamHandler(
+            base_path().'\logs\logger.log', Logger::INFO));
     }
 }

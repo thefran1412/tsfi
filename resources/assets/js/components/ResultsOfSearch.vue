@@ -7,14 +7,14 @@
 					      <div class="panel">
 					         <h3>Tags</h3>
 					         <hr>
-					         <a v-bind:href="'#/search?tag='+ t.tags_id" v-for="t in tags" ><span class="tag-rounded">{{t.nomTags}}</span></a>
+					         <a v-on:click="getResourceForTag()" v-bind:href="'#/search?tag='+ t.tags_id" v-for="t in tags" ><span class="tag-rounded">{{t.nomTags}}</span></a>
 					      </div>
 					</div>
 				</div>
 			</div>
 			<infinite-loading :on-infinite="onInfiniteSearch" ref="infiniteLoading">
 		    <span slot="no-more">
-		      No hi han més recursos amb aquets resultats.
+		    No hi han més recursos amb aquets resultats.
 		    </span>
 		    <span slot="no-results">
 			  No em trobat cap resultat amb aquesta paraula.
@@ -64,6 +64,14 @@ export default {
         }
       });
     },
+    getResourceForTag: function(value){
+            this.list = [];
+            this.$nextTick(() => {
+                this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                this.pageSearch = 1;
+            });
+            this.$parent.animationScroll();
+          }
   },
   components: {
     InfiniteLoading,

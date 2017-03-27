@@ -16,6 +16,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url('css/resource.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/multiselect.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/send-resource.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/search-results.css') }}">
 
         <title>Laravel</title>
 

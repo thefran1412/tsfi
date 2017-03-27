@@ -24,6 +24,45 @@ class Recursos extends Controller
                 'resources' => $resources
             ]);
     }
+
+    public function getResultSearch(Request $request) {
+
+
+        if(isset($_GET["name"])){
+            $searchName = $_GET["name"];
+
+            $tags = \App\Tag::where("nomTags","LIKE", "%$searchName%")->get();
+
+            $resources = Resource::with('entity')->
+            where("titolRecurs","LIKE", "%$searchName%")->paginate(20)->items();
+
+            return response()->json([
+                'resources' => $resources,
+                'tags' => $tags
+            ]);
+        }
+
+        if(isset($_GET["tag"])){
+            $searchTag = $_GET["tag"];
+
+            //$tagsSearch = \App\Tag::with('resource')->where("tags_id","=", $searchTag)->paginate(20)->items();
+
+            $resources = Resource::with('tag')->
+            whereHas('tag', function ($query) use ($searchTag) {
+                    $query->where('tags_id','=', $searchTag);
+            })->paginate(20)->items();
+
+            return response()->json([
+                'resources' => $resources
+            ]);
+        }
+
+            
+
+        
+    }
+
+
     public function getResource(Request $request, $id) {
         $resource = Resource::with('category',
                                     'age',

@@ -56,21 +56,25 @@ class Recursos extends Controller
                 $validateimage->errorUpoad();
             }
         }
+        /*foreach ($requests as $key => $request) {
+            $request = setDefaults($request, $key, 'recursos');
+        }*/
+
         \App\Resource::Create([
             'titolRecurs' => $request['titolRecurs'],
-            'subTitol' => setDefaults($request, 'subTitol'),
-            'descBreu' => setDefaults($request, 'descBreu'),
-            'creatPer' => setDefaults($request, 'creatPer'),
-            'descDetaill1' => setDefaults($request, 'descDetaill1'),
-            'descDetaill2' => setDefaults($request, 'descDetaill2'),
-            'relevancia' => setDefaults($request, 'relevancia'),
+            'subTitol' => setDefaults($request, 'subTitol', 'recursos'),
+            'descBreu' => setDefaults($request, 'descBreu', 'recursos'),
+            'creatPer' => setDefaults($request, 'creatPer', 'recursos'),
+            'descDetaill1' => setDefaults($request, 'descDetaill1', 'recursos'),
+            'descDetaill2' => setDefaults($request, 'descDetaill2', 'recursos'),
+            'relevancia' => setDefaults($request, 'relevancia', 'recursos'),
             'dataInici' => getCorrectDate($request['dataInici']),
             'dataFinal' => getCorrectDate($request['dataFinal']),
-            'gratuit' => setDefaults($request, 'gratuit'),
-            'preuInferior' => setDefaults($request, 'preuInferior'),
-            'preuSuperior' => setDefaults($request, 'preuSuperior'),
+            'gratuit' => setDefaults($request, 'gratuit', 'recursos'),
+            'preuInferior' => setDefaults($request, 'preuInferior', 'recursos'),
+            'preuSuperior' => setDefaults($request, 'preuSuperior', 'recursos'),
             'dataPublicacio' => getCorrectDate($request['dataPublicacio']),
-            'visible' => setDefaults($request,'visible'),
+            'visible' => setDefaults($request,'visible', 'recursos'),
             'fotoResum' => $this->fotoResum
         ]);
 dump($this->fotoResum);

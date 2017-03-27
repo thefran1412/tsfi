@@ -15,23 +15,23 @@
                         <div class="col-md-3">
                             <div class="selects">
                                 <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
-                            </div>   
+                            </div>
                         </div>
                     <div class="col-md-3">
                         <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="codiCategoria" track-by="codiCategoria"  :allow-empty="false"></multiselect>
                     </div>
                     <div class="col-md-3">
-                            <form class="site-search" >
+                            <form @submit.prevent="actionToSearch" class="site-search" >
                               <div id="site-search-container">
                                 <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
                               </div>
                               <button tabindex="2" type="submit">
-                                <span class="a11y-only">Search</span>
+                                    <span class="a11y-only">Search</span>
                                     <svg class="icon-search" viewBox="0 0 34 34" fill="none" stroke="currentColor">
                                         <ellipse stroke-width="3" cx="16" cy="15" rx="12" ry="12"></ellipse>
                                         <path d="M26 26 l 8 8" stroke-width="3" stroke-linecap="square"></path>
                                     </svg>
-                             </button>
+                               </button>
                             </form>
                     </div>
                     <div class="col-md-2 user-type">
@@ -116,9 +116,7 @@
             this.whatUserPage(this.$route.params.typeuser);
             this.fetchCategories();
             this.fetchEntities();
-            //this.onInfinite(this.$route.params.typeuser, this.$route.params.category);
             this.correctSelectCategory(this.$route.params.category);
-            //this.fetchResource(this.$route.params.typeuser, this.$route.params.category);
         },
         mounted(){
             this.typeUser();
@@ -130,9 +128,11 @@
                 //     this.recursos = [];
                 //     this.$nextTick(() => {
                 //         this.prueba.$emit('$InfiniteLoading:reset');
+                //         this.animationScroll();
                 //     });
                 //     this.category = { codiCategoria:value , nomCategoria: 'enviar-recurs' };
                 // }
+
                 if(typeUser === 'student'){
                     this.type = 'student';
                 }
@@ -236,6 +236,19 @@
                 animationScroll(){
                     $("html, body").animate({ scrollTop: 20 }, "slow");
                     $("html, body").animate({ scrollTop: 0 }, "slow");
+                },
+                actionToSearch(){
+                        this.$children[3].list = [];
+                        this.$children[3].tags = [];
+                        
+                        this.$router.push('/search?name=' + this.search);
+
+                        this.$nextTick(() => {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                            this.$children[3].pageSearch = 1;
+                        });
+
+                        this.animationScroll();
                 }
         },
        components: {

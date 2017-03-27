@@ -10,12 +10,13 @@
 
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/menu.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/font-awesome.css') }}" >
 
         <link rel="stylesheet" type="text/css" href="{{ url('css/recursos.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/resource.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/multiselect.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/send-resource.css') }}">
-        
+        <link rel="stylesheet" type="text/css" href="{{ url('css/search-results.css') }}">
 
         <title>Laravel</title>
 
@@ -29,13 +30,13 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        
+
     </head>
     <body>
         <div class="flex-center position-ref full-height">
 
             <div id="appVue" class="content">
-                
+
             </div>
         </div>
         <script src="{{ URL::asset('/js/app.js') }}" ></script>

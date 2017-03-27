@@ -23,6 +23,7 @@ Route::resource('recursos', 'Recursos');
 
 Route::get('recursos/{recurso}', 'Recursos@getResource')->name('recurso.getResource');
 Route::get('typeuser/{typeUser}/{category}', 'Recursos@index')->name('recurso.index');
+Route::get('search', 'Recursos@getResultSearch')->name('recurso.getResultSearch');
 
 
 Route::get('/user', function (Request $request) {

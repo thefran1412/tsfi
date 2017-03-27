@@ -44,7 +44,7 @@ const router = new VueRouter({
         {path:'/resource/:id',component:Resource, name:'resource' },
         {path:'/enviar-recurs',component:EnviarRecurs, name:'enviar-recurs' },
         {path:'/:typeuser/:category',component:Resources, name:'resources' },
-        {path:'/search/:search',component:ResultOfSearch, name:'result-of-search' }
+        {path:'/search',component:ResultOfSearch, name:'result-of-search' }
     ]
 });
 

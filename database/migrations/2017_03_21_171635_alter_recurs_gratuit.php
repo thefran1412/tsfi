@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterDescription extends Migration
+class AlterRecursGratuit extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AlterDescription extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE recursos MODIFY descDetaill1 TEXT(20844) ;');
+        DB::statement('ALTER TABLE recursos MODIFY gratuit BOOLEAN;');
     }
 
     /**
@@ -23,6 +23,6 @@ class AlterDescription extends Migration
      */
     public function down()
     {
-        DB::statement('ALTER TABLE recursos MODIFY descDetaill1 TEXT(255) ;');
+        DB::statement('ALTER TABLE recursos MODIFY gratuit TINYINT(1);');
     }
 }

@@ -1,0 +1,30 @@
+.content-send-resource{
+	border-radius: 0px;
+}
+
+.content-send-resource .form-group input,
+.content-send-resource .form-group select, 
+.content-send-resource .form-group textarea{
+	border-radius: 0px;
+}
+
+.content-send-resource img{
+	width: 100%;
+	height: 100%;
+}
+
+.content-send-resource .remove-image{
+	display: block;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.content-send-resource .btn-primary{ 
+	margin-top: 50px; 
+	margin-bottom: 50px; 
+	border-radius: 0px;
+}
+
+.content-send-resource .button-send{
+	text-align: center;
+}

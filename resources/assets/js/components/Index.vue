@@ -94,7 +94,7 @@
 <script>
     import Multiselect from 'vue-multiselect';
     import { EventBus } from '../app.js';
-
+    
     export default{
         data(){
             return{
@@ -116,9 +116,7 @@
             this.whatUserPage(this.$route.params.typeuser);
             this.fetchCategories();
             this.fetchEntities();
-            //this.onInfinite(this.$route.params.typeuser, this.$route.params.category);
             this.correctSelectCategory(this.$route.params.category);
-            //this.fetchResource(this.$route.params.typeuser, this.$route.params.category);
         },
         mounted(){
             this.typeUser();
@@ -240,8 +238,17 @@
                     $("html, body").animate({ scrollTop: 0 }, "slow");
                 },
                 actionToSearch(){
-                        console.log(this.search);
-                        this.$router.push('/search/' + this.search);
+                        this.$children[3].list = [];
+                        this.$children[3].tags = [];
+                        
+                        this.$router.push('/search?name=' + this.search);
+
+                        this.$nextTick(() => {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                            this.$children[3].pageSearch = 1;
+                        });
+
+                        this.animationScroll();
                 }
         },
        components: {

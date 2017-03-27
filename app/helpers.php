@@ -30,7 +30,7 @@ function setDefaults(Request $request, $field, $table)
     return $default;
 }
 
-function getCorrectDate($date)
+function getCorrectDate($date = null)
 {
     if (!$date){
         $date = Carbon::now()->format('Y-m-d');

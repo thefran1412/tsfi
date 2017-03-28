@@ -1,9 +1,7 @@
 body {
 	min-width: 412px;
 }
-h4 {
-  text-transform: capitalize;
-}
+
 .resource-extras {
   /*float: left;*/
 }

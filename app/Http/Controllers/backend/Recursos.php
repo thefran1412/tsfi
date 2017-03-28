@@ -5,16 +5,11 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Validators\ImageValidator;
 use App\Resource;
 use Carbon\Carbon;
-use DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use SplFileInfo;
-use Symfony\Component\VarDumper\Tests\Fixture\DumbFoo;
+use \App\Category;
 
 class Recursos extends Controller
 {
@@ -36,8 +31,10 @@ class Recursos extends Controller
 
     public function add()
     {
+        $categorias = Category::all('categoria_id', 'nomCategoria');
         $current_time = Carbon::now()->format('Y-m-d');
-        return view('backend.recursos.add', ['current_time' => $current_time]);
+        return view('backend.recursos.add', compact('categorias',$categorias),
+            ['current_time' => $current_time, '$categorias' => $categorias]);
     }
     public function store(Request $request)
     {
@@ -49,7 +46,7 @@ class Recursos extends Controller
                 $validateimage->saveImage();
                 $this->setInfoLog($this->log,sprintf('Se guardó la imagen "%s" en la carpeta "%s"',
                     $validateimage->getHashName(), $validateimage->getTargetFile()));
-                $this->fotoResum = $validateimage->getPublicDir();
+                    $this->fotoResum = $validateimage->getNewImagePath();
             }else{
                 $validateimage->errorUpoad();
             }

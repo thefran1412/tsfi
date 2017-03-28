@@ -16,6 +16,9 @@ label{
     padding: 10px;
     display: inline-block;
 }
+.desc {
+	width: 98% !important;
+}
 .form-control{
 	display: inline-block;
 	margin: 10px;

@@ -37,7 +37,7 @@
                     <div class="col-md-2 user-type">
                         <li v-on:click="typeUser('Envians un recurs')">
                             <router-link :to="{name: 'enviar-recurs'}">
-                                <i class="fa fa-paper-plane-o" aria-hidden="true" title="Enviar recurs"></i>
+                                <i class="fa fa-cloud-upload" aria-hidden="true" title="Enviar recurs"></i>
                             </router-link>
                         </li>
                         <li v-on:click="changeTypeUser('teacher')" v-if="type === 'student'">
@@ -204,6 +204,9 @@
               },
              onInfinite(typeUser, typeCategory) {
                   var route = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
+                  var t;
+                  var d;
+                  
                   this.$http.get( route , {
                         // params: {
                         //   category: this.category.nomCategoria,
@@ -211,6 +214,17 @@
                   }).then((res) => {
                     if (res.data.resources.length ) {
                       this.recursos = this.recursos.concat(res.data.resources);
+
+                            this.recursos.forEach(function(data){
+                                if(data.dataPublicacio){
+                                    t = data.dataPublicacio.split(/[- :]/);
+                                    d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
+                                    data.dataPublicacio = d.toLocaleDateString('en-GB');
+                                }
+                            });
+
+                        console.log(d);
+
                           this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
                           if (this.recursos.length / 20 === 10) {
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');

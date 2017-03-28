@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use SplFileInfo;
+use Symfony\Component\VarDumper\Tests\Fixture\DumbFoo;
 
 class Recursos extends Controller
 {
@@ -39,8 +41,7 @@ class Recursos extends Controller
     }
     public function store(Request $request)
     {
-        $recurso = new Resource;
-        $this->setLog('Resource store');
+        $this->setLog('Resource store =>');
         $inputimage = 'fotoResum';
         if ($request->hasFile($inputimage)) {
             $validateimage = new ImageValidator($request, $inputimage);
@@ -48,10 +49,12 @@ class Recursos extends Controller
                 $validateimage->saveImage();
                 $this->setInfoLog($this->log,sprintf('Se guardó la imagen "%s" en la carpeta "%s"',
                     $validateimage->getHashName(), $validateimage->getTargetFile()));
-                $this->fotoResum = $validateimage->getTargetFile();
+                $this->fotoResum = $validateimage->getPublicDir();
             }else{
                 $validateimage->errorUpoad();
             }
+        }else{
+            dump('no hay archivo');
         }
         /*foreach ($requests as $key => $request) {
             $request = setDefaults($request, $key, 'recursos');
@@ -71,10 +74,12 @@ class Recursos extends Controller
             'preuInferior' => setDefaults($request, 'preuInferior', 'recursos'),
             'preuSuperior' => setDefaults($request, 'preuSuperior', 'recursos'),
             'dataPublicacio' => getCorrectDate($request['dataPublicacio']),
+            'created-at' => getCorrectDate()->getTimestamp(),
+            'updated_at' => getCorrectDate()->getTimestamp(),
             'visible' => setDefaults($request,'visible', 'recursos'),
             'fotoResum' => $this->fotoResum
         ]);
-
+        dump(getCorrectDate()->getTimestamp ());
         exit();
         $this->setInfoLog($this->log,'data->   '.implode("\n",$data));
         Resource::create($data);

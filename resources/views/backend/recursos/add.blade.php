@@ -112,7 +112,7 @@
 
 @section('script')
     {{--Summer Note--}}
-    <script src="{{ URL::asset('http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js') }}"></script>
+    <script src="{{ URL::asset('/js/sumer_note/jquery_sumernote.js') }}"></script>
     <script src="{{ URL::asset('/js/sumer_note/summernote.js') }}"></script>
     <script src="{{ URL::asset('/js/sumer_note/summernote-es-ES.js') }}"></script>
     <script src="{{ URL::asset('/js/sumer_note/custom_editors.js') }}"></script>

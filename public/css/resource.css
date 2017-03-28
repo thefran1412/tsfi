@@ -1,6 +1,9 @@
 body {
 	min-width: 412px;
 }
+h4 {
+  text-transform: capitalize;
+}
 .resource-extras {
   /*float: left;*/
 }
@@ -53,6 +56,16 @@ body {
     transition: color .5s ease-in-out;
 }
 
+.links{
+  color: #636b6f;
+}
+
+.links:hover{
+    color: #4FC08D;
+    text-decoration: none;
+    transition: color .5s ease-in-out;
+}
+
 .resource-extras p {
   padding: 10px;
   text-align: left;
@@ -89,19 +102,17 @@ body {
   height: 200px;
   background: #636b6f;
 }
+/*Autor -- Inicio*/
 .autor div {
-  /*padding-top: 5px;
-  padding-bottom:  5px;*/
   display: inline-block;
 }
 .autor h5{
-  /*display: inline-block;*/
-  float: left;
+  text-transform: capitalize;
 }
 .autor p {
-  /*display: inline-block;*/
   float: right;
 }
+/*Autor -- Fin*/
 
 
 /* Large desktops and laptops */

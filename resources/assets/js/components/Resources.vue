@@ -1,21 +1,17 @@
 <template>
 	<div class="content-bottom-header" >
-		<!-- <h1>RESOURCE</h1> -->
 		<div id="resource" class="container">
-
+			<!-- Columna principal -->
 			<div v-if="resource" class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
-				<!--  clearfix visible-xs-block visible-sm-block visible-md-block visible-lg-block -->
+				<!--  titol Recurs-->
 				<h1>{{resource[0].titolRecurs}}</h1>
+				<!--  Foto resum-->
 				<img class="img-responsive" :src="'/img/image/'+ resource[0].fotoResum" :alt="resource[0].titolRecurs" :title="resource[0].titolRecurs">
-				<!-- width="960" height="540" -->
-				<!-- <div v-if="resource[0].creatPer && datePub"class class="extras resource-extras-tag"> -->
-				<div>
-				<h5><strong>Autor: </strong> {{resource[0].creatPer}} <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i> {{datePub}}</strong></p></h5>
+				<!-- autor i data publicació-->
+				<div v-if="resource[0].creatPer && datePub" class="autor">
+					<h5><strong>Autor: </strong> {{resource[0].creatPer}} <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i> {{datePub}}</strong></p></h5>
 				</div>
-				<!-- <p>{{resource[0].creatPer}}</p> -->
-				<!-- <h3>Data de publicació</h3> -->
-				<!-- <p>{{datePub}}</p> -->
-				<!-- </div> -->
+				<!-- subtitol -->
 				<h2>{{resource[0].subtitol}}</h2>
 				<!-- class="descshort" -->
 				<p><strong>{{resource[0].descBreu}}</strong></p>
@@ -24,7 +20,7 @@
 					<!-- desc2 -->
 				<p>{{resource[0].descDetaill2}}</p>
 			</div>
-
+			<!-- Columna secundaria -->
 			<div v-if="resource" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 resource-extras">
 				<h1>FITXA TÈCNICA</h1>
 				<div v-if="resource[0].age" class="resource-extras-tag">
@@ -42,17 +38,23 @@
 					<p v-if="resource[0].gratuit === 0">{{resource[0].preuInferior}} €</p>
 					<p v-if="resource[0].gratuit === 0">{{resource[0].preuSuperior}} €</p>
 				</div>
-		<!-- 		<div v-if="resource[0].creatPer && datePub"class class="extras resource-extras-tag">
-					<h3>Publicat per</h3>
-					<p>{{resource[0].creatPer}}</p>
-					<h3>Data de publicació</h3>
-					<p>{{datePub}}</p>
-				</div> -->
+
 				<!-- <pre>{{this.resource[0].entitats}}</pre> -->
 				<div v-if="resource[0].entity !== 0" class="extras">
-				<!-- <div  v-if="resource[0].entity[0] !== 0" class="extras"> <-->
-					<h3>Direcció</h3>
-					<p>Calle estroncio 15-21, 3-4</p>
+				<!-- Logo entitat ** sin arreglar -->
+					<h3>{{resource[0].entity[0].nomEntitat}}</h3></br>
+					<h4 v-if="resource[0].entity[0].descEntitat">{{resource[0].entity[0].descEntitat}}</h4>
+					<!-- <a :href="resource[0].entity[0].link" target="_blank">
+						<img class="img-responsive" :src="resource[0].entity[0].logo" :alt="resource[0].entity[0].link" :title="resource[0].entity[0].link">
+					</a> -->
+					<h4><strong>Adreça:</strong></br>{{resource[0].entity[0].adreca}}</h4>
+
+					<h4 v-if="resource[0].entity[0].telf1 !== 0 && resource[0].entity[0].telf2 !== 0"><strong>Telefóns: </strong></br>{{resource[0].entity[0].telf1}} / {{resource[0].entity[0].telf2}}</h4>
+					<h4 v-if="resource[0].entity[0].telf1 !== 0 && resource[0].entity[0].telf2 === 0"><strong>Telefón: </strong></br>{{resource[0].entity[0].telf1}}</h4>
+					<h4 v-if="resource[0].entity[0].telf1 === 0 && resource[0].entity[0].telf2 !== 0"><strong>Telefón: </strong></br>{{resource[0].entity[0].telf2}}</h4>
+					<!-- plana web -->
+					<h4><strong>Plana web:</strong></br><a class="links":href="resource[0].entity[0].link" target="_blank" :title="resource[0].entity[0].link">{{resource[0].entity[0].link}}</a></h4>
+
 					<h3>Xarxes Socials</h3>
 						<a class="socialMedia" :href="'https://twitter.com/'+ resource[0].entity[0].twitter" target="_blank" :title="'https://twitter.com/'+ resource[0].entity[0].twitter">
 						   <i class="fa fa-twitter fa-3x"></i>

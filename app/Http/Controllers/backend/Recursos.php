@@ -46,7 +46,7 @@ class Recursos extends Controller
                 $validateimage->saveImage();
                 $this->setInfoLog($this->log,sprintf('Se guardó la imagen "%s" en la carpeta "%s"',
                     $validateimage->getHashName(), $validateimage->getTargetFile()));
-                $this->fotoResum = $validateimage->getPublicDir();
+                    $this->fotoResum = $validateimage->getNewImagePath();
             }else{
                 $validateimage->errorUpoad();
             }

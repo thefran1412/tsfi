@@ -52,7 +52,7 @@ class Entitats extends Controller
             }
         }else{
             
-            $this->logo = '/images/default.png';
+            $this->logo = '/img/image/default.png';
         }
         \App\Entity::Create([
             'nomEntitat' =>  setDefaults($request, 'nomEntitat', 'entitats'),
@@ -97,6 +97,7 @@ class Entitats extends Controller
     {
         $recurs = Entity::find($id);
         $recurs->fill($request->all());
+        $recurs->esMembre = setDefaults($request, 'esMembre', 'entitats');
         $recurs->save();
         return redirect('admin/entitats');
     }

@@ -44,7 +44,7 @@ class Entitats extends Controller
             if ($validateimage->validateImage(null, 2000000)){
                 
                 $validateimage->saveImage();
-                $this->logo = $validateimage->getPublicDir();
+                $this->logo = $validateimage->getNewImagePath();
             
             }else{
                 

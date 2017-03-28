@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 
-                <div class="recurso-foto" :style="{ backgroundImage: 'url('+'/images/' + r.fotoResum + ')' }"> 
+                <div class="recurso-foto" :style="{ backgroundImage: 'url('+'/img/image/' + r.fotoResum + ')' }"> 
                 </div>
               </div>
             </div>

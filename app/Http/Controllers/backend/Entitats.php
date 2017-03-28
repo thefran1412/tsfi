@@ -52,7 +52,7 @@ class Entitats extends Controller
             }
         }else{
             
-            $this->logo = '/images/default.jpg';
+            $this->logo = '/images/default.png';
         }
         \App\Entity::Create([
             'nomEntitat' =>  setDefaults($request, 'nomEntitat', 'entitats'),

@@ -9,7 +9,7 @@ class Entity extends Model
     //
     protected $table = 'entitats';
     protected $primaryKey = 'entitat_id';
-    protected $fillable = ['entitat_id', 'nomEntitat', 'adreca', 'telf1', 'telf2', 'link', 'logo', 'descRecurs', 'esMembre', 'idLocalitzacio', 'facebook', 'twitter', 'idEntitat'];
+    protected $fillable = ['entitat_id', 'nomEntitat', 'adreca', 'telf1', 'telf2', 'link', 'logo', 'descEntitat', 'esMembre', 'idLocalitzacio', 'facebook', 'twitter', 'idEntitat', 'instagram'];
 
     public function resource(){
         return $this->hasMany('App\Resource','entitat_recurs','idEntitat','idRecurs');

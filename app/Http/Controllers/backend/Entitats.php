@@ -32,12 +32,28 @@ class Entitats extends Controller
     public function store(Request $request)
     {
         $this->validateEntity($request);
-        
-            \App\Entity::Create([
-                'nomEntitat' => $request['nom'],
-                'descEntitat' => $request['desc']
-            ]);
-            return redirect('admin/entitats');
+        //$request['logo'] = '/hola/';
+        var_dump($request['descEntitat']);
+        \App\Entity::Create([
+            'nomEntitat' =>  setDefaults($request, 'nomEntitat', 'entitats'),
+            'descEntitat' =>  setDefaults($request, 'descEntitat', 'entitats'),
+            
+            'telf1' =>  setDefaults($request, 'telf1', 'entitats'),
+            'telf2' =>  setDefaults($request, 'telf2', 'entitats'),
+            'link' =>  setDefaults($request, 'link', 'entitats'),
+            
+            'esMembre' => setDefaults($request, 'esMembre', 'entitats'),
+            
+            'logo' => 'hola',
+            'idLocalitzacio' => null,
+
+            'facebook' =>  setDefaults($request, 'facebook', 'entitats'),
+            'twitter' =>  setDefaults($request, 'twitter', 'entitats'),
+            'instagram' =>  setDefaults($request, 'instagram', 'entitats'),
+
+            'adreca' => $request['adreca'],
+        ]);
+        return redirect('admin/entitats');
 
     }
 
@@ -67,8 +83,9 @@ class Entitats extends Controller
     private function validateEntity($request)
     {
         $this->validate($request, [
-            'nom' => 'required|max:255',
-            
+            'nomEntitat' => 'required|max:255',
+            'descEntitat' => 'required|max:255',
+
             'telf1' => 'required|min:9|max:9',
             'telf2' => 'min:9|max:9',
                         

@@ -24,12 +24,16 @@
       {!!Form::open(['action' => 'backend\Entitats@store', 'method' => 'post', 'id' => 'create'])!!}
         <div class="paper">
           <div>
-            {!!Form::label('nom', 'Nom: ')!!}
-            {!!Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Nom de la entitat'])!!}
+            {!!Form::label('nomEntitat', 'Nom: ')!!}
+            {!!Form::text('nomEntitat', null, ['class' => 'form-control', 'placeholder' => 'Nom de la entitat'])!!}
           </div>
           <div>
             {!!Form::label('esMembre', 'És membre: ')!!}
             {!!Form::checkbox('esMembre', null, ['class' => 'form-control', 'placeholder' => 'Es membre'])!!}
+          </div>
+          <div class="desc">
+            {!!Form::label('descEntitat', 'Descripció: ')!!}
+            {!!Form::textArea('descEntitat', null, ['class' => 'form-control', 'placeholder' => 'Descripció de la entitat'])!!}
           </div>
           <div>
             {!!Form::label('telf1', 'Telèfon 1: ')!!}
@@ -69,7 +73,7 @@
 
         </div>
         <div class="paper">
-          {!!Form::label('desc', 'Adreça: ')!!}
+          {!!Form::label('adreca', 'Adreça: ')!!}
           {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
 
         <div class="map"><div id="map"></div></div>

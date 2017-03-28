@@ -14,13 +14,7 @@ function setDefaults(Request $request, $field, $table)
     $default = null;
     $type = (DB::connection()->getDoctrineColumn($table, $field)->getType()->getName());
     if (!$request[$field]){
-        if ($type == "integer" or $type=="float"){
-            $default = 0;
-        }elseif ($type=="boolean"){
-            $default = false;
-        }elseif($type=="string" or $type=="text"){
-            $default="";
-        }
+        $default=null;
     }else{
         $default=$request[$field];
         if ($type=="boolean"){

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use SplFileInfo;
+use Symfony\Component\VarDumper\Tests\Fixture\DumbFoo;
 
 class Recursos extends Controller
 {
@@ -39,8 +41,7 @@ class Recursos extends Controller
     }
     public function store(Request $request)
     {
-        $recurso = new Resource;
-        $this->setLog('Resource store');
+        $this->setLog('Resource store =>');
         $inputimage = 'fotoResum';
         if ($request->hasFile($inputimage)) {
             $validateimage = new ImageValidator($request, $inputimage);
@@ -48,29 +49,37 @@ class Recursos extends Controller
                 $validateimage->saveImage();
                 $this->setInfoLog($this->log,sprintf('Se guardó la imagen "%s" en la carpeta "%s"',
                     $validateimage->getHashName(), $validateimage->getTargetFile()));
-                $this->fotoResum = $validateimage->getTargetFile();
+                $this->fotoResum = $validateimage->getPublicDir();
             }else{
                 $validateimage->errorUpoad();
             }
+        }else{
+            dump('no hay archivo');
         }
+        /*foreach ($requests as $key => $request) {
+            $request = setDefaults($request, $key, 'recursos');
+        }*/
+
         \App\Resource::Create([
             'titolRecurs' => $request['titolRecurs'],
-            'subTitol' => setDefaults($request, 'subTitol'),
-            'descBreu' => setDefaults($request, 'descBreu'),
-            'creatPer' => setDefaults($request, 'creatPer'),
-            'descDetaill1' => setDefaults($request, 'descDetaill1'),
-            'descDetaill2' => setDefaults($request, 'descDetaill2'),
-            'relevancia' => setDefaults($request, 'relevancia'),
+            'subTitol' => setDefaults($request, 'subTitol', 'recursos'),
+            'descBreu' => setDefaults($request, 'descBreu', 'recursos'),
+            'creatPer' => setDefaults($request, 'creatPer', 'recursos'),
+            'descDetaill1' => setDefaults($request, 'descDetaill1', 'recursos'),
+            'descDetaill2' => setDefaults($request, 'descDetaill2', 'recursos'),
+            'relevancia' => setDefaults($request, 'relevancia', 'recursos'),
             'dataInici' => getCorrectDate($request['dataInici']),
             'dataFinal' => getCorrectDate($request['dataFinal']),
-            'gratuit' => setDefaults($request, 'gratuit'),
-            'preuInferior' => setDefaults($request, 'preuInferior'),
-            'preuSuperior' => setDefaults($request, 'preuSuperior'),
+            'gratuit' => setDefaults($request, 'gratuit', 'recursos'),
+            'preuInferior' => setDefaults($request, 'preuInferior', 'recursos'),
+            'preuSuperior' => setDefaults($request, 'preuSuperior', 'recursos'),
             'dataPublicacio' => getCorrectDate($request['dataPublicacio']),
-            'visible' => setDefaults($request,'visible'),
+            'created-at' => getCorrectDate()->getTimestamp(),
+            'updated_at' => getCorrectDate()->getTimestamp(),
+            'visible' => setDefaults($request,'visible', 'recursos'),
             'fotoResum' => $this->fotoResum
         ]);
-
+        dump(getCorrectDate()->getTimestamp ());
         exit();
         $this->setInfoLog($this->log,'data->   '.implode("\n",$data));
         Resource::create($data);

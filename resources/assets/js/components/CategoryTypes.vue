@@ -52,6 +52,9 @@
             <span slot="no-more">
               No n'hi han més recursos.
             </span>
+             <span slot="no-results">
+                No em trobat cap resultat amb aquesta paraula.
+              </span>
         </infinite-loading>
 
         <!-- Acaba recurso -->
@@ -92,51 +95,23 @@ import InfiniteLoading from 'vue-infinite-loading';
 
     },
     methods:{
-        onInfinite(){
-          console.log('hola CategoryTypes.vue');
-              this.$parent.onInfinite(this.$route.params.typeuser, this.$route.params.category);
-        },
-        getCategory: function(value){
-
-          var cap = value.charAt(0).toUpperCase() + value.slice(1);
-          this.$root.category = { codiCategoria: cap, nomCategoria: value };
-        }
-      },
+          onInfinite(){
+                this.$parent.onInfinite(this.$route.params.typeuser, this.$route.params.category);
+          },
+          getCategory: function(value){
+            this.$root.recursos = [];
+            var cap = value.charAt(0).toUpperCase() + value.slice(1);
+            this.$router.push('/'+this.typeUserUrl + '/' + value);
+            this.$nextTick(() => {
+                this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                this.$root.page = 1;
+            });
+            this.$parent.animationScroll();
+            this.$root.category = { codiCategoria: cap, nomCategoria: value };
+          }
+         },
     components: {
             InfiniteLoading
-    },
-    computed:{
-      getSearchTitle(){
-
-        var searchWord = this.$root.search;
-        var searchEntity = this.$root.entity.name;
-
-        if(searchEntity === 'Totes'){
-              searchEntity = '';
-        }
-
-        function normalize(text){
-            return text.toLowerCase()
-                .replace(/á/g, 'a')
-                .replace(/é/g, 'e')
-                .replace(/í/g, 'i')
-                .replace(/ó/g, 'o')
-                .replace(/ú/g, 'u');
-        }
-
-        // return this.$root.recursos.filter(function(item) {
-
-        //       if(!normalize(item.titolRecurs).includes(normalize(searchWord))){
-        //           return normalize(item.creatPer).includes(normalize(searchWord));
-        //       }else{
-        //           return normalize(item.titolRecurs).includes(normalize(searchWord)); 
-        //       }
-              
-        //     }).filter(function(item) {
-        //         return item.entity[0].nomEntitat.includes(searchEntity);
-        //     })
-
-      }
     }
   }
 </script>

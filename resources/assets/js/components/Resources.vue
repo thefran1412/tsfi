@@ -8,6 +8,14 @@
 				<h1>{{resource[0].titolRecurs}}</h1>
 				<img class="img-responsive" :src="'/img/image/'+ resource[0].fotoResum" :alt="resource[0].titolRecurs" :title="resource[0].titolRecurs">
 				<!-- width="960" height="540" -->
+				<!-- <div v-if="resource[0].creatPer && datePub"class class="extras resource-extras-tag"> -->
+				<div>
+				<h5><strong>Autor: </strong> {{resource[0].creatPer}} <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i> {{datePub}}</strong></p></h5>
+				</div>
+				<!-- <p>{{resource[0].creatPer}}</p> -->
+				<!-- <h3>Data de publicació</h3> -->
+				<!-- <p>{{datePub}}</p> -->
+				<!-- </div> -->
 				<h2>{{resource[0].subtitol}}</h2>
 				<!-- class="descshort" -->
 				<p><strong>{{resource[0].descBreu}}</strong></p>
@@ -21,7 +29,7 @@
 				<h1>FITXA TÈCNICA</h1>
 				<div v-if="resource[0].age" class="resource-extras-tag">
 					<h3>Edats recomenades</h3>
-					<p v-for="(r, key) in resource[0].age">{{r.codiEdat}}</p>
+					<p v-for="r in resource[0].age">{{r.codiEdat}}</p>
 				</div>
 				<div v-if="dateIni && dateEnd"class="resource-extras-tag">
 					<h3>Data inicial i final</h3>
@@ -34,18 +42,15 @@
 					<p v-if="resource[0].gratuit === 0">{{resource[0].preuInferior}} €</p>
 					<p v-if="resource[0].gratuit === 0">{{resource[0].preuSuperior}} €</p>
 				</div>
-				<div v-if="resource[0].creatPer && datePub"class class="extras resource-extras-tag">
+		<!-- 		<div v-if="resource[0].creatPer && datePub"class class="extras resource-extras-tag">
 					<h3>Publicat per</h3>
 					<p>{{resource[0].creatPer}}</p>
 					<h3>Data de publicació</h3>
 					<p>{{datePub}}</p>
-				</div>
+				</div> -->
 				<!-- <pre>{{this.resource[0].entitats}}</pre> -->
-<<<<<<< HEAD
 				<div v-if="resource[0].entity !== 0" class="extras">
-=======
-				<div  v-if="resource[0].entity[0] !== 0" class="extras">
->>>>>>> 7408e340fd00c3118bc0bb57b28d9673b97dff6e
+				<!-- <div  v-if="resource[0].entity[0] !== 0" class="extras"> <-->
 					<h3>Direcció</h3>
 					<p>Calle estroncio 15-21, 3-4</p>
 					<h3>Xarxes Socials</h3>

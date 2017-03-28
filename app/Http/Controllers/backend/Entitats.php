@@ -35,7 +35,7 @@ class Entitats extends Controller
     {
         //$this->validateEntity($request);
         //$request['logo'] = '/hola/';
-        var_dump($request->hasFile('logo'));
+        //var_dump($request->hasFile('logo'));
         
         if ($request->hasFile('logo')) {
             
@@ -106,7 +106,7 @@ class Entitats extends Controller
             'nomEntitat' => 'required|max:255',
             'descEntitat' => 'required|max:255',
 
-            'telf1' => 'required|min:9|max:9',
+            'telf1' => 'min:9|max:9',
             'telf2' => 'min:9|max:9',
                         
             'link' => 'url|max:255',
@@ -114,7 +114,6 @@ class Entitats extends Controller
             'twitter' => 'url|max:255',
             'instagram' => 'url|max:255',
 
-            'logo' => 'required',
             'adreca' => 'max:255',
         ]);
     }

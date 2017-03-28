@@ -77,7 +77,7 @@ class Recursos extends Controller
                                     'videoType')
             ->where('recursos.recurs_id','=', $id)
             ->get();
-            
+
         // $dateIni = Carbon::now();;
         // $dateEnd = $dateIni;
         // $datePub = $dateIni;
@@ -85,11 +85,20 @@ class Recursos extends Controller
         if($resource[0]->dataInici){
             $dateIni = $resource[0]->dataInici->format('d/m/Y');
         }
+        else {
+             $dateIni = null;
+        }
         if($resource[0]->dataFinal){
             $dateEnd = $resource[0]->dataFinal->format('d/m/Y');
         }
+        else {
+             $dateEnd = null;
+        }
         if($resource[0]->dataPublicacio){
             $datePub = $resource[0]->dataPublicacio->format('d/m/Y');
+        }
+        else {
+             $datePub = null;
         }
         //var_dump($resource)
     return response()->json([

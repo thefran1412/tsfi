@@ -5,7 +5,8 @@
 				<div class="col-md-offset-2 col-md-8">
 					<div class="tags">
 					      <div class="panel">
-					         <h3>Tags</h3>
+					         <h3 v-if="!this.$route.query.tag">Tags</h3>
+                   <h3 v-if="this.$route.query.tag"> Buscan per el tag {{nameTag}} {{setTag(this.$route.query.tag)}}</h3>
 					         <hr>
 					         <a v-on:click="getResourceForTag()" v-bind:href="'#/search?tag='+ t.tags_id" v-for="t in tags" ><span class="tag-rounded">{{t.nomTags}}</span></a>
 					      </div>
@@ -58,7 +59,8 @@ export default {
     return {
       list: [],
       tags:[],
-      pageSearch:1
+      pageSearch:1,
+      nameTag:''
     };
   },
   methods: {
@@ -108,7 +110,20 @@ export default {
                 this.pageSearch = 1;
             });
             this.$parent.animationScroll();
-          }
+          },
+    setTag(value){
+        var t;
+
+        if(this.list[0]){
+           this.list[0].tag.forEach(function(v){
+              if(v.tags_id == value){
+                  t = v.nomTags;
+              }
+          });
+        }
+
+        this.nameTag = t;
+    }
   },
   components: {
     InfiniteLoading,

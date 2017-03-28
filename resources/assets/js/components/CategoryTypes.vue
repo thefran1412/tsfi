@@ -52,6 +52,9 @@
             <span slot="no-more">
               No n'hi han més recursos.
             </span>
+             <span slot="no-results">
+                No em trobat cap resultat amb aquesta paraula.
+              </span>
         </infinite-loading>
 
         <!-- Acaba recurso -->

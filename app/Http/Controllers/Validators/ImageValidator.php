@@ -101,7 +101,7 @@ class ImageValidator
         $this->file->move($this->target_dir, $this->hash_name);
         return true;
     }
-    public function errorUpoad(){
+    public function errorUpload(){
         if(!$this->isBiggerThan()){
             throw new FileException(sprintf('La imagen "%s" no se ha podido subir porque el tamaño de esta es mayor que "%s"KB',
                 $this->file->getClientOriginalName(), $this->size));

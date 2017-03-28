@@ -42,13 +42,11 @@ class Entitats extends Controller
             $validateimage = new ImageValidator($request, 'logo');
             
             if ($validateimage->validateImage(null, 2000000)){
-                
                 $validateimage->saveImage();
                 $this->logo = $validateimage->getNewImagePath();
-            
             }else{
                 
-                $validateimage->errorUpoad();
+                $validateimage->errorUpload();
             }
         }else{
             

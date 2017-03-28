@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Http\Controllers\Validators\ImageValidator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Entity;
 
 class Entitats extends Controller
 {
-    protected $loginPath = '/admin/login';  
+    protected $loginPath = '/admin/login';
+    protected $logo;
     /**
      * Create a new controller instance.
      *
@@ -31,9 +33,27 @@ class Entitats extends Controller
 
     public function store(Request $request)
     {
-        $this->validateEntity($request);
+        //$this->validateEntity($request);
         //$request['logo'] = '/hola/';
-        var_dump($request['descEntitat']);
+        var_dump($request->hasFile('logo'));
+        
+        if ($request->hasFile('logo')) {
+            
+            $validateimage = new ImageValidator($request, 'logo');
+            
+            if ($validateimage->validateImage(null, 2000000)){
+                
+                $validateimage->saveImage();
+                $this->logo = $validateimage->getPublicDir();
+            
+            }else{
+                
+                $validateimage->errorUpoad();
+            }
+        }else{
+            
+            $this->logo = '/images/default.jpg';
+        }
         \App\Entity::Create([
             'nomEntitat' =>  setDefaults($request, 'nomEntitat', 'entitats'),
             'descEntitat' =>  setDefaults($request, 'descEntitat', 'entitats'),
@@ -44,7 +64,7 @@ class Entitats extends Controller
             
             'esMembre' => setDefaults($request, 'esMembre', 'entitats'),
             
-            'logo' => 'hola',
+            'logo' => $this->logo,
             'idLocalitzacio' => null,
 
             'facebook' =>  setDefaults($request, 'facebook', 'entitats'),

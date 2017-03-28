@@ -21,7 +21,7 @@
 
 @section('content')
      <div class="create">
-      {!!Form::open(['action' => 'backend\Entitats@store', 'method' => 'post', 'id' => 'create'])!!}
+      {!!Form::open(['action' => 'backend\Entitats@store', 'method' => 'post', 'id' => 'create', 'files' => true])!!}
         <div class="paper">
           <div>
             {!!Form::label('nomEntitat', 'Nom: ')!!}
@@ -47,7 +47,7 @@
         <div class="paper">
           <div class="upload">
             {!!Form::label('logo', 'Logo: ')!!}
-            <input type="file" name="logo" accept="image/*" class="form-control">
+            <input type="file" name="logo" accept="image/*" class="form-control" id="logo">
             {{-- {!!Form::file('logo', null, ['class' => 'form-control', 'placeholder' => 'Logo', 'accept' => 'image/*'])!!} --}}
           </div>
 

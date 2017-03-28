@@ -27,10 +27,10 @@ class ImageValidator
         $this->file =  $request->file($filename);
         $this->extension = '.'.$request->file($filename)->getClientOriginalExtension();
         $this->file_type = $request->file($filename)->getMimeType();
-        $this->target_dir = base_path() . '\public\images\\';
+        $this->target_dir = base_path() . '/public/images\\';
         $this->hash_name = hash('md5',time() . $request->file($filename)->getClientOriginalName()). $this->extension;
         $this->target_file = $this->target_dir . $this->hash_name;
-        $this->publicdir = '\public\images\\'.$this->hash_name;
+        $this->publicdir = '/images\\'.$this->hash_name;
         $this->image_size = bcdiv($request->file($filename)->getSize()/1024,1,1);
     }
     public function getTargetFile()

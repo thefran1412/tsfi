@@ -89,6 +89,19 @@ body {
   height: 200px;
   background: #636b6f;
 }
+.autor div {
+  /*padding-top: 5px;
+  padding-bottom:  5px;*/
+  display: inline-block;
+}
+.autor h5{
+  /*display: inline-block;*/
+  float: left;
+}
+.autor p {
+  /*display: inline-block;*/
+  float: right;
+}
 
 
 /* Large desktops and laptops */

@@ -51,6 +51,11 @@
             <input type="file" name="logo" accept="image/*" class="form-control" id="logo">
             {{-- {!!Form::file('logo', null, ['class' => 'form-control', 'placeholder' => 'Logo', 'accept' => 'image/*'])!!} --}}
           </div>
+          <div class="preview">
+            <div>
+              <img src="{{$entitat->logo}}">
+            </div>
+          </div>
 
         </div>
         <div class="paper">

@@ -48,7 +48,7 @@ $(document).ready(function() {
     startDate.change(function() {
         $('#dataFinal').attr('min',$(this).val())
     });
-    var $gratuit=$('#id_gratuit');
+    var $gratuit=$('#gratuit');
     $gratuit.change(function () {
         var attr = $gratuit.attr( "checked" );
         if ( $gratuit.attr( "value" ) !== "false") {

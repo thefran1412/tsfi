@@ -20,8 +20,6 @@ class MapValidator
     public function saveMap()
     {
         if ($this->lat == 0 || $this->lng == 0) {
-            echo 'entered';
-            exit();
             return null;
         }
         $location = new Location;
@@ -29,10 +27,8 @@ class MapValidator
         $location->latitud = $this->lat;
         $location->longitud = $this->lng;
 
-        if ($flight->save()) {
+        if ($location->save()) {
             return $location->id;
         }
-
-
     }
 }

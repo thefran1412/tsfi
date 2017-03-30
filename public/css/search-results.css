@@ -149,6 +149,10 @@
     text-decoration: none;
 }
 
+.total-results h4 b {
+    font-size: 28px;
+}
+
 .description-resource{
     display: block;
     display: -webkit-box;

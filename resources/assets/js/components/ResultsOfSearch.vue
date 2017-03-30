@@ -15,6 +15,9 @@
 			</div>
       <div class="container">
           <div class="row">
+              <div class="col-md-12 total-results">
+                  <h4>Em trobat <b>{{totalResults}}</b> recurs/os amb aquets criteris de cerca...</h4>
+              </div>
               <div class="col-sm-4 col-md-4 margin-post" v-for="l in list">
                   <div class="post">
                       <div class="post-img-content">
@@ -59,6 +62,7 @@ export default {
     return {
       list: [],
       tags:[],
+      totalResults:'',
       pageSearch:1,
       nameTag:''
     };
@@ -80,6 +84,7 @@ export default {
 
       	if(this.pageSearch === 1){
       		this.tags = res.data.tags;
+          this.totalResults = res.data.totalCount;
       	}
       	
         if (res.data.resources.length) {

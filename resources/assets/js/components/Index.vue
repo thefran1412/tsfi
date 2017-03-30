@@ -8,6 +8,7 @@
                         <li v-on:click="changeTypeUser('teacher')" v-if="type === 'teacher'">
                                 <span class="title">TSFI</span>
                         </li>
+                        
                         <li  v-on:click="changeTypeUser('student')" v-if="type === 'student'">
                                 <span class="title">TSFI</span>
                         </li>

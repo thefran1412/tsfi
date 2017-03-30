@@ -47,6 +47,10 @@ Route::post('submit', function(Request $request){
 	$prueba = Resource::create($input);
 	$insertedId = $prueba->recurs_id;
 
+	$resource = Resource::find($insertedId);
+	$resource->visible = 0;
+	$resource->save();
+
 	if($selectTypeUser['target'] === 'Estudiants'){
 		TargetResource::create(['idRecurs' => $insertedId, 'idTarget' => 2]);
 	}

@@ -40,7 +40,7 @@
 				</div>
 
 				<!-- <pre>{{this.resource[0].entitats}}</pre> -->
-				<div v-if="resource[0].entity" class="extras">
+				<div v-if="resource[0].entity > 0" class="extras">
 				<!-- Logo entitat ** sin arreglar -->
 					<h3>{{resource[0].entity[0].nomEntitat}}</h3></br>
 					<h4 v-if="resource[0].entity[0].descEntitat">{{resource[0].entity[0].descEntitat}}</h4>

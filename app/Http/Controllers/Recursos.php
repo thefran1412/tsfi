@@ -13,7 +13,7 @@ class Recursos extends Controller
             $category = '%';
         }
 
-        $resources = Resource::with('category','targets','entity')->
+        $resources = Resource::where('visible', '=', 1)->with('category','targets','entity')->
             whereHas('targets', function ($query) use ($typeuser) {
                     $query->where('codiTarget','=', $typeuser);
             })->whereHas('category', function ($query) use ($category) {

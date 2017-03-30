@@ -71,6 +71,7 @@
      border-radius: 25px;
      padding: 6px 15px;
      color: #a9b1b5;
+     margin-right: 10px;
      transition: all 300ms ease-in-out;
 }
 
@@ -138,4 +139,26 @@
     color: #FFF;
     padding: 10px 15px;
     margin-top: 5px;
+}
+
+.post .post-title b a{
+    color: #4FC08D;
+}
+
+.post .post-title b a:hover{
+    text-decoration: none;
+}
+
+.description-resource{
+    display: block;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 67px;
+    margin: 0 auto;
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

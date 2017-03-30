@@ -28,7 +28,7 @@
                               By <b>{{l.creatPer}}</b> |
                               <time datetime="2014-01-20">{{l.dataPublicacio}}</time>
                           </div>
-                          <div>
+                          <div class="description-resource">
                               <span>{{l.descBreu}}</span>
                           </div>
                       </div>

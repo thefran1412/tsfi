@@ -13,8 +13,8 @@ class MapValidator
 
     public function __construct($lat, $lng)
     {
-        $this->lat = floatval($lat);
-        $this->lng =  floatval($lng);
+        $this->lat = strval(floatval($lat));
+        $this->lng =  strval(floatval($lng));
     }
 
     public function saveMap()
@@ -22,13 +22,36 @@ class MapValidator
         if ($this->lat == 0 || $this->lng == 0) {
             return null;
         }
-        $location = new Location;
 
-        $location->latitud = $this->lat;
-        $location->longitud = $this->lng;
+        $exists = $this->exists();
+        
+        if (!$exists) {
+            $location = new Location;
+            
+            $location->latitud = $this->lat;
+            $location->longitud = $this->lng;
 
-        if ($location->save()) {
-            return $location->id;
+            if ($location->save()) {
+                return $location->localitzacions_id;
+            }
         }
+        else{
+            return $exists;
+        }
+
+        return null;
+    }
+
+    public function exists()
+    {
+        $l = Location::where('latitud', $this->lat)
+        ->where('longitud', $this->lng)
+        ->first();
+
+        if ($l !== null) {
+            return $l->localitzacions_id;
+        }
+        
+        return false;
     }
 }

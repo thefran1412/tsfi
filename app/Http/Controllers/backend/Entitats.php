@@ -39,6 +39,9 @@ class Entitats extends Controller
         //validate and save map
         $validatemap = new MapValidator($request['lat'], $request['lng']);
         $locId = $validatemap->saveMap();
+        if ($locId == null) {
+            $request['adreca'] = null;
+        }
 
         if ($request->hasFile('logo')) {
             

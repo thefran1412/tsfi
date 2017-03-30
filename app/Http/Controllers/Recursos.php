@@ -33,7 +33,7 @@ class Recursos extends Controller
 
             $tags = \App\Tag::where("nomTags","LIKE", "%$searchName%")->get();
 
-            $resources = Resource::with('entity')->
+            $resources = Resource::where('visible', '=', 1)->with('entity')->
             where("titolRecurs","LIKE", "%$searchName%")->paginate(20)->items();
 
             return response()->json([
@@ -47,7 +47,7 @@ class Recursos extends Controller
 
             //$tagsSearch = \App\Tag::with('resource')->where("tags_id","=", $searchTag)->paginate(20)->items();
 
-            $resources = Resource::with('tag')->
+            $resources = Resource::where('visible', '=', 1)->with('tag')->
             whereHas('tag', function ($query) use ($searchTag) {
                     $query->where('tags_id','=', $searchTag);
             })->paginate(20)->items();

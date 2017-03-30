@@ -18,9 +18,9 @@
                                 <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                             </div>
                         </div>
-                    <!-- <div class="col-md-3">
+                    <div class="col-md-3" v-show="noShow">
                         <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="codiCategoria" track-by="codiCategoria"  :allow-empty="false"></multiselect>
-                    </div> -->
+                    </div>
                     <div class="col-md-3">
                             <form @submit.prevent="actionToSearch" class="site-search" >
                               <div id="site-search-container">
@@ -108,6 +108,7 @@
                 categories: [],
                 entities: [],
                 prueba:null,
+                noShow:false,
                 typeUserUrl: this.$route.params.typeuser,
                 typeCategory:this.$route.params.category,
                 page:1
@@ -129,7 +130,7 @@
                 //     this.recursos = [];
                 //     this.$nextTick(() => {
                 //         this.prueba.$emit('$InfiniteLoading:reset');
-                //         this.animationScroll();
+                        // this.animationScroll();
                 //     });
                 //     this.category = { codiCategoria:value , nomCategoria: 'enviar-recurs' };
                 // }
@@ -171,7 +172,7 @@
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
 
-                    this.animationScroll();
+                    // this.animationScroll();
                     
                 });
                 
@@ -246,7 +247,7 @@
                             this.page = 1;
                         });
 
-                       this.animationScroll();
+                       // this.animationScroll();
                 },
                 animationScroll(){
                     $("html, body").animate({ scrollTop: 20 }, "slow");
@@ -263,7 +264,7 @@
                             this.$children[3].pageSearch = 1;
                         });
 
-                        this.animationScroll();
+                        // this.animationScroll();
                 }
         },
        components: {

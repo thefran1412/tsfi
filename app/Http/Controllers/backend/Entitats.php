@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Validators\ImageValidator;
+use App\Http\Controllers\Validators\MapValidator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Entity;
@@ -33,27 +34,31 @@ class Entitats extends Controller
 
     public function store(Request $request)
     {
-        //$this->validateEntity($request);
-        //$request['logo'] = '/hola/';
-        //var_dump($request->hasFile('logo'));
+        $this->validateEntity($request);
         
+        //validate and save map
+        $validatemap = new MapValidator($request['lat'], $request['lng']);
+        $locId = $validatemap->saveMap();
+        if ($locId == null) {
+            $request['adreca'] = null;
+        }
+
         if ($request->hasFile('logo')) {
             
             $validateimage = new ImageValidator($request, 'logo');
             
             if ($validateimage->validateImage(null, 2000000)){
-                
                 $validateimage->saveImage();
                 $this->logo = $validateimage->getNewImagePath();
-            
             }else{
                 
-                $validateimage->errorUpoad();
+                $validateimage->errorUpload();
             }
         }else{
             
             $this->logo = '/img/image/default.png';
         }
+
         \App\Entity::Create([
             'nomEntitat' =>  setDefaults($request, 'nomEntitat', 'entitats'),
             'descEntitat' =>  setDefaults($request, 'descEntitat', 'entitats'),
@@ -65,7 +70,7 @@ class Entitats extends Controller
             'esMembre' => setDefaults($request, 'esMembre', 'entitats'),
             
             'logo' => $this->logo,
-            'idLocalitzacio' => null,
+            'idLocalitzacio' => $locId,
 
             'facebook' =>  setDefaults($request, 'facebook', 'entitats'),
             'twitter' =>  setDefaults($request, 'twitter', 'entitats'),

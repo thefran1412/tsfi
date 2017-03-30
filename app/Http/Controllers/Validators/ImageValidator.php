@@ -30,7 +30,7 @@ class ImageValidator
         $this->target_dir = base_path() . '/public/img/image/\\';
         $this->hash_name = hash('md5',time() . $request->file($filename)->getClientOriginalName()). $this->extension;
         $this->target_file = $this->target_dir . $this->hash_name;
-        $this->newimagepath = 'public/img/image/'.$this->hash_name;
+        $this->newimagepath = '/img/image/'.$this->hash_name;
         $this->image_size = bcdiv($request->file($filename)->getSize()/1024,1,1);
     }
     public function getTargetFile()
@@ -101,7 +101,7 @@ class ImageValidator
         $this->file->move($this->target_dir, $this->hash_name);
         return true;
     }
-    public function errorUpoad(){
+    public function errorUpload(){
         if(!$this->isBiggerThan()){
             throw new FileException(sprintf('La imagen "%s" no se ha podido subir porque el tamaño de esta es mayor que "%s"KB',
                 $this->file->getClientOriginalName(), $this->size));

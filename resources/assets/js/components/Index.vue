@@ -13,14 +13,14 @@
                                 <span class="title">TSFI</span>
                         </li>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-md-offset-3">
                             <div class="selects">
                                 <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                             </div>
                         </div>
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="codiCategoria" track-by="codiCategoria"  :allow-empty="false"></multiselect>
-                    </div>
+                    </div> -->
                     <div class="col-md-3">
                             <form @submit.prevent="actionToSearch" class="site-search" >
                               <div id="site-search-container">

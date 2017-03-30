@@ -26,9 +26,10 @@ class Tags extends Controller
 
     public function store(Request $request)
     {
+        $this->validateTag($request);
+
         \App\Tag::Create([
-            'nomTags' => $request['nom'],
-            'descTag' => $request['desc']
+            'nomTags' => $request['nomTags']
         ]);
         return redirect('admin/tags');
     }
@@ -54,5 +55,11 @@ class Tags extends Controller
         $recurs->fill($request->all());
         $recurs->save();
         return redirect('admin/tags');
+    }
+    private function validateTag($request)
+    {
+        $this->validate($request, [
+            'nomTags' => 'required|max:255',
+        ]);
     }
 }

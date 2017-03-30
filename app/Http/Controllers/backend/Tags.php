@@ -38,7 +38,6 @@ class Tags extends Controller
     {
         \App\Tag::destroy($id);
         return redirect('admin/tags');
-
     }
 
     public function edit($id = NULL)
@@ -51,6 +50,7 @@ class Tags extends Controller
     }
     public function update($id, Request $request)
     {
+        $this->validateTag($request);
         $recurs = Tag::find($id);
         $recurs->fill($request->all());
         $recurs->save();
@@ -59,7 +59,7 @@ class Tags extends Controller
     private function validateTag($request)
     {
         $this->validate($request, [
-            'nomTags' => 'required|max:255',
+            'nomTags' => 'required|max:70',
         ]);
     }
 }

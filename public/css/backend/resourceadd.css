@@ -1,0 +1,19 @@
+.note-editor.note-frame .note-editing-area .note-editable{
+    padding-left:20px;
+}
+#tags_box{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px solid rgb(206, 209, 212);
+    background: #FFFFFF;
+    min-height: 120px;
+    padding: 10px;
+}
+.categoriaDelete{
+    margin: 5px 2px 0 2px;
+}
+
+.categoriaDelete:hover{
+    color: #fff;
+    background-color: rgba(238, 64, 0, 0.87);
+    border-color: #db1700; /*set the color you want here*/
+}

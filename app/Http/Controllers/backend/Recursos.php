@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Age;
 use App\Http\Controllers\Validators\ImageValidator;
 use App\Resource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use \App\Category;
+use \App\Tag;
+use stdClass;
 
 class Recursos extends Controller
 {
@@ -28,13 +33,45 @@ class Recursos extends Controller
         $v = Resource::where('visible', 0)->get();
         return view('backend.recursos.index', ['resources' => $r, 'pendents' => $v]);
     }
+    public function autoCompleteCategory(Request $request)
+    {
+        $categories = Category::all('nomCategoria', 'codiCategoria');
+        $obj = ['query'=>'Unit'];
+        $values=[];
+        foreach ($categories as $category){
+            $cat = ['value' => $category->nomCategoria, 'data' => $category->cosiCategoria];
+            array_push ($values,$cat);
+        }
+        $obj['suggestions']=$values;
+        return response()->json($obj);
+    }
+    public function autoComplete(Request $request)
+    {
+        $term = null;
+        if($request['term']){
+            $term = $request['term'];
+        }
 
+        $results = array();
+        $queries = Tag::where('nomTags', 'LIKE', "{$term}%")->take(5)->get();
+        $results=[];
+        foreach ($queries as $query)
+        {
+            array_push($results,$query->nomTags);
+        }
+
+        return $results;
+    }
     public function add()
     {
-        $categorias = Category::all('categoria_id', 'nomCategoria');
+        $categorias = Category::all('nomCategoria', 'categoria_id');
+        $edats = Age::pluck('descEdat', 'edats_id');
         $current_time = Carbon::now()->format('Y-m-d');
-        return view('backend.recursos.add', compact('categorias',$categorias),
-            ['current_time' => $current_time, '$categorias' => $categorias]);
+        return view('backend.recursos.add',[
+                'edats'=>$edats,
+                'categorias'=>$categorias
+            ]
+        );
     }
     public function store(Request $request)
     {
@@ -53,11 +90,7 @@ class Recursos extends Controller
         }else{
             dump('no hay archivo');
         }
-        /*foreach ($requests as $key => $request) {
-            $request = setDefaults($request, $key, 'recursos');
-        }*/
-
-        \App\Resource::Create([
+        $recurso = Resource::Create([
             'titolRecurs' => $request['titolRecurs'],
             'subTitol' => setDefaults($request, 'subTitol', 'recursos'),
             'descBreu' => setDefaults($request, 'descBreu', 'recursos'),
@@ -76,7 +109,11 @@ class Recursos extends Controller
             'visible' => setDefaults($request,'visible', 'recursos'),
             'fotoResum' => $this->fotoResum
         ]);
-        dump(getCorrectDate()->getTimestamp ());
+
+        $insertedId = $recurso->recurs_id;
+        dump($insertedId);
+        dump($request['multipleage']);
+        dump($request['']);
         exit();
         $this->setInfoLog($this->log,'data->   '.implode("\n",$data));
         Resource::create($data);
@@ -113,6 +150,7 @@ class Recursos extends Controller
             'logo' => 'required',
             'adreca' => 'max:255',
         ]);
+
     }
     private function setInfoLog(Logger $log, $message)
     {

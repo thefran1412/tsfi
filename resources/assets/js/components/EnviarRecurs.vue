@@ -5,12 +5,12 @@
 			<div class="form-group" :class="{'has-error' : errors.has('titolRecurs') }">
 				<label for="titolRecurs">Títol:</label>
 				<span v-show="errors.has('titolRecurs')" class="help is-danger">{{ errors.first('titolRecurs') }}</span>	
-					<input v-validate="'required|max:100'" class="form-control title" type="text" id="titolRecurs" data-vv-as="Títol" name="titolRecurs" placeholder="Títol" required>
+					<input v-validate="'required|max:60'" class="form-control title" type="text" id="titolRecurs" data-vv-as="Títol" name="titolRecurs" placeholder="Títol">
 			</div>
 			<div class="form-group" :class="{'has-error' : errors.has('subTitol') }">
 				<label for="subTitol">Subtítol:</label>
 				<span v-show="errors.has('subTitol')" class="help is-danger">{{ errors.first('subTitol') }}</span>	
-					<input v-validate="'required|max:200'" class="form-control title" type="text" id="subTitol" data-vv-as="Subtítol" name="subTitol" placeholder="Subtítol" required>
+					<input v-validate="'required|max:200'" class="form-control title" type="text" id="subTitol" data-vv-as="Subtítol" name="subTitol" placeholder="Subtítol">
 			</div>
 			<div class="row">
 				<div class="col-md-6">
@@ -38,7 +38,7 @@
 			<div class="form-group" :class="{'has-error' : errors.has('descDetaill1') }">
 				<label for="descDetaill1">Descripció:</label>
 				<span v-show="errors.has('descDetaill1')" class="help is-danger">{{ errors.first('descDetaill1') }}</span>	
-					<textarea v-validate="'required|max:5000'" class="form-control title" type="text" id="descDetaill1" data-vv-as="Descripció" name="descDetaill1" placeholder="Descripció" required></textarea>
+					<textarea v-validate="'required|max:5000'" class="form-control title" type="text" id="descDetaill1" data-vv-as="Descripció" name="descDetaill1" placeholder="Descripció"></textarea>
 			</div>
 			<div class="row">
 				<div class="col-md-4">
@@ -169,17 +169,27 @@
 				
 			},
 			submitForm: function(){
-				var form = this.$refs.enviarRecurs;
-				var formdata = new FormData(form);
+				if (!this.validate()){
+					var form = this.$refs.enviarRecurs;
+					var formdata = new FormData(form);
 
-				console.log(form);
-				console.log(formdata);
+					console.log(form);
+					console.log(formdata);
 
-				this.$http.post('../api/submit', formdata).then((response) =>{
-					//this.$router.push({path:'/student/home', query:{alert:'User Create'}})
-				},(response)=>{
-					console.log(response);
-				});
+					this.$http.post('../api/submit', formdata).then((response) =>{
+						//this.$router.push({path:'/student/home', query:{alert:'User Create'}})
+					},(response)=>{
+						console.log(response);
+					});		
+					alert('Recurs enviat')
+				}else{
+					alert('Recurs no enviat, si us plau revisa les dades')
+				}
+			},
+			validate: function(){
+				this.$validator.validateAll();
+
+				return this.errors.any();
 			}
 		}
 	}

@@ -25,20 +25,28 @@ import Index from './components/Index.vue';
 
 //SendResource
 import EnviarRecurs from './components/EnviarRecurs.vue';
-
 import VeeValidate from 'vee-validate';
+import { Validator } from 'vee-validate';
 
-// Vue.use(VeeValidate);
-
-import messagesEs from './i18n/messages/es.js';
-import attributesEs from './i18n/attributes/es.js';
-
-Vue.use(VeeValidate, {
-  locale: 'es',
-  dictionary: {
-    es: { messages: messagesEs, attributes: attributesEs }
+const dictionary = {
+  en: {
+    messages:{
+      required: () => 'Some English Message'
+    }
+  },
+  ca: {
+    messages: {
+      required: (field) => `El camp ${field} es obligatori.`,
+      max: (field, [length]) => `El camp ${field} no pot ser major a ${length} caràcteres.`,
+    }
   }
-});
+};
+Vue.use(VeeValidate)
+Validator.updateDictionary(dictionary);
+
+const validator = new Validator({ first_name: 'required' });
+
+validator.setLocale('ca');
 
 //Categories
 import Resources from './components/CategoryTypes.vue';

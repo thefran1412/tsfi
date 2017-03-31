@@ -225,8 +225,6 @@
                                 }
                             });
 
-                        console.log(d);
-
                           this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
                           if (this.recursos.length / 20 === 10) {
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
@@ -270,5 +268,28 @@
        components: {
             Multiselect
         },
+        watch: {
+            '$route' (to, from) {
+                this.$children[3].list = [];
+                this.recursos = [];
+
+                console.log(to);
+
+                this.$router.push(to.fullPath);
+
+                this.$nextTick(() => {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                            this.$children[3].pageSearch = 1;
+                            this.page = 1;
+                        });
+
+                console.log(to.fullPath.indexOf('student') > 0);
+
+                if(to.fullPath.indexOf('student') > 0 || to.fullPath.indexOf('teacher') > 0){
+                    var cap = to.params.category.charAt(0).toUpperCase() + to.params.category.slice(1);
+                    this.category = { codiCategoria: cap, nomCategoria: to.params.category };
+                }
+           }
+       }
     }
 </script>

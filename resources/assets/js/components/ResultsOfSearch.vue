@@ -39,10 +39,10 @@
               </div>
               <infinite-loading :on-infinite="onInfiniteSearch" ref="infiniteLoading">
                 <span slot="no-more">
-                No hi han més recursos amb aquets resultats.
+                      No hi han més recursos amb aquets resultats.
                 </span>
                 <span slot="no-results">
-                No em trobat cap resultat amb aquesta paraula.
+                    No em trobat cap resultat amb aquesta paraula.
               </span>
               </infinite-loading>
           </div>

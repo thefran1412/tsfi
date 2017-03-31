@@ -28,3 +28,7 @@
 .content-send-resource .button-send{
 	text-align: center;
 }
+
+.is-danger {
+	color: #a94442;
+}

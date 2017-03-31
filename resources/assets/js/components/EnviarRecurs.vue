@@ -2,13 +2,15 @@
 	<div class="content-bottom-header container content-send-resource">
 		<h1>Enviar Recurs</h1>
 		<form @submit.prevent="submitForm" ref="enviarRecurs" method="post" enctype="multipart/form-data">
-			<div class="form-group">
+			<div class="form-group" :class="{'has-error' : errors.has('titolRecurs') }">
 				<label for="titolRecurs">Títol:</label>
-				<input class="form-control title" type="text" id="titolRecurs" name="titolRecurs" placeholder="Títol" required>
+				<span v-show="errors.has('titolRecurs')" class="help is-danger">{{ errors.first('titolRecurs') }}</span>	
+					<input v-validate="'required|max:100'" class="form-control title" type="text" id="titolRecurs" data-vv-as="Títol" name="titolRecurs" placeholder="Títol" required>
 			</div>
-			<div class="form-group">
+			<div class="form-group" :class="{'has-error' : errors.has('subTitol') }">
 				<label for="subTitol">Subtítol:</label>
-				<input class="form-control title" type="text" id="subTitol" name="subTitol" placeholder="Subtítol" required>
+				<span v-show="errors.has('subTitol')" class="help is-danger">{{ errors.first('subTitol') }}</span>	
+					<input v-validate="'required|max:200'" class="form-control title" type="text" id="subTitol" data-vv-as="Subtítol" name="subTitol" placeholder="Subtítol" required>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
@@ -31,11 +33,12 @@
 			</div>
 			<div class="form-group">
 			  <label for="descBreu" required>Descripció breu:</label>
-			  <textarea class="form-control" type="text" id="descBreu" name="descBreu"></textarea>
+			  <textarea class="form-control" type="text" id="descBreu" name="descBreu" placeholder="Descripció breu"></textarea>
 			</div>
-			<div class="form-group">
-			  <label for="descDetaill1">Descripció:</label>
-			  <textarea class="form-control" type="text" id="descDetaill1" name="descDetaill1"></textarea>
+			<div class="form-group" :class="{'has-error' : errors.has('descDetaill1') }">
+				<label for="descDetaill1">Descripció:</label>
+				<span v-show="errors.has('descDetaill1')" class="help is-danger">{{ errors.first('descDetaill1') }}</span>	
+					<textarea v-validate="'required|max:5000'" class="form-control title" type="text" id="descDetaill1" data-vv-as="Descripció" name="descDetaill1" placeholder="Descripció" required></textarea>
 			</div>
 			<div class="row">
 				<div class="col-md-4">
@@ -81,7 +84,6 @@
 		</form>
 	</div>
 </template>
-
 
 <script>
 	export default{

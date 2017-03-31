@@ -7,6 +7,7 @@
 var Vue = require('vue');
 var VueRouter = require('vue-router');
 
+
 require('./bootstrap');
 
 /**
@@ -18,6 +19,7 @@ require('./bootstrap');
 Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 Vue.use(VueRouter);
 
+
 //Index
 import Index from './components/Index.vue';
 
@@ -25,6 +27,19 @@ import Index from './components/Index.vue';
 
 import EnviarRecurs from './components/EnviarRecurs.vue';
 
+import VeeValidate from 'vee-validate';
+
+// Vue.use(VeeValidate);
+
+import messagesEs from './i18n/messages/es.js';
+import attributesEs from './i18n/attributes/es.js';
+
+Vue.use(VeeValidate, {
+  locale: 'es',
+  dictionary: {
+    es: { messages: messagesEs, attributes: attributesEs }
+  }
+});
 
 //Categories
 import Resources from './components/CategoryTypes.vue';

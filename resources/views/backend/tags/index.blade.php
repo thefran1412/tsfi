@@ -28,13 +28,13 @@
           <div class="createBody">
             {!!Form::open(['action' => 'backend\Tags@store', 'method' => 'post'])!!}
               <div>
-                  {!!Form::label('nom', 'Nom: ')!!}
-                  {!!Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Nom del tag'])!!}
+                  {!!Form::label('nomTags', 'Nom: ')!!}
+                  {!!Form::text('nomTags', null, ['class' => 'form-control', 'placeholder' => 'Nom del tag'])!!}
               </div>
-              <div>
+              {{-- <div>
                   {!!Form::label('desc', 'Descripció: ')!!}
                   {!!Form::textarea('desc', null, ['class' => 'form-control', 'placeholder' => 'Descripció del tag'])!!}
-              </div>
+              </div> --}}
               <div>
                   {!!Form::submit('Guardar canvis', ['class' => 'btn btn-primary'])!!}
               </div>
@@ -52,15 +52,15 @@
                     <thead >
                         <tr>
                             <th>Nom</th>
-                            <th>Descripció</th>
+                            {{-- <th>Descripció</th> --}}
                             <th>Accions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($tags as $tag)
                             <tr>
-                              <th><a href="{{action('backend\Tags@edit', ['id' => $tag->tag_id])}}">{{$tag->nomTags}}</a></th>
-                              <th>{{$tag->descTag}}</th>
+                              <th><a href="{{action('backend\Tags@edit', ['id' => $tag->tags_id])}}">{{$tag->nomTags}}</a></th>
+                              {{-- <th>{{$tag->descTag}}</th> --}}
                               <th>
                                 <div class="actions">
                                   <a title="Editar" href="{{action('backend\Tags@edit', ['id' => $tag->tags_id])}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>

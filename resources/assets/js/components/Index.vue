@@ -8,6 +8,7 @@
                         <li v-on:click="changeTypeUser('teacher')" v-if="type === 'teacher'">
                                 <span class="title">TSFI</span>
                         </li>
+                        
                         <li  v-on:click="changeTypeUser('student')" v-if="type === 'student'">
                                 <span class="title">TSFI</span>
                         </li>
@@ -17,9 +18,9 @@
                                 <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                             </div>
                         </div>
-                    <!-- <div class="col-md-3">
+                    <div class="col-md-3" v-show="noShow">
                         <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="codiCategoria" track-by="codiCategoria"  :allow-empty="false"></multiselect>
-                    </div> -->
+                    </div>
                     <div class="col-md-3">
                             <form @submit.prevent="actionToSearch" class="site-search" >
                               <div id="site-search-container">
@@ -115,6 +116,7 @@
                 categories: [],
                 entities: [],
                 prueba:null,
+                noShow:false,
                 typeUserUrl: this.$route.params.typeuser,
                 typeCategory:this.$route.params.category,
                 page:1
@@ -136,7 +138,7 @@
                 //     this.recursos = [];
                 //     this.$nextTick(() => {
                 //         this.prueba.$emit('$InfiniteLoading:reset');
-                //         this.animationScroll();
+                        // this.animationScroll();
                 //     });
                 //     this.category = { codiCategoria:value , nomCategoria: 'enviar-recurs' };
                 // }
@@ -178,7 +180,7 @@
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
 
-                    this.animationScroll();
+                    // this.animationScroll();
                     
                 });
                 
@@ -231,8 +233,6 @@
                                 }
                             });
 
-                        console.log(d);
-
                           this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
                           if (this.recursos.length / 20 === 10) {
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
@@ -253,7 +253,7 @@
                             this.page = 1;
                         });
 
-                       this.animationScroll();
+                       // this.animationScroll();
                 },
                 animationScroll(){
                     $("html, body").animate({ scrollTop: 20 }, "slow");
@@ -270,11 +270,34 @@
                             this.$children[3].pageSearch = 1;
                         });
 
-                        this.animationScroll();
+                        // this.animationScroll();
                 }
         },
        components: {
             Multiselect
         },
+        watch: {
+            '$route' (to, from) {
+                this.$children[3].list = [];
+                this.recursos = [];
+
+                console.log(to);
+
+                this.$router.push(to.fullPath);
+
+                this.$nextTick(() => {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                            this.$children[3].pageSearch = 1;
+                            this.page = 1;
+                        });
+
+                console.log(to.fullPath.indexOf('student') > 0);
+
+                if(to.fullPath.indexOf('student') > 0 || to.fullPath.indexOf('teacher') > 0){
+                    var cap = to.params.category.charAt(0).toUpperCase() + to.params.category.slice(1);
+                    this.category = { codiCategoria: cap, nomCategoria: to.params.category };
+                }
+           }
+       }
     }
 </script>

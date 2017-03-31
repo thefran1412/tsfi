@@ -60,7 +60,11 @@
 					</h4>
 				</div>
 				<!-- <pre>{{this.resource[0].entitats}}</pre> -->
+
+				<div v-if="resource[0].entity > 0" class="extras">
+
 				<div v-if="resource[0].entity[0]" class="extras">
+
 				<!-- Logo entitat ** sin arreglar -->
 					<h3 v-if="resource[0].entity[0].nomEntitat"><i class="fa fa-building fa-lg" aria-hidden="true"></i> {{resource[0].entity[0].nomEntitat}}</h3>
 					<!-- </br> -->

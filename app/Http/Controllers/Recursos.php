@@ -13,7 +13,7 @@ class Recursos extends Controller
             $category = '%';
         }
 
-        $resources = Resource::with('category','targets','entity')->
+        $resources = Resource::where('visible', '=', 1)->with('category','targets','entity')->
             whereHas('targets', function ($query) use ($typeuser) {
                     $query->where('codiTarget','=', $typeuser);
             })->whereHas('category', function ($query) use ($category) {
@@ -33,27 +33,38 @@ class Recursos extends Controller
 
             $tags = \App\Tag::where("nomTags","LIKE", "%$searchName%")->get();
 
-            $resources = Resource::with('entity')->
+            $totalCount = Resource::where('visible', '=', 1)->with('entity')->
+            where("titolRecurs","LIKE", "%$searchName%")->count();
+
+
+            $resources = Resource::where('visible', '=', 1)->with('entity')->
             where("titolRecurs","LIKE", "%$searchName%")->paginate(20)->items();
 
             return response()->json([
                 'resources' => $resources,
-                'tags' => $tags
+                'tags' => $tags,
+                'totalCount' => $totalCount
             ]);
         }
 
         if(isset($_GET["tag"])){
             $searchTag = $_GET["tag"];
 
+            $totalCount = Resource::where('visible', '=', 1)->with('tag')->
+            whereHas('tag', function ($query) use ($searchTag) {
+                    $query->where('tags_id','=', $searchTag);
+            })->count();
+
             //$tagsSearch = \App\Tag::with('resource')->where("tags_id","=", $searchTag)->paginate(20)->items();
 
-            $resources = Resource::with('tag')->
+            $resources = Resource::where('visible', '=', 1)->with('tag')->
             whereHas('tag', function ($query) use ($searchTag) {
                     $query->where('tags_id','=', $searchTag);
             })->paginate(20)->items();
 
             return response()->json([
-                'resources' => $resources
+                'resources' => $resources,
+                'totalCount' => $totalCount
             ]);
         }
 

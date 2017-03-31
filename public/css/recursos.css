@@ -135,6 +135,7 @@
 
 .squares-resources {
 	text-align: center;
+	min-height: 428px;
 }
 
 .resource-not-found{

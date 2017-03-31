@@ -23,10 +23,10 @@
                   {!!Form::label('nomTags', 'Nom: ')!!}
                   {!!Form::text('nomTags', null, ['class' => 'form-control', 'placeholder' => 'Nom del tag'])!!}
               </div>
-              <div>
+              {{-- <div>
                   {!!Form::label('descTag', 'Descripció: ')!!}
                   {!!Form::textarea('descTag', null, ['class' => 'form-control', 'placeholder' => 'Descripció del tag'])!!}
-              </div>
+              </div> --}}
               <div>
                   {!!Form::submit('Guardar canvis', ['class' => 'btn btn-primary'])!!}
               </div>

@@ -73,7 +73,7 @@
 						</div>
 						<input name="image3" type="file" @change="onFileChange($event,3)">
 					</div>
-				<div></div>
+				</div>
 			</div>
 			<div class="col-md-12 button-send">
 				<button class="btn btn-primary" type="submit">Enviar Recurs</button>

@@ -41,10 +41,18 @@
                             </router-link>
                         </li>
                         <li v-on:click="changeTypeUser('teacher')" v-if="type === 'student'">
+                                <!-- <span class="fa-stack fa-3x" title="Canviar perfil">
+                                  <i class="fa fa-refresh fa-stack-2x"></i>
+                                  <i class="fa fa-user fa-stack-lg"></i>
+                                </span> -->
                                 <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
                         </li>
                         <li  v-on:click="changeTypeUser('student')" v-if="type === 'teacher'">
                                 <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
+                                <!-- <span class="fa-stack fa-3x" title="Canviar perfil">
+                                  <i class="fa fa-refresh fa-stack-2x"></i>
+                                  <i class="fa fa-user fa-stack-lg"></i>
+                                </span> -->
                         </li>
                     </div>
                 </div>   

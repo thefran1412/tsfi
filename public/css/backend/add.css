@@ -11,10 +11,13 @@ textarea {
 label{
 	padding: 10px;
 }
-.paper div{
+.paperdiv{
 	width: 49%;
     padding: 10px;
     display: inline-block;
+}
+.desc {
+	width: 98% !important;
 }
 .form-control{
 	display: inline-block;
@@ -94,4 +97,21 @@ display: none;
 }
 #map #infowindow-content {
 display: inline;
+}
+.preview {
+	width: 1200px !important;
+	align-content: center;
+	display: inline !important;
+
+}
+.preview div{
+	width: 300px !important;
+	margin: 0 auto;
+	display: inline !important;
+	
+}
+.preview img {
+	margin: 0 auto;
+	width: 200px;
+	display: inline-block;
 }

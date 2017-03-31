@@ -2,132 +2,86 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Http\Controllers\Validators\ImageValidator;
 use App\Resource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use \App\Category;
 
 class Recursos extends Controller
 {
-    protected  $log;
+    protected $log;
+    protected $loginPath = '/admin/login';
+    protected $fotoResum;
 
-    public function setLog($log)
-    {
-        $this->log = new Logger($log);
-        $this->log->pushHandler(new StreamHandler(
-            'C:\wamp64\www\tsfi\logs\logger.log', Logger::INFO));
-    }
-
-     protected $loginPath = '/admin/login';  
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
     }
-	public function index()
-	{
-		$r = Resource::All();
+
+    public function index()
+    {
+        $r = Resource::All();
         $v = Resource::where('visible', 0)->get();
         return view('backend.recursos.index', ['resources' => $r, 'pendents' => $v]);
-	}
-
-	public function add()
-	{
-        $current_time = Carbon::now()->format('Y-m-d');
-		return view('backend.recursos.add',  ['current_time' => $current_time]);
     }
 
-	public function store(Request $request)
-	{
-        $request->file('fotoResum')->getSize();
-        exit(dump($request->hasFile('fotoResum')));
-        if ($request->hasFile('fotoResum')) {
-            $extension = '.'.$request->file('fotoResum')->getClientOriginalExtension();
-            dump(strval(bcdiv($request->file('fotoResum')->getSize()/1024,1,1)).'KB');
-            $uploadOk = 1;
-            $target_dir = base_path() . '\public\img\image\\';
-            $hash_name = hash('md5',time() . $request->file('fotoResum')->getClientOriginalName()). $extension;
-            $target_file= $target_dir . $hash_name;
-            dump($target_file);
-
-
-            if(bcdiv($request->file('fotoResum')->getSize()/1024,1,1)> 2048){
-                dump('la imagen ha de ser mas pequeña que 2MB');
-                $uploadOk=0;
-            }
-            if(substr($request->file('fotoResum')->getMimeType(), 0, 5) !== 'image') {
-                dump('no es una imagen');
-                $uploadOk=0;
-            }
-
-            while(file_exists($target_file)){
-                dump('igual');
-                $target_file = hash('md5',$target_file).$extension;
-            }
-           $i = 5/0;
-            if ($uploadOk >0){
-
+    public function add()
+    {
+        $categorias = Category::all('categoria_id', 'nomCategoria');
+        $current_time = Carbon::now()->format('Y-m-d');
+        return view('backend.recursos.add', compact('categorias',$categorias),
+            ['current_time' => $current_time, '$categorias' => $categorias]);
+    }
+    public function store(Request $request)
+    {
+        $this->setLog('Resource store =>');
+        $inputimage = 'fotoResum';
+        if ($request->hasFile($inputimage)) {
+            $validateimage = new ImageValidator($request, $inputimage);
+            if ($validateimage->validateImage(null,4000)){
+                $validateimage->saveImage();
+                $this->setInfoLog($this->log,sprintf('Se guardó la imagen "%s" en la carpeta "%s"',
+                    $validateimage->getHashName(), $validateimage->getTargetFile()));
+                    $this->fotoResum = $validateimage->getNewImagePath();
             }else{
-                dump('Algo ha ido mal');
+                $validateimage->errorUpoad();
             }
+        }else{
+            dump('no hay archivo');
         }
-//        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-//        $uploadOk = 0;
-//        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-//        // Check if image file is a actual image or fake image
-//        // Check if file already exists
-//        // Check file size
-//        if ($_FILES["fileToUpload"]["size"] > 500000) {
-//            echo "Sorry, your file is too large.";
-//            $uploadOk = 0;
-//        }
-//        // Allow certain file formats
-//        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-//            && $imageFileType != "gif" ) {
-//            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-//            $uploadOk = 0;
-//        }
-//        // Check if $uploadOk is set to 0 by an error
-//        if ($uploadOk == 0) {
-//            echo "Sorry, your file was not uploaded.";
-//        // if everything is ok, try to upload file
-//        } else {
-//            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-//                echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-//            } else {
-//                echo "Sorry, there was an error uploading your file.";
-//            }
-//        }
-	    $this->setLog('Resource store');
-        echo gettype($this->log), "\n";
-        $data = $request->intersect([
-            'titolRecurs',
-            'subTitol',
-            'descBreu',
-            'descDetaill1',
-            'descDetaill2',
-            'relevancia',
-            'dataInici',
-            'dataFinal',
-            'gratuit',
-            'preuInferior',
-            'preuSuperior',
-            'dataPublicacio',
-            'visible',
-            'fotoResum',
-            'creatPer'
+        /*foreach ($requests as $key => $request) {
+            $request = setDefaults($request, $key, 'recursos');
+        }*/
+
+        \App\Resource::Create([
+            'titolRecurs' => $request['titolRecurs'],
+            'subTitol' => setDefaults($request, 'subTitol', 'recursos'),
+            'descBreu' => setDefaults($request, 'descBreu', 'recursos'),
+            'creatPer' => setDefaults($request, 'creatPer', 'recursos'),
+            'descDetaill1' => setDefaults($request, 'descDetaill1', 'recursos'),
+            'descDetaill2' => setDefaults($request, 'descDetaill2', 'recursos'),
+            'relevancia' => setDefaults($request, 'relevancia', 'recursos'),
+            'dataInici' => getCorrectDate($request['dataInici']),
+            'dataFinal' => getCorrectDate($request['dataFinal']),
+            'gratuit' => setDefaults($request, 'gratuit', 'recursos'),
+            'preuInferior' => setDefaults($request, 'preuInferior', 'recursos'),
+            'preuSuperior' => setDefaults($request, 'preuSuperior', 'recursos'),
+            'dataPublicacio' => getCorrectDate($request['dataPublicacio']),
+            'created-at' => getCorrectDate()->getTimestamp(),
+            'updated_at' => getCorrectDate()->getTimestamp(),
+            'visible' => setDefaults($request,'visible', 'recursos'),
+            'fotoResum' => $this->fotoResum
         ]);
+        dump(getCorrectDate()->getTimestamp ());
+        exit();
         $this->setInfoLog($this->log,'data->   '.implode("\n",$data));
         Resource::create($data);
         return redirect()->to('admin/recursos');
-	}
+    }
 
     public function edit($id)
     {
@@ -143,9 +97,31 @@ class Recursos extends Controller
         $recurs->save();
         return redirect('admin/recursos');
     }
+    private function validateEntity($request)
+    {
+        $this->validate($request, [
+            'nom' => 'required|max:255',
 
+            'telf1' => 'required|min:9|max:9',
+            'telf2' => 'min:9|max:9',
+
+            'link' => 'url|max:255',
+            'facebook' => 'url|max:255',
+            'twitter' => 'url|max:255',
+            'instagram' => 'url|max:255',
+
+            'logo' => 'required',
+            'adreca' => 'max:255',
+        ]);
+    }
     private function setInfoLog(Logger $log, $message)
     {
         $log->info($message);
+    }
+    public function setLog($log)
+    {
+        $this->log = new Logger($log);
+        $this->log->pushHandler(new StreamHandler(
+            base_path().'\logs\logger.log', Logger::INFO));
     }
 }

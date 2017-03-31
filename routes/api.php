@@ -23,6 +23,7 @@ Route::resource('recursos', 'Recursos');
 
 Route::get('recursos/{recurso}', 'Recursos@getResource')->name('recurso.getResource');
 Route::get('typeuser/{typeUser}/{category}', 'Recursos@index')->name('recurso.index');
+Route::get('search', 'Recursos@getResultSearch')->name('recurso.getResultSearch');
 
 
 Route::get('/user', function (Request $request) {
@@ -39,12 +40,16 @@ Route::post('submit', function(Request $request){
 
 	if($file = $request->file('image')){
 		$name = time() . $file->getClientOriginalName();
-		$file->move('images',$name);
+		$file->move('img/image',$name);
 		$input['fotoResum'] = $name;
 	}
 
 	$prueba = Resource::create($input);
 	$insertedId = $prueba->recurs_id;
+
+	$resource = Resource::find($insertedId);
+	$resource->visible = 0;
+	$resource->save();
 
 	if($selectTypeUser['target'] === 'Estudiants'){
 		TargetResource::create(['idRecurs' => $insertedId, 'idTarget' => 2]);
@@ -60,13 +65,13 @@ Route::post('submit', function(Request $request){
 
 	if($file = $request->file('image2')){
 		$name = time() . $file->getClientOriginalName();
-		$file->move('images',$name);
+		$file->move('img/image',$name);
 		$photo = ImageResource::create(['titolImatge'=>'','descImatge'=>'','imatge' => $name ,'ordre'=>1,'idRecurs' => $insertedId]);
 	}
 
 	if($file = $request->file('image3')){
 		$name = time() . $file->getClientOriginalName();
-		$file->move('images',$name);
+		$file->move('img/image',$name);
 		$photo = ImageResource::create(['titolImatge'=>'','descImatge'=>'','imatge' => $name, 'ordre'=>2, 'idRecurs' => $insertedId]);
 	}
 

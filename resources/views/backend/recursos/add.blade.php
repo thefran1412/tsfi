@@ -9,14 +9,14 @@
 @endsection
 
 @section('titol')
-  <i class="fa fa-angle-right"></i>
-  <a href="{{ action('backend\Recursos@index') }}">Recursos</a>
-  <i class="fa fa-angle-right"></i>
-  <a href="{{ action('backend\Recursos@add') }}">Afegir</a>
+    <i class="fa fa-angle-right"></i>
+    <a href="{{ action('backend\Recursos@index') }}">Recursos</a>
+    <i class="fa fa-angle-right"></i>
+    <a href="{{ action('backend\Recursos@add') }}">Afegir</a>
 @endsection
 
 @section('content')
-    
+
     <div class="container">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -26,174 +26,93 @@
             </div>
         </div>
         @include('partials.errors')
-        {!! Form::open(array('route' => 'resource_store', 'class' => 'form')) !!}
-            <div class="form-group row">
-                {!! Form::label('Título del Recurso', null, array(
-                        'class'=>'control-label col-sm-2')) !!}
-                <div class="col-sm-8">
-                    {!! Form::text('name', null,
-                        array('required',
-                                'name' => 'titolRecurs',
-                                'class'=>'form-control')) !!}<br>
-                </div>
+        {!! Form::open(array('route' => 'resource_store', 'class' => 'form', 'files' => true)) !!}
+        <div class="form-group row">
+            {!! Form::label('titolRecurs', 'Título del Recurso', ['class'=>'control-label col-sm-2']) !!}
+            <div class="col-sm-8">
+                {!! Form::text('titolRecurs', null,['required', 'class'=>'form-control']) !!}<br>
             </div>
-            <div class="form-group row">
-                {!! Form::label('Autor del Recurso', null, array(
-                        'class'=>'control-label col-sm-2')) !!}
-                <div class="col-sm-4">
-                {!! Form::text('name', null,
-                        array('name' => 'creatPer',
-                        'class'=>'form-control')) !!}<br>
-                </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('creatPer', 'Autor del Recurso', ['class'=>'control-label col-sm-2']) !!}
+            <div class="col-sm-4">
+                {!! Form::text('creatPer', null, ['class'=>'form-control']) !!}<br>
             </div>
+        </div>
 
-            <div class="form-group row">
-                {!! Form::label('Subtítulo:', null,
-                        array('class'=>'control-label col-sm-2')) !!}
-                <div class="col-sm-4">
-                    {!! Form::text('name', null,
-                            array('name' => 'subTitol',
-                                    'class'=>'form-control')) !!}<br>
-                </div>
+        <div class="form-group row">
+            {!! Form::label('subTitol', 'Subtítulo:', ['class'=>'control-label col-sm-2']) !!}
+            <div class="col-sm-4">
+                {!! Form::text('subTitol', null, ['class'=>'form-control']) !!}<br>
             </div>
-            <div class="form-group row">
-                {!! Form::label('Descripción breve', null,
-                        array('class'=>'control-label col-sm-2')) !!}
-                <div class="col-sm-8">
-                {!! Form::textarea('message', null,
-                    array('name'=>'descBreu',
-                            'class'=>'form-control input-sm summernote')) !!}
-                </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('descBreu', 'Descripción breve',
+                    array('class'=>'control-label col-sm-2')) !!}
+            <div class="col-sm-8">
+                {!! Form::textarea('descBreu', null, ['class'=>'form-control input-sm summernote']) !!}
             </div>
-            <div class="form-group row">
-                {!! Form::label('Descripción detallada 1', null,
-                        array('class'=>'control-label col-sm-2')) !!}
-                <div class="col-sm-8">
-                    {!! Form::textarea('message', null,
-                        array('name'=>'descDetaill1',
-                                'class'=>'form-control input-sm summernote')) !!}
-                </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('descDetaill1', 'Descripción detallada 1', ['class'=>'control-label col-sm-2']) !!}
+            <div class="col-sm-8">
+                {!! Form::textarea('descDetaill1', null, ['class'=>'form-control input-sm summernote']) !!}
             </div>
-            <div class="form-group row">
-                {!! Form::label('Descripción detallada 2', null,
-                        array('class'=>'control-label col-sm-2')) !!}
-                <div class="col-sm-8">
-                    {!! Form::textarea('message', null,
-                        array('name'=>'descDetaill2',
-                                'class'=>'form-control input-sm summernote')) !!}
-                </div>
-            </div>Form::number('name', 'value');
-            <div class="form-group row">
-                {!! Form::label('Relevancia:', null,
-                        array('class'=>'control-label col-sm-2')) !!}
-                <div class="col-sm-2">
-                    {!! Form::number('name', null,
-                        array('name'=>'relevancia',
-                                'class'=>'form-control number',
-                                'min'=>'0',
-                                'max'=>'11' )) !!}
-                </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('descDetaill2', 'Descripción detallada 2' , ['class'=>'control-label col-sm-2']) !!}
+            <div class="col-sm-8">
+                {!! Form::textarea('descDetaill2', null, ['class'=>'form-control input-sm summernote']) !!}
             </div>
-            <div class="form-group row">
-                {!! Form::label('Fecha inicial', null,
-                        array('class'=>'control-label col-sm-1')) !!}
-                <div class="col-sm-2">
-                    {!! Form::date('name', "{{ $current_time }}",
-                        array('name'=>'dataInici',
-                                'class'=>'form-control',
-                                'id'=>'dataInici',
-                                'min'=>"{{ $current_time }}")) !!}
-                </div>
-                {!! Form::label('Fecha Final', null,
-                        array('class'=>'control-label col-sm-1')) !!}
-                <div class="col-sm-2">
-                    {!! Form::date('name', "{{ $current_time }}",
-                        array('name'=>'dataFinal',
-                                'class'=>'form-control',
-                                'id'=>'dataInici',
-                                'min'=>"{{ $current_time }}")) !!}
-                </div>
-                <label class="control-label col-sm-3" for="dataFinal">Fecha final</label>
-                <div class="col-sm-2">
-                    <input id="dataFinal" type="date" name="dataFinal" min="{{ $current_time }}" value="{{ $current_time }}">
-                </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('relevancia', 'Relevancia:', ['class'=>'control-label col-sm-2']) !!}
+            <div class="col-sm-2">
+                {!! Form::number('relevancia', null, ['class'=>'form-control number', 'min'=>'0', 'max'=>'11']) !!}
             </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-1">
-                        <div class="checkbox">
-                            <label>
-                                <input id="id_gratuit" name="gratuit" type="checkbox" value="">Gratuit
-                            </label>
-                        </div>
-                    </div>
-                    <label class="control-label col-sm-2" for="preuInferior">Precio menos que:</label>
-                    <div class="col-sm-2">
-                        <input type="number" placeholder="&#8364;" class="form-control input-sm number" min="0" id="preuInferior" name="preuInferior">
-                    </div>
-                    <label class="control-label col-sm-2" for="preuSuperior">Precio mas que:</label>
-                    <div class="col-md-2 col-0-offset-2">
-                        <input type="number" placeholder="&#8364;" class="form-control input-sm number" min="0" id="preuSuperior" name="preuSuperior">
-                    </div>
-                </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label col-sm-2']) !!}
+            <div class="col-sm-2">
+                {!! Form::date('dataInici', null, ['class'=>'form-control']) !!}
             </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-5">
-                        <div class="checkbox">
-                            Selecciona una imagen para subirla:
-                                <input type="file" name="fotoResum" id="fileToUpload">
-                        </div>
-                    </div>
-                </div>
+            {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label col-sm-2']) !!}
+            <div class="col-sm-2">
+                {!! Form::date('dataFinal', null, ['class'=>'form-control']) !!}
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('gratuit', 'Gratuit:', ['class'=>'control-label col-sm-1']) !!}
+            <div class="col-sm-1">
+                {!! Form::checkbox('gratuit', null, false, []) !!}
             </div>
-        </form>
+            {!! Form::label('preuInferior', 'Precio menos que:', ['class'=>'control-label col-sm-2']) !!}
+            <div class="col-sm-2">
+                {!! Form::number('preuInferior', null, ['class'=>'form-control number', 'placeholder'=>'€', 'min'=>'0']) !!}
+            </div>
+            {!! Form::label('preuSuperior', 'Precio mas que:', ['class'=>'control-label col-sm-2']) !!}
+            <div class="col-sm-2">
+                {!! Form::number('preuSuperior', null, ['class'=>'form-control number', 'placeholder'=>'€', 'min'=>'0']) !!}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-8">
+                Selecciona una imagen para subirla:
+                {!! Form::file('fotoResum') !!}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
     </div>
-
-    <h1>Contact TODOParrot</h1>
-
-    <ul>
-        @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-
-
-
-
-
-    <div class="form-group">
-        {!! Form::label('Your E-mail Address') !!}
-        {!! Form::text('email', null,
-            array('required',
-                  'class'=>'form-control',
-                  'placeholder'=>'Your e-mail address')) !!}
-    </div>
-
-    <div class="form-group">
-        {!! Form::label('Your Message') !!}
-        {!! Form::textarea('message', null,
-            array('required',
-                  'class'=>'form-control',
-                  'placeholder'=>'Your message')) !!}
-    </div>
-
-    <div class="form-group row">
-        {!! Form::submit('Crear',
-          array('class'=>'btn btn-primary')) !!}
-    </div>
-    {!! Form::close() !!}
 
 @endsection
 
 @section('script')
     {{--Summer Note--}}
-    <script src="{{ URL::asset('http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js') }}"></script>
+    <script src="{{ URL::asset('/js/sumer_note/jquery_sumernote.js') }}"></script>
     <script src="{{ URL::asset('/js/sumer_note/summernote.js') }}"></script>
     <script src="{{ URL::asset('/js/sumer_note/summernote-es-ES.js') }}"></script>
     <script src="{{ URL::asset('/js/sumer_note/custom_editors.js') }}"></script>

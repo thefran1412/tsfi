@@ -38,13 +38,18 @@ $(document).ready(function() {
             toolbar: tool_tips
         });
     });
-    $('#dataInici').change(function() {
+    var startDate = $('#dataInici');
+    var finalDate = $('#dataFinal');
+    var date =new Date($.now());
+    var current_date=((date.getYear()+1900)+ '-' + ("0" + (date.getMonth() + 1)).slice(-2) + '-' + date.getDate()).toString();
+    startDate.attr('value', current_date);
+    finalDate.attr('value', current_date);
+
+    startDate.change(function() {
         $('#dataFinal').attr('min',$(this).val())
     });
-    var $gratuit=$('#id_gratuit');
+    var $gratuit=$('#gratuit');
     $gratuit.change(function () {
-
-
         var attr = $gratuit.attr( "checked" );
         if ( $gratuit.attr( "value" ) !== "false") {
             $gratuit.attr('value', false);

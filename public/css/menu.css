@@ -146,14 +146,14 @@ header.header-light .site-search input[type=submit]{
 	clip:rect(1px 1px 1px 1px);
 }
 
-.fa-paper-plane-o{
+.fa-cloud-upload{
 	font-size: 30px !important;
     float: left;
     padding-left: 48.25px;
     color: #4FC08D;
 }
 
-.fa-paper-plane-o:hover{
+.fa-cloud-upload:hover{
     color: white;
     transition: color .5s ease-in-out;
 }

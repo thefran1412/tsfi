@@ -5,7 +5,7 @@ class Resource extends Model
 {
     protected $table = 'recursos';
     protected $primaryKey = 'recurs_id';
-    public $timestamps = false;
+    public $timestamps = true;
     protected $fillable = ['recurs_id',
                             'titolRecurs',
                             'subTitol',

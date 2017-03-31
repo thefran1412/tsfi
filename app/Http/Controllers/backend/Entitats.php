@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Http\Controllers\Validators\ImageValidator;
+use App\Http\Controllers\Validators\MapValidator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Entity;
 
 class Entitats extends Controller
 {
-    protected $loginPath = '/admin/login';  
+    protected $loginPath = '/admin/login';
+    protected $logo;
     /**
      * Create a new controller instance.
      *
@@ -33,11 +36,49 @@ class Entitats extends Controller
     {
         $this->validateEntity($request);
         
-            \App\Entity::Create([
-                'nomEntitat' => $request['nom'],
-                'descEntitat' => $request['desc']
-            ]);
-            return redirect('admin/entitats');
+        //validate and save map
+        $validatemap = new MapValidator($request['lat'], $request['lng']);
+        $locId = $validatemap->saveMap();
+        if ($locId == null) {
+            $request['adreca'] = null;
+        }
+
+        if ($request->hasFile('logo')) {
+            
+            $validateimage = new ImageValidator($request, 'logo');
+            
+            if ($validateimage->validateImage(null, 2000000)){
+                $validateimage->saveImage();
+                $this->logo = $validateimage->getNewImagePath();
+            }else{
+                
+                $validateimage->errorUpload();
+            }
+        }else{
+            
+            $this->logo = '/img/image/default.png';
+        }
+
+        \App\Entity::Create([
+            'nomEntitat' =>  setDefaults($request, 'nomEntitat', 'entitats'),
+            'descEntitat' =>  setDefaults($request, 'descEntitat', 'entitats'),
+            
+            'telf1' =>  setDefaults($request, 'telf1', 'entitats'),
+            'telf2' =>  setDefaults($request, 'telf2', 'entitats'),
+            'link' =>  setDefaults($request, 'link', 'entitats'),
+            
+            'esMembre' => setDefaults($request, 'esMembre', 'entitats'),
+            
+            'logo' => $this->logo,
+            'idLocalitzacio' => $locId,
+
+            'facebook' =>  setDefaults($request, 'facebook', 'entitats'),
+            'twitter' =>  setDefaults($request, 'twitter', 'entitats'),
+            'instagram' =>  setDefaults($request, 'instagram', 'entitats'),
+
+            'adreca' => $request['adreca'],
+        ]);
+        return redirect('admin/entitats');
 
     }
 
@@ -61,15 +102,17 @@ class Entitats extends Controller
     {
         $recurs = Entity::find($id);
         $recurs->fill($request->all());
+        $recurs->esMembre = setDefaults($request, 'esMembre', 'entitats');
         $recurs->save();
         return redirect('admin/entitats');
     }
     private function validateEntity($request)
     {
         $this->validate($request, [
-            'nom' => 'required|max:255',
-            
-            'telf1' => 'required|min:9|max:9',
+            'nomEntitat' => 'required|max:255',
+            'descEntitat' => 'required|max:255',
+
+            'telf1' => 'min:9|max:9',
             'telf2' => 'min:9|max:9',
                         
             'link' => 'url|max:255',
@@ -77,7 +120,6 @@ class Entitats extends Controller
             'twitter' => 'url|max:255',
             'instagram' => 'url|max:255',
 
-            'logo' => 'required',
             'adreca' => 'max:255',
         ]);
     }

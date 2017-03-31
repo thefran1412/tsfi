@@ -8,36 +8,37 @@
                         <li v-on:click="changeTypeUser('teacher')" v-if="type === 'teacher'">
                                 <span class="title">TSFI</span>
                         </li>
+                        
                         <li  v-on:click="changeTypeUser('student')" v-if="type === 'student'">
                                 <span class="title">TSFI</span>
                         </li>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-md-offset-3">
                             <div class="selects">
                                 <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
-                            </div>   
+                            </div>
                         </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3" v-show="noShow">
                         <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="codiCategoria" track-by="codiCategoria"  :allow-empty="false"></multiselect>
                     </div>
                     <div class="col-md-3">
-                            <form class="site-search" >
+                            <form @submit.prevent="actionToSearch" class="site-search" >
                               <div id="site-search-container">
                                 <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
                               </div>
                               <button tabindex="2" type="submit">
-                                <span class="a11y-only">Search</span>
+                                    <span class="a11y-only">Search</span>
                                     <svg class="icon-search" viewBox="0 0 34 34" fill="none" stroke="currentColor">
                                         <ellipse stroke-width="3" cx="16" cy="15" rx="12" ry="12"></ellipse>
                                         <path d="M26 26 l 8 8" stroke-width="3" stroke-linecap="square"></path>
                                     </svg>
-                             </button>
+                               </button>
                             </form>
                     </div>
                     <div class="col-md-2 user-type">
                         <li v-on:click="typeUser('Envians un recurs')">
                             <router-link :to="{name: 'enviar-recurs'}">
-                                <i class="fa fa-paper-plane-o" aria-hidden="true" title="Enviar recurs"></i>
+                                <i class="fa fa-cloud-upload" aria-hidden="true" title="Enviar recurs"></i>
                             </router-link>
                         </li>
                         <li v-on:click="changeTypeUser('teacher')" v-if="type === 'student'">
@@ -107,6 +108,7 @@
                 categories: [],
                 entities: [],
                 prueba:null,
+                noShow:false,
                 typeUserUrl: this.$route.params.typeuser,
                 typeCategory:this.$route.params.category,
                 page:1
@@ -116,9 +118,7 @@
             this.whatUserPage(this.$route.params.typeuser);
             this.fetchCategories();
             this.fetchEntities();
-            //this.onInfinite(this.$route.params.typeuser, this.$route.params.category);
             this.correctSelectCategory(this.$route.params.category);
-            //this.fetchResource(this.$route.params.typeuser, this.$route.params.category);
         },
         mounted(){
             this.typeUser();
@@ -130,9 +130,11 @@
                 //     this.recursos = [];
                 //     this.$nextTick(() => {
                 //         this.prueba.$emit('$InfiniteLoading:reset');
+                        // this.animationScroll();
                 //     });
                 //     this.category = { codiCategoria:value , nomCategoria: 'enviar-recurs' };
                 // }
+
                 if(typeUser === 'student'){
                     this.type = 'student';
                 }
@@ -170,7 +172,7 @@
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
 
-                    this.animationScroll();
+                    // this.animationScroll();
                     
                 });
                 
@@ -204,6 +206,9 @@
               },
              onInfinite(typeUser, typeCategory) {
                   var route = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
+                  var t;
+                  var d;
+                  
                   this.$http.get( route , {
                         // params: {
                         //   category: this.category.nomCategoria,
@@ -211,6 +216,15 @@
                   }).then((res) => {
                     if (res.data.resources.length ) {
                       this.recursos = this.recursos.concat(res.data.resources);
+
+                            this.recursos.forEach(function(data){
+                                if(data.dataPublicacio){
+                                    t = data.dataPublicacio.split(/[- :]/);
+                                    d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
+                                    data.dataPublicacio = d.toLocaleDateString('en-GB');
+                                }
+                            });
+
                           this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:loaded');
                           if (this.recursos.length / 20 === 10) {
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
@@ -231,15 +245,51 @@
                             this.page = 1;
                         });
 
-                       this.animationScroll();
+                       // this.animationScroll();
                 },
                 animationScroll(){
                     $("html, body").animate({ scrollTop: 20 }, "slow");
                     $("html, body").animate({ scrollTop: 0 }, "slow");
+                },
+                actionToSearch(){
+                        this.$children[3].list = [];
+                        this.$children[3].tags = [];
+                        
+                        this.$router.push('/search?name=' + this.search);
+
+                        this.$nextTick(() => {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                            this.$children[3].pageSearch = 1;
+                        });
+
+                        // this.animationScroll();
                 }
         },
        components: {
             Multiselect
         },
+        watch: {
+            '$route' (to, from) {
+                this.$children[3].list = [];
+                this.recursos = [];
+
+                console.log(to);
+
+                this.$router.push(to.fullPath);
+
+                this.$nextTick(() => {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                            this.$children[3].pageSearch = 1;
+                            this.page = 1;
+                        });
+
+                console.log(to.fullPath.indexOf('student') > 0);
+
+                if(to.fullPath.indexOf('student') > 0 || to.fullPath.indexOf('teacher') > 0){
+                    var cap = to.params.category.charAt(0).toUpperCase() + to.params.category.slice(1);
+                    this.category = { codiCategoria: cap, nomCategoria: to.params.category };
+                }
+           }
+       }
     }
 </script>

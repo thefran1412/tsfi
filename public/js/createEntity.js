@@ -1,91 +1,13 @@
-/*$("#create").submit(function(e){
-  e.preventDefault();
-  if(valid()){
-    console.log('form is good to go!');
-  }
-  else{
-    console.log('There is somme error');
+var lat;
+var lng;
+$("#create").submit(function(e){
+  if ($("#pac-input").is(":focus")) {
+    e.preventDefault();
+  }else{
+    $('#lat').val(lat);
+    $('#lng').val(lng);
   }
 }); 
-*/
-
-
-
-function valid() {
-  
-  var cool = true;
-  
-  $(".form-control").each(function( index ) {
-    
-    console.log( index + ": " + $( this ).val() );
-      $(this).parent().addClass('has-error');
-    
-      var r = null;
-      switch($(this).attr('id')) {
-        case 'url':
-            r = isUrlValid($(this).val());
-            break;
-        case 'phone':
-            r = isPhoneValid($(this).val());
-            break;
-        case 'location':
-            break;
-        default:
-            r = isValid($(this).val());
-      }
-
-      console.log(r);
-
-      if (r) {
-        $(this).parent().removeClass('has-error').addClass('has-success');
-      } else {
-        $(this).parent().removeClass('has-success').addClass('has-error');
-        cool = false;
-      }
-  });
-
-  return cool;
-}
-function isUrlValid(url) {
-  var valid = isValid(url);
-  if (valid){
-    var e = /^(https?:\/\/)?([\da-z\.-]+\.[a-z\.]{2,6}|[\d\.]+)([\/:?=&#]{1}[\da-z\.-]+)*[\/\?]?$/ig;
-    return e.test(url)
-  }
-  else if (valid == 'empty'){
-    return true;
-  } 
-  else {
-    return false;
-  }
-}
-function isPhoneValid(argument) {
-  var valid = isValid(url);
-  if (valid){
-    var e = /\d{9}/ig;
-    return e.test(url)
-  }
-  else if (valid == 'empty'){
-    return true;
-  } 
-  else {
-    return false;
-  }
-}
-
-function isValid(value) {
-  if (value == '') {
-    if ($(this).prop('required')) {
-      return false;
-    }
-    else{
-      return 'empty';
-    }
-  }
-  return true;
-}
-
-
 
 
 function initMap() {
@@ -132,11 +54,14 @@ function initMap() {
       location: place.geometry.location
     });
     marker.setVisible(true);
+    
+    lat = place.geometry.location.lat();
+    lng = place.geometry.location.lng();
+    // console.log(lat, lng);
 
     infowindowContent.children['place-name'].textContent = place.name;
-    infowindowContent.children['place-id'].textContent = place.place_id;
-    infowindowContent.children['place-address'].textContent =
-        place.formatted_address;
+    // infowindowContent.children['place-id'].textContent = place.place_id;
+    // infowindowContent.children['place-address'].textContent = place.formatted_address;
     infowindow.open(map, marker);
     });
 }

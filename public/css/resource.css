@@ -1,6 +1,7 @@
 body {
 	min-width: 412px;
 }
+
 .resource-extras {
   /*float: left;*/
 }
@@ -44,12 +45,24 @@ body {
 }
 
 .socialMedia i{
+  padding-top: 20px;
+  padding-bottom:  20px;
  /*margin-left: 17%;*/
   color: #333333;
 }
 
 .socialMedia i:hover{
     color: #4FC08D;
+    transition: color .5s ease-in-out;
+}
+
+.links{
+  color: #636b6f;
+}
+
+.links:hover{
+    color: #4FC08D;
+    text-decoration: none;
     transition: color .5s ease-in-out;
 }
 
@@ -89,7 +102,21 @@ body {
   height: 200px;
   background: #636b6f;
 }
+/*Autor -- Inicio*/
+.autor div {
+  display: inline-block;
+}
+.autor h5{
+  text-transform: capitalize;
+}
+.autor p {
+  float: right;
+}
+/*Autor -- Fin*/
 
+/*.resource-extras a, p {
+  padding-left: 10px;
+}*/
 
 /* Large desktops and laptops */
 @media (min-width: 1200px) {

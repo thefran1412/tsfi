@@ -24,7 +24,6 @@ Vue.use(VueRouter);
 import Index from './components/Index.vue';
 
 //SendResource
-
 import EnviarRecurs from './components/EnviarRecurs.vue';
 
 import VeeValidate from 'vee-validate';
@@ -48,6 +47,9 @@ import Resources from './components/CategoryTypes.vue';
 //Recurso
 import Resource from './components/Resources.vue';
 
+//SearchResource
+import ResultOfSearch from './components/ResultsOfSearch.vue'
+
 
 const router = new VueRouter({
     hashbang:false,
@@ -56,7 +58,8 @@ const router = new VueRouter({
     routes:[
         {path:'/resource/:id',component:Resource, name:'resource' },
         {path:'/enviar-recurs',component:EnviarRecurs, name:'enviar-recurs' },
-        {path:'/:typeuser/:category',component:Resources, name:'resources' }
+        {path:'/:typeuser/:category',component:Resources, name:'resources' },
+        {path:'/search',component:ResultOfSearch, name:'result-of-search' }
     ]
 });
 

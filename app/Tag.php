@@ -8,6 +8,10 @@ class Tag extends Model
 {
     protected $table = 'tags';
     protected $primaryKey = 'tags_id';
-     protected $fillable = [
-    'tags_id', 'nomTags', 'descTag'];
+    protected $fillable = [
+    'tags_id', 'nomTags'];
+
+    public function resource(){
+        return $this->belongsToMany('App\Resource','tag_recurs','idTag','idRecurs');
+    }
 }

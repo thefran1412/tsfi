@@ -36,7 +36,7 @@ class EntityV2 extends Migration
             $table->string('instagram');
             $table->string('facebook');
             $table->string('twitter');
-            $table->integer('idEntitat')->references('id')->on('entitats');
+            $table->integer('idEntitat')->references('entitat_id')->on('entitats');
             $table->timestamps();
         });
     }

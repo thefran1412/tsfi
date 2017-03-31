@@ -21,66 +21,76 @@
 
 @section('content')
      <div class="create">
-            {!!Form::open(['action' => 'backend\Entitats@store', 'method' => 'post'])!!}
-              <div class="paper">
-                  <div>
-                    {!!Form::label('nom', 'Nom: ')!!}
-                    {!!Form::text('nom', null, ['class' => 'form-control', 'placeholder' => 'Nom de la entitat'])!!}
-                  </div>
-                  <div>
-                    {!!Form::label('esMembre', 'És membre: ')!!}
-                    {!!Form::checkbox('esMembre', null, ['class' => 'form-control', 'placeholder' => 'Es membre'])!!}
-                  </div>
-                  <div>
-                    {!!Form::label('telf1', 'Telèfon 1: ')!!}
-                    {!!Form::number('telf1', null, ['class' => 'form-control', 'placeholder' => 'Telefon 1 de la entitat'])!!}
-                  </div>
-                  <div>
-                    {!!Form::label('telf2', 'Telèfon 2: ')!!}
-                    {!!Form::number('telf2', null, ['class' => 'form-control', 'placeholder' => 'Telefon 2 de la entitat'])!!}
-                  </div>
-                </div>
-                <div class="paper">
-                  <div class="upload">
-                    {!!Form::label('logo', 'Logo: ')!!}
-                    <input type="file" name="logo" accept="image/*" class="form-control">
-                    {{-- {!!Form::file('logo', null, ['class' => 'form-control', 'placeholder' => 'Logo', 'accept' => 'image/*'])!!} --}}
-                  </div>
+      {!!Form::open(['action' => 'backend\Entitats@store', 'method' => 'post', 'id' => 'create', 'files' => true])!!}
+        <div class="paper">
+          <div class="paperdiv">
+            {!!Form::label('nomEntitat', 'Nom: ')!!}
+            {!!Form::text('nomEntitat', null, ['class' => 'form-control', 'placeholder' => 'Nom de la entitat'])!!}
+          </div>
+          <div class="paperdiv">
+            {!!Form::label('esMembre', 'És membre: ')!!}
+            {!!Form::checkbox('esMembre', null, ['class' => 'form-control', 'placeholder' => 'Es membre'])!!}
+          </div>
+          <div class="paperdiv desc">
+            {!!Form::label('descEntitat', 'Descripció: ')!!}
+            {!!Form::textArea('descEntitat', null, ['class' => 'form-control', 'placeholder' => 'Descripció de la entitat'])!!}
+          </div>
+          <div class="paperdiv">
+            {!!Form::label('telf1', 'Telèfon 1: ')!!}
+            {!!Form::number('telf1', null, ['class' => 'form-control', 'placeholder' => 'Telefon 1 de la entitat'])!!}
+          </div>
+          <div class="paperdiv">
+            {!!Form::label('telf2', 'Telèfon 2: ')!!}
+            {!!Form::number('telf2', null, ['class' => 'form-control', 'placeholder' => 'Telefon 2 de la entitat'])!!}
+          </div>
+        </div>
+        <div class="paper">
+          <div class="paperdiv upload">
+            {!!Form::label('logo', 'Logo: ')!!}
+            <input type="file" name="logo" accept="image/*" class="form-control" id="logo">
+            {{-- {!!Form::file('logo', null, ['class' => 'form-control', 'placeholder' => 'Logo', 'accept' => 'image/*'])!!} --}}
+          </div>
 
-              </div>
-              <div class="paper">
-                  <div>
-                    {!!Form::label('link', 'Enllaç pàgina web: ')!!}
-                    {!!Form::text('link', null, ['class' => 'form-control', 'placeholder' => 'Enllaç a la pàgina web'])!!}
-                  </div>
-                  <div>
-                    {!!Form::label('facebook', 'Facebook: ')!!}
-                    {!!Form::text('facebook', null, ['class' => 'form-control', 'placeholder' => 'Url Facebook'])!!}
-                  </div>
-                  <div>
-                    {!!Form::label('twitter', 'Twitter: ')!!}
-                    {!!Form::text('twitter', null, ['class' => 'form-control', 'placeholder' => 'Url Twitter'])!!}
-                  </div>
-                  <div>
-                    {!!Form::label('instagram', 'Instagram: ')!!}
-                    {!!Form::text('instagram', null, ['class' => 'form-control', 'placeholder' => 'Url Instagram'])!!}
-                  </div>
-                </div>
+        </div>
+        <div class="paper">
+          <div class="paperdiv">
+            {!!Form::label('link', 'Enllaç pàgina web: ')!!}
+            {!!Form::text('link', null, ['class' => 'form-control', 'placeholder' => 'Enllaç a la pàgina web'])!!}
+          </div>
+          <div class="paperdiv">
+            {!!Form::label('facebook', 'Facebook: ')!!}
+            {!!Form::text('facebook', null, ['class' => 'form-control', 'placeholder' => 'Url Facebook'])!!}
+          </div>
+          <div class="paperdiv">
+            {!!Form::label('twitter', 'Twitter: ')!!}
+            {!!Form::text('twitter', null, ['class' => 'form-control', 'placeholder' => 'Url Twitter'])!!}
+          </div>
+          <div class="paperdiv">
+            {!!Form::label('instagram', 'Instagram: ')!!}
+            {!!Form::text('instagram', null, ['class' => 'form-control', 'placeholder' => 'Url Instagram'])!!}
+          </div>
+        </div>
 
-              </div>
-              <div class="paper">
-                  {!!Form::label('desc', 'Adreça: ')!!}
-                  {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat'])!!}
+        </div>
+        <div class="paper">
+          {!!Form::label('adreca', 'Adreça: ')!!}
+          {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
+          {!!Form::hidden('lat', null, ['class' => 'form-control', 'id' => 'lat'])!!}
+          {!!Form::hidden('lng', null, ['class' => 'form-control', 'id' => 'lng'])!!}
 
-              <div class="map"><div id="map"></div></div>
-              <div id="infowindow-content">
-                <span id="place-name" class="title"></span>
-                <br>Place ID <span id="place-id"></span><br>
-                <span id="place-address"></span>
-              </div>
-              <div class="air">
-                  {!!Form::submit('Guardar canvis', ['class' => 'btn btn-primary'])!!}
-              </div>
-                    {!!Form::close()!!}
-               </div>
+        <div class="map">
+          <div id="map"></div>
+        </div>
+
+        <div id="infowindow-content">
+          <span id="place-name" class="title"></span>
+          {{-- <br>Place ID <span id="place-id"></span><br> --}}
+          {{-- <span id="place-address"></span> --}}
+        </div>
+
+        <div class="air">
+          {!!Form::submit('Guardar canvis', ['class' => 'btn btn-primary'])!!}
+        </div>
+        {!!Form::close()!!}
+        </div>
 @endsection

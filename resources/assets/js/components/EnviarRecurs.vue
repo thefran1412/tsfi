@@ -42,7 +42,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-4">
-					<div class="form-group">
+					<div class="form-group" :class="{'has-error' : errors.has('image') }">
 						<div v-if="!image">
 							<h4>Selecciona l'imatge de portada del recurs:</h4>
 						</div>
@@ -50,11 +50,12 @@
 							<img :src="image" />
 							<button class="remove-image" @click="removeImage(1)">Eliminar imatge</button>
 						</div>
-						<input name="image" type="file" @change="onFileChange($event,1)">
+						<input v-validate="'size:2048'" name="image" data-vv-as="image" type="file" @change="onFileChange($event,1)">
+						<span v-show="errors.has('image')" class="help is-danger">{{ errors.first('image') }}</span>	
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="form-group">
+					<div class="form-group" :class="{'has-error' : errors.has('image2') }">
 						<div v-if="!image2">
 							<h4>Selecciona la primera imatge que hi anirà dins de l'article:</h4>
 						</div>
@@ -62,11 +63,12 @@
 							<img :src="image2" />
 							<button class="remove-image" @click="removeImage(2)">Eliminar imatge</button>
 						</div>
-						<input name="image2" type="file" @change="onFileChange($event,2)">
+						<input v-validate="'size:2048'" name="image2" data-vv-as="image2" type="file" @change="onFileChange($event,2)">
+						<span v-show="errors.has('image2')" class="help is-danger">{{ errors.first('image2') }}</span>	
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="form-group">
+					<div class="form-group" :class="{'has-error' : errors.has('image3') }">
 						<div v-if="!image3">
 							<h4>Selecciona la segona imatge que hi anirà dins de l'article:</h4>
 						</div>
@@ -74,7 +76,8 @@
 							<img :src="image3" />
 							<button class="remove-image" @click="removeImage(3)">Eliminar imatge</button>
 						</div>
-						<input name="image3" type="file" @change="onFileChange($event,3)">
+						<input v-validate="'size:2048'" name="image3" data-vv-as="image3" type="file" @change="onFileChange($event,3)">
+						<span v-show="errors.has('image3')" class="help is-danger">{{ errors.first('image3') }}</span>	
 					</div>
 				</div>
 			</div>

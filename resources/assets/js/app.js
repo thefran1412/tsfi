@@ -38,6 +38,7 @@ const dictionary = {
     messages: {
       required: (field) => `El camp ${field} es obligatori.`,
       max: (field, [length]) => `El camp ${field} no pot ser major a ${length} caràcteres.`,
+      size: (field, [size]) => `La imatge ${field} ha de ser menor a ${size} KB.`
     }
   }
 };

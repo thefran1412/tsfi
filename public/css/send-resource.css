@@ -32,3 +32,15 @@
 .is-danger {
 	color: #a94442;
 }
+
+#map {
+	width:100%;
+}
+
+.location-address{
+  display: none;
+}
+
+  #pac-input {
+    margin-bottom: 15px;
+  }

@@ -4,6 +4,7 @@ use App\Resource;
 use App\ImageResource;
 use App\TargetResource;
 use App\CategoryResource;
+use App\Location;
 use Illuminate\Http\Request;
 
 /*
@@ -36,6 +37,14 @@ Route::post('submit', function(Request $request){
 	$input = $request->only('titolRecurs','subTitol','descBreu','descDetaill1', 'fotoResum');
 	$selectCategory = $request->only('categoria');
 	$selectTypeUser = $request->only('target');
+	$location = $request->only('latitude','longitude');
+
+
+	$sameLocation = Location::where('latitud', '=',$location['latitude'])
+	->where('longitud', '=',$location['longitude'])->get();
+
+	$prueba = $sameLocation->toJson();
+	$data = json_decode($prueba);
 
 
 	if($file = $request->file('image')){
@@ -44,10 +53,24 @@ Route::post('submit', function(Request $request){
 		$input['fotoResum'] = $name;
 	}
 
-	$prueba = Resource::create($input);
-	$insertedId = $prueba->recurs_id;
+	$lastID = Resource::create($input);
+	$insertedId = $lastID->recurs_id;
 
 	$resource = Resource::find($insertedId);
+	
+	if(count($data) > 0){
+		if($data[0]->localitzacions_id){
+			$resource->idLocalitzacio = $data[0]->localitzacions_id;
+		}
+	}
+	
+
+	if($location['latitude'] !== '' && $location['longitude'] !== '' && count($data) === 0){
+		$lastLocation = Location::create(['latitud' => $location['latitude'], 'longitud' => $location['longitude']]);
+		$insertLocation = $lastLocation -> localitzacions_id;
+		$resource->idLocalitzacio = $insertLocation;
+	}
+
 	$resource->visible = 0;
 	$resource->save();
 

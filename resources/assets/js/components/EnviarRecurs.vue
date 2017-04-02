@@ -1,7 +1,7 @@
 <template>
 	<div class="content-bottom-header container content-send-resource">
 		<h1>Enviar Recurs</h1>
-		<form @submit.prevent="submitForm" ref="enviarRecurs" method="post" enctype="multipart/form-data">
+		<form @submit.stop.prevent="submitForm($event)" ref="enviarRecurs" method="post" enctype="multipart/form-data">
 			<div class="form-group" :class="{'has-error' : errors.has('titolRecurs') }">
 				<label for="titolRecurs">Títol:</label>
 				<span v-show="errors.has('titolRecurs')" class="help is-danger">{{ errors.first('titolRecurs') }}</span>	
@@ -40,6 +40,17 @@
 				<span v-show="errors.has('descDetaill1')" class="help is-danger">{{ errors.first('descDetaill1') }}</span>	
 					<textarea v-validate="'required|max:5000'" class="form-control title" type="text" id="descDetaill1" data-vv-as="Descripció" name="descDetaill1" placeholder="Descripció"></textarea>
 			</div>
+			<div class="form-group">
+				<label for="pac-input" required>Si l'event te una localització:</label>
+				
+				<input id="pac-input" class="form-control title" type="text"
+	            placeholder="Introdueix la direcció">
+	            <div id="map" ref="map" ></div>
+			</div>
+			<div class="form-group location-address">
+				<input id="latitude" name="latitude" type="text" :value="latitude">
+				<input id="longitude" name="longitude" type="text" :value="longitude">
+			</div>
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group" :class="{'has-error' : errors.has('image') }">
@@ -51,7 +62,7 @@
 							<button class="remove-image" @click="removeImage(1)">Eliminar imatge</button>
 						</div>
 						<input v-validate="'size:2048'" name="image" data-vv-as="image" type="file" @change="onFileChange($event,1)">
-						<span v-show="errors.has('image')" class="help is-danger">{{ errors.first('image') }}</span>	
+						<span v-show="errors.has('image')" class="help is-danger">{{ errors.first('image') }}</span>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -95,18 +106,23 @@
 				image:'',
 				image2: '',
 				image3: '',
+				latitude: null,
+				longitude: null,
 				listCategories: []
 			}
 		},
 		created(){
             this.fetchEntities();
         },
+        mounted: function() {
+            this.initMap();
+        },
 		methods:{
 			fetchEntities(){
 	            this.$http.get('../api/categories').then(response=>{
 	                var p=[];
 					response.data.categories.forEach(function(c){
-						//console.log(this.listCategories);
+
 						console.log(c.categoria_id !== 6);
 							if(c.categoria_id !== 6){
 								p.push(c);
@@ -172,28 +188,97 @@
 				
 			},
 			submitForm: function(){
-				if (!this.validate()){
-					var form = this.$refs.enviarRecurs;
-					var formdata = new FormData(form);
+					if (!this.validate()){
+						var form = this.$refs.enviarRecurs;
+						var formdata = new FormData(form);
 
-					console.log(form);
-					console.log(formdata);
+						console.log(form);
+						console.log(formdata);
 
-					this.$http.post('../api/submit', formdata).then((response) =>{
-						//this.$router.push({path:'/student/home', query:{alert:'User Create'}})
-					},(response)=>{
-						console.log(response);
-					});		
-					alert('Recurs enviat')
-				}else{
-					alert('Recurs no enviat, si us plau revisa les dades')
-				}
+						this.$http.post('../api/submit', formdata).then((response) =>{
+							//this.$router.push({path:'/student/home', query:{alert:'User Create'}})
+						},(response)=>{
+							console.log(response);
+						});		
+						alert('Recurs enviat')
+					}else{
+						alert('Recurs no enviat, si us plau revisa les dades')
+					}
+				
 			},
 			validate: function(){
 				this.$validator.validateAll();
 
 				return this.errors.any();
-			}
+			},
+			initMap: function(event) {
+
+                 var myLatLng = {lat: 41.366438452538, lng: 2.0970153808594};
+
+                 var map = new google.maps.Map(this.$refs.map , {
+                    center: myLatLng,
+                    scrollwheel: false,
+                    zoom: 16
+                 })
+
+                  var input = document.getElementById('pac-input');
+
+                  google.maps.event.addDomListener(input, 'keydown', function(e) { 
+				    if (e.keyCode == 13) { 
+				        e.preventDefault();
+				        e.stopPropagation(); 
+				    }
+				});
+
+                  var autocomplete = new google.maps.places.Autocomplete(input);
+                  autocomplete.bindTo('bounds', map);
+
+                  var infowindow = new google.maps.InfoWindow();
+
+                  var marker = new google.maps.Marker({
+                    map: map
+                  });
+
+                  marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                  });
+
+                  var getLocation = this.getLocation;
+
+                  autocomplete.addListener('place_changed', function() {
+
+                    infowindow.close();
+                    var place = autocomplete.getPlace();
+
+                    if (!place.geometry) {
+                      return;
+                    }
+
+                    if (place.geometry.viewport) {
+                      map.fitBounds(place.geometry.viewport);
+                    } else {
+                      map.setCenter(place.geometry.location);
+                      map.setZoom(17);
+                    }
+
+                    marker.setPlace({
+                      placeId: place.place_id,
+                      location: place.geometry.location
+                    });
+
+                    marker.setVisible(true);
+
+                    getLocation(place);
+
+                    infowindow.setContent('<div><strong>' + place.name + '</strong><br>'+ '<br>' +
+                        place.formatted_address);
+                    infowindow.open(map, marker);
+                  });
+            },
+            getLocation(place){
+            	this.latitude = place.geometry.location.lat();
+                this.longitude = place.geometry.location.lng();
+            }
 		}
 	}
 </script>

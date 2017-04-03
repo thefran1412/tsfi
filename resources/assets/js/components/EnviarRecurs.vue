@@ -1,7 +1,7 @@
 <template>
 	<div class="content-bottom-header container content-send-resource">
 		<h1>Enviar Recurs</h1>
-		<form @submit.stop.prevent="submitForm($event)" ref="enviarRecurs" method="post" enctype="multipart/form-data">
+		<form @submit.stop.prevent="submitForm" ref="enviarRecurs" method="post" enctype="multipart/form-data">
 			<div class="form-group" :class="{'has-error' : errors.has('titolRecurs') }">
 				<label for="titolRecurs">Títol:</label>
 				<span v-show="errors.has('titolRecurs')" class="help is-danger">{{ errors.first('titolRecurs') }}</span>	
@@ -11,6 +11,19 @@
 				<label for="subTitol">Subtítol:</label>
 				<span v-show="errors.has('subTitol')" class="help is-danger">{{ errors.first('subTitol') }}</span>	
 					<input v-validate="'required|max:200'" class="form-control title" type="text" id="subTitol" data-vv-as="Subtítol" name="subTitol" placeholder="Subtítol">
+			</div>
+			<div class="form-group">
+				<v-select
+					multiple
+					:value="selected"
+					:debounce="250"
+					:on-search="getOptions"
+					:options="options"
+					v-model="tagsSelected"
+					placeholder="Agrega tags relacionats amb el recurs..."
+					label="nomTags"
+				>
+				</v-select>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
@@ -100,7 +113,11 @@
 </template>
 
 <script>
+
+import vSelect from "vue-select";
+
 	export default{
+		components: {vSelect},
 		data(){
 			return{
 				image:'',
@@ -108,7 +125,10 @@
 				image3: '',
 				latitude: null,
 				longitude: null,
-				listCategories: []
+				listCategories: [],
+				selected: null,
+				options:[],
+				tagsSelected:[]
 			}
 		},
 		created(){
@@ -188,28 +208,30 @@
 				
 			},
 			submitForm: function(){
-					if (!this.validate()){
-						var form = this.$refs.enviarRecurs;
-						var formdata = new FormData(form);
+					var form = this.$refs.enviarRecurs;
+					var formdata = new FormData(form);
 
-						console.log(form);
-						console.log(formdata);
+					this.$validator.validateAll().then(() => {
 
-						this.$http.post('../api/submit', formdata).then((response) =>{
+						var concatIdTags = '';
+						
+						if(this.tagsSelected.length > 0){
+							this.tagsSelected.forEach(function(data){
+								concatIdTags += '#' + data.tags_id;
+							});
+							var splitPr = concatIdTags.substr(1).split('#');
+						}
+
+						this.$http.post('../api/submit?tags='+ splitPr, formdata).then((response) =>{
 							//this.$router.push({path:'/student/home', query:{alert:'User Create'}})
 						},(response)=>{
 							console.log(response);
 						});		
 						alert('Recurs enviat')
-					}else{
-						alert('Recurs no enviat, si us plau revisa les dades')
-					}
-				
-			},
-			validate: function(){
-				this.$validator.validateAll();
+					}).catch((e) => {
 
-				return this.errors.any();
+					});
+				
 			},
 			initMap: function(event) {
 
@@ -278,7 +300,26 @@
             getLocation(place){
             	this.latitude = place.geometry.location.lat();
                 this.longitude = place.geometry.location.lng();
-            }
+            },
+            getOptions(search, loading) {
+			    loading(true)
+			    this.$http.get('../api/tags?q='+search, {
+			       q: search
+			    }).then(resp => {
+			    	console.log(resp.data.tags);
+			       this.options = resp.data.tags;
+			       loading(false)
+			    })
+			},
+			addTag (newTag) {
+				console.log(newTag);
+		      const tag = {
+		        name: newTag,
+		        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+		      }
+		      this.options.push(tag)
+		      this.tagsSelected.push(tag);
+		    }
 		}
 	}
 </script>

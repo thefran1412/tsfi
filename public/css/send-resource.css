@@ -37,10 +37,10 @@
 	width:100%;
 }
 
-.location-address{
-  display: none;
+#pac-input {
+  margin-bottom: 15px;
 }
 
-  #pac-input {
-    margin-bottom: 15px;
-  }
+.no-options,  .location-address{
+	display: none;
+}

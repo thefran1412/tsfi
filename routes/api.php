@@ -3,6 +3,7 @@
 use App\Resource;
 use App\ImageResource;
 use App\TargetResource;
+use App\TagResource;
 use App\CategoryResource;
 use App\Location;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ Route::resource('entitats', 'Entitats');
 Route::resource('recursos', 'Recursos');
 
 Route::get('recursos/{recurso}', 'Recursos@getResource')->name('recurso.getResource');
+Route::get('tags', 'Tags@getTags')->name('tag.getTags');
 Route::get('typeuser/{typeUser}/{category}', 'Recursos@index')->name('recurso.index');
 Route::get('search', 'Recursos@getResultSearch')->name('recurso.getResultSearch');
 
@@ -38,7 +40,6 @@ Route::post('submit', function(Request $request){
 	$selectCategory = $request->only('categoria');
 	$selectTypeUser = $request->only('target');
 	$location = $request->only('latitude','longitude');
-
 
 	$sameLocation = Location::where('latitud', '=',$location['latitude'])
 	->where('longitud', '=',$location['longitude'])->get();
@@ -73,6 +74,13 @@ Route::post('submit', function(Request $request){
 
 	$resource->visible = 0;
 	$resource->save();
+
+	if(isset($_GET["tags"])){
+		$tags = explode(",", $_GET["tags"]);
+		foreach ($tags as $tag) {
+		   TagResource::create(['idTag'=>$tag, 'idRecurs'=> $insertedId ]);
+		}
+	}
 
 	if($selectTypeUser['target'] === 'Estudiants'){
 		TargetResource::create(['idRecurs' => $insertedId, 'idTarget' => 2]);

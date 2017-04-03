@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\backend;
 
+
 use App\Age;
+use App\Entity;
 use App\Http\Controllers\Validators\ImageValidator;
 use App\Resource;
 use Carbon\Carbon;
@@ -24,7 +26,7 @@ class Recursos extends Controller
 
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
@@ -33,43 +35,16 @@ class Recursos extends Controller
         $v = Resource::where('visible', 0)->get();
         return view('backend.recursos.index', ['resources' => $r, 'pendents' => $v]);
     }
-    public function autoCompleteCategory(Request $request)
-    {
-        $categories = Category::all('nomCategoria', 'codiCategoria');
-        $obj = ['query'=>'Unit'];
-        $values=[];
-        foreach ($categories as $category){
-            $cat = ['value' => $category->nomCategoria, 'data' => $category->cosiCategoria];
-            array_push ($values,$cat);
-        }
-        $obj['suggestions']=$values;
-        return response()->json($obj);
-    }
-    public function autoComplete(Request $request)
-    {
-        $term = null;
-        if($request['term']){
-            $term = $request['term'];
-        }
-
-        $results = array();
-        $queries = Tag::where('nomTags', 'LIKE', "{$term}%")->take(5)->get();
-        $results=[];
-        foreach ($queries as $query)
-        {
-            array_push($results,$query->nomTags);
-        }
-
-        return $results;
-    }
     public function add()
     {
         $categorias = Category::all('nomCategoria', 'categoria_id');
+        $entitats = Entity::pluck('nomEntitat', 'entitat_id');
         $edats = Age::pluck('descEdat', 'edats_id');
         $current_time = Carbon::now()->format('Y-m-d');
         return view('backend.recursos.add',[
                 'edats'=>$edats,
-                'categorias'=>$categorias
+                'categorias'=>$categorias,
+                'entitats'=>$entitats
             ]
         );
     }
@@ -87,8 +62,6 @@ class Recursos extends Controller
             }else{
                 $validateimage->errorUpoad();
             }
-        }else{
-            dump('no hay archivo');
         }
         $recurso = Resource::Create([
             'titolRecurs' => $request['titolRecurs'],
@@ -111,12 +84,11 @@ class Recursos extends Controller
         ]);
 
         $insertedId = $recurso->recurs_id;
-        dump($insertedId);
-        dump($request['multipleage']);
-        dump($request['']);
+        if($request['multipleage'])addRecursoAge($request, $insertedId);
+        if($request['categorias'])addRecursCategory($request, $insertedId);
+        if($request['tag0'])addRecursTag($request, $insertedId);
+        if($request['entitats'])addRecursEntity($request, $insertedId);
         exit();
-        $this->setInfoLog($this->log,'data->   '.implode("\n",$data));
-        Resource::create($data);
         return redirect()->to('admin/recursos');
     }
 

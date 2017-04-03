@@ -21,8 +21,8 @@ use Monolog\Handler\StreamHandler;
 */
 $log = new Logger('Fakers ->');
 $log->pushHandler(new StreamHandler('logs/logger.log', Logger::INFO));
-$root = "C:\\Users\\nicof\\PhpstormProjects\\POO";
-$path = "\\tsfi\\tests\\_data\\images";
+$root = base_path();
+$path = "/public/images";
 $images  = scandir($root.$path);
 $imgpath = "http://localhost:8000/img/resource/";
 
@@ -36,6 +36,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+    $word = $faker->word.rand(0, 10000);
+    return [
+        'nomTags' => $word,
     ];
 });
 

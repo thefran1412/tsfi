@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 @section('css')
     <link href="{{ URL::asset('/js/sumer_note/summernote.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css') }}" rel="stylesheet">
+    {{--<link href="{{ URL::asset('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css') }}" rel="stylesheet">--}}
     <link href="{{ URL::asset('/css/backend/extra.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/multi-select.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/resourceadd.css') }}" rel="stylesheet">
@@ -120,48 +120,31 @@
             </div>
         </div>
         <div class="form-group row">
-            <div id="tags_box" class="col-md-4 col-md-offset-3">
-                <input type="button" name="tag1" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag2" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag3" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag4" class="btn btn-primary btn-xs categoriaDelete" readonly value="buton input buton"/>
-                <input type="button" name="tag5" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag6" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton buton"/>
-                <input type="button" name="tag7" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton buton buton"/>
-                <input type="button" name="tag8" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag9" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag10" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag11" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag12" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag13" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag14" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton buton"/>
-                <input type="button" name="tag15" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton buton"/>
-                <input type="button" name="tag16" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag17" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag18" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag19" class="btn btn-primary btn-xs categoriaDelete" readonly value="inputinputinput buton"/>
-                <input type="button" name="tag20" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag22" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag23" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
-                <input type="button" name="tag24" class="btn btn-primary btn-xs categoriaDelete" readonly value="input buton"/>
+            {!! Form::Label('entitats', 'Escoje la entidad a la cual pertenece el recrso:', ['class'=>'control-label col-sm-3']) !!}
+            <div class="col-sm-3">
+            {!! Form::select('entitats', $entitats, null, ['class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div id="boxOfTags" class="col-md-4 col-md-offset-3">
             </div>
         </div>
         <div class="form-group row">
             <label for="tags" class="control-label col-sm-3">Tags: </label>
             <div class="col-sm-4">
-                <input type="text" id="tags" name='tags' placeholder="escribe una categoria para añadir." class="form-control" list="autocomplete">
+                <input type="text" id="tags" name='tags' placeholder="escribe una categoria para añadir." class="form-control" list="autocomplete" autocomplete="true">
                 <datalist id="autocomplete">
                 </datalist>
             </div>
-                <div class="col-md-2">
-                    <button type="button" class="btn">Add</button>
-                </div>
-        </div>
+            <div class="col-md-2">
+                <button type="button" class="btn addTag">Add</button>
+            </div>
+        </div><br><br><br><br>
         <div class="form-group row">
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>
-        </div>
+        </div><br><br><br><br>
     </div>
 
 @endsection

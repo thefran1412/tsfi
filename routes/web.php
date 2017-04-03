@@ -35,7 +35,7 @@ Route::get('/admin/analytics', 'backend\Analytics@index');
 Route::get('/admin/recursos', 'backend\Recursos@index');
 Route::get('/admin/recursos/add', 'backend\Recursos@add');
 Route::get('/admin/recursos/categories', 'backend\Recursos@autoCompleteCategory');
-Route::get('/admin/recursos/autocomplete', 'backend\Recursos@autocomplete');
+Route::get('/admin/recursos/autocomplete', 'publiccontrollers\publicURLs@autocomplete');
 Route::get('/admin/recursos/{id}/edit', 'backend\Recursos@edit');
 // Route::get('/admin/recursos/update', 'backend\Recursos@update');
 Route::put('/admin/recursos/{recurso}', 'backend\Recursos@update');

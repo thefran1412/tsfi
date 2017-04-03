@@ -1,19 +1,38 @@
 .note-editor.note-frame .note-editing-area .note-editable{
     padding-left:20px;
 }
-#tags_box{
+#boxOfTags{
     -webkit-border-radius: 10px 10px 10px 10px;
     border: 2px solid rgb(206, 209, 212);
     background: #FFFFFF;
     min-height: 120px;
     padding: 10px;
 }
-.categoriaDelete{
+.tagDelete{
+    float: left;
     margin: 5px 2px 0 2px;
 }
 
-.categoriaDelete:hover{
+.tagDelete:hover{
     color: #fff;
-    background-color: rgba(238, 64, 0, 0.87);
+    background-color: rgba(201, 22, 0, 0.87);
     border-color: #db1700; /*set the color you want here*/
+}
+
+input::-webkit-calendar-picker-indicator {
+    opacity: 100;
+}
+
+#tags{
+    margin-bottom: 10px;
+}
+
+.alert{
+    margin-top: 15px;
+}
+
+.glyphicon-remove {
+    float: right;
+    margin-top: 2px;
+    margin-right: -6px;
 }

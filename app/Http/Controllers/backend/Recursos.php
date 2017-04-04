@@ -88,6 +88,7 @@ class Recursos extends Controller
         if($request['categorias'])addRecursCategory($request, $insertedId);
         if($request['tag0'])addRecursTag($request, $insertedId);
         if($request['entitats'])addRecursEntity($request, $insertedId);
+        if($request['linkrecurs'])addRecursLinks($request, $insertedId);
         exit();
         return redirect()->to('admin/recursos');
     }

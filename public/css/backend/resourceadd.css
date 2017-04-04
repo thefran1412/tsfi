@@ -1,7 +1,7 @@
 .note-editor.note-frame .note-editing-area .note-editable{
     padding-left:20px;
 }
-#boxOfTags{
+#boxOfTags #videoBox{
     -webkit-border-radius: 10px 10px 10px 10px;
     border: 2px solid rgb(206, 209, 212);
     background: #FFFFFF;
@@ -60,4 +60,13 @@ div.panel {
     padding: 0 18px;
     background-color: white;
     display: none;
+}
+
+/*Video */
+#videoBox{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px solid rgb(206, 209, 212);
+    background: #FFFFFF;
+    min-height: 150px;
+    padding: 10px;
 }

@@ -13,7 +13,11 @@ $(document).ready(function() {
     var tagNameId = 0;
     var $addTag = $('.addTag');
     var $boxOfTags = $('#boxOfTags');
-
+    var $videoInput = $('#videoInput');
+    var $videoBox = $('#videoBox');
+    var videoType;
+    var $videoSize;
+    $videoBox.innerHeight(($videoBox.innerWidth()*2)/3);
 
 
     //Summer Note script
@@ -168,4 +172,64 @@ $(document).ready(function() {
             }
         }
     }
+    $(document).on('change', '#selectFormat', function(){// $videoInput  $videoBox
+        var $videoRecurs = $('#videoRecurs');
+        console.log($("option:selected", this).val());
+        $videoInput.find('div').remove();
+        if ($("option:selected", this).val() === '1'){//upload
+            console.log($(this).val());
+            $videoInput.append('<div class="col-sm-10"><input id="videoRecurs" name="videoRecurs" type="file"></div>');
+        }else if ($("option:selected", this).val() === '2'){//embed
+            videoType = 2;
+            $videoInput.append('<div class="col-sm-10"><textarea class="form-control" placeholder="Inserta el codigo enbed del video." '+
+                'rows="5" cols="60" name="videoRecurs" id="videoRecurs"></textarea></div>' +
+                '<div class="col-md-2"> <button type="button" id="testVideoButton" class="btn addTag">Test</button></div>');
+            console.log('es 2 o 3');
+        }else if (($("option:selected", this).val() === '3')) {//link
+            videoType = 3;
+            $videoInput.append('<div class="col-sm-10"><input type="text" id="videoRecurs" name="videoRecurs" '+
+                'placeholder="Escribe el link del video" class="form-control col-sm-3"></div>' +
+            '<div class="col-md-2"> <button type="button" id="testVideoButton" class="btn addTag">Test</button></div>');
+            console.log('else');
+        }
+    });
+    $(document).on('click', '#testVideoButton', function(){
+        $videoBox.children().remove();
+        var $videoRecurs = $('#videoRecurs');
+        var videourl = $videoRecurs.val();
+        var videoId;
+
+        if (videoType === 3){
+            if (videourl.indexOf('youtube') >= 0){
+                $videoSize = $('object  ');//https://www.youtube.com/watch?v=5mHe_NsJJd4
+                videoId = videourl.substring(videourl.indexOf('v=')+2);
+                $videoBox.append('<iframe width="'+ $videoBox.width() + '" height="' + $videoBox.height() +
+                    '" src="https://www.youtube.com/embed/' + videoId +
+                    '" frameborder="0" allowfullscreen></iframe>');
+            }else if (videourl.indexOf('vimeo') >= 0){//https://vimeo.com/211265585
+                videoId = videourl.substring(videourl.indexOf('com/')+4);
+                $videoSize = $('iframe');
+                $videoBox.append('<iframe width="'+ $videoBox.width() + '" height="' + $videoBox.height() +
+                    '" src="https://player.vimeo.com/video/' + videoId +
+                    '" frameborder="0" allowfullscreen></iframe>')
+            }
+        }else{
+            var src = videourl.substring(videourl.indexOf('src="')+4);
+            src = src.substring(0, src.indexOf(' '));
+            $videoSize = $('iframe');
+            $videoBox.append('<iframe width="'+ $videoBox.width() + '" height="' + $videoBox.height() +
+                '" src=' + src +
+                ' frameborder="0" allowfullscreen></iframe>');
+        }
+    });
+    $(window).resize(function() {
+        $videoBox.innerHeight(($videoBox.innerWidth()*2)/3);
+        $videoSize.width($videoBox.width());
+        $videoSize.height($videoBox.height());
+    });
+
+    function isUrlValid(url) {
+        return /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
+    }
+
 });

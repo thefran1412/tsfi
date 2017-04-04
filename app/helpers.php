@@ -112,3 +112,7 @@ function addRecursLinks(Request $request, $recurs_id)
         }
     }
 }
+function addRecursVideo(Request $request, $recurs_id)
+{
+
+}

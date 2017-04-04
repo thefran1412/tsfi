@@ -160,7 +160,30 @@
                      'cols'=>"50"]) !!}
                 </div>
             </div>
-        </div><br><br><br><br>
+        </div>
+        <div class="row"><br>
+            <div id="videoBox" class="col-md-4 col-md-offset-3">
+
+            </div>
+        </div><br>
+        <div class="row">
+            <div id="videoInput" class="col-md-4 col-md-offset-3">
+
+            </div>
+        </div>
+        <br>
+        <div class="form-group row">
+            <label for="selectFormat" class="control-label col-md-3">Selecciona el formato de video.</label>
+            <div class="col-md-3">
+                <select class="form-control col-md-4" id="selectFormat">
+                    <option>Selecciona una opción</option>
+                    <option value="1">Upload video (20 mb max)</option>
+                    <option value="2">Embed video</option>
+                    <option value="3">Link video</option>
+                </select>
+            </div>
+        </div><br>
+        <br><br><br>
         <div class="form-group row">
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary">Create</button>

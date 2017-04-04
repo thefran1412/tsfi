@@ -42,18 +42,10 @@
                             </router-link>
                         </li>
                         <li v-on:click="changeTypeUser('teacher')" v-if="type === 'student'">
-                                <!-- <span class="fa-stack fa-3x" title="Canviar perfil">
-                                  <i class="fa fa-refresh fa-stack-2x"></i>
-                                  <i class="fa fa-user fa-stack-lg"></i>
-                                </span> -->
                                 <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
                         </li>
                         <li  v-on:click="changeTypeUser('student')" v-if="type === 'teacher'">
                                 <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
-                                <!-- <span class="fa-stack fa-3x" title="Canviar perfil">
-                                  <i class="fa fa-refresh fa-stack-2x"></i>
-                                  <i class="fa fa-user fa-stack-lg"></i>
-                                </span> -->
                         </li>
                     </div>
                 </div>   
@@ -281,8 +273,6 @@
                 this.$children[3].list = [];
                 this.recursos = [];
 
-                console.log(to);
-
                 this.$router.push(to.fullPath);
 
                 this.$nextTick(() => {
@@ -295,6 +285,7 @@
 
                 if(to.fullPath.indexOf('student') > 0 || to.fullPath.indexOf('teacher') > 0){
                     var cap = to.params.category.charAt(0).toUpperCase() + to.params.category.slice(1);
+                    
                     this.category = { codiCategoria: cap, nomCategoria: to.params.category };
                 }
            }

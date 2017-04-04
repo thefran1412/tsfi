@@ -20,13 +20,6 @@
 
         <title>Laravel</title>
 
-        <script type="text/javascript">
-            // if(localStorage.length >= 2){
-            //         var url = window.location.href;
-            //         window.location.href = "http://localhost:8000/?url="+url.substring(22);
-            //     }
-        </script>
-
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -39,6 +32,7 @@
 
             </div>
         </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places" async defer></script>
         <script src="{{ URL::asset('/js/app.js') }}" ></script>
     </body>
 </html>

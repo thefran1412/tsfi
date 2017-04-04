@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers\backend;
 
+
+use App\Age;
+use App\Entity;
 use App\Http\Controllers\Validators\ImageValidator;
 use App\Resource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use \App\Category;
+use \App\Tag;
+use stdClass;
 
 class Recursos extends Controller
 {
@@ -19,7 +26,7 @@ class Recursos extends Controller
 
     public function __construct()
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
@@ -28,13 +35,18 @@ class Recursos extends Controller
         $v = Resource::where('visible', 0)->get();
         return view('backend.recursos.index', ['resources' => $r, 'pendents' => $v]);
     }
-
     public function add()
     {
-        $categorias = Category::all('categoria_id', 'nomCategoria');
+        $categorias = Category::all('nomCategoria', 'categoria_id');
+        $entitats = Entity::pluck('nomEntitat', 'entitat_id');
+        $edats = Age::pluck('descEdat', 'edats_id');
         $current_time = Carbon::now()->format('Y-m-d');
-        return view('backend.recursos.add', compact('categorias',$categorias),
-            ['current_time' => $current_time, '$categorias' => $categorias]);
+        return view('backend.recursos.add',[
+                'edats'=>$edats,
+                'categorias'=>$categorias,
+                'entitats'=>$entitats
+            ]
+        );
     }
     public function store(Request $request)
     {
@@ -50,14 +62,8 @@ class Recursos extends Controller
             }else{
                 $validateimage->errorUpoad();
             }
-        }else{
-            dump('no hay archivo');
         }
-        /*foreach ($requests as $key => $request) {
-            $request = setDefaults($request, $key, 'recursos');
-        }*/
-
-        \App\Resource::Create([
+        $recurso = Resource::Create([
             'titolRecurs' => $request['titolRecurs'],
             'subTitol' => setDefaults($request, 'subTitol', 'recursos'),
             'descBreu' => setDefaults($request, 'descBreu', 'recursos'),
@@ -76,10 +82,14 @@ class Recursos extends Controller
             'visible' => setDefaults($request,'visible', 'recursos'),
             'fotoResum' => $this->fotoResum
         ]);
-        dump(getCorrectDate()->getTimestamp ());
+
+        $insertedId = $recurso->recurs_id;
+        if($request['multipleage'])addRecursoAge($request, $insertedId);
+        if($request['categorias'])addRecursCategory($request, $insertedId);
+        if($request['tag0'])addRecursTag($request, $insertedId);
+        if($request['entitats'])addRecursEntity($request, $insertedId);
+        if($request['linkrecurs'])addRecursLinks($request, $insertedId);
         exit();
-        $this->setInfoLog($this->log,'data->   '.implode("\n",$data));
-        Resource::create($data);
         return redirect()->to('admin/recursos');
     }
 
@@ -113,6 +123,7 @@ class Recursos extends Controller
             'logo' => 'required',
             'adreca' => 'max:255',
         ]);
+
     }
     private function setInfoLog(Logger $log, $message)
     {

@@ -57,7 +57,11 @@ import Resources from './components/CategoryTypes.vue';
 import Resource from './components/Resources.vue';
 
 //SearchResource
-import ResultOfSearch from './components/ResultsOfSearch.vue'
+import ResultOfSearch from './components/ResultsOfSearch.vue';
+
+//map
+import Location from './components/Location.vue';
+import LocationInput from './components/LocationInput.vue';
 
 
 const router = new VueRouter({
@@ -68,7 +72,10 @@ const router = new VueRouter({
         {path:'/resource/:id',component:Resource, name:'resource' },
         {path:'/enviar-recurs',component:EnviarRecurs, name:'enviar-recurs' },
         {path:'/:typeuser/:category',component:Resources, name:'resources' },
-        {path:'/search',component:ResultOfSearch, name:'result-of-search' }
+        {path:'/search',component:ResultOfSearch, name:'result-of-search' },
+        {path:'/map', component:Location, name:'map'},
+        {path:'/location-input', component:LocationInput, name:'location-input'}
+
     ]
 });
 

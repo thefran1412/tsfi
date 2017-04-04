@@ -1,10 +1,10 @@
 @extends('layouts.backend')
-<style> .note-editor.note-frame .note-editing-area .note-editable{
-        padding-left:20px;}</style>
 @section('css')
     <link href="{{ URL::asset('/js/sumer_note/summernote.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css') }}" rel="stylesheet">
+    {{--<link href="{{ URL::asset('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css') }}" rel="stylesheet">--}}
     <link href="{{ URL::asset('/css/backend/extra.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/multi-select.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/backend/resourceadd.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -73,11 +73,11 @@
         </div>
         <div class="form-group row">
             {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 {!! Form::date('dataInici', null, ['class'=>'form-control']) !!}
             </div>
             {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 {!! Form::date('dataFinal', null, ['class'=>'form-control']) !!}
             </div>
         </div>
@@ -102,10 +102,70 @@
             </div>
         </div>
         <div class="form-group row">
+            {!! Form::Label('categorias', 'Categorias:', ['class'=>'control-label col-sm-3']) !!}
+            <div class="col-sm-3">
+            <select class="form-control" id="categorias" name="categorias">
+                <option value="" selected>Selecciona una categoria</option>
+                @foreach($categorias as $category)
+                    <option value="{{ $category->categoria_id }}">{{$category->nomCategoria }}</option>
+                @endforeach
+            </select>
+            {{--{!! Form::select('categorias', $categorias, null, ['class' => 'form-control']) !!}--}}
+            </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::Label('edat', 'Edats a qui s\'hadreça el recurs:', ['class'=>'control-label col-sm-3']) !!}
+            <div class="col-sm-3">
+            {!! Form::select('multipleage[]', $edats, null, ['id' => 'multipleage','multiple'=>'multiple', 'class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::Label('entitats', 'Escoje la entidad a la cual pertenece el recrso:', ['class'=>'control-label col-sm-3']) !!}
+            <div class="col-sm-3">
+            {!! Form::select('entitats', $entitats, null, ['class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="form-group row">
+            <div id="boxOfTags" class="col-md-4 col-md-offset-3">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="tags" class="control-label col-sm-3">Tags: </label>
+            <div class="col-sm-4">
+                <input type="text" id="tags" name='tags' placeholder="escribe una categoria para añadir." class="form-control" list="autocomplete" autocomplete="true">
+                <datalist id="autocomplete">
+                </datalist>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn addTag">Add</button>
+            </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('linkrecurs', 'Entra los enlaces del recurso:', ['class'=>'control-label col-sm-3']) !!}
+            <div class="col-sm-4">
+                {!! Form::textarea('linkrecurs', null, ['class'=>'form-control',
+                'placeholder'=>'separa los enlaces por ;',
+                'rows'=>"3",
+                 'cols'=>"50"]) !!}<br>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <button class="accordion"  type="button">
+                    {!! Form::label('videoembed', 'Inserta un video: ' , ['class'=>'control-label']) !!}
+                </button>
+                <div class="panel">
+                        {!! Form::textarea('videoembed', null, ['class'=>'form-control input-sm',
+                    'rows'=>"3",
+                     'cols'=>"50"]) !!}
+                </div>
+            </div>
+        </div><br><br><br><br>
+        <div class="form-group row">
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>
-        </div>
+        </div><br><br><br><br>
     </div>
 
 @endsection
@@ -117,4 +177,10 @@
     <script src="{{ URL::asset('/js/sumer_note/summernote-es-ES.js') }}"></script>
     <script src="{{ URL::asset('/js/sumer_note/custom_editors.js') }}"></script>
     {{--End Summer Note scripts--}}
+    {{--Autocomplete js--}}
+    <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
+    {{--end autocompelete--}}
+    {{--Multi select--}}
+    <script src="{{URL::asset('js/jquery.multi-select.js')}}"></script>
+    {{--end Multi select--}}
 @endsection

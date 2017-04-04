@@ -1,0 +1,63 @@
+.note-editor.note-frame .note-editing-area .note-editable{
+    padding-left:20px;
+}
+#boxOfTags{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px solid rgb(206, 209, 212);
+    background: #FFFFFF;
+    min-height: 120px;
+    padding: 10px;
+}
+.tagDelete{
+    float: left;
+    margin: 5px 2px 0 2px;
+}
+
+.tagDelete:hover{
+    color: #fff;
+    background-color: rgba(201, 22, 0, 0.87);
+    border-color: #db1700; /*set the color you want here*/
+}
+
+input::-webkit-calendar-picker-indicator {
+    opacity: 100;
+}
+
+#tags{
+    margin-bottom: 10px;
+}
+
+.alert{
+    margin-top: 15px;
+}
+
+.glyphicon-remove {
+    float: right;
+    margin-top: 2px;
+    margin-right: -6px;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+button.accordion {
+    background-color: rgba(0, 156, 223, 0.28);
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+div.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+}

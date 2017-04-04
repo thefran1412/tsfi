@@ -15,23 +15,20 @@
           <div class="col-md-4" v-for="(r, key) in this.$root.recursos" :key="r.recurs_id">
             <div class="recurso">
               <div class="recurso-content">
-                <h2>
-                  <a v-bind:href="'#/resource/'+ r.recurs_id">
-                      {{r.titolRecurs}}</a>
-                  </a>
-                </h2>
+                <a v-bind:href="'#/resource/'+ r.recurs_id">
+                  <h2>{{r.titolRecurs}}</h2>
+                  <h6>{{r.subTitol}}</h6>
+                </a>
                 <div class="recurso-meta">
                     <div class="autor">
-                      <a href="#">
-                        {{r.creatPer}}
-                      </a>
+                      {{r.creatPer}}
                     </div>
-                    <div class="fecha">
-                      {{r.dataPublicacio}}
-                    </div>
+                    <div class="fecha">{{r.dataPublicacio}}</div>
                     <div class="categoria">
-                      <i class="fa fa-archive" aria-hidden="true"></i>
-                      <a v-on:click="getCategory(r.category[0].nomCategoria)" v-bind:href="'#/'+typeUserUrl+'/'+r.category[0].nomCategoria">
+                      
+                      <a v-on:click="getCategory(r.category[0].nomCategoria)" v-bind:href="'#/'+typeUserUrl+'/'+r.
+                        category[0].nomCategoria">
+                        <i class="fa fa-archive" aria-hidden="true"></i>
                         {{r.category[0].nomCategoria}}
                       </a>
                     </div>
@@ -60,15 +57,6 @@
     </div>
   </div>
 </template>
-<style type="text/css">
-  
-  .prueba{
-    height: 200px;
-    width: 100%;
-    margin-bottom: 20px;
-    background-color: red;
-  }
-</style>
 
 <script>
 

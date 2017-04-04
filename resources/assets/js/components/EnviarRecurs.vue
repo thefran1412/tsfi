@@ -5,12 +5,12 @@
 			<div class="form-group" :class="{'has-error' : errors.has('titolRecurs') }">
 				<label for="titolRecurs">Títol:</label>
 				<span v-show="errors.has('titolRecurs')" class="help is-danger">{{ errors.first('titolRecurs') }}</span>	
-					<input v-validate="'required|max:60'" class="form-control title" type="text" id="titolRecurs" data-vv-as="Títol" name="titolRecurs" placeholder="Títol">
+					<input v-validate="'required|max:90'" class="form-control title" type="text" id="titolRecurs" data-vv-as="Títol" name="titolRecurs" placeholder="Títol">
 			</div>
 			<div class="form-group" :class="{'has-error' : errors.has('subTitol') }">
 				<label for="subTitol">Subtítol:</label>
 				<span v-show="errors.has('subTitol')" class="help is-danger">{{ errors.first('subTitol') }}</span>	
-					<input v-validate="'required|max:200'" class="form-control title" type="text" id="subTitol" data-vv-as="Subtítol" name="subTitol" placeholder="Subtítol">
+					<input v-validate="'required|max:150'" class="form-control title" type="text" id="subTitol" data-vv-as="Subtítol" name="subTitol" placeholder="Subtítol">
 			</div>
 			<div class="row">
 				<div class="col-md-6">

@@ -74,7 +74,7 @@
 							<img :src="image" />
 							<button class="remove-image" @click="removeImage(1)">Eliminar imatge</button>
 						</div>
-						<input v-validate="'size:2048'" name="image" data-vv-as="image" type="file" @change="onFileChange($event,1)">
+						<input v-validate="'size:20'" name="image" data-vv-as="image" type="file" @change="onFileChange($event,1)">
 						<span v-show="errors.has('image')" class="help is-danger">{{ errors.first('image') }}</span>
 					</div>
 				</div>

@@ -102,6 +102,7 @@ body {
   height: 200px;
   background: #636b6f;
 }
+
 /*Autor -- Inicio*/
 .autor div {
   display: inline-block;
@@ -113,6 +114,12 @@ body {
   float: right;
 }
 /*Autor -- Fin*/
+
+#map {
+  /*background: green;*/
+  height:100%; 
+  width:100%;
+}
 
 /*.resource-extras a, p {
   padding-left: 10px;

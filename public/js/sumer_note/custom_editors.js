@@ -16,7 +16,6 @@ $(document).ready(function() {
     var $videoInput = $('#videoInput');
     var $videoBox = $('#videoBox');
     var videoType;
-    var $videoSize;
     $videoBox.innerHeight(($videoBox.innerWidth()*2)/3);
 
 
@@ -198,31 +197,48 @@ $(document).ready(function() {
         var $videoRecurs = $('#videoRecurs');
         var videourl = $videoRecurs.val();
         var videoId;
+        var src = null;
 
         if (videoType === 3){
-            if (videourl.indexOf('youtube') >= 0){
-                $videoSize = $('object  ');//https://www.youtube.com/watch?v=5mHe_NsJJd4
-                videoId = videourl.substring(videourl.indexOf('v=')+2);
+            if (videourl.indexOf('youtube') >= 0 && videourl.indexOf('v=') > 6){
+                if (videourl.indexOf('&') >= 0){
+                    videoId = videourl.substring(videourl.indexOf('v=')+2, videourl.indexOf('&'));
+                }else{
+                    videoId = videourl.substring(videourl.indexOf('v=')+2);
+                }
+                src = "https://www.youtube.com/embed/" + videoId;
                 $videoBox.append('<iframe width="'+ $videoBox.width() + '" height="' + $videoBox.height() +
                     '" src="https://www.youtube.com/embed/' + videoId +
                     '" frameborder="0" allowfullscreen></iframe>');
+                $('#errorAdd').hide();
             }else if (videourl.indexOf('vimeo') >= 0){//https://vimeo.com/211265585
                 videoId = videourl.substring(videourl.indexOf('com/')+4);
-                $videoSize = $('iframe');
+                src = "https://player.vimeo.com/video/" + videoId;
                 $videoBox.append('<iframe width="'+ $videoBox.width() + '" height="' + $videoBox.height() +
                     '" src="https://player.vimeo.com/video/' + videoId +
-                    '" frameborder="0" allowfullscreen></iframe>')
+                    '" frameborder="0" allowfullscreen></iframe>');
+                $('#errorAdd').hide();
+            }else {
+                $('#errorAdd').hide();
+                bootstrap_alert('El enlace no es valido asegurate que el video es de youtube o vimeo', 'danger', $videoBox);
             }
         }else{
-            var src = videourl.substring(videourl.indexOf('src="')+4);
-            src = src.substring(0, src.indexOf(' '));
-            $videoSize = $('iframe');
-            $videoBox.append('<iframe width="'+ $videoBox.width() + '" height="' + $videoBox.height() +
-                '" src=' + src +
-                ' frameborder="0" allowfullscreen></iframe>');
+            if((videourl.indexOf('src="')+4) >0) {
+                src = videourl.substring(videourl.indexOf('src="')+4);
+                src = src.substring(1, src.indexOf(' ')-1);
+                $videoBox.append('<iframe width="'+ $videoBox.width() + '" height="' + $videoBox.height() +
+                    '" src="' + src +
+                    '" frameborder="0" allowfullscreen></iframe>');
+                $('#errorAdd').hide();
+            }else{
+                $('#errorAdd').hide();
+                bootstrap_alert('Iframe no válido.', 'danger', $videoBox)
+            }
         }
+        $videoBox.append('<input type="text" value="'+src+'" name="videoembed" hidden>')
     });
     $(window).resize(function() {
+        var $videoSize = $('iframe');
         $videoBox.innerHeight(($videoBox.innerWidth()*2)/3);
         $videoSize.width($videoBox.width());
         $videoSize.height($videoBox.height());

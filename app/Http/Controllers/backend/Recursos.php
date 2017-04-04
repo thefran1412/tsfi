@@ -89,7 +89,9 @@ class Recursos extends Controller
         if($request['tag0'])addRecursTag($request, $insertedId);
         if($request['entitats'])addRecursEntity($request, $insertedId);
         if($request['linkrecurs'])addRecursLinks($request, $insertedId);
-        if($request['videoembed'])addRecursVideo($request, $insertedId);
+        dump($request['videoembed']);
+        dump($request['videoembed'] !== null);
+        if($request['videoembed'] !== null)addRecursVideo($request, $insertedId);
         exit();
         return redirect()->to('admin/recursos');
     }

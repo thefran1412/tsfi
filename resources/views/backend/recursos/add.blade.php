@@ -149,18 +149,18 @@
                  'cols'=>"50"]) !!}<br>
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-sm-6">
-                <button class="accordion"  type="button">
-                    {!! Form::label('videoembed', 'Inserta un video: ' , ['class'=>'control-label']) !!}
-                </button>
-                <div class="panel">
-                        {!! Form::textarea('videoembed', null, ['class'=>'form-control input-sm',
-                    'rows'=>"3",
-                     'cols'=>"50"]) !!}
-                </div>
-            </div>
-        </div>
+        {{--<div class="form-group row">--}}
+            {{--<div class="col-sm-6">--}}
+                {{--<button class="accordion"  type="button">--}}
+                    {{--{!! Form::label('videoembed', 'Inserta un video: ' , ['class'=>'control-label']) !!}--}}
+                {{--</button>--}}
+                {{--<div class="panel">--}}
+                        {{--{!! Form::textarea('videoembed', null, ['class'=>'form-control input-sm',--}}
+                    {{--'rows'=>"3",--}}
+                     {{--'cols'=>"50"]) !!}--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <div class="row"><br>
             <div id="videoBox" class="col-md-4 col-md-offset-3">
 
@@ -182,7 +182,7 @@
                     <option value="3">Link video</option>
                 </select>
             </div>
-        </div><br>
+        </div> <br>
         <br><br><br>
         <div class="form-group row">
             <div class="col-sm-10">

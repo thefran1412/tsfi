@@ -9,6 +9,7 @@ use App\EntityResource;
 use App\Link;
 use App\Resource;
 use App\Tag;
+use App\VideoType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -89,10 +90,13 @@ function addRecursTag(Request $request, $recurs_id)
 }
 function addRecursEntity (Request $request, $recurs_id)
 {
-    $entidad = new EntityResource;
-    $entidad->idEntitat = $request['entitats'];
-    $entidad->idRecurs = $recurs_id;
-    $entidad->save();
+    $entidad = EntityResource::where(['idEntitat' => $request['entitats'], 'idRecurs' => $recurs_id])->first();
+    if(!$entidad){
+        $entidad = new EntityResource;
+        $entidad->idEntitat = $request['entitats'];
+        $entidad->idRecurs = $recurs_id;
+        $entidad->save();
+    }
 }
 function addRecursLinks(Request $request, $recurs_id)
 {
@@ -114,5 +118,12 @@ function addRecursLinks(Request $request, $recurs_id)
 }
 function addRecursVideo(Request $request, $recurs_id)
 {
-
+    $pos = strpos($request['videoembed'], 'youtube');
+    if (strpos($request['videoembed'], 'youtube')) {
+        dump("La cadena fue encontrada en la cadena");
+    } else if (strpos($request['videoembed'], 'youtube')){
+        dump("La cadena no fue encontrada en la cadena");
+    }
+    $video = VideoType::where(['idEntitat' => $request['entitats'], 'idRecurs' => $recurs_id])->first();
+    $request['videoembed'];
 }

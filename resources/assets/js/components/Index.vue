@@ -135,7 +135,7 @@
                 }
             },
             animationScroll(){
-                     $("html, body").animate({ scrollTop: 20 }, "slow");
+                     $("html, body").animate({ scrollTop: 5 }, "slow");
                      $("html, body").animate({ scrollTop: 0 }, "slow");
             },
             whatUserPage(value){
@@ -161,6 +161,8 @@
                     this.page = 1;
                 });
                 this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
+
+                this.animationScroll();
             },
             changeTypeUser: function (typeUser){
                 

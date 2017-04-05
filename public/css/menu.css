@@ -18,7 +18,7 @@ header{
 }
 
 .content-bottom-header{
-	padding-top: 89px;
+	padding-top: 51px;
 }
 
 .header-top-item{
@@ -134,9 +134,11 @@ header{
 	background-size:16px 16px
 }
 
-.col-md-offset-3 {
+header .col-md-offset-3 {
 	padding: 0;
+	margin-left: 22%;
 }
+
 .site-search input[type="submit"]:focus{
 	border:1px solid rgba(255,255,255,0.8);
 }
@@ -161,16 +163,7 @@ header.header-light .site-search input[type=submit]{
     padding-left: 48.25px;
 }*/
 
-header .col-md-offset-3 {
-	margin-left: 22%;
-}
 
-
-
-@media (min-width: 992px)
-.col-md-offset-3 {
-    margin-left: 22%;
-}
 
 
 .user-type i {

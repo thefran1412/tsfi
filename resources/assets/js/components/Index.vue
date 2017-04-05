@@ -4,16 +4,16 @@
             <div class="header-top-item header-search-container">
 
                 <div class="row">
-                    <div class="col-md-1" >
+                    <div class="col-md-2" >
                         <li v-on:click="returnHomePage('teacher')" v-if="type === 'teacher'">
-                                <span class="title">TSFI</span>
+                                <span class="title">TSFI</span><span class="role">Estudiants i Pares</span>
                         </li>
                         
                         <li  v-on:click="returnHomePage('student')" v-if="type === 'student'">
-                                <span class="title">TSFI</span>
+                                <span class="title">TSFI</span><span class="role">Orientadors i Professors</span>
                         </li>
                         </div>
-                        <div class="col-md-3 col-md-offset-4">
+                        <div class="col-md-3 col-md-offset-3">
                             <div class="selects">
                                 <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                             </div>

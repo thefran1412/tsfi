@@ -4,13 +4,13 @@
             <div class="header-top-item header-search-container">
 
                 <div class="row">
-                    <div class="col-md-1" >
+                    <div class="col-md-2" >
                         <li v-on:click="returnHomePage('teacher')" v-if="type === 'teacher'">
-                                <span class="title">TSFI</span>
+                                <span class="title">TSFI</span><span class="role">Estudiants i Pares</span>
                         </li>
                         
                         <li  v-on:click="returnHomePage('student')" v-if="type === 'student'">
-                                <span class="title">TSFI</span>
+                                <span class="title">TSFI</span><span class="role">Orientadors i Professors</span>
                         </li>
                         </div>
                         <div class="col-md-3 col-md-offset-3">
@@ -42,21 +42,21 @@
                             </router-link>
                         </li>
                         <li v-on:click="changeTypeUser('teacher')" v-if="type === 'student'">
-                                <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
+                                <i class="fa fa-user" aria-hidden="true" title="Canviar perfil"></i>
                         </li>
                         <li  v-on:click="changeTypeUser('student')" v-if="type === 'teacher'">
-                                <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
+                                <i class="fa fa-user" aria-hidden="true" title="Canviar perfil"></i>
                         </li>
                     </div>
                 </div>   
-                <span class="profile">
+                <!-- <span class="profile">
                     <li v-if="type === 'student'">
                         Estudiants i Pares
                     </li>
                     <li v-if="type === 'teacher'">
                         Orientadors i Professors  
                     </li>
-                </span>
+                </span> -->
             </div>
         </header>
         <div class="container">

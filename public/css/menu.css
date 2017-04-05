@@ -22,7 +22,7 @@ header{
 }
 
 .header-top-item{
-	padding: 22px 15px 7px;
+	padding: 10px;
 	width: 100%;
 	background-color: #333333;
 	color: #4FC08D; 
@@ -32,11 +32,21 @@ header{
 }
 
 .header-top-item .title{
-	font-size: 3em;
+	font-size: 2em;
     font-weight: bold; 
     letter-spacing: 6px; 
     color: #4FC08D;
     cursor: pointer;
+}
+
+.role{
+	display: inline-block;
+    position: absolute;
+    top: 5px;
+    line-height: 20px;
+    font-size: 19px;
+    letter-spacing: 1px;
+    padding-left: 20px;
 }
 
 .header-top-item a:hover, .header-top-item a:focus {
@@ -74,19 +84,20 @@ header{
 }
 
 .site-search input[type=search]{
-	transition: border 1s ease;
-	background-color:transparent;
-	font-family: "Raleway", sans-serif;
-	color:inherit;
-	border:1px solid rgba(255,255,255,0.2);
-	border-radius:0;margin:0 0 20px;
-	padding:5px;
-	padding-left:15px;
-	display:block;
-	width:100%;
-	outline:0;
-	min-height:3.6em;
-	font-size: 12px;
+    transition: border 1s ease;
+    font-family: "Raleway", sans-serif;
+    color: inherit;
+    padding: 5px;
+    padding-left: 15px;
+    display: block;
+    width: 100%;
+    outline: 0;
+    height: 30px;
+    font-size: 12px;
+    border: 0;
+	margin:0;
+    background-color: #4e4e4e;
+    border-radius: 3px;
 }
 
 .site-search input[type=search]:focus{
@@ -96,13 +107,13 @@ header{
 .site-search [type=submit]{
 	outline:0px;
 	position:absolute;
-    top: -3px;
-    right: 3px;
-	height:3.6em;
-	width:34px;
-	padding:6px;
-	margin-bottom:0px;
-	border:0;
+    top: -10px;
+    right: 0;
+	height: 3.6em;
+	width: 30px;
+	padding: 6px;
+	margin-bottom: 0px;
+	border: 0;
 	padding: 8px;
 	padding-top: 10px;
 	cursor:pointer;
@@ -114,11 +125,6 @@ header{
 	background-color:transparent
 }
 
-.site-search input[type="search"]{
-	height:3.125em;
-	margin:0
-}
-
 .site-search input[type="submit"]{
 	width:78px;
 	height:2.777em;
@@ -128,6 +134,9 @@ header{
 	background-size:16px 16px
 }
 
+.col-md-offset-3 {
+	padding: 0;
+}
 .site-search input[type="submit"]:focus{
 	border:1px solid rgba(255,255,255,0.8);
 }
@@ -147,39 +156,51 @@ header.header-light .site-search input[type=submit]{
 	clip:rect(1px 1px 1px 1px);
 }
 
-.fa-pied-piper, .fa-cloud-upload{
-	font-size: 30px !important;
-    color: #4FC08D;
-}
-.fa-cloud-upload{
+/*.fa-cloud-upload{
     float: left;
     padding-left: 48.25px;
+}*/
+
+header .col-md-offset-3 {
+	margin-left: 22%;
 }
 
-.fa-pied-piper{
-    padding-right: 17px;
+
+
+@media (min-width: 992px)
+.col-md-offset-3 {
+    margin-left: 22%;
 }
 
-.fa-pied-piper:hover, .fa-cloud-upload:hover{
+
+.user-type i {
+	font-size: 25px;
+	color: #4FC08D;
+	/*float: left;*/
+	padding-left: 15px;
+	padding-top: 2px;
+
+}
+
+.user-type i:hover{
     color: white;
     transition: color .5s ease-in-out;
     cursor: pointer;
 }
-
+.fa-user{
+    padding-left: 40px !important;
+}
 .user-type{
-	display:table;
+	display: inline-block;
+	width: 150px;
 	text-align: center;
-	/*background-color: #78617f;*/
-   /* background-color: rgb(92, 143, 132);*/
-   	/*background-color: #54839a;*/
-
     transition:background-color 1s ease;
-    height: 3.125em;
 }
 
 .user-type li{
-	display: table-cell;
+	/*display: table-cell;*/
 	vertical-align: middle;
+	float: left;
 }
 
 .user-type:hover{

@@ -55,7 +55,6 @@ fieldset[disabled] .multiselect {
   display: block;
   position: relative;
   width: 100%;
-  min-height: 3.125em;
   text-align: left;
   color: #35495E;
 }
@@ -89,14 +88,12 @@ fieldset[disabled] .multiselect {
   min-height: 20px;
   line-height: 25px;
   border: none;
-  background-color: #333333;
   color: #fff;
-  /*border-radius: 5px;*/
   padding: 1px 0 0 5px;
   width: calc(100%);
   transition: border 0.1s ease;
   box-sizing: border-box;
-  margin-bottom: 8px;
+  /*margin-bottom: 8px;*/
 }
 .multiselect__tag ~ .multiselect__input,
 .multiselect__tag ~ .multiselect__single {
@@ -113,22 +110,19 @@ fieldset[disabled] .multiselect {
 }
 .multiselect__single {
   padding-left: 6px;
-  margin-bottom: 8px;
 }
 .multiselect__tags {
-  min-height: 3.125em;
   display: block;
-  padding: 8px 40px 0 8px;
-  /*border-radius: 5px;*/
-  border: 1px solid rgba(255,255,255,0.2);
-/*  background-color: #4FC08D;*/
+  height: 30px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background-color: #4e4e4e;
   cursor: pointer;
 }
 .multiselect__tag {
   position: relative;
   display: inline-block;
   padding: 4px 26px 4px 10px;
-  /*border-radius: 5px;*/
   margin-right: 10px;
   color: #fff;
   line-height: 1;
@@ -184,8 +178,8 @@ fieldset[disabled] .multiselect {
   display: block;
   position: absolute;
   box-sizing: border-box;
-  width: 40px;
-  height: 38px;
+  width: 35px;
+  height: 30px;
   right: 1px;
   top: 1px;
   padding: 4px 8px;

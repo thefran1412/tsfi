@@ -26,6 +26,8 @@ class Categories extends Controller
 
     public function store(Request $request)
     {
+        $this->validateTag($request);
+
         \App\Category::Create([
             'nomCategoria' => $request['nom'],
             'codiCategoria' => $request['codi'],
@@ -51,9 +53,18 @@ class Categories extends Controller
     }
     public function update($id, Request $request)
     {
+        $this->validateTag($request);
+
         $recurs = Category::find($id);
         $recurs->fill($request->all());
         $recurs->save();
         return redirect('admin/categories');
+    }
+    private function validateCategory($request)
+    {
+        $this->validate($request, [
+            'nomCategoria' => 'required|max:70',
+            'descCategoria' => 'required|max:70',
+        ]);
     }
 }

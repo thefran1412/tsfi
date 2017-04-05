@@ -95,14 +95,71 @@ class Entitats extends Controller
             return redirect('admin/entitats');
         }
         $c = Entity::find($id);
-        return view('backend.entitats.edit',  ['entitat' => $c]);
+        $location = \App\Location::find($c->idLocalitzacio);
+        // var_dump($location);
+        
+        return view('backend.entitats.edit',  ['entitat' => $c, 'location' => $location]);
     }
 
     public function update($id, Request $request)
     {
+        
+        //valida els camps
+        $this->validateEntity($request);
+        //agafa la info de l'entitat
         $recurs = Entity::find($id);
+        
+        /* VALIDACIÓ MAPA */
+        
+        $validatemap = new MapValidator($request['lat'], $request['lng']);
+        //guarda la localització del mapa i torna l'id
+        $locId = $validatemap->saveMap();
+        
+        //en cas que no hi hagi valors de longitud i latitud la adreça es posa a null
+        if ($locId == null) {
+            $request['adreca'] = null;
+        }
+        
+        /* VALIDACIÓ IMATGE */
+        
+        if ($request->hasFile('logo')) {
+            
+            $validateimage = new ImageValidator($request, 'logo');
+            
+            //valida que la imatge sigui correcte
+            if ($validateimage->validateImage(null, 2000000)){
+                $validateimage->saveImage();
+                $this->logo = $validateimage->getNewImagePath();
+            }else{
+                
+                $validateimage->errorUpload();
+            }
+        }else{
+            //si no hi ha cap arxiu nou, posa el valor que ja hi havia a la base de dades
+            $this->logo = $recurs->logo;
+        }
+
         $recurs->fill($request->all());
-        $recurs->esMembre = setDefaults($request, 'esMembre', 'entitats');
+
+        //make sure all empty values = null;
+        $recurs->esMembre =setDefaults($request, 'esMembre', 'entitats');
+
+        $recurs->nomEntitat = setDefaults($request, 'nomEntitat', 'entitats');
+        $recurs->descEntitat = setDefaults($request, 'descEntitat', 'entitats');
+        
+        $recurs->telf1 = setDefaults($request, 'telf1', 'entitats');
+        $recurs->telf2 = setDefaults($request, 'telf2', 'entitats');
+        $recurs->link = setDefaults($request, 'link', 'entitats');
+        
+        $recurs->esMembre =setDefaults($request, 'esMembre', 'entitats');
+        
+        $recurs->logo = $this->logo;
+        $recurs->idLocalitzacio = $locId;
+
+        $recurs->facebook = setDefaults($request, 'facebook', 'entitats');
+        $recurs->twitter = setDefaults($request, 'twitter', 'entitats');
+        $recurs->instagram = setDefaults($request, 'instagram', 'entitats');
+
         $recurs->save();
         return redirect('admin/entitats');
     }

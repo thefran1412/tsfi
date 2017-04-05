@@ -15,7 +15,7 @@
 
 @section('script')
 <script src="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
-  <script src="{{ URL::asset('/js/createEntity.js') }}"></script>
+  <script src="{{ URL::asset('/js/map_back.js') }}"></script>
   <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
 @endsection
 

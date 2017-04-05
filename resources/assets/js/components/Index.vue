@@ -13,7 +13,7 @@
                                 <span class="title">TSFI</span>
                         </li>
                         </div>
-                        <div class="col-md-3 col-md-offset-3">
+                        <div class="col-md-3 col-md-offset-4">
                             <div class="selects">
                                 <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                             </div>
@@ -35,28 +35,28 @@
                                </button>
                             </form>
                     </div>
-                    <div class="col-md-2 user-type">
+                    <div class="col-md-1 user-type">
                         <li v-on:click="typeUser('Envians un recurs')">
                             <router-link :to="{name: 'enviar-recurs'}">
                                 <i class="fa fa-cloud-upload" aria-hidden="true" title="Enviar recurs"></i>
                             </router-link>
                         </li>
                         <li v-on:click="changeTypeUser('teacher')" v-if="type === 'student'">
-                                <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
+                                <i class="fa fa-user" aria-hidden="true" title="Canviar perfil"></i>
                         </li>
                         <li  v-on:click="changeTypeUser('student')" v-if="type === 'teacher'">
-                                <i class="fa fa-pied-piper" aria-hidden="true" title="Canviar perfil"></i>
+                                <i class="fa fa-user" aria-hidden="true" title="Canviar perfil"></i>
                         </li>
                     </div>
                 </div>   
-                <span class="profile">
+                <!-- <span class="profile">
                     <li v-if="type === 'student'">
                         Estudiants i Pares
                     </li>
                     <li v-if="type === 'teacher'">
                         Orientadors i Professors  
                     </li>
-                </span>
+                </span> -->
             </div>
         </header>
         <div class="container">

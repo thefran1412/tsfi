@@ -16,8 +16,23 @@
 
 @section('script')
 <script src="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
-  <script src="{{ URL::asset('/js/createEntity.js') }}"></script>
-  <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
+  <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places') }}" async defer></script>
+  <script src="{{ URL::asset('/js/map_back.js') }}"></script>
+  <script type="text/javascript">
+    dir = getPlaceInfo({{$location->latitud}}, {{$location->longitud}});
+    function getPlaceInfo(lat, lng) {
+      var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&sensor=false';
+    
+      $.getJSON(url, function (data) {
+        this.formatedAddress = data.results[0].formatted_address;
+        var direction = this.formatedAddress;
+        // console.log('exec: ' + this.formatedAddress);
+
+        initMap(lat, lng, direction);
+
+      });
+    }
+  </script>
 @endsection
 
 @section('content')

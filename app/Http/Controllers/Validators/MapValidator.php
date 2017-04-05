@@ -18,7 +18,7 @@ class MapValidator
     }
 
     public function saveMap()
-    {
+    {   
         if ($this->lat == 0 || $this->lng == 0) {
             return null;
         }

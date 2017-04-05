@@ -134,6 +134,10 @@
                     this.type = 'teacher';
                 }
             },
+            animationScroll(){
+                     $("html, body").animate({ scrollTop: 20 }, "slow");
+                     $("html, body").animate({ scrollTop: 0 }, "slow");
+            },
             whatUserPage(value){
                 var typeNum = localStorage.getItem("numType");
                 this.search = '';
@@ -289,6 +293,8 @@
                         this.category = { codiCategoria: cap, nomCategoria: to.params.category };
                     }
                 }
+
+                this.animationScroll();
            }
        }
     }

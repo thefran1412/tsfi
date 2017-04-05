@@ -2,30 +2,38 @@
 	<div class="content-bottom-header" >
 		<div id="resource" class="container">
 			<!-- Columna principal -->
-			<div v-if="resource" class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
+			<div  class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
 				<!--  titol Recurs-->
-				<h1>{{resource[0].titolRecurs}}</h1>
+
+
+
+				<h1 v-if="resource" >{{resource[0].titolRecurs}}</h1>
+
+				
+
  				<!--  Foto resum-->
-				<img class="img-responsive" :src="'/img/image/'+ resource[0].fotoResum" :alt="resource[0].titolRecurs" :title="resource[0].titolRecurs">
+				<img v-if="resource" class="img-responsive" :src="'/img/image/'+ resource[0].fotoResum" :alt="resource[0].titolRecurs" :title="resource[0].titolRecurs">
 				<!-- autor i data publicació-->
-				<div v-if="resource[0].creatPer && datePub" class="autor">
+				<div v-if="resource && resource[0].creatPer && datePub" class="autor">
 					<h5><strong>Autor: </strong> {{resource[0].creatPer}} <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i> {{datePub}}</strong></p></h5>
 				</div>
 				<!-- subtitol -->
-				<h2>{{resource[0].subtitol}}</h2>
+				<h2 v-if="resource">{{resource[0].subtitol}}</h2>
 				<!-- class="descshort" -->
-				<p><strong>{{resource[0].descBreu}}</strong></p>
+				<p v-if="resource"><strong>{{resource[0].descBreu}}</strong></p>
 					<!-- desc1 -->
-				<p>{{resource[0].descDetaill1}}</p>
+				<p v-if="resource">{{resource[0].descDetaill1}}</p>
 					<!-- desc2 -->
-				<p>{{resource[0].descDetaill2}}</p>
+				<p v-if="resource">{{resource[0].descDetaill2}}</p>
 				<!-- media -->
-				<h2 v-if="resource[0].image_resource[0] || resource[0].video_resource[0] || resource[0].podcast[0]">Media</h2>
-				<img  v-for="r in resource[0].image_resource" class="img-responsive" :src="r.imatge" :alt="r.descImatge" :title="r.descImatge"></img>
+				<h2 v-if="resource && resource[0].image_resource[0] || resource && resource[0].video_resource[0] || resource && resource[0].podcast[0]">Media</h2>
+				<!-- <img  v-for="r in resource[0].image_resource" class="img-responsive" :src="r.imatge" :alt="r.descImatge" :title="r.descImatge"></img> -->
 
 				<!-- <iframe v-for="r in resource[0].video_resource" width="560" height="315" :src="r.urlVideo" frameborder="0" allowfullscreen></iframe> -->
 
-				<iframe v-for="r in resource[0].podcast" width="100%" height="200" frameborder="0" allowfullscreen="" scrolling="no" :src="r.podCast"></iframe>
+				<!-- <iframe v-for="r in resource[0].podcast" width="100%" height="200" frameborder="0" allowfullscreen="" scrolling="no" :src="r.podCast"></iframe> -->
+				<h2>{{formatedAddress}}</h2>
+				<div id="map" ref="map"></div>
 			</div>
 
 			<!-- Columna secundaria -->
@@ -97,10 +105,10 @@
 			</div>
 		
 			<!-- Mapa recurso -->
-			<div class="resource-body">
+			<!-- <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
 				<h2>{{formatedAddress}}</h2>
 				<div id="map" ref="map"></div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>

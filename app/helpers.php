@@ -6,9 +6,12 @@
  * Time: 21:22
  */
 use App\EntityResource;
+use App\Http\Controllers\Validators\MapValidator;
 use App\Link;
 use App\Resource;
 use App\Tag;
+use App\TargetResource;
+use App\VideoResource;
 use App\VideoType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -118,12 +121,52 @@ function addRecursLinks(Request $request, $recurs_id)
 }
 function addRecursVideo(Request $request, $recurs_id)
 {
-    $pos = strpos($request['videoembed'], 'youtube');
-    if (strpos($request['videoembed'], 'youtube')) {
-        dump("La cadena fue encontrada en la cadena");
-    } else if (strpos($request['videoembed'], 'youtube')){
-        dump("La cadena no fue encontrada en la cadena");
+    $src = $request['videoembed'];
+    $pos = strpos($src, 'youtube');
+    $titolVideo = 'Video recurso';
+    if (strpos($src, 'youtube')) {
+        $video_id = substr($src, strrpos($src, '/')+1);
+        if($content = file_get_contents("http://youtube.com/get_video_info?video_id=".$video_id)){
+            parse_str($content, $ytarr);
+            $titolVideo = $ytarr['title'];
+            dump($titolVideo);
+        }
+    } else if (strpos($src, 'vimeo')){
+        $video_id = substr($src, strrpos($src, '/')+1);
+        if($content = file_get_contents("http://vimeo.com/api/v2/video/".$video_id.".json")){
+            $hash = json_decode($content);
+            $titolVideo = $hash[0]->title;
+            dump($titolVideo);
+        }
+        $hash = json_decode(file_get_contents("http://vimeo.com/api/v2/video/{$video_id}.json"));
+    }else{
+        strpos($src, 'iframe');
+        dump('otros sitios');
     }
-    $video = VideoType::where(['idEntitat' => $request['entitats'], 'idRecurs' => $recurs_id])->first();
-    $request['videoembed'];
+    $videoRecurs = new VideoResource;
+    $videoRecurs->idRecurs = $recurs_id;
+    $videoRecurs->urlVideo = $src;
+    $videoRecurs->titolVideoRecurs = $titolVideo;
+    $videoRecurs->save();
+}
+function addRecursTarget(Request $request, $recurs_id)
+{
+    dump($recurs_id);
+    foreach ($request['target'] as  $value) {
+        $target_recurs = TargetResource::where(['idRecurs' => $recurs_id, 'idTarget' => $value])->first();
+        if (!$target_recurs) {
+            $target_recurs = new TargetResource;
+            $target_recurs->idRecurs = $recurs_id;
+            $target_recurs->idTarget = $value;
+            $target_recurs->save();
+        }
+    }
+}
+function addRecursLocalitzacio(Request $request, $recurs_id)
+{
+    $validatemap = new MapValidator($request['lat'], $request['lng']);
+    $locId = $validatemap->saveMap();
+    if ($locId == null) {
+        $request['adreca'] = null;
+    }
 }

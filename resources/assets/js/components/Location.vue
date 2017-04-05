@@ -12,9 +12,7 @@
             <div v-if="resource" class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
                 <!--  titol Recurs-->
                 <h1>{{resource[0].titolRecurs}}</h1>
-
-                   
-                            <!--  Foto resum-->
+                <!--  Foto resum-->
                 <img class="img-responsive" :src="'/img/image/'+ resource[0].fotoResum" :alt="resource[0].titolRecurs" :title="resource[0].titolRecurs">
                 <!-- autor i data publicació-->
                 <div v-if="resource[0].creatPer && datePub" class="autor">
@@ -29,7 +27,7 @@
                     <!-- desc2 -->
                 <p>{{resource[0].descDetaill2}}</p>
                 <!-- media -->
-                <h2 v-if="resource[0].image_resource[0] || resource[0].video_resource[0] || resource[0].podcast[0]">Media</h2>
+                <h2 v-if="resource[0].image_resource || resource[0].video_resource || resource[0].podcas">Media</h2>
                 <img  v-for="r in resource[0].image_resource" class="img-responsive" :src="r.imatge" :alt="r.descImatge" :title="r.descImatge"></img>
 
                 <iframe v-for="r in resource[0].video_resource" width="560" height="315" :src="r.urlVideo" frameborder="0" allowfullscreen></iframe>

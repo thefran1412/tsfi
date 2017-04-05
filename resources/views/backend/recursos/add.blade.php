@@ -1,7 +1,6 @@
 @extends('layouts.backend')
 @section('css')
     <link href="{{ URL::asset('/js/sumer_note/summernote.css') }}" rel="stylesheet">
-    {{--<link href="{{ URL::asset('http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css') }}" rel="stylesheet">--}}
     <link href="{{ URL::asset('/css/backend/extra.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/multi-select.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/resourceadd.css') }}" rel="stylesheet">
@@ -183,12 +182,42 @@
                 </select>
             </div>
         </div> <br>
-        <br><br><br>
+        <div class="form-group row">
+            <div class="col-md-3">
+                @foreach ($targets as $target)
+                    <div class="checkbox">
+                        <label>
+                            <input tabindex="1" type="checkbox" name="target[]" id="{{$target->targets_id}}" value="{{$target->targets_id}}">
+                            {{$target->target}}
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <br>
+    <div class="paper">
+        {!!Form::label('adreca', 'Adreça: ')!!}
+        {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
+        {!!Form::hidden('lat', null, ['class' => 'form-control', 'id' => 'lat'])!!}
+        {!!Form::hidden('lng', null, ['class' => 'form-control', 'id' => 'lng'])!!}
+
+        <div class="map">
+            <div id="map"></div>
+        </div>
+
+        <div id="infowindow-content">
+            <span id="place-name" class="title"></span>
+            {{-- <br>Place ID <span id="place-id"></span><br> --}}
+            {{-- <span id="place-address"></span> --}}
+        </div>
+        <br><br><br><br>
         <div class="form-group row">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Create</button>
+            {!!Form::submit('Create', ['class' => 'btn btn-primary'])!!}
             </div>
-        </div><br><br><br><br>
+        </div>
+        {!!Form::close()!!}
+    </div>
     </div>
 
 @endsection
@@ -206,4 +235,8 @@
     {{--Multi select--}}
     <script src="{{URL::asset('js/jquery.multi-select.js')}}"></script>
     {{--end Multi select--}}
+    {{--Google maps--}}
+    <script src="{{ URL::asset('/js/createEntity.js') }}"></script>
+    <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
+    {{--end Google maps--}}
 @endsection

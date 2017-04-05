@@ -5,11 +5,11 @@
 
                 <div class="row">
                     <div class="col-md-1" >
-                        <li v-on:click="changeTypeUser('teacher')" v-if="type === 'teacher'">
+                        <li v-on:click="returnHomePage('teacher')" v-if="type === 'teacher'">
                                 <span class="title">TSFI</span>
                         </li>
                         
-                        <li  v-on:click="changeTypeUser('student')" v-if="type === 'student'">
+                        <li  v-on:click="returnHomePage('student')" v-if="type === 'student'">
                                 <span class="title">TSFI</span>
                         </li>
                         </div>
@@ -126,14 +126,6 @@
         methods:{
             typeUser(value){
                 var typeUser = localStorage.getItem("typeUser");
-                // if(value){
-                //     this.recursos = [];
-                //     this.$nextTick(() => {
-                //         this.prueba.$emit('$InfiniteLoading:reset');
-                        // this.animationScroll();
-                //     });
-                //     this.category = { codiCategoria:value , nomCategoria: 'enviar-recurs' };
-                // }
 
                 if(typeUser === 'student'){
                     this.type = 'student';
@@ -156,14 +148,26 @@
                     }
                 }
             },
+            returnHomePage(typeUser){
+                
+                this.$router.push('/'+typeUser+'/home');
+                this.recursos = [];
+                this.$nextTick(() => {
+                    this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                    this.page = 1;
+                });
+                this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
+            },
             changeTypeUser: function (typeUser){
+                
                 this.search = '';
                 localStorage.removeItem("typeUser");
                 localStorage.setItem("typeUser", typeUser);
+                
                 var typeActUser = localStorage.getItem("typeUser");
                 localStorage.removeItem("numType");
                 localStorage.setItem("numType", 0);
-                
+
                 this.$router.push('/'+typeUser+'/home');
 
                 this.typeUser();
@@ -171,21 +175,22 @@
                 this.$nextTick(() => {
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
-
-                    // this.animationScroll();
-                    
                 });
                 
                 this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
             },
             correctSelectCategory(routeParam){
-                if(routeParam !== 'home' && routeParam !== undefined){
+                console.log(routeParam);
+                if(routeParam !== undefined){
+                    if(routeParam !== 'home'){
                     var cap = routeParam.charAt(0).toUpperCase() + routeParam.slice(1);
                     this.category = { codiCategoria: cap, nomCategoria: routeParam };
+                    }
+                    if(routeParam === 'home'){
+                        this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
+                    }
                 }
-                if(routeParam !== undefined){
-                    this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
-                }
+                
             },
             fetchEntities(){
                 this.$http.get('../api/entitats').then(response=>{
@@ -210,13 +215,10 @@
                   var d;
                   
                   this.$http.get( route , {
-                        // params: {
-                        //   category: this.category.nomCategoria,
-                        // },
+
                   }).then((res) => {
                     if (res.data.resources.length ) {
                       this.recursos = this.recursos.concat(res.data.resources);
-
                             this.recursos.forEach(function(data){
                                 if(data.dataPublicacio){
                                     t = data.dataPublicacio.split(/[- :]/);
@@ -239,17 +241,11 @@
                     this.recursos = [];
                     var typeUser = localStorage.getItem("typeUser");
                     this.$router.push('/'+typeUser + '/' + v.nomCategoria);
-                    // if(v.nomCategoria !== 'enviar-recurs'){}
+
                         this.$nextTick(() => {
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                             this.page = 1;
                         });
-
-                       // this.animationScroll();
-                },
-                animationScroll(){
-                    $("html, body").animate({ scrollTop: 20 }, "slow");
-                    $("html, body").animate({ scrollTop: 0 }, "slow");
                 },
                 actionToSearch(){
                         this.$children[3].list = [];
@@ -261,8 +257,6 @@
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                             this.$children[3].pageSearch = 1;
                         });
-
-                        // this.animationScroll();
                 }
         },
        components: {
@@ -275,18 +269,25 @@
 
                 this.$router.push(to.fullPath);
 
-                this.$nextTick(() => {
+                if(!to.fullPath.indexOf('enviar-recurs') > 0){
+                    this.$nextTick(() => {
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                             this.$children[3].pageSearch = 1;
                             this.page = 1;
                         });
-
-                console.log(to.fullPath.indexOf('student') > 0);
+                }else{
+                    this.category = { codiCategoria: "Envia'ns un recurs", nomCategoria: 'home' };
+                }
 
                 if(to.fullPath.indexOf('student') > 0 || to.fullPath.indexOf('teacher') > 0){
-                    var cap = to.params.category.charAt(0).toUpperCase() + to.params.category.slice(1);
                     
-                    this.category = { codiCategoria: cap, nomCategoria: to.params.category };
+
+                    if(to.fullPath.indexOf('home') > 0){
+                        this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
+                    }else{
+                        var cap = to.params.category.charAt(0).toUpperCase() + to.params.category.slice(1);
+                        this.category = { codiCategoria: cap, nomCategoria: to.params.category };
+                    }
                 }
            }
        }

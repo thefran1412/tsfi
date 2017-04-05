@@ -7,6 +7,7 @@ use App\Age;
 use App\Entity;
 use App\Http\Controllers\Validators\ImageValidator;
 use App\Resource;
+use App\Target;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -40,11 +41,13 @@ class Recursos extends Controller
         $categorias = Category::all('nomCategoria', 'categoria_id');
         $entitats = Entity::pluck('nomEntitat', 'entitat_id');
         $edats = Age::pluck('descEdat', 'edats_id');
+        $targets = Target::all('targets_id', 'target');
         $current_time = Carbon::now()->format('Y-m-d');
         return view('backend.recursos.add',[
                 'edats'=>$edats,
                 'categorias'=>$categorias,
-                'entitats'=>$entitats
+                'entitats'=>$entitats,
+                'targets'=>$targets
             ]
         );
     }
@@ -89,6 +92,9 @@ class Recursos extends Controller
         if($request['tag0'])addRecursTag($request, $insertedId);
         if($request['entitats'])addRecursEntity($request, $insertedId);
         if($request['linkrecurs'])addRecursLinks($request, $insertedId);
+        if($request['videoembed'] !== null)addRecursVideo($request, $insertedId);
+        dump($request['target']);
+        if($request['target'])addRecursTarget($request, $insertedId);
         exit();
         return redirect()->to('admin/recursos');
     }

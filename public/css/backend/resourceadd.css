@@ -1,7 +1,7 @@
 .note-editor.note-frame .note-editing-area .note-editable{
     padding-left:20px;
 }
-#boxOfTags{
+#boxOfTags #videoBox{
     -webkit-border-radius: 10px 10px 10px 10px;
     border: 2px solid rgb(206, 209, 212);
     background: #FFFFFF;
@@ -37,27 +37,15 @@ input::-webkit-calendar-picker-indicator {
     margin-right: -6px;
 }
 
-/* Style the buttons that are used to open and close the accordion panel */
-button.accordion {
-    background-color: rgba(0, 156, 223, 0.28);
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
+/*Video */
+#videoBox{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 2px solid rgb(206, 209, 212);
+    background: #FFFFFF;
+    min-height: 150px;
+    padding: 10px;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-button.accordion.active, button.accordion:hover {
-    background-color: #ddd;
-}
-
-/* Style the accordion panel. Note: hidden by default */
-div.panel {
-    padding: 0 18px;
-    background-color: white;
-    display: none;
+#descBreu{
+    height: 100px;
 }

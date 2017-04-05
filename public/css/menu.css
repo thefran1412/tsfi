@@ -36,6 +36,7 @@ header{
     font-weight: bold; 
     letter-spacing: 6px; 
     color: #4FC08D;
+    cursor: pointer;
 }
 
 .header-top-item a:hover, .header-top-item a:focus {
@@ -44,7 +45,7 @@ header{
 
 .header-top-item .profile{
 	font-size: 1em;
-    letter-spacing: 1px;
+    letter-spacing: 1.3px;
     list-style: none;
 }
 
@@ -146,27 +147,23 @@ header.header-light .site-search input[type=submit]{
 	clip:rect(1px 1px 1px 1px);
 }
 
-.fa-cloud-upload{
+.fa-pied-piper, .fa-cloud-upload{
 	font-size: 30px !important;
-    float: left;
-    padding-left: 48.25px;
     color: #4FC08D;
 }
-
-.fa-cloud-upload:hover{
-    color: white;
-    transition: color .5s ease-in-out;
+.fa-cloud-upload{
+    float: left;
+    padding-left: 48.25px;
 }
 
 .fa-pied-piper{
-    font-size: 30px !important;
     padding-right: 17px;
-    color: #4FC08D;
 }
 
-.fa-pied-piper:hover{
+.fa-pied-piper:hover, .fa-cloud-upload:hover{
     color: white;
     transition: color .5s ease-in-out;
+    cursor: pointer;
 }
 
 .user-type{

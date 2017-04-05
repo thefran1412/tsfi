@@ -8,3 +8,6 @@ Homestead.yaml
 .env
 composer.phar
 public/js/app.js
+public/css/app.css.map
+public/js/app.js
+resources/assets/js/components/Resources.vue.orig

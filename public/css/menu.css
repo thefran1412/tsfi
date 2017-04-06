@@ -40,17 +40,6 @@ header{
     cursor: pointer;
 }
 
-.role{
-	display: inline-block;
-    position: absolute;
-    top: 5px;
-    line-height: 20px;
-    font-size: 19px;
-    letter-spacing: 1px;
-    padding-left: 20px;
-    cursor: pointer;
-}
-
 .header-top-item a:hover, .header-top-item a:focus {
     text-decoration: none;
 }
@@ -89,9 +78,20 @@ header{
 /* LOGO */
 
 .logo{
-	width: 300px;
+	width: 240px;
 	position: absolute;
 	left: 10px;
+}
+
+.role{
+	display: inline-block;
+    position: absolute;
+    top: 5px;
+    line-height: 20px;
+    font-size: 19px;
+    letter-spacing: 1px;
+    padding-left: 20px;
+    cursor: pointer;
 }
 
 /* INPUTS IN GENERAL */
@@ -356,3 +356,44 @@ footer .network img{
     margin-bottom: 25px;
     margin-top: 15px;
 }
+
+
+
+
+
+/* MEDIA QUERY */
+
+@media screen and (max-width: 820px) {
+	.logo{
+		width: 60px;
+	}
+	.role{
+		display: none;
+	}
+}
+
+@media screen and (max-width: 680px) {
+	.selects {
+		left: 70px;
+
+	}
+	.search {
+		width: calc(100% - 385px);
+	}
+}
+
+@media screen and (max-width: 540px) {
+	.search {
+		display: none;
+	}
+	.search_icon{
+		display: inline-block !important;
+	}
+	.user-type{
+		width: 200px;
+	}
+	.user-type i{
+		padding-left: 30px !important;
+	}
+}
+

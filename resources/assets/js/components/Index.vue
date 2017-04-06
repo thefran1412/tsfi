@@ -35,7 +35,13 @@
                                </button>
                             </form>
                     </div>
+
                     <div class="user-type">
+                        <li class="search_icon" v-on:click="typeUser('Envians un recurs')" v-show="noShow">
+                            <router-link :to="{name: 'enviar-recurs'}">
+                                <i class="fa fa-search" aria-hidden="true" title="Busca"></i>
+                            </router-link>
+                        </li>
                         <li v-on:click="typeUser('Envians un recurs')">
                             <router-link :to="{name: 'enviar-recurs'}">
                                 <i class="fa fa-cloud-upload" aria-hidden="true" title="Enviar recurs"></i>

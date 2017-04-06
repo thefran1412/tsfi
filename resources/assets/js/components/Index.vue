@@ -4,7 +4,7 @@
             <div class="header-top-item header-search-container">
 
                 <div class="row">
-                    <div class="col-md-3" >
+                    <div class="logo" >
                         <li v-on:click="returnHomePage('teacher')" v-if="type === 'teacher'">
                                 <span class="title">TSFI</span><span class="role">Estudiants i Pares</span>
                         </li>
@@ -12,16 +12,16 @@
                         <li  v-on:click="returnHomePage('student')" v-if="type === 'student'">
                                 <span class="title">TSFI</span><span class="role">Orientadors i Professors</span>
                         </li>
+                    </div>
+                    <div class="input">
+                        <div class="selects">
+                            <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                         </div>
-                        <div class="col-md-3 col-md-offset-2">
-                            <div class="selects">
-                                <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
-                            </div>
-                        </div>
-                    <div class="col-md-3" v-show="noShow">
+                    </div>
+                    <div class="input" v-show="noShow">
                         <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="codiCategoria" track-by="codiCategoria"  :allow-empty="false"></multiselect>
                     </div>
-                    <div class="col-md-3">
+                    <div class="input search">
                             <form @submit.prevent="actionToSearch" class="site-search" >
                               <div id="site-search-container">
                                 <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
@@ -35,7 +35,11 @@
                                </button>
                             </form>
                     </div>
-                    <div class="col-md-2 user-type">
+
+                    <div class="user-type">
+                        <li class="search_icon" v-on:click="searchMobile()" hidden>
+                           <i class="fa fa-search" title="Buscar"> 
+                        </li>
                         <li v-on:click="typeUser('Envians un recurs')">
                             <router-link :to="{name: 'enviar-recurs'}">
                                 <i class="fa fa-cloud-upload" aria-hidden="true" title="Enviar recurs"></i>
@@ -48,6 +52,22 @@
                                 <i class="fa fa-user" aria-hidden="true" title="Canviar perfil"></i>
                         </li>
                     </div>
+                </div>   
+            </div>
+            <div class="searchMobile" v-if="mobile === true">
+                <div class="input mobile">
+                    <form @submit.prevent="actionToSearch" class="site-search" >
+                        <div id="site-search-container">
+                            <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
+                        </div>
+                        <button tabindex="2" type="submit">
+                            <span class="a11y-only">Search</span>
+                            <svg class="icon-search" viewBox="0 0 34 34" fill="none" stroke="currentColor">
+                                <ellipse stroke-width="3" cx="16" cy="15" rx="12" ry="12"></ellipse>
+                                <path d="M26 26 l 8 8" stroke-width="3" stroke-linecap="square"></path>
+                            </svg>
+                        </button>
+                    </form>
                 </div>
             </div>
         </header>
@@ -101,6 +121,7 @@
                 entities: [],
                 prueba:null,
                 noShow:false,
+                mobile:false,
                 typeUserUrl: this.$route.params.typeuser,
                 typeCategory:this.$route.params.category,
                 page:1
@@ -116,6 +137,9 @@
             this.typeUser();
         },
         methods:{
+            searchMobile(){
+                this.mobile = this.mobile ? false : true;
+            },
             typeUser(value){
                 var typeUser = localStorage.getItem("typeUser");
 
@@ -125,10 +149,6 @@
                 if(typeUser === 'teacher'){
                     this.type = 'teacher';
                 }
-            },
-            animationScroll(){
-                     $("html, body").animate({ scrollTop: 5 }, "slow");
-                     $("html, body").animate({ scrollTop: 0 }, "slow");
             },
             whatUserPage(value){
                 var typeNum = localStorage.getItem("numType");
@@ -153,8 +173,6 @@
                     this.page = 1;
                 });
                 this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
-
-                this.animationScroll();
             },
             changeTypeUser: function (typeUser){
                 
@@ -278,15 +296,14 @@
                 }
 
                 if(to.fullPath.indexOf('student') > 0 || to.fullPath.indexOf('teacher') > 0){
+                    
 
-                    this.$nextTick(() => {
+                    if(to.fullPath.indexOf('home') > 0){
+                        this.$nextTick(() => {
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                             this.$children[3].pageSearch = 1;
                             this.page = 1;
                         });
-                    this.animationScroll();
-
-                    if(to.fullPath.indexOf('home') > 0){
                         this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
                     }else{
                         var cap = to.params.category.charAt(0).toUpperCase() + to.params.category.slice(1);

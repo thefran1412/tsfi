@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="user-type">
-                        <li v-on:click="searchMobile()">
+                        <li class="search_icon" v-on:click="searchMobile()" hidden>
                            <i class="fa fa-search" title="Buscar"> 
                         </li>
                         <li v-on:click="typeUser('Envians un recurs')">
@@ -53,6 +53,22 @@
                         </li>
                     </div>
                 </div>   
+            </div>
+            <div class="searchMobile" v-if="mobile === true">
+                <div class="input mobile">
+                    <form @submit.prevent="actionToSearch" class="site-search" >
+                        <div id="site-search-container">
+                            <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
+                        </div>
+                        <button tabindex="2" type="submit">
+                            <span class="a11y-only">Search</span>
+                            <svg class="icon-search" viewBox="0 0 34 34" fill="none" stroke="currentColor">
+                                <ellipse stroke-width="3" cx="16" cy="15" rx="12" ry="12"></ellipse>
+                                <path d="M26 26 l 8 8" stroke-width="3" stroke-linecap="square"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
             </div>
         </header>
         <div class="container">
@@ -105,6 +121,7 @@
                 entities: [],
                 prueba:null,
                 noShow:false,
+                mobile:false,
                 typeUserUrl: this.$route.params.typeuser,
                 typeCategory:this.$route.params.category,
                 page:1
@@ -121,7 +138,7 @@
         },
         methods:{
             searchMobile(){
-                console.log('exec');
+                this.mobile = this.mobile ? false : true;
             },
             typeUser(value){
                 var typeUser = localStorage.getItem("typeUser");

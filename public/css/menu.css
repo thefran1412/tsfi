@@ -94,14 +94,6 @@ header{
     cursor: pointer;
 }
 
-/* INPUTS IN GENERAL */
-
-.input {
-	width: 300px;
-	display: inline-block;
-
-}
-
 /* CATEGORY INPUT */
 
 .selects{
@@ -115,10 +107,27 @@ header{
 
 
 .search{
+	width: 300px;
 	position: absolute;
     right: 150px;
 }
 
+/* SEARCH MOBILE INPUT */
+
+.searchMobile{
+	position: absolute;
+	top: 50px;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	background-color: #252525;
+	align-content: center;
+}
+.mobile{
+	/*position: absolute;
+    right: 150px;*/
+    margin: 10px;
+}
 
 /* ICONS */
 
@@ -394,6 +403,16 @@ footer .network img{
 	}
 	.user-type i{
 		padding-left: 30px !important;
+		font-size: 20px;
+		padding-top: 4px;
+	}
+	.selects{
+		width: calc(100% - 250px);
 	}
 }
 
+@media screen and (min-width: 540px) {
+	.searchMobile{
+		display: none;
+	}
+}

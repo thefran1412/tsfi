@@ -37,10 +37,8 @@
                     </div>
 
                     <div class="user-type">
-                        <li class="search_icon" v-on:click="typeUser('Envians un recurs')" v-show="noShow">
-                            <router-link :to="{name: 'enviar-recurs'}">
-                                <i class="fa fa-search" aria-hidden="true" title="Busca"></i>
-                            </router-link>
+                        <li v-on:click="searchMobile()">
+                           <i class="fa fa-search" title="Buscar"> 
                         </li>
                         <li v-on:click="typeUser('Envians un recurs')">
                             <router-link :to="{name: 'enviar-recurs'}">
@@ -55,14 +53,6 @@
                         </li>
                     </div>
                 </div>   
-                <!-- <span class="profile">
-                    <li v-if="type === 'student'">
-                        Estudiants i Pares
-                    </li>
-                    <li v-if="type === 'teacher'">
-                        Orientadors i Professors  
-                    </li>
-                </span> -->
             </div>
         </header>
         <div class="container">
@@ -130,6 +120,9 @@
             this.typeUser();
         },
         methods:{
+            searchMobile(){
+                console.log('exec');
+            },
             typeUser(value){
                 var typeUser = localStorage.getItem("typeUser");
 

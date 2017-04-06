@@ -4,7 +4,7 @@
             <div class="header-top-item header-search-container">
 
                 <div class="row">
-                    <div class="col-md-2" >
+                    <div class="col-md-3" >
                         <li v-on:click="returnHomePage('teacher')" v-if="type === 'teacher'">
                                 <span class="title">TSFI</span><span class="role">Estudiants i Pares</span>
                         </li>
@@ -13,7 +13,7 @@
                                 <span class="title">TSFI</span><span class="role">Orientadors i Professors</span>
                         </li>
                         </div>
-                        <div class="col-md-3 col-md-offset-3">
+                        <div class="col-md-3 col-md-offset-2">
                             <div class="selects">
                                 <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                             </div>
@@ -48,15 +48,7 @@
                                 <i class="fa fa-user" aria-hidden="true" title="Canviar perfil"></i>
                         </li>
                     </div>
-                </div>   
-                <!-- <span class="profile">
-                    <li v-if="type === 'student'">
-                        Estudiants i Pares
-                    </li>
-                    <li v-if="type === 'teacher'">
-                        Orientadors i Professors  
-                    </li>
-                </span> -->
+                </div>
             </div>
         </header>
         <div class="container">
@@ -286,7 +278,13 @@
                 }
 
                 if(to.fullPath.indexOf('student') > 0 || to.fullPath.indexOf('teacher') > 0){
-                    
+
+                    this.$nextTick(() => {
+                            this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
+                            this.$children[3].pageSearch = 1;
+                            this.page = 1;
+                        });
+                    this.animationScroll();
 
                     if(to.fullPath.indexOf('home') > 0){
                         this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
@@ -295,8 +293,6 @@
                         this.category = { codiCategoria: cap, nomCategoria: to.params.category };
                     }
                 }
-
-                this.animationScroll();
            }
        }
     }

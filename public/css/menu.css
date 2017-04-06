@@ -18,7 +18,11 @@ header{
 }
 
 .content-bottom-header{
+<<<<<<< HEAD
 	padding-top: 50px;
+=======
+	padding-top: 51px;
+>>>>>>> 44020107a79913a146ae807d31d36cd8e94f38f3
 }
 
 .header-top-item{
@@ -245,9 +249,11 @@ header{
 	background-size:16px 16px
 }
 
-.col-md-offset-3 {
+header .col-md-offset-3 {
 	padding: 0;
+	margin-left: 22%;
 }
+
 .site-search input[type="submit"]:focus{
 	border:1px solid rgba(255,255,255,0.8);
 }
@@ -272,19 +278,38 @@ header.header-light .site-search input[type=submit]{
     padding-left: 48.25px;
 }*/
 
-/*header .col-md-offset-3 {
-	margin-left: 22%;
+
+
+
+.user-type i {
+	font-size: 25px;
+	color: #4FC08D;
+	/*float: left;*/
+	padding-left: 15px;
+	padding-top: 2px;
+
 }
 
+.user-type i:hover{
+    color: white;
+    transition: color .5s ease-in-out;
+    cursor: pointer;
+}
+.fa-user{
+    padding-left: 40px !important;
+}
+.user-type{
+	display: inline-block;
+	width: 150px;
+	text-align: center;
+    transition:background-color 1s ease;
+}
 
-
-@media (min-width: 992px)
-.col-md-offset-3 {
-    margin-left: 22%;
-}*/
-
-
-
+.user-type li{
+	/*display: table-cell;*/
+	vertical-align: middle;
+	float: left;
+}
 
 
 .footer-menu{

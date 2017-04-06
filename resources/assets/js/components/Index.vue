@@ -4,7 +4,7 @@
             <div class="header-top-item header-search-container">
 
                 <div class="row">
-                    <div class="col-md-2" >
+                    <div class="logo" >
                         <li v-on:click="returnHomePage('teacher')" v-if="type === 'teacher'">
                                 <span class="title">TSFI</span><span class="role">Estudiants i Pares</span>
                         </li>

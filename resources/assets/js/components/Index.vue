@@ -12,16 +12,16 @@
                         <li  v-on:click="returnHomePage('student')" v-if="type === 'student'">
                                 <span class="title">TSFI</span><span class="role">Orientadors i Professors</span>
                         </li>
+                    </div>
+                    <div class="input">
+                        <div class="selects">
+                            <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
                         </div>
-                        <div class="col-md-3 col-md-offset-3">
-                            <div class="selects">
-                                <multiselect @select="dispatchAction" v-model="category" selected-label="Seleccionada" track-by="codiCategoria" label="codiCategoria" placeholder="Selecciona una categoria" :options="categories" :searchable="false" :allow-empty="false"></multiselect>
-                            </div>
-                        </div>
-                    <div class="col-md-3" v-show="noShow">
+                    </div>
+                    <div class="input" v-show="noShow">
                         <multiselect v-model="entity" :options="entities" :custom-label="nameWithLang" placeholder="Selecciona una entitat" label="codiCategoria" track-by="codiCategoria"  :allow-empty="false"></multiselect>
                     </div>
-                    <div class="col-md-3">
+                    <div class="input search">
                             <form @submit.prevent="actionToSearch" class="site-search" >
                               <div id="site-search-container">
                                 <input v-model="search" type="search" id="site-search" placeholder="Cerca el recurs...">
@@ -35,7 +35,7 @@
                                </button>
                             </form>
                     </div>
-                    <div class="col-md-2 user-type">
+                    <div class="user-type">
                         <li v-on:click="typeUser('Envians un recurs')">
                             <router-link :to="{name: 'enviar-recurs'}">
                                 <i class="fa fa-cloud-upload" aria-hidden="true" title="Enviar recurs"></i>

@@ -122,6 +122,7 @@ header{
 	height: 50px;
 	background-color: #252525;
 	align-content: center;
+	color: #4FC08D;
 }
 .mobile{
 	/*position: absolute;
@@ -400,6 +401,7 @@ footer .network img{
 	}
 	.user-type{
 		width: 200px;
+		right: -30px;
 	}
 	.user-type i{
 		padding-left: 30px !important;
@@ -407,7 +409,7 @@ footer .network img{
 		padding-top: 4px;
 	}
 	.selects{
-		width: calc(100% - 250px);
+		width: calc(100% - 230px);
 	}
 }
 

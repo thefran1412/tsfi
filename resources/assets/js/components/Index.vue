@@ -79,9 +79,9 @@
                 <div class="row">
                     <div class="col-md-6 network">
                         <h4>Segueix-nos a :</h4>
-                        <a href="#"><img src="/img/twitter.svg"></a>
-                        <a href="#"><img src="/img/facebook.svg"></a>
-                        <a href="#"><img src="/img/instagram.svg"></a>
+                        <a href="#"><img src="img/twitter.svg"></a>
+                        <a href="#"><img src="img/facebook.svg"></a>
+                        <a href="#"><img src="img/instagram.svg"></a>
                     </div>
                     <div class="col-md-offset-2 col-md-4 contact">
                         <h4>Contacta amb nosaltres :</h4>
@@ -168,11 +168,18 @@
                 
                 this.$router.push('/'+typeUser+'/home');
                 this.recursos = [];
+
+                this.animationScroll();
+
                 this.$nextTick(() => {
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
                 });
                 this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
+            },
+            animationScroll(){
+                     $("html, body").animate({ scrollTop: 5 }, "slow");
+                     $("html, body").animate({ scrollTop: 0 }, "slow");
             },
             changeTypeUser: function (typeUser){
                 
@@ -209,24 +216,24 @@
                 
             },
             fetchEntities(){
-                this.$http.get('../api/entitats').then(response=>{
+                this.$http.get('api/entitats').then(response=>{
                     this.entities = response.data.entities;
                 })
             },
             fetchCategories(){
-                this.$http.get('../api/categories').then(response=>{
+                this.$http.get('api/categories').then(response=>{
                     this.categories = response.data.categories;
                 })
             },
             fetchResource(typeUser, category){
-                this.$http.get('../api/typeuser/'+this.type+'/'+category).then(response=>{
+                this.$http.get('api/typeuser/'+this.type+'/'+category).then(response=>{
                     this.recursos = response.data.resources;
                     this.search = '';
                     this.loading = true;
                 });
               },
              onInfinite(typeUser, typeCategory) {
-                  var route = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
+                  var route = 'api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
                   var t;
                   var d;
                   
@@ -297,6 +304,7 @@
 
                 if(to.fullPath.indexOf('student') > 0 || to.fullPath.indexOf('teacher') > 0){
                     
+                    this.animationScroll();
 
                     if(to.fullPath.indexOf('home') > 0){
                         this.$nextTick(() => {

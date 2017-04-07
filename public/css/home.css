@@ -1,16 +1,16 @@
 @font-face {
     font-family: AdamCG;
-    src: url(/fonts/adam-cg-pro.regular.otf);
+    src: url(../fonts/adam-cg-pro.regular.otf);
 }
 
 @font-face {
     font-family: Ethon;
-    src: url(/fonts/EthRomainEthon.ttf);
+    src: url(../fonts/EthRomainEthon.ttf);
 }
 
 @font-face {
     font-family: Simplifica;
-    src: url(/fonts/SIMPLIFICA.ttf);
+    src: url(../fonts/SIMPLIFICA.ttf);
 }
 
 html,body,.home-container,.student,.teacher{
@@ -20,7 +20,7 @@ body{
 	overflow-y: hidden ;
 	overflow-x: hidden ;
 	background-color: #f8f8f8;
-	background-image: url('/img/background.jpg');
+	background-image: url('../img/background.jpg');
 	background-size: cover; 
 	background-repeat: no-repeat;
 	font-family: Simplifica;

@@ -139,7 +139,7 @@ import vSelect from "vue-select";
         },
 		methods:{
 			fetchEntities(){
-	            this.$http.get('../api/categories').then(response=>{
+	            this.$http.get('api/categories').then(response=>{
 	                var p=[];
 					response.data.categories.forEach(function(c){
 
@@ -222,7 +222,7 @@ import vSelect from "vue-select";
 							var splitPr = concatIdTags.substr(1).split('#');
 						}
 
-						this.$http.post('../api/submit?tags='+ splitPr, formdata).then((response) =>{
+						this.$http.post('api/submit?tags='+ splitPr, formdata).then((response) =>{
 							//this.$router.push({path:'/student/home', query:{alert:'User Create'}})
 						},(response)=>{
 							console.log(response);
@@ -303,7 +303,7 @@ import vSelect from "vue-select";
             },
             getOptions(search, loading) {
 			    loading(true)
-			    this.$http.get('../api/tags?q='+search, {
+			    this.$http.get('api/tags?q='+search, {
 			       q: search
 			    }).then(resp => {
 			    	console.log(resp.data.tags);

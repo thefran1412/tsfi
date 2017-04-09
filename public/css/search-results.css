@@ -122,6 +122,8 @@
 }
 .post .post-img-content img
 {
+    height: 220px;
+    width: 100%;
     position: absolute;
 }
 .post .post-title

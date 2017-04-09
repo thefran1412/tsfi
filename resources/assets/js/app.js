@@ -20,6 +20,8 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 Vue.use(VueRouter);
 
 
+
+
 //Index
 import Index from './components/Index.vue';
 
@@ -62,6 +64,11 @@ import ResultOfSearch from './components/ResultsOfSearch.vue';
 //map
 import Location from './components/Location.vue';
 import LocationInput from './components/LocationInput.vue';
+
+// register modal component
+Vue.component('modal', {
+  template: '#modal-template'
+})
 
 
 const router = new VueRouter({

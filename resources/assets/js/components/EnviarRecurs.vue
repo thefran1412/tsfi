@@ -1,7 +1,7 @@
 <template>
 	<div class="content-bottom-header container content-send-resource">
 		<h1>Enviar Recurs</h1>
-		<form @submit.stop.prevent="submitForm" ref="enviarRecurs" id="enviarRecurs" method="post" enctype="multipart/form-data">
+		<form @submit.stop.prevent ref="enviarRecurs" method="post" enctype="multipart/form-data">
 			<div class="form-group" :class="{'has-error' : errors.has('titolRecurs') }">
 				<label for="titolRecurs">Títol:</label>
 				<span v-show="errors.has('titolRecurs')" class="help is-danger">{{ errors.first('titolRecurs') }}</span>	
@@ -71,10 +71,10 @@
 							<h4>Selecciona l'imatge de portada del recurs:</h4>
 						</div>
 						<div v-if="image">
-							<img :src="image" />
+							<img :src="image" id="image1" />
 							<button class="remove-image" @click="removeImage(1)">Eliminar imatge</button>
 						</div>
-						<input v-validate="'size:20'" name="image" data-vv-as="image" type="file" @change="onFileChange($event,1)">
+						<input id="input1" v-validate="'size:20'" name="image" data-vv-as="image" type="file" @change="onFileChange($event,1)">
 						<span v-show="errors.has('image')" class="help is-danger">{{ errors.first('image') }}</span>
 					</div>
 				</div>
@@ -84,10 +84,10 @@
 							<h4>Selecciona la primera imatge que hi anirà dins de l'article:</h4>
 						</div>
 						<div v-if="image2">
-							<img :src="image2" />
+							<img :src="image2" id="image2" />
 							<button class="remove-image" @click="removeImage(2)">Eliminar imatge</button>
 						</div>
-						<input v-validate="'size:2048'" name="image2" data-vv-as="image2" type="file" @change="onFileChange($event,2)">
+						<input id="input2" v-validate="'size:2048'" name="image2" data-vv-as="image2" type="file" @change="onFileChange($event,2)">
 						<span v-show="errors.has('image2')" class="help is-danger">{{ errors.first('image2') }}</span>	
 					</div>
 				</div>
@@ -97,19 +97,58 @@
 							<h4>Selecciona la segona imatge que hi anirà dins de l'article:</h4>
 						</div>
 						<div v-if="image3">
-							<img :src="image3" />
+							<img :src="image3" id="image3" />
 							<button class="remove-image" @click="removeImage(3)">Eliminar imatge</button>
 						</div>
-						<input v-validate="'size:2048'" name="image3" data-vv-as="image3" type="file" @change="onFileChange($event,3)">
+						<input id="input3" v-validate="'size:2048'" name="image3" data-vv-as="image3" type="file" @change="onFileChange($event,3)">
 						<span v-show="errors.has('image3')" class="help is-danger">{{ errors.first('image3') }}</span>	
 					</div>
 				</div>
 			</div>
-			<div class="col-md-12 button-send">
-				<button class="btn btn-primary" type="submit">Enviar Recurs</button>
-			</div>	
 		</form>
-	</div>
+		<div class="col-md-12 button-send">
+				<button @click="submitForm" class="btn btn-primary btn-send" type="submit">Enviar Recurs</button>
+		</div>
+		<!-- template for the modal component -->
+		<script type="text/x-template" id="modal-template">
+		  <transition name="modal">
+		    <div class="modal-mask">
+		      <div class="modal-wrapper">
+		        <div class="modal-container">
+
+		          <div class="modal-header" >
+		            <slot name="header">
+		              default header
+		            </slot>
+		          </div>
+
+		          <div class="modal-body">
+		            <slot name="body" >
+		              default body
+		            </slot>
+		          </div>
+
+		          <div class="modal-footer">
+		            <slot name="footer">
+		              <button class="modal-default-button" @click="$emit('close')">
+		                Tancar
+		              </button>
+		            </slot>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		  </transition>
+		</script>
+		<modal v-if="showModal" @close="showModal = false" >
+			<h3 slot="header" :class="{'requiredModal' : required }" >{{messageHeader}}</h3>
+			<span slot="body">{{messageBody}}</span>
+			<span slot="footer" v-if="!required">
+	              <button class="modal-default-button" @click="close($event)">
+	                Tancar
+	              </button>
+		    </span>
+		</modal>
 </template>
 
 <script>
@@ -128,7 +167,11 @@ import vSelect from "vue-select";
 				listCategories: [],
 				selected: null,
 				options:[],
-				tagsSelected:[]
+				tagsSelected:[],
+				showModal: false,
+				required:false,
+				messageBody:'',
+				messageHeader:''
 			}
 		},
 		created(){
@@ -150,10 +193,14 @@ import vSelect from "vue-select";
 					});
 
 					this.listCategories = p;
-					console.log(this.listCategories);
 
 	            })
             },
+		    close: function(e) {
+		    	console.log(e);
+		      	var typeUser = localStorage.getItem("typeUser");
+				this.$router.push({path:'/'+typeUser+'/home'});
+		    },
 			onFileChange(e, imgNum){
 
 				var files = e.target.files || e.dataTransfer.files;
@@ -167,7 +214,8 @@ import vSelect from "vue-select";
 					
 				}
 			},
-			createImage(file, imgNum){
+			createImage(file, imgNum) {
+
 				var image = new Image();
 				var reader = new FileReader();
 				var vm = this;
@@ -194,46 +242,58 @@ import vSelect from "vue-select";
 			},
 			removeImage: function (v){
 
-				if (v === 1) {
+				if(v === 1){
 					this.image = '';
-				};
+				}
 
-				if (v === 2) {
+				if(v === 2){
 					this.image2 = '';
-				};
+				}
 
-				if (v === 3) {
+				if(v === 3){
 					this.image3 = '';
-				};
-				
+				}
+
+				$('#input' + v ).val("");
+				$('#image' + v ).attr("src","");
+
+				this.$validator.validateAll().then(() => {
+				}).catch((e) => {});
 			},
 			submitForm: function(){
 					var form = this.$refs.enviarRecurs;
 					var formdata = new FormData(form);
 
-					$("#enviarRecurs").submit(function(e){
-					    return false;
-					});
-
 					this.$validator.validateAll().then(() => {
 
 						var concatIdTags = '';
+						var splitPr,url;
 						
 						if(this.tagsSelected.length > 0){
 							this.tagsSelected.forEach(function(data){
 								concatIdTags += '#' + data.tags_id;
 							});
-							var splitPr = concatIdTags.substr(1).split('#');
+							splitPr = concatIdTags.substr(1).split('#');
+							url = '../api/submit?tags='+ splitPr;
+						}else{
+							url = '../api/submit';
 						}
 
-						this.$http.post('../api/submit?tags='+ splitPr, formdata).then((response) =>{
-							//this.$router.push({path:'/student/home', query:{alert:'User Create'}})
-						},(response)=>{
-							console.log(response);
-						});		
-						alert('Recurs enviat')
-					}).catch((e) => {
+						this.$http.post(url, formdata).then((response) =>{
+							this.required = false;
+							this.messageHeader = "Tot correcte!"
+							this.messageBody = "El recurs s'ha enviat correctament.";
+							this.showModal = true;
 
+						},(response)=>{
+						});
+						
+					}).catch((e) => {
+						console.log(this.$root.$children[3].message);
+							this.required = true;
+							this.messageHeader = "Advertència!"
+							this.messageBody = "T'has deixat un dels camps requerids sence completar.";
+							this.showModal = true;
 					});
 				
 			},
@@ -310,20 +370,10 @@ import vSelect from "vue-select";
 			    this.$http.get('../api/tags?q='+search, {
 			       q: search
 			    }).then(resp => {
-			    	console.log(resp.data.tags);
 			       this.options = resp.data.tags;
 			       loading(false)
 			    })
-			},
-			addTag (newTag) {
-				console.log(newTag);
-		      const tag = {
-		        name: newTag,
-		        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-		      }
-		      this.options.push(tag)
-		      this.tagsSelected.push(tag);
-		    }
+			}
 		}
 	}
 </script>

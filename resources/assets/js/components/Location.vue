@@ -13,7 +13,7 @@
                 <!--  titol Recurs-->
                 <h1>{{resource[0].titolRecurs}}</h1>
                 <!--  Foto resum-->
-                <img class="img-responsive" :src="'/img/image/'+ resource[0].fotoResum" :alt="resource[0].titolRecurs" :title="resource[0].titolRecurs">
+                <img class="img-responsive" :src="'img/image/'+ resource[0].fotoResum" :alt="resource[0].titolRecurs" :title="resource[0].titolRecurs">
                 <!-- autor i data publicació-->
                 <div v-if="resource[0].creatPer && datePub" class="autor">
                     <h5><strong>Autor: </strong> {{resource[0].creatPer}} <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i> {{datePub}}</strong></p></h5>
@@ -135,7 +135,7 @@
         methods: {
             initMap: function(id) {
 
-                this.$http.get('../api/recursos/'+id).then(function(response){
+                this.$http.get('api/recursos/'+id).then(function(response){
                     this.resource = response.data.resource;
                     this.dateIni = response.data.dateIni;
                     this.dateEnd = response.data.dateEnd;

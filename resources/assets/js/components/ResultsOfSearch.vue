@@ -21,7 +21,7 @@
               <div class="col-sm-4 col-md-4 margin-post" v-for="l in list">
                   <div class="post">
                       <div class="post-img-content">
-                          <img :src="'img/image/'+ l.fotoResum" class="img-responsive" />
+                          <img :src="'/img/image/'+ l.fotoResum" class="img-responsive" />
                           <span class="post-title">
                             <b><a v-bind:href="'#/resource/'+ l.recurs_id">{{l.titolRecurs}}</a></b><br />
                               <b>{{l.subTitol}}</b></span>
@@ -71,7 +71,7 @@ export default {
 
     onInfiniteSearch() {
 
-    	var route = 'api/search?page=' + this.pageSearch;
+    	var route = '../api/search?page=' + this.pageSearch;
       var t;
       var d;
 

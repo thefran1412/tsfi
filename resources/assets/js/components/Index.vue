@@ -79,9 +79,9 @@
                 <div class="row">
                     <div class="col-md-6 network">
                         <h4>Segueix-nos a :</h4>
-                        <a href="#"><img src="img/twitter.svg"></a>
-                        <a href="#"><img src="img/facebook.svg"></a>
-                        <a href="#"><img src="img/instagram.svg"></a>
+                        <a href="#"><img src="/img/twitter.svg"></a>
+                        <a href="#"><img src="/img/facebook.svg"></a>
+                        <a href="#"><img src="/img/instagram.svg"></a>
                     </div>
                     <div class="col-md-offset-2 col-md-4 contact">
                         <h4>Contacta amb nosaltres :</h4>

@@ -1,7 +1,7 @@
 <template>
 	<div class="content-bottom-header container content-send-resource">
 		<h1>Enviar Recurs</h1>
-		<form @submit.stop.prevent="submitForm" ref="enviarRecurs" method="post" enctype="multipart/form-data">
+		<form @submit.stop.prevent="submitForm" ref="enviarRecurs" id="enviarRecurs" method="post" enctype="multipart/form-data">
 			<div class="form-group" :class="{'has-error' : errors.has('titolRecurs') }">
 				<label for="titolRecurs">Títol:</label>
 				<span v-show="errors.has('titolRecurs')" class="help is-danger">{{ errors.first('titolRecurs') }}</span>	
@@ -139,7 +139,7 @@ import vSelect from "vue-select";
         },
 		methods:{
 			fetchEntities(){
-	            this.$http.get('api/categories').then(response=>{
+	            this.$http.get('../api/categories').then(response=>{
 	                var p=[];
 					response.data.categories.forEach(function(c){
 
@@ -211,6 +211,10 @@ import vSelect from "vue-select";
 					var form = this.$refs.enviarRecurs;
 					var formdata = new FormData(form);
 
+					$("#enviarRecurs").submit(function(e){
+					    return false;
+					});
+
 					this.$validator.validateAll().then(() => {
 
 						var concatIdTags = '';
@@ -222,7 +226,7 @@ import vSelect from "vue-select";
 							var splitPr = concatIdTags.substr(1).split('#');
 						}
 
-						this.$http.post('api/submit?tags='+ splitPr, formdata).then((response) =>{
+						this.$http.post('../api/submit?tags='+ splitPr, formdata).then((response) =>{
 							//this.$router.push({path:'/student/home', query:{alert:'User Create'}})
 						},(response)=>{
 							console.log(response);
@@ -303,7 +307,7 @@ import vSelect from "vue-select";
             },
             getOptions(search, loading) {
 			    loading(true)
-			    this.$http.get('api/tags?q='+search, {
+			    this.$http.get('../api/tags?q='+search, {
 			       q: search
 			    }).then(resp => {
 			    	console.log(resp.data.tags);

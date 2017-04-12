@@ -36,7 +36,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post('submit', function(Request $request){
 
-	$input = $request->only('titolRecurs','subTitol','descBreu','descDetaill1', 'fotoResum');
+	$input = $request->only('titolRecurs','subTitol','descBreu','creatPer','descDetaill1', 'fotoResum');
 	$selectCategory = $request->only('categoria');
 	$selectTypeUser = $request->only('target');
 	$location = $request->only('latitude','longitude');
@@ -70,6 +70,10 @@ Route::post('submit', function(Request $request){
 		$lastLocation = Location::create(['latitud' => $location['latitude'], 'longitud' => $location['longitude']]);
 		$insertLocation = $lastLocation -> localitzacions_id;
 		$resource->idLocalitzacio = $insertLocation;
+	}
+
+	if(isset($_GET["date"])){
+		$resource->dataPublicacio = $_GET["date"];
 	}
 
 	$resource->visible = 0;

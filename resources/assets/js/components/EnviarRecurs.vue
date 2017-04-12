@@ -6,6 +6,7 @@
 				<label for="titolRecurs">Títol:</label>
 				<span v-show="errors.has('titolRecurs')" class="help is-danger">{{ errors.first('titolRecurs') }}</span>	
 					<input v-validate="'required|max:90'" class="form-control title" type="text" id="titolRecurs" data-vv-as="Títol" name="titolRecurs" placeholder="Títol">
+					<div class="row">
 			</div>
 			<div class="form-group" :class="{'has-error' : errors.has('subTitol') }">
 				<label for="subTitol">Subtítol:</label>
@@ -41,6 +42,21 @@
 							  <option>Estudiants</option>
 							  <option>Professors</option>
 							</select>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group" :class="{'has-error' : errors.has('creatPer') }">
+							<label for="creatPer">Escriu el teu nom:</label>
+							<span v-show="errors.has('creatPer')" class="help is-danger">{{ errors.first('creatPer') }}</span>
+							<input v-validate="'required'" class="form-control title" type="text" id="creatPer" data-vv-as="Títol" name="creatPer" placeholder="Nom">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label>Escriu la data que vols que es publiqui:</label>
+						<date-picker :date="date" :option="option" ></date-picker>
 					</div>
 				</div>
 			</div>
@@ -154,9 +170,10 @@
 <script>
 
 import vSelect from "vue-select";
+import myDatepicker from 'vue-datepicker';
 
 	export default{
-		components: {vSelect},
+		components: {vSelect,'date-picker': myDatepicker},
 		data(){
 			return{
 				image:'',
@@ -171,7 +188,43 @@ import vSelect from "vue-select";
 				showModal: false,
 				required:false,
 				messageBody:'',
-				messageHeader:''
+				messageHeader:'',
+				date: {
+				  time: '' // string 
+				},
+				
+
+		      	option: {
+			        type: 'day',
+			        week: ['Dil', 'Dima', 'Dime', 'Dij', 'Div', 'Dis', 'Diu'],
+			        month: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Decembre'],
+			        format: 'DD-MM-YYYY',
+			        placeholder: 'Data de publicació',
+			        inputStyle: {
+			          'display':'block',
+			          'width':'100%',
+			          'height':'36px',
+			          'padding': '6px 12px',
+			          'line-height': '1.6',
+			          'font-size': '14px',
+			          'border': '1px solid #ccd0d2',
+			          'background-color':'#fff',
+			          'box-shadow': '0 1px 1px 0 rgba(0, 0, 0, 0.075)',
+			          'border-radius': '2px',
+			          'color': '#555555'
+			        },
+			        color: {
+			          header: '#333333',
+			          headerText: '#4FC08D'
+			        },
+			        buttons: {
+			          
+			        }
+
+			      },
+
+
+
 			}
 		},
 		created(){
@@ -181,12 +234,23 @@ import vSelect from "vue-select";
             this.initMap();
         },
 		methods:{
+			prueba(d){
+				
+				// if(d.time !== ''){
+				// 	var arr = d.time.split('/');
+				// 	d.time = arr[1]+'/'+arr[0]+'/'+arr[2];
+				// 	console.log(d.time);
+				// }
+
+				// if(d.time === d.time){
+				// 	var arr = d.time.split('/');
+				// 	d.time = arr[0]+'/'+arr[1]+'/'+arr[2] 
+				// }
+			},
 			fetchEntities(){
 	            this.$http.get('../api/categories').then(response=>{
 	                var p=[];
 					response.data.categories.forEach(function(c){
-
-						console.log(c.categoria_id !== 6);
 							if(c.categoria_id !== 6){
 								p.push(c);
 							}
@@ -197,7 +261,6 @@ import vSelect from "vue-select";
 	            })
             },
 		    close: function(e) {
-		    	console.log(e);
 		      	var typeUser = localStorage.getItem("typeUser");
 				this.$router.push({path:'/'+typeUser+'/home'});
 		    },
@@ -267,7 +330,7 @@ import vSelect from "vue-select";
 					this.$validator.validateAll().then(() => {
 
 						var concatIdTags = '';
-						var splitPr,url;
+						var splitPr,url,datePubli;
 						
 						if(this.tagsSelected.length > 0){
 							this.tagsSelected.forEach(function(data){
@@ -279,17 +342,27 @@ import vSelect from "vue-select";
 							url = '../api/submit';
 						}
 
+						if(this.date.time !== ''){
+							var arr = this.date.time.split('-');
+							datePubli = arr[2]+'-'+arr[1]+'-'+arr[0];
+
+							if(url.indexOf('tags') > 0){
+								url += '&date='+datePubli;
+							}else{
+								url += '?date='+datePubli;
+							}
+						}
+
 						this.$http.post(url, formdata).then((response) =>{
 							this.required = false;
 							this.messageHeader = "Tot correcte!"
 							this.messageBody = "El recurs s'ha enviat correctament.";
 							this.showModal = true;
-
 						},(response)=>{
 						});
 						
 					}).catch((e) => {
-						console.log(this.$root.$children[3].message);
+						console.log(e);
 							this.required = true;
 							this.messageHeader = "Advertència!"
 							this.messageBody = "T'has deixat un dels camps requerids sence completar.";

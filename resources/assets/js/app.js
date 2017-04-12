@@ -65,7 +65,7 @@ import ResultOfSearch from './components/ResultsOfSearch.vue';
 import Location from './components/Location.vue';
 import LocationInput from './components/LocationInput.vue';
 
-// register modal component
+// modal component
 Vue.component('modal', {
   template: '#modal-template'
 })

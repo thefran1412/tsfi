@@ -21,6 +21,7 @@
     "vee-validate": "^2.0.0-beta.25",
     "vue-multiselect": "^2.0.0-beta.14",
     "vue-router": "^2.2.1",
-    "vue-select": "github:sagalbot/vue-select"
+    "vue-select": "github:sagalbot/vue-select",
+    "vuejs-datepicker": "^0.7.2"
   }
 }

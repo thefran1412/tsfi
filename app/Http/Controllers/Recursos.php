@@ -18,7 +18,7 @@ class Recursos extends Controller
                     $query->where('codiTarget','=', $typeuser);
             })->whereHas('category', function ($query) use ($category) {
                     $query->where('nomCategoria','LIKE', $category);
-            })->paginate(20)->items();
+            })->orderBy('dataPublicacio', 'des')->paginate(20)->items();
 
         return response()->json([
                 'resources' => $resources
@@ -38,7 +38,8 @@ class Recursos extends Controller
 
 
             $resources = Resource::where('visible', '=', 1)->with('entity')->
-            where("titolRecurs","LIKE", "%$searchName%")->paginate(20)->items();
+            where("titolRecurs","LIKE", "%$searchName%")->
+            orderBy('dataPublicacio', 'des')->paginate(20)->items();
 
             return response()->json([
                 'resources' => $resources,
@@ -60,7 +61,7 @@ class Recursos extends Controller
             $resources = Resource::where('visible', '=', 1)->with('tag')->
             whereHas('tag', function ($query) use ($searchTag) {
                     $query->where('tags_id','=', $searchTag);
-            })->paginate(20)->items();
+            })->orderBy('dataPublicacio', 'des')->paginate(20)->items();
 
             return response()->json([
                 'resources' => $resources,

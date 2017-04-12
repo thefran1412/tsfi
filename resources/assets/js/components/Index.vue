@@ -203,7 +203,6 @@
                 this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
             },
             correctSelectCategory(routeParam){
-                console.log(routeParam);
                 if(routeParam !== undefined){
                     if(routeParam !== 'home'){
                     var cap = routeParam.charAt(0).toUpperCase() + routeParam.slice(1);

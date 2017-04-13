@@ -163,3 +163,16 @@
     display: block !important;
     color: #5D5D5D;
 }
+
+.v-select .dropdown-toggle {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: block;
+    padding: 0;
+    background: #fff !important;
+    border: 1px solid rgba(60,60,60,.26);
+     border-radius: 0px !important; 
+    white-space: normal;
+    /* transition: border-radius .25s; */
+}

@@ -25,6 +25,7 @@ Route::resource('recursos', 'Recursos');
 
 Route::get('recursos/{recurso}', 'Recursos@getResource')->name('recurso.getResource');
 Route::get('tags', 'Tags@getTags')->name('tag.getTags');
+Route::get('targets', 'Targets@getTargets')->name('target.getTargets');
 Route::get('typeuser/{typeUser}/{category}', 'Recursos@index')->name('recurso.index');
 Route::get('search', 'Recursos@getResultSearch')->name('recurso.getResultSearch');
 
@@ -86,13 +87,7 @@ Route::post('submit', function(Request $request){
 		}
 	}
 
-	if($selectTypeUser['target'] === 'Estudiants'){
-		TargetResource::create(['idRecurs' => $insertedId, 'idTarget' => 2]);
-	}
-
-	if($selectTypeUser['target'] === 'Professors'){
-		TargetResource::create(['idRecurs' => $insertedId, 'idTarget' => 1]);
-	}
+	TargetResource::create(['idRecurs' => $insertedId, 'idTarget' => $selectTypeUser['target']]);
 
 	$category_id = $selectCategory['categoria'];
 

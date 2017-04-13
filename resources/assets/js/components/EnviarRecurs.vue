@@ -1,6 +1,10 @@
 <template>
 	<div class="content-bottom-header container content-send-resource">
-		<h1>Enviar Recurs</h1>
+		<div class="col-md-offset-2 col-md-8">
+			<div class="tags">
+				<div class="panel">
+					<h3>Enviar Recurs</h3>
+					<hr>
 		<form @submit.stop.prevent ref="enviarRecurs" method="post" enctype="multipart/form-data">
 			<div class="form-group" :class="{'has-error' : errors.has('titolRecurs') }">
 				<label for="titolRecurs">Títol:</label>
@@ -39,8 +43,7 @@
 					<div class="form-group">
 							<label for="target">Aquí va dirigit:</label>
 							<select class="form-control selectpicker" type="text" id="target" name="target">
-							  <option>Estudiants</option>
-							  <option>Professors</option>
+							  <option v-for="lt in listTargets" :value="lt.targets_id">{{lt.target}}</option>
 							</select>
 					</div>
 				</div>
@@ -125,6 +128,10 @@
 		<div class="col-md-12 button-send">
 				<button @click="submitForm" class="btn btn-primary btn-send" type="submit">Enviar Recurs</button>
 		</div>
+				</div>
+			</div>
+		</div>
+		
 		<!-- template for the modal component -->
 		<script type="text/x-template" id="modal-template">
 		  <transition name="modal">
@@ -182,6 +189,7 @@ import myDatepicker from 'vue-datepicker';
 				latitude: null,
 				longitude: null,
 				listCategories: [],
+				listTargets:[],
 				selected: null,
 				options:[],
 				tagsSelected:[],
@@ -229,23 +237,21 @@ import myDatepicker from 'vue-datepicker';
 		},
 		created(){
             this.fetchEntities();
+            this.fetchTargets();
         },
         mounted: function() {
             this.initMap();
         },
 		methods:{
-			prueba(d){
-				
-				// if(d.time !== ''){
-				// 	var arr = d.time.split('/');
-				// 	d.time = arr[1]+'/'+arr[0]+'/'+arr[2];
-				// 	console.log(d.time);
-				// }
-
-				// if(d.time === d.time){
-				// 	var arr = d.time.split('/');
-				// 	d.time = arr[0]+'/'+arr[1]+'/'+arr[2] 
-				// }
+			fetchTargets(){
+				this.$http.get('../api/targets').then(response=>{
+	                var p=[];
+					response.data.targets.forEach(function(t){
+						p.push(t);
+					});
+					this.listTargets = p;
+					console.log(this.listTargets);
+				})
 			},
 			fetchEntities(){
 	            this.$http.get('../api/categories').then(response=>{

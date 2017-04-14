@@ -323,12 +323,12 @@ header.header-light .site-search input[type=submit]{
 
 .footer-menu .col-md-4{
 	padding: 13px 15px;
-}
+}	
 
 footer{
-	background-color: #333;
 	padding: 15px 15px 0 15px;
 	overflow: hidden;
+	background-color: #333;
 }
 
 footer h4{
@@ -392,9 +392,20 @@ footer .network img{
     margin-top: 15px;
 }
 
+footer .fa {
+	font-size: 20px;
+	color: white;
+	margin: 10px;
+}
 
+.footertitle{
+	height: 200px;
+}
 
-
+.col-md-4{
+	background-color: white;
+	
+}
 
 /* MEDIA QUERY */
 

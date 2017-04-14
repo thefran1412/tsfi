@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
@@ -18,7 +19,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url('css/send-resource.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/search-results.css') }}">
 
-        <title>Laravel</title>
+        <title>TSFI</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">

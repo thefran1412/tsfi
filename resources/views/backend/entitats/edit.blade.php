@@ -41,7 +41,14 @@
           </div>
           <div class="paperdiv">
             {!!Form::label('esMembre', 'És membre: ')!!}
-            {!!Form::checkbox('esMembre', null, ['class' => 'form-control', 'placeholder' => 'Es membre'])!!}
+            
+            @if($entitat->esMembre)
+              <?php $checked = true; ?> 
+            @else
+              <?php $checked = false; ?>
+            @endif
+            
+            {!!Form::checkbox('esMembre', $checked, ['class' => 'form-control', 'placeholder' => 'Es membre'])!!}
           </div>
           <div class="desc paperdiv">
             {!!Form::label('descEntitat', 'Descripció: ')!!}

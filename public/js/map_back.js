@@ -47,6 +47,9 @@ function initMap(ilat = 41.627619, ilng = 2, dir = null) {
       title: dir
     });
 
+    lat = ilat;
+    lng = ilng;
+
     infowindow.open(map, marker);
   }
   else{
@@ -88,8 +91,6 @@ function initMap(ilat = 41.627619, ilng = 2, dir = null) {
     
     lat = place.geometry.location.lat();
     lng = place.geometry.location.lng();
-
-    console.log(lat, lng);
 
     infowindowContent.children['place-name'].textContent = place.name;
     infowindow.open(map, marker);

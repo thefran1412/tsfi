@@ -109,7 +109,11 @@ fieldset[disabled] .multiselect {
   outline: none;
 }
 .multiselect__single {
-  padding-left: 6px;
+    padding-left: 6px;
+    width: 89%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .multiselect__tags {
   display: block;

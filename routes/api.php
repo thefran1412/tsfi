@@ -25,6 +25,7 @@ Route::resource('recursos', 'Recursos');
 
 Route::get('recursos/{recurso}', 'Recursos@getResource')->name('recurso.getResource');
 Route::get('tags', 'Tags@getTags')->name('tag.getTags');
+Route::get('targets', 'Targets@getTargets')->name('target.getTargets');
 Route::get('typeuser/{typeUser}/{category}', 'Recursos@index')->name('recurso.index');
 Route::get('search', 'Recursos@getResultSearch')->name('recurso.getResultSearch');
 
@@ -36,7 +37,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post('submit', function(Request $request){
 
-	$input = $request->only('titolRecurs','subTitol','descBreu','descDetaill1', 'fotoResum');
+	$input = $request->only('titolRecurs','subTitol','descBreu','creatPer','descDetaill1', 'fotoResum');
 	$selectCategory = $request->only('categoria');
 	$selectTypeUser = $request->only('target');
 	$location = $request->only('latitude','longitude');
@@ -72,6 +73,10 @@ Route::post('submit', function(Request $request){
 		$resource->idLocalitzacio = $insertLocation;
 	}
 
+	if(isset($_GET["date"])){
+		$resource->dataPublicacio = $_GET["date"];
+	}
+
 	$resource->visible = 0;
 	$resource->save();
 
@@ -82,13 +87,7 @@ Route::post('submit', function(Request $request){
 		}
 	}
 
-	if($selectTypeUser['target'] === 'Estudiants'){
-		TargetResource::create(['idRecurs' => $insertedId, 'idTarget' => 2]);
-	}
-
-	if($selectTypeUser['target'] === 'Professors'){
-		TargetResource::create(['idRecurs' => $insertedId, 'idTarget' => 1]);
-	}
+	TargetResource::create(['idRecurs' => $insertedId, 'idTarget' => $selectTypeUser['target']]);
 
 	$category_id = $selectCategory['categoria'];
 

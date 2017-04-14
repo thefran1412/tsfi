@@ -6,11 +6,11 @@
                 <div class="row">
                     <div class="logo" >
                         <li v-on:click="returnHomePage('teacher')" v-if="type === 'teacher'">
-                                <span class="title">TSFI</span><span class="role">Estudiants i Pares</span>
+                                <span class="title">TSFI</span><span class="role">Orientadors i Professors</span>
                         </li>
                         
                         <li  v-on:click="returnHomePage('student')" v-if="type === 'student'">
-                                <span class="title">TSFI</span><span class="role">Orientadors i Professors</span>
+                                <span class="title">TSFI</span><span class="role">Estudiants i Pares</span>
                         </li>
                     </div>
                     <div class="input">
@@ -169,11 +169,18 @@
                 
                 this.$router.push('/'+typeUser+'/home');
                 this.recursos = [];
+
+                this.animationScroll();
+
                 this.$nextTick(() => {
                     this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
                     this.page = 1;
                 });
                 this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
+            },
+            animationScroll(){
+                     $("html, body").animate({ scrollTop: 5 }, "slow");
+                     $("html, body").animate({ scrollTop: 0 }, "slow");
             },
             changeTypeUser: function (typeUser){
                 
@@ -197,7 +204,6 @@
                 this.category = { codiCategoria: 'Totes les Categories', nomCategoria: 'home' };
             },
             correctSelectCategory(routeParam){
-                console.log(routeParam);
                 if(routeParam !== undefined){
                     if(routeParam !== 'home'){
                     var cap = routeParam.charAt(0).toUpperCase() + routeParam.slice(1);
@@ -298,6 +304,7 @@
 
                 if(to.fullPath.indexOf('student') > 0 || to.fullPath.indexOf('teacher') > 0){
                     
+                    this.animationScroll();
 
                     if(to.fullPath.indexOf('home') > 0){
                         this.$nextTick(() => {

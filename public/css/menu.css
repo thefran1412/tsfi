@@ -266,6 +266,16 @@ header.header-light .site-search input[type=submit]{
 	color:inherit
 }
 
+.error-404 {
+	text-align: center;
+	padding: 30px;
+}
+
+.error-404 h1:first-child{
+	font-size: 140px;
+	font-weight: bold;
+}
+
 .a11y-only{
 	position:absolute !important;
 	height:1px;

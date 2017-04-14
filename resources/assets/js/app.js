@@ -20,6 +20,8 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 Vue.use(VueRouter);
 
 
+
+
 //Index
 import Index from './components/Index.vue';
 
@@ -63,6 +65,14 @@ import ResultOfSearch from './components/ResultsOfSearch.vue';
 import Location from './components/Location.vue';
 import LocationInput from './components/LocationInput.vue';
 
+//NotFound
+import NotFound from './components/NotFound.vue';
+
+// modal component
+Vue.component('modal', {
+  template: '#modal-template'
+})
+
 
 const router = new VueRouter({
     hashbang:false,
@@ -74,11 +84,11 @@ const router = new VueRouter({
         {path:'/:typeuser/:category',component:Resources, name:'resources' },
         {path:'/search',component:ResultOfSearch, name:'result-of-search' },
         {path:'/map', component:Location, name:'map'},
-        {path:'/location-input', component:LocationInput, name:'location-input'}
+        {path:'/location-input', component:LocationInput, name:'location-input'},
+        {path:'*', component: NotFound, name: 'not-found'},
 
     ]
 });
-
 
 
 new Vue(Vue.util.extend({router}, Index)).$mount('#appVue')

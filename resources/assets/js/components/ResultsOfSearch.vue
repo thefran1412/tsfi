@@ -2,7 +2,7 @@
 	<div>
 		<div class="content-bottom-header">
 			<div class="container">
-				<div class="col-md-offset-2 col-md-8">
+				<div class="col-md-offset-1 col-md-10">
 					<div class="tags">
 					      <div class="panel">
 					         <h3 v-if="!this.$route.query.tag">Tags</h3>

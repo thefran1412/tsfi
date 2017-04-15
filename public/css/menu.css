@@ -467,6 +467,11 @@ footer .fa {
 		width: calc(100% - 385px);
 	}
 }
+@media screen and (max-width: 550px) {
+	.contact{
+		text-align: left !important;
+	}
+}
 
 @media screen and (max-width: 540px) {
 	.search {

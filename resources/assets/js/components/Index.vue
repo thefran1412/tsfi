@@ -77,12 +77,14 @@
         <footer>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 footertitle">asdfgh</div>
+                    <div class="col-md-4 footertitle">TSFI</div>
                     <div class="col-md-4 network">
                         <h4>Segueix-nos a :</h4>
-                        <a href="#"><i class="fa fa-twitter"></a>
-                        <a href="#"><i class="fa fa-facebook"></a>
-                        <a href="#"><i class="fa fa-instagram"></a>
+                        <div class="social">
+                            <a href="#"><i class="fa fa-twitter"></a>
+                            <a href="#"><i class="fa fa-facebook"></a>
+                            <a href="#"><i class="fa fa-instagram"></a>
+                        </div>
                     </div>
                     <div class="col-md-4 contact">
                         <h4>Contacta amb nosaltres:</h4>

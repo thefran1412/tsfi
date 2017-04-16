@@ -9,6 +9,13 @@ header{
     width: 100%;
 }
 
+::selection {
+  background: #5d5d5d;
+}
+::-moz-selection {
+  background: #5d5d5d;
+}
+
 #appVue > .container:nth-of-type(1){
 	width:100%;
 }

@@ -6,10 +6,10 @@
 			<div  v-if="resource" class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
  				<!--  Foto resum-->
 				<!-- <img class="img-responsive" :src="'/img/image/'+ resource[0].fotoResum" :alt="resource[0].titolRecurs" :title="resource[0].titolRecurs"> -->
-				<div class="resource-img-resum" :style="{ backgroundImage: 'url(/img/image/' + resource[0].fotoResum + ')' }">
+				<div v-if="resource[0].fotoResum" class="resource-img-resum" :style="{ backgroundImage: 'url(/img/image/' + resource[0].fotoResum + ')' }">
 					<div class="resource-title-sub">
-						<h1 v-if="resource" >{{resource[0].titolRecurs}}</h1>
-						<h3 v-if="resource" >{{resource[0].subTitol}}</h3>
+						<h1 v-if="resource[0].titolRecurs" >{{resource[0].titolRecurs}}</h1>
+						<h3 v-if="resource[0].subTitol" >{{resource[0].subTitol}}</h3>
 					</div>
 					
 				<!-- <div class="resource-img-resum" :style="{ background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)) 0% 0% / cover fixed, url(/img/image/'+resource[0].fotoResum +') center 35% no-repeat'}">  -->
@@ -20,12 +20,12 @@
 				</div>
 				<h2>{{resource[0].subtitol}}</h2>
 				<p><strong>{{resource[0].descBreu}}</strong></p>
-					<div class="col-md-10 col-md-offset-2 img-resource">
+					<div v-if="resource[0].image_resource > 0" class="col-md-10 col-md-offset-2 img-resource">
 						<img class="img-responsive" :src="'/img/image/'+resource[0].image_resource[0].imatge" :alt="resource[0].image_resource[0].descImatge" :title="resource[0].image_resource[0].descImatge"></img>
 					</div>
 					
 				<p>{{resource[0].descDetaill1}}</p>
-					<div class="col-md-10 col-md-offset-2 img-resource">
+					<div v-if="resource[0].image_resource.length > 0" class="col-md-10 col-md-offset-2 img-resource">
 						<img class="img-responsive" :src="'/img/image/'+resource[0].image_resource[1].imatge" :alt="resource[0].image_resource[1].descImatge" :title="resource[0].image_resource[1].descImatge"></img>
 					</div>
 					
@@ -224,6 +224,8 @@
 					this.dateIni = response.data.dateIni;
 					this.dateEnd = response.data.dateEnd;
 					this.datePub = response.data.datePub;
+
+					console.log(this.resource);
 					var URLactual = window.location;
 
 					this.imgMeta = URLactual.origin+'/projects/ts/img/image/'+this.resource[0].fotoResum;

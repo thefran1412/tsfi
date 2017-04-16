@@ -77,13 +77,13 @@
         <footer>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 network">
+                    <div class="col-md-6 col-xs-12 network">
                         <h4>Segueix-nos a :</h4>
                         <a href="#"><img src="/img/twitter.svg"></a>
                         <a href="#"><img src="/img/facebook.svg"></a>
                         <a href="#"><img src="/img/instagram.svg"></a>
                     </div>
-                    <div class="col-md-offset-2 col-md-4 contact">
+                    <div class="col-md-offset-2 col-md-4 col-xs-12 contact">
                         <h4>Contacta amb nosaltres :</h4>
                         <span>Número de Telefón: 93 333 33 33</span>
                         <span>Correu Electrónic: 
@@ -317,6 +317,8 @@
                         this.category = { codiCategoria: cap, nomCategoria: to.params.category };
                     }
                 }
+
+                console.log(this.$children[3].isMap);
            }
        }
     }

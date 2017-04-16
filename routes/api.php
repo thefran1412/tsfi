@@ -4,6 +4,7 @@ use App\Resource;
 use App\ImageResource;
 use App\TargetResource;
 use App\TagResource;
+use App\AgeResource;
 use App\CategoryResource;
 use App\Location;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ Route::resource('recursos', 'Recursos');
 Route::get('recursos/{recurso}', 'Recursos@getResource')->name('recurso.getResource');
 Route::get('tags', 'Tags@getTags')->name('tag.getTags');
 Route::get('targets', 'Targets@getTargets')->name('target.getTargets');
+Route::get('ages', 'EdatsRecomenades@getAge')->name('ages.getAge');
 Route::get('typeuser/{typeUser}/{category}', 'Recursos@index')->name('recurso.index');
 Route::get('search', 'Recursos@getResultSearch')->name('recurso.getResultSearch');
 
@@ -40,13 +42,14 @@ Route::post('submit', function(Request $request){
 	$input = $request->only('titolRecurs','subTitol','descBreu','creatPer','descDetaill1', 'fotoResum');
 	$selectCategory = $request->only('categoria');
 	$selectTypeUser = $request->only('target');
+	$selectAge = $request -> only('rangEdat');
 	$location = $request->only('latitude','longitude');
 
 	$sameLocation = Location::where('latitud', '=',$location['latitude'])
 	->where('longitud', '=',$location['longitude'])->get();
 
-	$prueba = $sameLocation->toJson();
-	$data = json_decode($prueba);
+	$loc = $sameLocation->toJson();
+	$data = json_decode($loc);
 
 
 	if($file = $request->file('image')){
@@ -65,7 +68,6 @@ Route::post('submit', function(Request $request){
 			$resource->idLocalitzacio = $data[0]->localitzacions_id;
 		}
 	}
-	
 
 	if($location['latitude'] !== '' && $location['longitude'] !== '' && count($data) === 0){
 		$lastLocation = Location::create(['latitud' => $location['latitude'], 'longitud' => $location['longitude']]);
@@ -77,8 +79,27 @@ Route::post('submit', function(Request $request){
 		$resource->dataPublicacio = $_GET["date"];
 	}
 
+	if($price = $request->only('preuInferior')){
+		if($price['preuInferior'] === '' || $price['preuInferior'] === 0 || $price['preuInferior'] === 0.0 || $price['preuInferior'] === 0.00){
+			$resource->gratuit = 1;
+		}else{
+			$resource->gratuit = 0;
+			$resource->preuInferior = $price['preuInferior'];
+		}
+	}
+
+	if(isset($_GET["dateStart"])){
+		$resource->dataInici = $_GET["dateStart"];
+	}
+
+	if(isset($_GET["dateEnd"])){
+		$resource->dataFinal = $_GET["dateEnd"];
+	}
+
 	$resource->visible = 0;
 	$resource->save();
+
+	AgeResource::create(['idEdat'=>$selectAge['rangEdat'], 'idRecurs'=> $insertedId ]);
 
 	if(isset($_GET["tags"])){
 		$tags = explode(",", $_GET["tags"]);

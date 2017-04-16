@@ -41,7 +41,7 @@
   margin-bottom: 15px;
 }
 
-.no-options,  .location-address{
+.location-address{
 	display: none;
 }
 
@@ -148,9 +148,9 @@
     transform: rotate(-45deg);
 }
 
-.button-box[data-v-9f164724] {
+/*.button-box[data-v-9f164724] {
     display: none !important;
-}
+}*/
 
 .checked[data-v-9f164724] {
      display: none !important;

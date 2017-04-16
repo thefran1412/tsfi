@@ -15,10 +15,11 @@ class Recursos extends Controller
 
         $resources = Resource::where('visible', '=', 1)->with('category','targets','entity')->
             whereHas('targets', function ($query) use ($typeuser) {
-                    $query->where('codiTarget','=', $typeuser);
+                    $query->where('codiTarget','=', $typeuser)->orWhere('targets_id','=', 3);
             })->whereHas('category', function ($query) use ($category) {
                     $query->where('nomCategoria','LIKE', $category);
             })->orderBy('dataPublicacio', 'des')->paginate(20)->items();
+
 
         return response()->json([
                 'resources' => $resources

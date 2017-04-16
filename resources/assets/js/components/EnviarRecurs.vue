@@ -35,6 +35,7 @@
 										placeholder="Agrega tags relacionats amb el recurs..."
 										label="nomTags"
 									>
+									<span slot="no-options">No coincideix cap opció. Cerca!</span>
 									</v-select>
 								</div>
 							</div>
@@ -65,8 +66,37 @@
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
-									<label>Data de l'event:</label>
+									<label>Data que vols publicar:</label>
 									<date-picker :date="date" :option="option" ></date-picker>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>Data de Inici de l'event:</label>
+									<date-picker :date="dateIn" :option="optionData" ></date-picker>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>Data final de l'event:</label>
+									<date-picker :date="dateEnd" :option="optionData" ></date-picker>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group" :class="{'has-error' : errors.has('preuInferior') }">
+										<label v-show="!errors.has('preuInferior')" for="preuInferior">Escriu el preu si en té:</label>
+										<span v-show="errors.has('preuInferior')" class="help is-danger">{{ errors.first('preuInferior') }}</span>
+										<input v-validate="'decimal:2'" class="form-control title" type="text" id="preuInferior" data-vv-as="Preu" name="preuInferior" placeholder="Preu">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="rangEdat">Escull un rang d'Edat:</label>
+									<select v-if="listCategories" class="form-control selectpicker" type="text" id="rangEdat" name="rangEdat">
+									  <option v-for="la in listAges" :value="la.edats_id">{{la.descEdat}}</option>
+									</select>
 								</div>
 							</div>
 						</div>
@@ -205,6 +235,7 @@ import myDatepicker from 'vue-datepicker';
 				longitude: null,
 				listCategories: [],
 				listTargets:[],
+				listAges:[],
 				selected: null,
 				options:[],
 				tagsSelected:[],
@@ -212,6 +243,12 @@ import myDatepicker from 'vue-datepicker';
 				required:false,
 				messageBody:'',
 				messageHeader:'',
+				dateEnd:{
+					time:''
+				},
+				dateIn:{
+					time:''
+				},
 				date: {
 				  time: '' // string 
 				},
@@ -239,19 +276,64 @@ import myDatepicker from 'vue-datepicker';
 			          headerText: '#4FC08D'
 			        },
 			        buttons: {
-			          
-			        }
+			          ok: "",
+			          cancel: ''
+			        },
+			        limit: {
+					  type:'fromto',
+					  from:'2017-04-15',
+					  to:'2017-04-21'
+					}
 			      },
+			      optionData: {
+			        type: 'min',
+			        week: ['Dil', 'Dima', 'Dime', 'Dij', 'Div', 'Dis', 'Diu'],
+			        month: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Decembre'],
+			        format: 'DD-MM-YYYY HH:mm',
+			        placeholder: 'Data de publicació',
+			        inputStyle: {
+			          'display':'block',
+			          'width':'100%',
+			          'height':'36px',
+			          'padding': '6px 12px',
+			          'line-height': '1.6',
+			          'font-size': '14px',
+			          'border': '1px solid #ccd0d2',
+			          'background-color':'#fff',
+			          'box-shadow': '0 1px 1px 0 rgba(0, 0, 0, 0.075)',
+			          'border-radius': '2px',
+			          'color': '#555555'
+			        },
+			        color: {
+			          header: '#333333',
+			          headerText: '#4FC08D'
+			        },
+			        buttons: {
+			          ok: "D'acord",
+			          cancel: 'Cancelar'
+			        }
+			      }
 			}
 		},
 		created(){
             this.fetchEntities();
             this.fetchTargets();
+            this.fetchAges();
         },
         mounted: function() {
             this.initMap();
         },
 		methods:{
+			fetchAges(){
+				this.$http.get('../api/ages').then(response=>{
+	                var p=[];
+					response.data.ages.forEach(function(t){
+						p.push(t);
+					});
+					this.listAges = p;
+					console.log(this.listAges);
+				})
+			},
 			fetchTargets(){
 				this.$http.get('../api/targets').then(response=>{
 	                var p=[];
@@ -259,7 +341,6 @@ import myDatepicker from 'vue-datepicker';
 						p.push(t);
 					});
 					this.listTargets = p;
-					console.log(this.listTargets);
 				})
 			},
 			fetchEntities(){
@@ -346,6 +427,7 @@ import myDatepicker from 'vue-datepicker';
 
 						var concatIdTags = '';
 						var splitPr,url,datePubli;
+
 						
 						if(this.tagsSelected.length > 0){
 							this.tagsSelected.forEach(function(data){
@@ -368,10 +450,48 @@ import myDatepicker from 'vue-datepicker';
 							}
 						}
 
+						if(this.date.time === ''){
+							var today = new Date();
+							var tomorrow = new Date(today.getTime() + (24 * 60 * 60 * 3000));
+							var res = tomorrow.toISOString().slice(0,10).replace(/-/g,"-");
+							
+							if(url.indexOf('tags') > 0){
+								url += '&date='+res;
+							}else{
+								url += '?date='+res;
+							}
+						}
+
+						if(this.dateIn.time !== '' && this.dateEnd.time !== ''){
+								var dateStart = this.dateIn.time.split(' ');
+								var dateEnd = this.dateEnd.time.split(' ');
+								var arrStart = dateStart[0].split('-');
+								var arrEnd = dateEnd[0].split('-');
+								var dateS = arrStart[2]+'-'+arrStart[1]+'-'+arrStart[0] +' '+ dateStart[1]+':'+'00';
+								var dateE = arrEnd[2]+'-'+arrEnd[1]+'-'+arrEnd[0] +' ' + dateEnd[1]+':'+'00';
+
+								if(url.indexOf('tags') > 0 || url.indexOf('date') > 0){
+									url += '&dateStart=' + dateS + '&dateEnd=' + dateE;
+								}else{
+									url += '?dateStart=' + dateS + '&dateEnd=' + dateE;
+								}
+
+						}else if(this.dateIn.time !== ''){
+								var dateStart = this.dateIn.time.split(' ');
+								var arrStart = dateStart[0].split('-');
+								var dateS = arrStart[2]+'-'+arrStart[1]+'-'+arrStart[0] +' '+ dateStart[1]+':'+'00';
+
+								if(url.indexOf('tags') > 0 || url.indexOf('date') > 0){
+									url += '&dateStart=' + dateS;
+								}else{
+									url += '?dateStart=' + dateS;
+								}
+						}
+
 						this.$http.post(url, formdata).then((response) =>{
 							this.required = false;
 							this.messageHeader = "Tot correcte!"
-							this.messageBody = "El recurs s'ha enviat correctament.";
+							this.messageBody = "El recurs s'ha enviat correctament. El revisarem en 48h.";
 							this.showModal = true;
 						},(response)=>{
 						});

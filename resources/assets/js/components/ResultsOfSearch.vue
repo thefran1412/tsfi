@@ -115,7 +115,7 @@ export default {
                 this.pageSearch = 1;
             });
             this.$parent.animationScroll();
-          },
+    },
     setTag(value){
         var t;
 

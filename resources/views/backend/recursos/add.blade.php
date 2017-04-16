@@ -20,7 +20,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <div class="row justify-content-lg-center text-center">
-                    <h2>Crea un Recurso</h2>
+                    <h2>Edita el recurso </h2>
                 </div>
             </div>
         </div>
@@ -73,17 +73,18 @@
         <div class="form-group row">
             {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-3">
-                {!! Form::date('dataInici', null, ['class'=>'form-control']) !!}
+                {!! Form::date('dataInici', null, ['class'=>'form-control', 'placeholder'=> 'YYYY/MM/DD']) !!}
             </div>
             {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-3">
-                {!! Form::date('dataFinal', null, ['class'=>'form-control']) !!}
+                {!! Form::date('dataFinal', null, ['class'=>'form-control', 'placeholder'=> 'YYYY/MM/DD']) !!}
             </div>
         </div>
+        <div id="error_preus"></div>
         <div class="form-group row">
             {!! Form::label('gratuit', 'Gratuit:', ['class'=>'control-label col-sm-1']) !!}
             <div class="col-sm-1">
-                {!! Form::checkbox('gratuit', null, false, []) !!}
+                    {!! Form::checkbox('gratuit', 'false', false, []) !!}
             </div>
             {!! Form::label('preuInferior', 'Precio menos que:', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-2">
@@ -103,25 +104,19 @@
         <div class="form-group row">
             {!! Form::Label('categorias', 'Categorias:', ['class'=>'control-label col-sm-3']) !!}
             <div class="col-sm-3">
-            <select class="form-control" id="categorias" name="categorias">
-                <option value="" selected>Selecciona una categoria</option>
-                @foreach($categorias as $category)
-                    <option value="{{ $category->categoria_id }}">{{$category->nomCategoria }}</option>
-                @endforeach
-            </select>
-            {{--{!! Form::select('categorias', $categorias, null, ['class' => 'form-control']) !!}--}}
+                {{ Form::select('categorias', $categorias, null,['class' => 'form-control']) }}
             </div>
         </div>
         <div class="form-group row">
             {!! Form::Label('edat', 'Edats a qui s\'hadreça el recurs:', ['class'=>'control-label col-sm-3']) !!}
             <div class="col-sm-3">
-            {!! Form::select('multipleage[]', $edats, null, ['id' => 'multipleage','multiple'=>'multiple', 'class' => 'form-control']) !!}
+                {!! Form::select('multipleage[]', $edats, null, ['id' => 'multipleage','multiple'=>'multiple', 'class' => 'form-control']) !!}
             </div>
         </div>
         <div class="form-group row">
             {!! Form::Label('entitats', 'Escoje la entidad a la cual pertenece el recrso:', ['class'=>'control-label col-sm-3']) !!}
             <div class="col-sm-3">
-            {!! Form::select('entitats', $entitats, null, ['class' => 'form-control']) !!}
+                {!! Form::select('entitats', $entitats, null, ['class' => 'form-control']) !!}
             </div>
         </div>
         <div class="form-group row">
@@ -148,23 +143,15 @@
                  'cols'=>"50"]) !!}<br>
             </div>
         </div>
-        {{--<div class="form-group row">--}}
-            {{--<div class="col-sm-6">--}}
-                {{--<button class="accordion"  type="button">--}}
-                    {{--{!! Form::label('videoembed', 'Inserta un video: ' , ['class'=>'control-label']) !!}--}}
-                {{--</button>--}}
-                {{--<div class="panel">--}}
-                        {{--{!! Form::textarea('videoembed', null, ['class'=>'form-control input-sm',--}}
-                    {{--'rows'=>"3",--}}
-                     {{--'cols'=>"50"]) !!}--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        <div class="row"><br>
-            <div id="videoBox" class="col-md-4 col-md-offset-3">
-
+        <div class="form-group row">
+            <div id="slider-video-wrapper" class="col-md-4 col-md-offset-3 slider">
+                <div id="video_slider">
+                </div>
+                <div id="left"><button id="button-previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
+                <div id="right"><button id="button-next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
+                <div id="center"><button id="button-delete-video"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
             </div>
-        </div><br>
+        </div>
         <div class="row">
             <div id="videoInput" class="col-md-4 col-md-offset-3">
 
@@ -183,41 +170,19 @@
             </div>
         </div> <br>
         <div class="form-group row">
+            <label for="target" class="control-label col-md-3">Perfils del recurs</label>
             <div class="col-md-3">
-                @foreach ($targets as $target)
-                    <div class="checkbox">
-                        <label>
-                            <input tabindex="1" type="checkbox" name="target[]" id="{{$target->targets_id}}" value="{{$target->targets_id}}">
-                            {{$target->target}}
-                        </label>
-                    </div>
-                @endforeach
+                {!! Form::select('target', $targets, null, ['class' => 'form-control']) !!}
             </div>
         </div>
         <br>
-    <div class="paper">
-        {!!Form::label('adreca', 'Adreça: ')!!}
-        {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
-        {!!Form::hidden('lat', null, ['class' => 'form-control', 'id' => 'lat'])!!}
-        {!!Form::hidden('lng', null, ['class' => 'form-control', 'id' => 'lng'])!!}
-
-        <div class="map">
-            <div id="map"></div>
-        </div>
-
-        <div id="infowindow-content">
-            <span id="place-name" class="title"></span>
-            {{-- <br>Place ID <span id="place-id"></span><br> --}}
-            {{-- <span id="place-address"></span> --}}
-        </div>
-        <br><br><br><br>
-        <div class="form-group row">
-            <div class="col-sm-10">
-            {!!Form::submit('Create', ['class' => 'btn btn-primary'])!!}
+            <div id="error_submit"></div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    {!!Form::submit('Create', ['class' => 'btn btn-primary'])!!}
+                </div>
             </div>
-        </div>
-        {!!Form::close()!!}
-    </div>
+            {!!Form::close()!!}
     </div>
 
 @endsection
@@ -227,7 +192,7 @@
     <script src="{{ URL::asset('/js/sumer_note/jquery_sumernote.js') }}"></script>
     <script src="{{ URL::asset('/js/sumer_note/summernote.js') }}"></script>
     <script src="{{ URL::asset('/js/sumer_note/summernote-es-ES.js') }}"></script>
-    <script src="{{ URL::asset('/js/sumer_note/custom_editors.js') }}"></script>
+    <script src="{{ URL::asset('/js/custom_editors.js') }}"></script>
     {{--End Summer Note scripts--}}
     {{--Autocomplete js--}}
     <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
@@ -236,7 +201,7 @@
     <script src="{{URL::asset('js/jquery.multi-select.js')}}"></script>
     {{--end Multi select--}}
     {{--Google maps--}}
-    <script src="{{ URL::asset('/js/createEntity.js') }}"></script>
-    <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
+    {{--<script src="{{ URL::asset('/js/createEntity.js') }}"></script>--}}
+    {{--<script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>--}}
     {{--end Google maps--}}
 @endsection

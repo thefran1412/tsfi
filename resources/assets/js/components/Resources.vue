@@ -1,92 +1,115 @@
 <template>
-	<div class="content-bottom-header" >
+	<div class="content-bottom-header-resource" >
 		<div id="resource" class="container">
-			<!-- Columna principal -->
-			<div  class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
-				<!--  titol Recurs-->
-
-
-
-				<h1 v-if="resource" >{{resource[0].titolRecurs}}</h1>
-
+			<div class="row">
+				<!-- Columna principal -->
+			<div  v-if="resource" class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
+ 				<!--  Foto resum-->
+				<!-- <img class="img-responsive" :src="'/img/image/'+ resource[0].fotoResum" :alt="resource[0].titolRecurs" :title="resource[0].titolRecurs"> -->
+				<div class="resource-img-resum" :style="{ backgroundImage: 'url(/img/image/' + resource[0].fotoResum + ')' }">
+					<div class="resource-title-sub">
+						<h1 v-if="resource" >{{resource[0].titolRecurs}}</h1>
+						<h3 v-if="resource" >{{resource[0].subTitol}}</h3>
+					</div>
+					
+				<!-- <div class="resource-img-resum" :style="{ background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)) 0% 0% / cover fixed, url(/img/image/'+resource[0].fotoResum +') center 35% no-repeat'}">  -->
+                </div>
+				<!-- autor i data publicació-->
+				<div class="autor">
+					<h5><strong>Autor: </strong> {{resource[0].creatPer}} <p><strong class="publish-date"> Publicat el:</strong> {{datePub}}</p></h5>
+				</div>
+				<h2>{{resource[0].subtitol}}</h2>
+				<p><strong>{{resource[0].descBreu}}</strong></p>
+					<div class="col-md-10 col-md-offset-2 img-resource">
+						<img class="img-responsive" :src="'/img/image/'+resource[0].image_resource[0].imatge" :alt="resource[0].image_resource[0].descImatge" :title="resource[0].image_resource[0].descImatge"></img>
+					</div>
+					
+				<p>{{resource[0].descDetaill1}}</p>
+					<div class="col-md-10 col-md-offset-2 img-resource">
+						<img class="img-responsive" :src="'/img/image/'+resource[0].image_resource[1].imatge" :alt="resource[0].image_resource[1].descImatge" :title="resource[0].image_resource[1].descImatge"></img>
+					</div>
+					
+				<p>{{resource[0].descDetaill2}}</p>
+				
+				<div class="row">
+					<div class="col-md-12 videos-list-resource">
+					<iframe v-for="r in resource[0].video_resource" width="100%" height="315" :src="r.urlVideo" frameborder="0" allowfullscreen></iframe>
+					</div>
+				</div>
+				
 				
 
- 				<!--  Foto resum-->
-				<img v-if="resource" class="img-responsive" :src="'/img/image/'+ resource[0].fotoResum" :alt="resource[0].titolRecurs" :title="resource[0].titolRecurs">
-				<!-- autor i data publicació-->
-				<div v-if="resource && resource[0].creatPer && datePub" class="autor">
-					<h5><strong>Autor: </strong> {{resource[0].creatPer}} <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i> {{datePub}}</strong></p></h5>
-				</div>
-				<!-- subtitol -->
-				<h2 v-if="resource">{{resource[0].subtitol}}</h2>
-				<!-- class="descshort" -->
-				<p v-if="resource"><strong>{{resource[0].descBreu}}</strong></p>
-					<!-- desc1 -->
-				<p v-if="resource">{{resource[0].descDetaill1}}</p>
-					<!-- desc2 -->
-				<p v-if="resource">{{resource[0].descDetaill2}}</p>
-				<!-- media -->
-				<h2 v-if="resource && resource[0].image_resource[0] || resource && resource[0].video_resource[0] || resource && resource[0].podcast[0]">Media</h2>
-				<!-- <img  v-for="r in resource[0].image_resource" class="img-responsive" :src="r.imatge" :alt="r.descImatge" :title="r.descImatge"></img> -->
-
-				<!-- <iframe v-for="r in resource[0].video_resource" width="560" height="315" :src="r.urlVideo" frameborder="0" allowfullscreen></iframe> -->
-
 				<!-- <iframe v-for="r in resource[0].podcast" width="100%" height="200" frameborder="0" allowfullscreen="" scrolling="no" :src="r.podCast"></iframe> -->
-				<h2>{{formatedAddress}}</h2>
-				<div id="map" ref="map"></div>
+				
 			</div>
 
 			<!-- Columna secundaria -->
 			<div v-if="resource" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 resource-extras">
-				<h1>FITXA TÈCNICA</h1>
 				<!-- edats escolar recomenades -->
 				<div v-if="resource[0].age[0]" class="resource-extras-tag">
-					<h3> <i class="fa fa-users" aria-hidden="true"></i> Edats recomenades</i></h3>
-					<p v-for="r in resource[0].age">{{r.codiEdat}}</p>
+					<span>Edats recomenades:</span>
+					<p v-for="r in resource[0].age">{{r.descEdat}}</p>
 				</div>
 				<!-- data inici i final -->
-				<div v-if="dateIni && dateEnd"class="resource-extras-tag">
-					<h3><i class="fa fa-calendar" aria-hidden="true"></i> Data inicial i final </h3>
+				<div v-if="dateIni || dateEnd"class="resource-extras-tag">
+					<span>Data:</span>
 					<p>{{dateIni}}</p>
-					<p>{{dateEnd}}</p>
+					<p v-if="dateEnd" >al</p>
+					<p v-if="dateEnd">{{dateEnd}}</p>
+				</div>
+				<div v-if="resource[0].dataInici || resource[0].dataFinal"class="resource-extras-tag">
+					<span>Horari de l'event:</span>
+					<p v-if="resource[0].dataInici" >{{hours.start}}</p>
+					<p v-if="resource[0].dataFinal" >a</p>
+					<p v-if="resource[0].dataFinal" >{{hours.end}}</p>
 				</div>
 				<!-- preu -->
-				<div v-if="resource[0].gratuit || (resource[0].preuInferior && resource[0].preuSuperior)" class="resource-extras-tag">
-					<h3><i class="fa fa-eur" aria-hidden="true"></i> Preu </h3>
-					<p v-if="resource[0].gratuit === 1">gratuït</p>
+				<div v-if="resource[0].gratuit || resource[0].preuInferior" class="resource-extras-tag">
+					<span>Preu:</span>
+					<p v-if="resource[0].gratuit === 1">Gratuït</p>
 					<p v-if="resource[0].gratuit === 0">{{resource[0].preuInferior}} €</p>
-					<p v-if="resource[0].gratuit === 0">{{resource[0].preuSuperior}} €</p>
 				</div>
 				<!-- categories -->
 				<div v-if="resource[0].category[0]" class="resource-extras-tag">
-					<h3><i class="fa fa-archive" aria-hidden="true"></i> Categoria/es </h3>
+					<span>Categoria:</span>
 					<p v-for="r in resource[0].category">{{r.codiCategoria}}</p>
 				</div>
 				<!-- etiquetes o tags -->
 				<div v-if="resource[0].tag[0]" class="resource-extras-tag">
-					<h3><i class="fa fa-tags" aria-hidden="true"></i> Etiquetes </h3>
-					<p v-for="r in resource[0].tag">{{r.nomTags}}</p>
+					<span>Tags:</span>
+					<a v-bind:href="'#/search?tag='+ r.tags_id" v-for="r in resource[0].tag" ><p class="tag-rounded-resource">{{r.nomTags}}</p></a>
 				</div>
 				<!-- Links relacionats -->
-				<div v-if="resource[0].link[0]" class="extras">
-					<h3><i class="fa fa-link" aria-hidden="true"></i> Relacionats </h3>
-					<!-- <p v-for="r in resource[0].link">{{r.link}}</p> -->
-					<h4 v-for="r in resource[0].link">
-						<a class="links":href="r.link" target="_blank" :title="r.link">{{r.link}}</a>
-					</h4>
+				<div v-if="resource[0].link[0]" class="resource-extras-tag links-extra-tags">
+					<span>Links Relacionats:</span>
+					<span v-for="r in resource[0].link">
+						<a class="links":href="r.link" target="_blank" :title="r.link">{{r.descLink}}</a>
+					</span>
 				</div>
+
+				<!-- <div v-if="resource[0].entity[0]" class="resource-extras-tag">
+					<span>Entitat:</span>
+					<p>{{resource[0].entity[0].nomEntitat}}</p>
+				</div> -->
+
+				<!-- <div v-if="resource[0].entity[0].adreca" class="resource-extras-tag">
+					<span>Adreça:</span>
+					<p>{{resource[0].entity[0].adreca}}</p>
+				</div> -->
+
+				<!-- <div v-if="resource[0].entity[0].telf1 !== 0 && resource[0].entity[0].telf2 !== 0" class="resource-extras-tag">
+					<span>Telefons:</span>
+					<p>{{resource[0].entity[0].telf1}} / {{resource[0].entity[0].telf2}}</p>
+				</div> -->
+
+				<!-- <div v-if="resource[0].entity[0].link" class="resource-extras-tag">
+					<span>Web:</span>
+					<p>
+						<a class="links":href="resource[0].entity[0].link" target="_blank" :title="resource[0].entity[0].link">{{resource[0].entity[0].link}}</a>
+					</p>
+				</div> -->
+
 				<div v-if="resource[0].entity[0]" class="extras">
-				<!-- Logo entitat ** sin arreglar -->
-					<h3 v-if="resource[0].entity[0].nomEntitat"><i class="fa fa-building" aria-hidden="true"></i> {{resource[0].entity[0].nomEntitat}}</h3>
-					<!-- </br> -->
-					<h4 v-if="resource[0].entity[0].descEntitat">{{resource[0].entity[0].descEntitat}}</h4>
-					<h4 v-if="resource[0].entity[0].adreca"><strong>Adreça:</strong></br>{{resource[0].entity[0].adreca}}</h4>
-					<h4 v-if="resource[0].entity[0].telf1 !== 0 && resource[0].entity[0].telf2 !== 0"><strong>Telefóns: </strong></br>{{resource[0].entity[0].telf1}} / {{resource[0].entity[0].telf2}}</h4>
-					<h4 v-if="resource[0].entity[0].telf1 !== 0 && resource[0].entity[0].telf2 === 0"><strong>Telefón: </strong></br>{{resource[0].entity[0].telf1}}</h4>
-					<h4 v-if="resource[0].entity[0].telf1 === 0 && resource[0].entity[0].telf2 !== 0"><strong>Telefón: </strong></br>{{resource[0].entity[0].telf2}}</h4>
-					<!-- plana web -->
-					<h4 v-if="resource[0].entity[0].link"><strong>Plana web:</strong></br><a class="links":href="resource[0].entity[0].link" target="_blank" :title="resource[0].entity[0].link">{{resource[0].entity[0].link}}</a></h4>
-					<!-- <h3>Xarxes Socials</h3> -->
 					<a class="socialMedia" v-if="resource[0].entity[0].twitter" :href="'https://twitter.com/'+ resource[0].entity[0].twitter" target="_blank" :title="'https://twitter.com/'+ resource[0].entity[0].twitter">
 					   <i class="fa fa-twitter fa-3x"></i>
 					</a>
@@ -96,19 +119,46 @@
 					<a class="socialMedia" v-if="resource[0].entity[0].instagram" :href="'https://www.instagram.com/'+ resource[0].entity[0].instagram" target="_blank" :title="'https://instagram.com/'+ resource[0].entity[0].instagram">
 						<i class="fa fa-instagram fa-3x"></i>
 					</a>
-				</br>
 				</div>
 
-				<div class="banners">
+				<!-- <div class="banners">
 					<h1>Banner</h1>
+				</div> -->
+			</div>
+
+			<div v-show="entity" v-if="resource" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 resource-extras">
+				<div v-if="resource[0].entity[0]" class="resource-extras-tag">
+					<span>Entitat:</span>
+					<p>{{resource[0].entity[0].nomEntitat}}</p>
+				</div>
+
+				<div v-if="resource[0].entity[0]" class="resource-extras-tag">
+					<span>Adreça:</span>
+					<p v-if="resource[0].entity[0].adreca">{{resource[0].entity[0].adreca}}</p>
+				</div>
+
+				<div v-if="resource[0].entity[0]" class="resource-extras-tag">
+					<span>Telefons:</span>
+					<p v-if="resource[0].entity[0].telf1 !== 0 && resource[0].entity[0].telf2 !== 0">{{resource[0].entity[0].telf1}} / {{resource[0].entity[0].telf2}}</p>
+				</div>
+
+				<div v-if="resource[0].entity[0]" class="resource-extras-tag">
+					<span>Web:</span>
+					<p v-if="resource[0].entity[0].link" >
+						<a class="links":href="resource[0].entity[0].link" target="_blank" :title="resource[0].entity[0].link">{{resource[0].entity[0].link}}</a>
+					</p>
 				</div>
 			</div>
-		
+
 			<!-- Mapa recurso -->
-			<!-- <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
-				<h2>{{formatedAddress}}</h2>
+			<div  v-show="isMap" class="col-xs-12 col-sm-4 col-md-4 col-lg-4 resource-extras">
+				<span>Localització de l'Event:</span>
+				<p >{{formatedAddress}}</p>
 				<div id="map" ref="map"></div>
-			</div> -->
+			</div>
+
+			
+			</div>
 		</div>
 	</div>
 </template>
@@ -123,16 +173,26 @@
 				resource:null,
 				dateIni:null,
 				dateEnd:null,
-				datePub:null
+				datePub:null,
+				hours:{
+					start:'',
+					end:''
+				},
+				isMap:true,
+				entity:true
+
 			}
 		},
-		// created(){
-		// 	this.fetchResource(this.$route.params.id);
-		// },
+		created(){
+			//this.resetMap();
+		},
         mounted: function() {
             this.initMap(this.$route.params.id);
         },
 		methods:{
+			resetMap(){
+				this.isMap = false;
+			},
 			// fetchResource: function(id){
 			// 	this.$http.get('../api/recursos/'+id).then(function(response){
 			// 		this.resource = response.data.resource;
@@ -149,37 +209,61 @@
 			initMap: function(id) {
 
                 this.$http.get('../api/recursos/'+id).then(function(response){
+					
 					this.resource = response.data.resource;
 					this.dateIni = response.data.dateIni;
 					this.dateEnd = response.data.dateEnd;
 					this.datePub = response.data.datePub;
 
-                    var myLatLng = {lat: parseFloat(response.data.resource[0].location.latitud), lng: parseFloat(response.data.resource[0].location.longitud)};
+					if(this.resource[0].entity[0]){
+						this.entity=true;
+					}else{
+						this.entity=false;
+					}
 
-                    console.log(myLatLng);
+					if(this.resource[0].dataInici && this.resource[0].dataFinal){
+						var hourStart = this.resource[0].dataInici.split(' ')[1].split(':');
+						var hourEnd = this.resource[0].dataFinal.split(' ')[1].split(':');
+						this.hours.start = hourStart[0]+ ':' + hourStart[1];
+						this.hours.end = hourEnd[0]+ ':' + hourEnd[1];
 
-                    this.map = new google.maps.Map(this.$refs.map , {
-                        center: myLatLng,
-                        scrollwheel: true,
-                        zoom: 16
-                    })
+					} else if (this.resource[0].dataInici) {
+						var hourStart = this.resource[0].dataInici.split(' ')[1].split(':');
+						this.hours.start = hourStart[0]+ ':' + hourStart[1];
+					} else if(this.resource[0].dataFinal){
+						var hourEnd = this.resource[0].dataFinal.split(' ')[1].split(':');
+						this.hours.end = hourEnd[0]+ ':' + hourEnd[1];
+					}
 
-                    var marker = new google.maps.Marker({
-                        position: myLatLng,
-                        map: this.map,
-                        title: 'Hello World!'
-                    });
+					if(this.resource[0].location){
 
-                    var getAddress = this.getAddress;
+						var myLatLng = {lat: parseFloat(this.resource[0].location.latitud), lng: parseFloat(this.resource[0].location.longitud)};
 
-                    var latlng = response.data.resource[0].location.latitud + ',' + response.data.resource[0].location.longitud;
+							this.map = new google.maps.Map(this.$refs.map , {
+	                        center: myLatLng,
+	                        scrollwheel: true,
+	                        zoom: 16
+	                    })
 
-                    var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng + '&sensor=false';
+	                    var marker = new google.maps.Marker({
+	                        position: myLatLng,
+	                        map: this.map,
+	                        title: 'Hello World!'
+	                    });
 
-                        $.getJSON(url, function (data) {
+	                    var getAddress = this.getAddress;
 
-                            getAddress(data);
-                        });
+	                    var latlng = this.resource[0].location.latitud + ',' + this.resource[0].location.longitud;
+
+	                    var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng + '&sensor=false';
+
+	                        $.getJSON(url, function (data) {
+
+	                            getAddress(data);
+	                        });
+					}else{
+						this.isMap = false;
+					}
                 });
             },
             getAddress(data){

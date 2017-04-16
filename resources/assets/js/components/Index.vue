@@ -77,8 +77,12 @@
         <footer>
             <div class="container">
                 <div class="row">
+<<<<<<< HEAD
                     <div class="col-md-4 footertitle">TSFI</div>
                     <div class="col-md-4 network">
+=======
+                    <div class="col-md-6 col-xs-12 network">
+>>>>>>> 013662911e8c30801bdb866683fc8570f06a30cd
                         <h4>Segueix-nos a :</h4>
                         <div class="social">
                             <a href="#"><i class="fa fa-twitter"></a>
@@ -86,8 +90,13 @@
                             <a href="#"><i class="fa fa-instagram"></a>
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div class="col-md-4 contact">
                         <h4>Contacta amb nosaltres:</h4>
+=======
+                    <div class="col-md-offset-2 col-md-4 col-xs-12 contact">
+                        <h4>Contacta amb nosaltres :</h4>
+>>>>>>> 013662911e8c30801bdb866683fc8570f06a30cd
                         <span>Número de Telefón: 93 333 33 33</span>
                         <span>Correu Electrónic: 
                             <a href="mailto:info@tsfi.com">info@tsfi.com</a>
@@ -320,6 +329,8 @@
                         this.category = { codiCategoria: cap, nomCategoria: to.params.category };
                     }
                 }
+
+                console.log(this.$children[3].isMap);
            }
        }
     }

@@ -39,6 +39,7 @@ const dictionary = {
   ca: {
     messages: {
       required: (field) => `El camp ${field} es obligatori.`,
+      decimal: (field) => `Ha de ser numeric amb 2 decimals max.`,
       max: (field, [length]) => `El camp ${field} no pot ser major a ${length} caràcteres.`,
       size: (field, [size]) => `La imatge ${field} ha de ser menor a ${size} KB.`
     }

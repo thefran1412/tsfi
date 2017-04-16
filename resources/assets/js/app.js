@@ -88,7 +88,7 @@ const router = new VueRouter({
         {path:'/search',component:ResultOfSearch, name:'result-of-search' },
         {path:'/map', component:Location, name:'map'},
         {path:'/location-input', component:LocationInput, name:'location-input'},
-        //{path:'*', component: NotFound, name: 'not-found'},
+        {path:'*', component: NotFound, name: 'not-found'},
 
     ]
 });

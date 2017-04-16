@@ -6,6 +6,7 @@
  */
 var Vue = require('vue');
 var VueRouter = require('vue-router');
+var Meta = require('vue-meta');
 
 
 require('./bootstrap');
@@ -18,6 +19,7 @@ require('./bootstrap');
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
 Vue.use(VueRouter);
+Vue.use(Meta);
 
 
 

@@ -156,7 +156,7 @@
 				<p >{{formatedAddress}}</p>
 				<div id="map" ref="map"></div>
 			</div>
-
+			<pre>{{imgMeta}}</pre>
 			
 			</div>
 		</div>
@@ -179,19 +179,31 @@
 					end:''
 				},
 				isMap:true,
-				entity:true
-
+				entity:true,
+				imgMeta: '',
+				urlMeta: '',
+				descriptionMeta:'',
+				titleMeta:''
 			}
 		},
-		created(){
-			//this.resetMap();
-		},
+		metaInfo() {
+			return {
+				meta: [
+	              { property: 'og:title', content: this.titleMeta },
+	              { property: 'og:description', content: this.descriptionMeta },
+	              { property: 'og:image', content: this.imgMeta },
+	              { property: 'og:url', content: this.urlMeta },
+	              { name: 'twitter:card', content: 'summary_large_image' }
+	            ]
+	        }
+        },
         mounted: function() {
             this.initMap(this.$route.params.id);
+            this.dinamicMeta();
         },
 		methods:{
-			resetMap(){
-				this.isMap = false;
+			dinamicMeta(){
+				
 			},
 			// fetchResource: function(id){
 			// 	this.$http.get('../api/recursos/'+id).then(function(response){
@@ -214,6 +226,14 @@
 					this.dateIni = response.data.dateIni;
 					this.dateEnd = response.data.dateEnd;
 					this.datePub = response.data.datePub;
+					var URLactual = window.location;
+
+					this.imgMeta = URLactual.origin+'/projects/ts/img/image/'+this.resource[0].fotoResum;
+					this.urlMeta = URLactual.href;
+					this.descriptionMeta = this.resource[0].descDetaill1;
+					this.titleMeta = this.resource[0].titolRecurs;
+
+					console.log(this.$root);
 
 					if(this.resource[0].entity[0]){
 						this.entity=true;

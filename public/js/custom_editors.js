@@ -20,6 +20,8 @@ $(document).ready(function() {
     var videoType;
     var $videoslider = $('#video_slider');
     var videoembedN = $('#slider-video-wrapper').children('input').length;
+    var $imageslider = $('#image_slider');
+    var imgN = $imageslider.children('img').length;
 
 
     //Summer Note script
@@ -242,14 +244,21 @@ $(document).ready(function() {
     });
 
     var $videoSize = $('iframe');
+    var $imgSize = $('.img_slider');
     $videoslider.innerHeight(($videoslider.innerWidth()*2)/3);
+    $imageslider.innerHeight(($videoslider.innerWidth()*2)/3);
     $videoSize.width($videoslider.width());
     $videoSize.height($videoslider.height());
+    $imgSize.width($videoslider.width());
+    $imgSize.height($videoslider.height());
     $(window).resize(function() {
         var $videoSize = $('iframe');
         $videoslider.innerHeight(($videoslider.innerWidth()*2)/3);
+        $imageslider.innerHeight(($videoslider.innerWidth()*2)/3);
         $videoSize.width($videoslider.width());
         $videoSize.height($videoslider.height());
+        $imgSize.width($videoslider.width());
+        $imgSize.height($videoslider.height());
     });
 
     //before do submit
@@ -267,14 +276,15 @@ $(document).ready(function() {
 
     //Add in video carousel
     var addInSlider = function (src) {
-        console.log(src);
         $('.old_video_active').removeClass('old_video_active');
-        $('.video_active').removeClass('video_active').addClass('old_video_active' );
+        $('.video_active').removeClass('video_active');
         $('#video_slider').append('<iframe name="video' + videoembedN + '" width="'+ $videoslider.width() + '" height="' + $videoslider.height() + '"'+
             ' class="slider_item video_active" src="' + src + '"></iframe>');
         $('.slider_item').fadeOut(0);
         $('.video_active').fadeIn(0);
     };
+
+    //Slider Video init slider, and previous and next functions
     $('.slider_item').first().addClass('video_active');
     $('.slider_item').hide();
     $('.video_active').show();
@@ -315,10 +325,8 @@ $(document).ready(function() {
         else{
             $('.old_video_active').next().addClass('video_active');
         }
-        console.log($('.old_video_active').attr('name'));
         var name = $('.old_video_active').attr('name');
         if (name == null){
-            console.log('Video active 2 => ',$('.video_active').attr('name'));
             var name = $('.video_active').attr('name');
         }
         $('iframe[name="'+ name +'"]').remove();
@@ -327,5 +335,77 @@ $(document).ready(function() {
         $('.video_active').fadeIn(0);
     });
 
+    //Image slider init slider, and previous and next functions
+    $('.img_slider').first().addClass('img_active');
+    $('.img_slider').hide();
+    $('.img_active').show();
+
+    $('#image_button-next').click(function(){
+
+        $('.img_active').removeClass('img_active').addClass('old_img_active');
+        if ( $('.old_img_active').is(':last-child')) {
+            $('.img_slider').first().addClass('img_active');
+        }
+        else{
+            $('.old_img_active').next().addClass('img_active');
+        }
+        $('.old_img_active').removeClass('old_img_active');
+        $('.img_slider').fadeOut(0);
+        $('.img_active').fadeIn(0);
+    });
+
+    $('#image_button-previous').click(function(){
+        $('.img_active').removeClass('img_active').addClass('old_img_active');
+        if ( $('.old_img_active').is(':first-child')) {
+            $('.img_slider').last().addClass('img_active');
+        }
+        else{
+            $('.old_img_active').prev().addClass('img_active');
+        }
+        $('.old_img_active').removeClass('old_img_active');
+        $('.img_slider').fadeOut(0);
+        $('.img_active').fadeIn(0);
+    });
+
+    $(document).on('change', '.image_upload', function(){
+        var $inputimage = $('.image_upload');
+        if (this.files && this.files[0]) {
+            $inputimage.addClass('image' + imgN);
+            $inputimage.hide();
+            $inputimage.attr('name','image' + imgN).removeClass('image_upload');
+            $('.old_img_active').removeClass('old_img_active');
+            $('.img_active').removeClass('img_active');
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $imageslider.append('<img name="image' + imgN + '" width="'+ $imageslider.width() +
+                    '" height="' + $imageslider.height() + '" alt="imagen"'+
+                    ' class="img_slider img_active" src="' + e.target.result + '"/>');
+                imgN++;
+            };
+            $('.images').append('<input type="file" name="" class="image_upload"/>');
+            $('.img_slider').fadeOut(0);
+            $('.img_active').fadeIn(0);
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+    
+    //Delete image
+    $(document).on('click', '#image_button-delete', function(){
+        $('.img_active').removeClass('img_active').addClass('old_img_active');
+        if ( $('.old_img_active').is(':last-child')) {
+            $('.img_slider').first().addClass('img_active');
+        }
+        else{
+            $('.old_img_active').next().addClass('img_active');
+        }
+        var name = $('.old_img_active').attr('name');
+        if (name == null){
+            var name = $('.img_active').attr('name');
+        }
+        $('img[name="'+ name +'"]').remove();
+        $('input[class="'+ name +'"]').remove();
+        $('.slider_item').fadeOut(0);
+        $('.img_active').fadeIn(0);
+    });
 });
 

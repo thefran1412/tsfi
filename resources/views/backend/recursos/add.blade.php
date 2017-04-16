@@ -79,7 +79,12 @@
             <div class="col-sm-3">
                 {!! Form::date('dataFinal', null, ['class'=>'form-control', 'placeholder'=> 'YYYY/MM/DD']) !!}
             </div>
-        </div>
+            </div><div class="form-group row">
+                {!! Form::label('gratuit', 'El recurso esta visible?', ['class'=>'control-label col-sm-3']) !!}
+                <div class="col-sm-1">
+                    {!! Form::checkbox('visible', 'false', false, []) !!}
+                </div>
+            </div>
         <div id="error_preus"></div>
         <div class="form-group row">
             {!! Form::label('gratuit', 'Gratuit:', ['class'=>'control-label col-sm-1']) !!}
@@ -168,7 +173,20 @@
                     <option value="3">Link video</option>
                 </select>
             </div>
-        </div> <br>
+        </div>
+        <br>
+        <div class="form-group row">
+            <div id="slider-image-wrapper" class="col-md-4 col-md-offset-3 slider">
+                <div id="image_slider">
+                </div>
+                <div id="left"><button id="image_button-previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
+                <div id="right"><button id="image_button-next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
+                <div id="center"><button id="image_button-delete"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
+            </div>
+        </div>
+        <div class="form-group row images">
+            <input type='file' name="" class="image_upload" multiple/>
+        </div><br>
         <div class="form-group row">
             <label for="target" class="control-label col-md-3">Perfils del recurs</label>
             <div class="col-md-3">

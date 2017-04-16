@@ -6,7 +6,9 @@
  * Time: 21:22
  */
 use App\EntityResource;
+use App\Http\Controllers\Validators\ImageValidator;
 use App\Http\Controllers\Validators\MapValidator;
+use App\ImageResource;
 use App\Link;
 use App\Resource;
 use App\Tag;
@@ -179,9 +181,57 @@ function addRecursLinks(Request $request, $recurs_id)
         }
     }
 }
+function get_numerics ($str) {
+    preg_match_all('/\d+/', $str, $matches);
+    return $matches[0];
+}
+function upsertImageResource(Request $request, $recurs_id)
+{
+    $pattern = "/image\\d+/";
+    $new_images = [];
+    if (!ImageResource::where('idRecurs', $recurs_id)->first()) {
+        $all_images = [];
+    } else {
+        $all_images = ImageResource::where('idRecurs', $recurs_id)->pluck('titolImatge')->toArray();
+    }
+
+    foreach ($request->all() as $key => $value) {
+        if (preg_match($pattern, $key)) {
+            if ($request->hasFile($key)) {
+                $validate_image = new ImageValidator($request, $key);
+                if ($validate_image->validateImage(null, 4000)) {
+                    dump($request->file($key)->getClientOriginalName());
+                    $img_original_name = $request->file($key)->getClientOriginalName();
+                    $img_recurso = ImageResource::where(['idRecurs' => $recurs_id, 'titolImatge' => $img_original_name])->first();
+                    if (!$img_recurso) {
+                        $img_recurso = new ImageResource;
+                        $img_recurso->titolImatge = $img_original_name;
+                        $img_recurso->imatge = $validate_image->getNewImagePath();
+                        $img_recurso->ordre = get_numerics($key)[0];
+                        $img_recurso->idRecurs = $recurs_id;
+                        $img_recurso->save();
+                        $validate_image->saveImage();
+                    }
+                    array_push($new_images, $img_original_name);
+                } else {
+                    $validate_image->errorUpload();
+                }
+            }
+        }
+        if (preg_match("/delimage\\d+/", $key)) {
+            array_push($new_images, $value);
+        }
+    }
+    $imgs_to_delete = array_diff($all_images, $new_images);
+    if ($imgs_to_delete) {
+        foreach ($imgs_to_delete as $item) {
+            $delet_tags = ImageResource::where(['titolImatge' => $item, 'idRecurs' => $recurs_id])->first();
+            $delet_tags->delete();
+        }
+    }
+}
 function upsertRecursVideo(Request $request, $recurs_id)
 {
-    dump('hola');
     $pattern = "/video\\d+/";
     $new_videos = [];
     if (!VideoResource::where('idRecurs', $recurs_id)->first()){

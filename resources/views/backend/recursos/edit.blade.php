@@ -194,6 +194,28 @@
             </div>
         </div> <br>
         <div class="form-group row">
+            <div id="slider-image-wrapper" class="col-md-4 col-md-offset-3 slider">
+                <div id="image_slider">
+                    @if($image_recurs)
+                        @foreach($image_recurs as $key => $image)
+                            <img name="image{{ $key }}" alt="{{ $image->descImatge }}" class="img_slider" src="{{ $image->imatge }}"/>
+                        @endforeach
+                    @endif
+                </div>
+                <div id="left"><button id="image_button-previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
+                <div id="right"><button id="image_button-next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
+                <div id="center"><button id="image_button-delete"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
+            </div>
+        </div>
+        <div class="form-group row images">
+            @if($image_recurs)
+                @foreach($image_recurs as $key => $image)
+                    <input type="text" value="{{ $image->titolImatge }}" name="delimage{{ $key }}" class="image{{ $key }}" style="display: none;">
+                @endforeach
+            @endif
+            <input type='file' name="" class="image_upload" multiple/>
+        </div><br>
+        <div class="form-group row">
             <label for="target" class="control-label col-md-3">Perfils del recurs</label>
             <div class="col-md-3">
                     {!! Form::select('target', $targets, $selectedtarget, ['class' => 'form-control']) !!}

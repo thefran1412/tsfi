@@ -9,6 +9,7 @@ use App\CategoryResource;
 use App\Entity;
 use App\EntityResource;
 use App\Http\Controllers\Validators\ImageValidator;
+use App\ImageResource;
 use App\Resource;
 use App\Target;
 use App\TargetResource;
@@ -103,6 +104,7 @@ class Recursos extends Controller
         $insertedId = $recurso->recurs_id;
         if($request['multipleage']!== null)addRecursoAge($request, $insertedId);
         if($request['categorias'] !== null)upsertRecursCategory($request, $insertedId);
+        upsertImageResource($request, $insertedId);
         upsertRecursTag($request, $insertedId);
         if($request['entitats'] !== null)upsertRecursEntity($request, $insertedId);
         if($request['linkrecurs'] !== null)addRecursLinks($request, $insertedId);
@@ -147,8 +149,7 @@ class Recursos extends Controller
         }
 
         $video_recurs = VideoResource::where(['idRecurs' => $id])->get();
-
-        $current_time = Carbon::now()->format('Y-m-d');
+        $image_recurs = ImageResource::where(['idRecurs' => $id])->get();
 
         return view('backend.recursos.edit',[
                 'edats'=>$edats,
@@ -162,7 +163,8 @@ class Recursos extends Controller
                 'id'=>$id,
                 'recurso'=>$recurso,
                 'selectedTags'=>$selectedTags,
-                'video_recurs'=>$video_recurs
+                'video_recurs'=>$video_recurs,
+                'image_recurs'=>$image_recurs
             ]
         );
     }
@@ -205,6 +207,7 @@ class Recursos extends Controller
         $insertedId = $recurso->recurs_id;
         if($request['multipleage'] !== null)addRecursoAge($request, $insertedId);
         if($request['categorias'] !==null)upsertRecursCategory($request, $insertedId);
+        upsertImageResource($request, $insertedId);
         upsertRecursTag($request, $insertedId);
         if($request['entitats'] !== null)upsertRecursEntity($request, $insertedId);
         if($request['linkrecurs'] !== null)addRecursLinks($request, $insertedId);

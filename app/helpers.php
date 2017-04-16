@@ -10,6 +10,7 @@ use App\Http\Controllers\Validators\MapValidator;
 use App\Link;
 use App\Resource;
 use App\Tag;
+use App\Target;
 use App\TargetResource;
 use App\VideoResource;
 use App\VideoType;
@@ -19,6 +20,16 @@ use Illuminate\Support\Facades\DB;
 use \App\AgeResource;
 use App\TagResource;
 use App\CategoryResource;
+
+
+function objectToArrayAndPleaseSelect($object){
+    $new_array = [];
+    foreach ($object as $key => $item){
+        $new_array[$key] = $item;
+    }
+    $new_array = array_merge(['0'=>'Selecciona una opcion'], $new_array);
+    return $new_array;
+}
 
 function setDefaults(Request $request, $field, $table)
 {
@@ -45,36 +56,65 @@ function getCorrectDate($date = null)
 
 function duplicatedRecurs(Request $request, $recurs_id)
 {
-    var_dump('duplicated recurs');
-    if ($request['titolRecurs'] === Resource::find($recurs_id)->titolRecurs)
-    dump('duplicated');
+    if ($request['titolRecurs'] === Resource::find($recurs_id)->titolRecurs);
 }
 function addRecursoAge(Request $request, $recurs_id)
 {
-    var_dump('edades');
-    dump($request['multipleage,']);
+    $new_ages = [];
+    if (!AgeResource::where('idRecurs', $recurs_id)->first()){
+        $all_ages = [];
+    }else{
+        $all_ages = AgeResource::where('idRecurs', $recurs_id)->pluck('idEdat')->toArray();
+    }
     foreach ($request['multipleage'] as $age) {
-        $agerecurs = new AgeResource;
-        $agerecurs->idRecurs = $recurs_id;
-        $agerecurs->idEdat = $age;
-        $agerecurs->save();
+        $age_recurs = AgeResource::where(['idEdat'=>$age, 'idRecurs' =>$recurs_id])->first();
+        if (!$age_recurs){
+            $age_recurs = new AgeResource;
+            $age_recurs->idRecurs = $recurs_id;
+            $age_recurs->idEdat = $age;
+            $age_recurs->save();
+        }
+        array_push($new_ages, $age);
+    }
+    $tags_to_delete = array_diff($all_ages, $new_ages);
+    if ($tags_to_delete){
+        foreach ($tags_to_delete as $item) {
+            $delet_tags = AgeResource::where(['idEdat'=>$item, 'idRecurs' =>$recurs_id])->first();
+            $delet_tags->delete();
+        }
     }
 }
-function addRecursCategory(Request $request, $recurs_id)
+function upsertRecursCategory(Request $request, $recurs_id)
 {
-    var_dump('categorias');
-    $categoria = new CategoryResource;
-    $categoria->idCategoria = $request['categorias'];
-    $categoria->idRecurs = $recurs_id;
-    $categoria->save();
+    $categoria = CategoryResource::where(['idRecurs' => $recurs_id])->first();
+    if ($request['categorias'] !== '0'){
+        if (!$categoria) {
+            $categoria = new CategoryResource;
+            $categoria->idCategoria = $request['categorias'];
+            $categoria->idRecurs = $recurs_id;
+            $categoria->save();
+        }else{
+            $categoria->idCategoria = $request['categorias'];
+            $categoria->save();
+        }
+    }else{
+        if ($categoria) {
+            $categoria->delete();
+        }
+    }
 }
-function addRecursTag(Request $request, $recurs_id)
+function upsertRecursTag(Request $request, $recurs_id)
 {
     $pattern = "/tag\\d+/";
-    dump('tags');
+    $new_tags = [];
+    if (!TagResource::where('idRecurs', $recurs_id)->first()){
+        $all_tags = [];
+    }else{
+        $all_tags = TagResource::where('idRecurs', $recurs_id)->pluck('idTag')->toArray();
+    }
     foreach ($request->all() as  $key => $value){
         if (preg_match($pattern, $key)) {
-            dump($value);
+            $value = strtolower($value);
             $tags = Tag::where('nomTags', $value)->first();
             if($tags) {
                 $tag_id = $tags->tags_id;
@@ -84,21 +124,42 @@ function addRecursTag(Request $request, $recurs_id)
                 $tags->save();
                 $tag_id = $tags->tags_id;
             }
-            $recursTag = new TagResource;
-            $recursTag->idTag = $tag_id;
-            $recursTag->idRecurs = $recurs_id;
-            $recursTag->save();
+            $tags_recurs = TagResource::where(['idTag'=>$tag_id, 'idRecurs' =>$recurs_id])->first();
+            if (!$tags_recurs){
+                $recursTag = new TagResource;
+                $recursTag->idTag = $tag_id;
+                $recursTag->idRecurs = $recurs_id;
+                $recursTag->save();
+            }
+            array_push($new_tags, $tag_id);
+        }
+    }
+    $tags_to_delete = array_diff($all_tags, $new_tags);
+    if ($tags_to_delete){
+        foreach ($tags_to_delete as $item) {
+            $delet_tags = TagResource::where(['idTag'=>$item, 'idRecurs' =>$recurs_id])->first();
+            $delet_tags->delete();
         }
     }
 }
-function addRecursEntity (Request $request, $recurs_id)
+function upsertRecursEntity (Request $request, $recurs_id)
 {
-    $entidad = EntityResource::where(['idEntitat' => $request['entitats'], 'idRecurs' => $recurs_id])->first();
-    if(!$entidad){
-        $entidad = new EntityResource;
-        $entidad->idEntitat = $request['entitats'];
-        $entidad->idRecurs = $recurs_id;
-        $entidad->save();
+    $entidad = EntityResource::where(['idRecurs' => $recurs_id])->first();
+    if ($request['entitats'] !== '0') {
+        if (!$entidad) {
+            $entidad = new EntityResource;
+            $entidad->idEntitat = $request['entitats'];
+            $entidad->idRecurs = $recurs_id;
+            $entidad->save();
+        } else {
+            $entidad->idEntitat = $request['entitats'];
+            $entidad->idRecurs = $recurs_id;
+            $entidad->save();
+        }
+    }else{
+        if ($entidad) {
+            $entidad->delete();
+        }
     }
 }
 function addRecursLinks(Request $request, $recurs_id)
@@ -111,7 +172,6 @@ function addRecursLinks(Request $request, $recurs_id)
             ? 'http://' . $url // temporarily add one
             : $url; // use current
         if (filter_var($temp_url, FILTER_VALIDATE_URL) !== false) {
-            dump($url);
             $link = new Link;
             $link->link = $url;
             $link->idRecurs = $recurs_id;
@@ -119,47 +179,76 @@ function addRecursLinks(Request $request, $recurs_id)
         }
     }
 }
-function addRecursVideo(Request $request, $recurs_id)
+function upsertRecursVideo(Request $request, $recurs_id)
 {
-    $src = $request['videoembed'];
-    $pos = strpos($src, 'youtube');
-    $titolVideo = 'Video recurso';
-    if (strpos($src, 'youtube')) {
-        $video_id = substr($src, strrpos($src, '/')+1);
-        if($content = file_get_contents("http://youtube.com/get_video_info?video_id=".$video_id)){
-            parse_str($content, $ytarr);
-            $titolVideo = $ytarr['title'];
-            dump($titolVideo);
-        }
-    } else if (strpos($src, 'vimeo')){
-        $video_id = substr($src, strrpos($src, '/')+1);
-        if($content = file_get_contents("http://vimeo.com/api/v2/video/".$video_id.".json")){
-            $hash = json_decode($content);
-            $titolVideo = $hash[0]->title;
-            dump($titolVideo);
-        }
-        $hash = json_decode(file_get_contents("http://vimeo.com/api/v2/video/{$video_id}.json"));
+    dump('hola');
+    $pattern = "/video\\d+/";
+    $new_videos = [];
+    if (!VideoResource::where('idRecurs', $recurs_id)->first()){
+        $all_videos = [];
     }else{
-        strpos($src, 'iframe');
-        dump('otros sitios');
+        $all_videos = VideoResource::where('idRecurs', $recurs_id)->pluck('urlVideo')->toArray();
     }
-    $videoRecurs = new VideoResource;
-    $videoRecurs->idRecurs = $recurs_id;
-    $videoRecurs->urlVideo = $src;
-    $videoRecurs->titolVideoRecurs = $titolVideo;
-    $videoRecurs->save();
-}
-function addRecursTarget(Request $request, $recurs_id)
-{
-    dump($recurs_id);
-    foreach ($request['target'] as  $value) {
-        $target_recurs = TargetResource::where(['idRecurs' => $recurs_id, 'idTarget' => $value])->first();
-        if (!$target_recurs) {
-            $target_recurs = new TargetResource;
-            $target_recurs->idRecurs = $recurs_id;
-            $target_recurs->idTarget = $value;
-            $target_recurs->save();
+    foreach ($request->all() as  $key => $value){
+        if (preg_match($pattern, $key)) {
+            $titolVideo = 'Video recurso';
+            dump($value);
+            $videoRecurs = VideoResource::where(['idRecurs'=>$recurs_id, 'urlVideo' => $value])->first();
+            if (!$videoRecurs){
+                if (strpos($value, 'youtube')) {
+                    $tipus_video = 1;
+                    $video_id = substr($value, strrpos($value, '/')+1);
+                    if($content = file_get_contents("http://youtube.com/get_video_info?video_id=".$video_id)){
+                        parse_str($content, $ytarr);
+                        if (array_key_exists('title', $ytarr)){
+                            $titolVideo = $ytarr['title'];
+                        }else{
+                            $titolVideo = 'Video Recurs';
+                        }
+                    }
+                } else if (strpos($value, 'vimeo')){
+                    $tipus_video = 2;
+                    $video_id = substr($value, strrpos($value, '/')+1);
+                    if($content = file_get_contents("http://vimeo.com/api/v2/video/".$video_id.".json")){
+                        $hash = json_decode($content);
+                        $titolVideo = $hash[0]->title;
+                    }
+                }else{
+                    $tipus_video = 2;
+                    strpos($value, 'iframe');
+                }
+                $videoRecurs = new VideoResource;
+                $videoRecurs->idRecurs = $recurs_id;
+                $videoRecurs->urlVideo = $value;
+                $videoRecurs->idTipus = $tipus_video;
+                $videoRecurs->titolVideoRecurs = $titolVideo;
+                $videoRecurs->save();
+            }
+            array_push($new_videos, $value);
         }
+    }
+    $videos_to_delete = array_diff($all_videos, $new_videos);
+    if ($videos_to_delete){
+        foreach ($videos_to_delete as $item) {
+            $delet_tags = VideoResource::where(['urlVideo'=>$item, 'idRecurs' =>$recurs_id])->first();
+            $delet_tags->delete();
+        }
+    }
+}
+
+function upsertRecursTarget(Request $request, $recurs_id)
+{
+    $target = $request['target'];
+    $targetrecurs = TargetResource::where(['idRecurs'=>$recurs_id])->first();
+    if (!$targetrecurs){
+        $targetrecurs = new TargetResource;
+        $targetrecurs->idTarget = $target;
+        $targetrecurs->idRecurs = $recurs_id;
+        $targetrecurs->save();
+    }else{
+        $targetrecurs->idTarget = $target;
+        $targetrecurs->idRecurs = $recurs_id;
+        $targetrecurs->save();
     }
 }
 function addRecursLocalitzacio(Request $request, $recurs_id)

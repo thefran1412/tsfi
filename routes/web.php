@@ -34,12 +34,12 @@ Route::get('/admin/analytics', 'backend\Analytics@index');
 
 Route::get('/admin/recursos', 'backend\Recursos@index');
 Route::get('/admin/recursos/add', 'backend\Recursos@add');
+Route::post('/admin/recursos/add', ['as' => 'resource_store','uses' => 'backend\Recursos@store']);
 Route::get('/admin/recursos/categories', 'backend\Recursos@autoCompleteCategory');
 Route::get('/admin/recursos/autocomplete', 'publiccontrollers\publicURLs@autocomplete');
 Route::get('/admin/recursos/{id}/edit', 'backend\Recursos@edit');
-// Route::get('/admin/recursos/update', 'backend\Recursos@update');
+Route::post('/admin/recursos/{id}/edit', ['as' => 'resource_update','uses' => 'backend\Recursos@update']);
 Route::put('/admin/recursos/{recurso}', 'backend\Recursos@update');
-Route::post('/admin/recursos/add', ['as' => 'resource_store','uses' => 'backend\Recursos@store']);
 
 /* CATEGORIES */
 Route::resource('/admin/categories', 'backend\Categories');

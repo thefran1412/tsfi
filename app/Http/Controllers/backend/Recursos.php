@@ -4,10 +4,15 @@ namespace App\Http\Controllers\backend;
 
 
 use App\Age;
+use App\AgeResource;
+use App\CategoryResource;
 use App\Entity;
+use App\EntityResource;
 use App\Http\Controllers\Validators\ImageValidator;
 use App\Resource;
 use App\Target;
+use App\TargetResource;
+use App\VideoResource;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -38,10 +43,10 @@ class Recursos extends Controller
     }
     public function add()
     {
-        $categorias = Category::all('nomCategoria', 'categoria_id');
-        $entitats = Entity::pluck('nomEntitat', 'entitat_id');
+        $categorias = objectToArrayAndPleaseSelect($categorias = Category::pluck('nomCategoria', 'categoria_id'));
+        $entitats = objectToArrayAndPleaseSelect(Entity::pluck('nomEntitat', 'entitat_id'));
         $edats = Age::pluck('descEdat', 'edats_id');
-        $targets = Target::all('targets_id', 'target');
+        $targets = Target::pluck('target', 'targets_id');
         $current_time = Carbon::now()->format('Y-m-d');
         return view('backend.recursos.add',[
                 'edats'=>$edats,
@@ -53,6 +58,14 @@ class Recursos extends Controller
     }
     public function store(Request $request)
     {
+//        \App\Resource::truncate();
+//        \App\AgeResource::truncate();
+//        \App\CategoryResource::truncate();
+//        \App\EntityResource::truncate();
+//        \App\ImageResource::truncate();
+//        \App\TagResource::truncate();
+//        \App\TargetResource::truncate();
+        dump('store');
         $this->setLog('Resource store =>');
         $inputimage = 'fotoResum';
         if ($request->hasFile($inputimage)) {
@@ -86,26 +99,121 @@ class Recursos extends Controller
             'fotoResum' => $this->fotoResum
         ]);
 
+
         $insertedId = $recurso->recurs_id;
-        if($request['multipleage'])addRecursoAge($request, $insertedId);
-        if($request['categorias'])addRecursCategory($request, $insertedId);
-        if($request['tag0'])addRecursTag($request, $insertedId);
-        if($request['entitats'])addRecursEntity($request, $insertedId);
-        if($request['linkrecurs'])addRecursLinks($request, $insertedId);
-        if($request['videoembed'] !== null)addRecursVideo($request, $insertedId);
-        dump($request['target']);
-        if($request['target'])addRecursTarget($request, $insertedId);
+        if($request['multipleage']!== null)addRecursoAge($request, $insertedId);
+        if($request['categorias'] !== null)upsertRecursCategory($request, $insertedId);
+        upsertRecursTag($request, $insertedId);
+        if($request['entitats'] !== null)upsertRecursEntity($request, $insertedId);
+        if($request['linkrecurs'] !== null)addRecursLinks($request, $insertedId);
+        upsertRecursVideo($request, $insertedId);
+        if($request['target'])upsertRecursTarget($request, $insertedId);
         exit();
         return redirect()->to('admin/recursos');
     }
 
     public function edit($id)
     {
-        $recurs = Resource::find($id);
-        return view('backend.recursos.edit',  ['recurs' => $recurs]);
+        $recurso = Resource::find($id);
+
+
+        $categorias = objectToArrayAndPleaseSelect($categorias = Category::pluck('nomCategoria', 'categoria_id'));
+
+        $selectedCategoria = CategoryResource::where(['idRecurs'=>$id])->first();
+        if ($selectedCategoria){
+            $selectedCategoria = $selectedCategoria->idCategoria;
+        }
+
+        $entitats = objectToArrayAndPleaseSelect(Entity::pluck('nomEntitat', 'entitat_id'));
+        $selectedEntitat = EntityResource::where(['idRecurs'=>$id])->first();
+        if ($selectedEntitat){
+            $selectedEntitat = $selectedEntitat->idEntitat;
+        }
+
+        $arrayedats = [];
+        $edats = Age::pluck('descEdat', 'edats_id');
+        $selectedAge = AgeResource::where('idRecurs', $id)->get();
+        foreach ($selectedAge as $ageid){
+            array_push($arrayedats,$ageid->idEdat);
+        }
+
+        $selectedTags = $recurso->tag()->where('idRecurs', $id)->get();
+
+        $targets = Target::pluck('target', 'targets_id');
+
+        $selectedtarget = TargetResource::where(['idRecurs' =>$id])->first();
+        if($selectedtarget){
+            $selectedtarget=$selectedtarget->idTarget;
+        }
+
+        $video_recurs = VideoResource::where(['idRecurs' => $id])->get();
+
+        $current_time = Carbon::now()->format('Y-m-d');
+
+        return view('backend.recursos.edit',[
+                'edats'=>$edats,
+                'categorias'=>$categorias,
+                'entitats'=>$entitats,
+                'targets'=>$targets,
+                'selectedtarget'=>$selectedtarget,
+                'selectedCategoria'=>$selectedCategoria,
+                'selectedEntitat'=>$selectedEntitat,
+                'arrayedats'=>$arrayedats,
+                'id'=>$id,
+                'recurso'=>$recurso,
+                'selectedTags'=>$selectedTags,
+                'video_recurs'=>$video_recurs
+            ]
+        );
     }
     public function update($id, Request $request)
     {
+        dump('id =>'.$id);
+        $this->setLog('Resource update =>');
+        $inputimage = 'fotoResum';
+        if ($request->hasFile($inputimage)) {
+            $validateimage = new ImageValidator($request, $inputimage);
+            if ($validateimage->validateImage(null,4000)){
+                $validateimage->saveImage();
+                $this->setInfoLog($this->log,sprintf('Se guardó la imagen "%s" en la carpeta "%s"',
+                    $validateimage->getHashName(), $validateimage->getTargetFile()));
+                $this->fotoResum = $validateimage->getNewImagePath();
+            }else{
+                $validateimage->errorUpoad();
+            }
+        }
+        $recurso = Resource::find($id);
+        if ($recurso){
+            $recurso->titolRecurs = $request['titolRecurs'];
+            $recurso->subTitol = setDefaults($request, 'subTitol', 'recursos');
+            $recurso->descBreu = setDefaults($request, 'descBreu', 'recursos');
+            $recurso->creatPer = setDefaults($request, 'creatPer', 'recursos');
+            $recurso->descDetaill1 = setDefaults($request, 'descDetaill1', 'recursos');
+            $recurso->descDetaill2 = setDefaults($request, 'descDetaill2', 'recursos');
+            $recurso->relevancia = setDefaults($request, 'relevancia', 'recursos');
+            $recurso->dataInici = getCorrectDate($request['dataInici']);
+            $recurso->dataFinal = getCorrectDate($request['dataFinal']);
+            $recurso->gratuit = setDefaults($request, 'gratuit', 'recursos');
+            $recurso->preuInferior =  setDefaults($request, 'preuInferior', 'recursos');
+            $recurso->preuSuperior =  setDefaults($request, 'preuSuperior', 'recursos');
+            $recurso->dataPublicacio = getCorrectDate($request['dataPublicacio']);
+            $recurso->visible = setDefaults($request,'visible', 'recursos');
+            $recurso->fotoResum = $this->fotoResum;
+            $recurso->save();
+        }
+
+        $insertedId = $recurso->recurs_id;
+        if($request['multipleage'] !== null)addRecursoAge($request, $insertedId);
+        if($request['categorias'] !==null)upsertRecursCategory($request, $insertedId);
+        upsertRecursTag($request, $insertedId);
+        if($request['entitats'] !== null)upsertRecursEntity($request, $insertedId);
+        if($request['linkrecurs'] !== null)addRecursLinks($request, $insertedId);
+        upsertRecursVideo($request, $insertedId);
+        if($request['target'] !== null)upsertRecursTarget($request, $insertedId);
+
+//        return view('backend.recursos.edit',  ['recurs' => $insertedId]);
+        exit();
+        return redirect()->to('admin/recursos');
         //echo 'hola ';
         //var_dump($request);
         $recurs = Resource::find($id);

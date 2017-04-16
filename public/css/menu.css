@@ -13,9 +13,9 @@ header{
 	width:100%;
 }
 
-#appVue footer .container:last-child{
+/* #appVue footer .container:last-child{
 	width:1170px;
-}
+} */
 
 .content-bottom-header{
 	padding-top: 50px;
@@ -337,12 +337,12 @@ header.header-light .site-search input[type=submit]{
 
 .footer-menu .col-md-4{
 	padding: 13px 15px;
-}
+}	
 
 footer{
-	background-color: #333;
 	padding: 15px 15px 0 15px;
 	overflow: hidden;
+	background-color: #333;
 }
 
 footer h4{
@@ -399,20 +399,61 @@ footer .network a{
 	float: left;
 }
 
+footer .contact{
+	padding-bottom: 30px;
+	text-align: right;
+}
+
 footer .network img{
 	width: 40px;
     margin-right: 20px;
     margin-bottom: 25px;
     margin-top: 15px;
 }
+footer .network{
+	display: inline-block;
+	padding-bottom: 30px;
+}
 
+footer .fa {
+	font-size: 20px;
+	color: white;
+	margin: 10px;
+}
 
+.footertitle{
+	font-size: 6em;
+    font-weight: bold;
+    letter-spacing: 6px;
+    color: #4FC08D;
+    cursor: pointer;
+	font-family: Simplifica;
+	line-height: normal;
+}
 
-
+.social{
+	display: inline-block;
+}
+.network{
+	text-align: center;
+}
 
 /* MEDIA QUERY */
 
-@media screen and (max-width: 820px) {
+@media screen and (max-width: 991px) and (min-width: 550px){	
+	.footertitle, .network, .contact{
+		/*background-color: white;*/
+		width: 33%;
+		float: left;
+	}
+
+	.entitats .col-md-4{
+		width: 50%;
+		float: left;
+	}
+}
+
+@media screen and (max-width: 820px){
 	.logo{
 		width: 60px;
 	}
@@ -428,6 +469,11 @@ footer .network img{
 	}
 	.search {
 		width: calc(100% - 385px);
+	}
+}
+@media screen and (max-width: 550px) {
+	.contact{
+		text-align: left !important;
 	}
 }
 

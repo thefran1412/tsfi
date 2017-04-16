@@ -37,15 +37,18 @@ input::-webkit-calendar-picker-indicator {
     margin-right: -6px;
 }
 
+#descBreu{
+    height: 100px;
+}
 /*Video */
-#videoBox{
+#left{float:left;}
+#right{float:right;}
+#center{margin:0 auto;width:0;}
+
+.slider{
     -webkit-border-radius: 10px 10px 10px 10px;
     border: 2px solid rgb(206, 209, 212);
     background: #FFFFFF;
     min-height: 150px;
     padding: 10px;
-}
-
-#descBreu{
-    height: 100px;
 }

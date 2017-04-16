@@ -156,8 +156,6 @@
 				<p >{{formatedAddress}}</p>
 				<div id="map" ref="map"></div>
 			</div>
-			<pre>{{imgMeta}}</pre>
-			
 			</div>
 		</div>
 	</div>

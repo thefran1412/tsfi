@@ -491,7 +491,7 @@ import myDatepicker from 'vue-datepicker';
 						this.$http.post(url, formdata).then((response) =>{
 							this.required = false;
 							this.messageHeader = "Tot correcte!"
-							this.messageBody = "El recurs s'ha enviat correctament. El revisarem en 48h.";
+							this.messageBody = "El recurs s'ha enviat correctament. El revisarem en 72h.";
 							this.showModal = true;
 						},(response)=>{
 						});

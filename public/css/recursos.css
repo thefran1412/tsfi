@@ -34,7 +34,7 @@
 }
 
 .recurso:hover {
-	background-color:rgba(0,0,0,.2);
+	background-color:rgba(0,0,0,.5);
 	transition: color .5s ease-in-out;
 	color: white;
 }

@@ -3,7 +3,7 @@
 		<div class="col-md-offset-1 col-md-10">
 			<div class="tags">
 				<div class="panel">
-					<h3>Enviar Recurs</h3>
+					<h3 v-html="rawHtml" >Enviar Recurs</h3>
 					<hr>
 					<form @submit.stop.prevent ref="enviarRecurs" method="post" enctype="multipart/form-data">
 						<div class="row">

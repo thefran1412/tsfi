@@ -151,12 +151,14 @@ class Entitats extends Controller
         $recurs->telf2 = setDefaults($request, 'telf2', 'entitats');
         $recurs->link = setDefaults($request, 'link', 'entitats');
         
-        if ($request['esMembre'] == null) {
-            $request['esMembre'] = 0;
+
+        if ($request['esMembre'] == 'true') {
+            $request['esMembre'] = 1;
         }
         else{
-            $request['esMembre'] = 1;   
+            $request['esMembre'] = 0;   
         }
+        
         $recurs->esMembre = $request['esMembre'];
         
         $recurs->logo = $this->logo;

@@ -48,7 +48,7 @@
               <?php $checked = false; ?>
             @endif
             
-            {!!Form::checkbox('esMembre', $checked, ['class' => 'form-control', 'placeholder' => 'Es membre'])!!}
+            {!!Form::checkbox('esMembre', 'true', $checked)!!}
           </div>
           <div class="desc paperdiv">
             {!!Form::label('descEntitat', 'Descripció: ')!!}

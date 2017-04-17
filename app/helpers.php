@@ -52,9 +52,11 @@ function setDefaults(Request $request, $field, $table)
 function getCorrectDate($date = null)
 {
     if (!$date){
-        $date = Carbon::now()->format('Y-m-d');
+        $date = Carbon::now()->format('Y-m-d H:i');
+    }else{
+        $date = Carbon::parse($date)->format('Y-m-d H:i');
     }
-    return date_create_from_format('Y-m-d', $date);
+    return date_create_from_format('Y-m-d H:i', $date);
 }
 
 function duplicatedRecurs(Request $request, $recurs_id)
@@ -167,18 +169,37 @@ function upsertRecursEntity (Request $request, $recurs_id)
 }
 function addRecursLinks(Request $request, $recurs_id)
 {
+    $new_link = [];
+    if (!Link::where('idRecurs', $recurs_id)->first()) {
+        $all_link = [];
+    } else {
+        $all_link = Link::where('idRecurs', $recurs_id)->pluck('link')->toArray();
+    }
     $urls = explode(';', $request['linkrecurs']);
     for ($i = 0; $i<count($urls); $i++){
         $url = preg_replace('/\s+/', '', $urls[$i]);
-        preg_match_all('#[-a-zA-Z0-9@:%_\+.~\#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~\#?&//=]*)?#si', $url, $result);
+        preg_match_all('#[-a-zA-Z0-9@:%_\+.~\#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~\#?&//=]*)?#si',
+            $url, $result);
         $temp_url = (!preg_match('#^(ht|f)tps?://#', $url)) // check if protocol not present
             ? 'http://' . $url // temporarily add one
             : $url; // use current
         if (filter_var($temp_url, FILTER_VALIDATE_URL) !== false) {
-            $link = new Link;
-            $link->link = $url;
-            $link->idRecurs = $recurs_id;
-            $link->save();
+            $link_resource = Link::where(['idRecurs' => $recurs_id, 'link' => $temp_url])->first();
+            if (!$link_resource){
+                $link = new Link;
+                $link->link = $temp_url;
+                $link->descLink = $temp_url;
+                $link->idRecurs = $recurs_id;
+                $link->save();
+            }
+            array_push($new_link, $temp_url);
+        }
+    }
+    $link_to_delete = array_diff($all_link, $new_link);
+    if ($link_to_delete) {
+        foreach ($link_to_delete as $item) {
+            $delet_tags = Link::where(['link' => $item, 'idRecurs' => $recurs_id])->first();
+            $delet_tags->delete();
         }
     }
 }
@@ -186,6 +207,25 @@ function get_numerics ($str) {
     preg_match_all('/\d+/', $str, $matches);
     return $matches[0];
 }
+
+function uppsertFotoresum(Request $request){
+    $inputimage = 'fotoResum';
+    $immgpath = null;
+    if ($request->hasFile($inputimage)) {
+        $validateimage = new ImageValidator($request, $inputimage);
+        if ($validateimage->validateImage(null,4000)){
+            $validateimage->saveImage();
+            $immgpath = $validateimage->getNewImagePath();
+        }else{
+            $validateimage->errorUpload();
+        }
+    }
+    if ($request['previousimgresource']){
+        $immgpath = $request['previousimgresource'];
+    }
+    return $immgpath;
+}
+
 function upsertImageResource(Request $request, $recurs_id)
 {
     $pattern = "/image\\d+/";

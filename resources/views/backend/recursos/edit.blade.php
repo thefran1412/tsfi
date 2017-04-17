@@ -173,7 +173,7 @@
                 </div>
                 <div id="left"><button id="button-previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
                 <div id="right"><button id="button-next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
-                <div id="center"><button id="button-delete-video"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
+                <div id="center"><button id="deletevideo"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
             </div>
         </div>
         <div class="row">
@@ -193,6 +193,56 @@
                 </select>
             </div>
         </div> <br>
+        <div class="form-group row" id="img_slider">
+            <div id="slider-image-wrapper" class="col-md-4 col-md-offset-3 slider">
+                <div id="image_slider">
+                    @if($image_recurs)
+                        @foreach($image_recurs as $key => $image)
+                            <img name="image{{ $key }}" alt="{{ $image->descImatge }}" class="img_slider" src="{{ $image->imatge }}"/>
+                        @endforeach
+                    @endif
+                </div>
+                <div id="left"><button id="image_button-previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
+                <div id="right"><button id="image_button-next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
+                <div id="center"><button id="imagedelete"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
+            </div>
+        </div>
+        <div class="form-group row images">
+            @if($image_recurs)
+                @foreach($image_recurs as $key => $image)
+                    <input type="text" value="{{ $image->titolImatge }}" name="delimage{{ $key }}" class="image{{ $key }}" style="display: none;">
+                @endforeach
+            @endif
+            <input type='file' name="" class="image_upload"/>
+        </div><br>
+        <div class="form-group row">
+            <div id="slider_podcast_wrapper" class="col-md-4 col-md-offset-3 slider">
+                @if($podcast_recurs)
+                    @foreach($podcast_recurs as $key => $podcast)
+                        <input type="text" value="{{ $podcast->podCast }}" name="podcast{{ $key }}" style="display: none;">
+                    @endforeach
+                @endif
+                <div id="podcast_preview">
+                    @if($podcast_recurs)
+                        @foreach($podcast_recurs as $key => $podcast)
+                            <iframe name="podcast{{ $key }}" class="podcast_item" src="{{ $podcast->podCast }}"></iframe>
+                        @endforeach
+                    @endif
+                </div>
+                <div id="left"><button id="podcast_previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
+                <div id="right"><button id="podcast_next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
+                <div id="center"><button id="podcastdelete"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="addpodcast" class="control-label col-md-3">Añade un podcast</label>
+            <div class="col-md-3">
+                <textarea type="text" id="addpodcast" class="form-control" placeholder="iframe podcast"></textarea>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn addPodcast">Add</button>
+            </div>
+        </div>
         <div class="form-group row">
             <label for="target" class="control-label col-md-3">Perfils del recurs</label>
             <div class="col-md-3">

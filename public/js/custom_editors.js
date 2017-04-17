@@ -20,6 +20,11 @@ $(document).ready(function() {
     var videoType;
     var $videoslider = $('#video_slider');
     var videoembedN = $('#slider-video-wrapper').children('input').length;
+    var $imageslider = $('#image_slider');
+    var $podcast_box = $('#podcast_preview');
+    var podcastN = $podcast_box.children('iframe').length;
+    var imgN = $imageslider.children('img').length;
+    var $podcast_preview = $('#podcast_preview');
 
 
     //Summer Note script
@@ -227,9 +232,17 @@ $(document).ready(function() {
                 bootstrap_alert('El enlace no es valido asegurate que el video es de youtube o vimeo', 'danger', $videoslider);
             }
         }else{
-            if((videourl.indexOf('src="')+4) >0) {
-                src = videourl.substring(videourl.indexOf('src="')+4);
-                src = src.substring(1, src.indexOf(' ')-1);
+            if((videourl.indexOf('src=')+5) >0) {
+                src = videourl.substring(videourl.indexOf('src=')+5);
+                if (src.match('/."./')){
+                    console.log('with "');
+                    src = src.substring(0, src.indexOf('"'));
+                    console.log(src);
+                }else if (src.match('/.*\'.*/')){
+                    console.log('with \'');
+                    src = src.substring(0, src.indexOf('\''));
+                    console.log(src);
+                }
                 $('#errorAdd').hide();
             }else{
                 $('#errorAdd').hide();
@@ -242,14 +255,24 @@ $(document).ready(function() {
     });
 
     var $videoSize = $('iframe');
+    var $imgSize = $('.img_slider');
     $videoslider.innerHeight(($videoslider.innerWidth()*2)/3);
+    $imageslider.innerHeight(($videoslider.innerWidth()*2)/3);
+    $podcast_box.innerHeight(($videoslider.innerWidth()*2)/3);
     $videoSize.width($videoslider.width());
     $videoSize.height($videoslider.height());
+    $imgSize.width($videoslider.width());
+    $imgSize.height($videoslider.height());
     $(window).resize(function() {
         var $videoSize = $('iframe');
+        var $imgSize = $('.img_slider');
         $videoslider.innerHeight(($videoslider.innerWidth()*2)/3);
+        $imageslider.innerHeight(($videoslider.innerWidth()*2)/3);
+        $podcast_box.innerHeight(($videoslider.innerWidth()*2)/3);
         $videoSize.width($videoslider.width());
         $videoSize.height($videoslider.height());
+        $imgSize.width($videoslider.width());
+        $imgSize.height($videoslider.height());
     });
 
     //before do submit
@@ -267,14 +290,15 @@ $(document).ready(function() {
 
     //Add in video carousel
     var addInSlider = function (src) {
-        console.log(src);
         $('.old_video_active').removeClass('old_video_active');
-        $('.video_active').removeClass('video_active').addClass('old_video_active' );
+        $('.video_active').removeClass('video_active');
         $('#video_slider').append('<iframe name="video' + videoembedN + '" width="'+ $videoslider.width() + '" height="' + $videoslider.height() + '"'+
             ' class="slider_item video_active" src="' + src + '"></iframe>');
         $('.slider_item').fadeOut(0);
         $('.video_active').fadeIn(0);
     };
+
+    //Slider Video init slider, and previous and next functions
     $('.slider_item').first().addClass('video_active');
     $('.slider_item').hide();
     $('.video_active').show();
@@ -307,7 +331,8 @@ $(document).ready(function() {
     });
 
     //Delet video from Video Slider
-    $(document).on('click', '#button-delete-video', function(){
+    $(document).on('click', '#deletevideo', function(){
+        console.log('video delete');
         $('.video_active').removeClass('video_active').addClass('old_video_active');
         if ( $('.old_video_active').is(':last-child')) {
             $('.slider_item').first().addClass('video_active');
@@ -315,10 +340,8 @@ $(document).ready(function() {
         else{
             $('.old_video_active').next().addClass('video_active');
         }
-        console.log($('.old_video_active').attr('name'));
         var name = $('.old_video_active').attr('name');
         if (name == null){
-            console.log('Video active 2 => ',$('.video_active').attr('name'));
             var name = $('.video_active').attr('name');
         }
         $('iframe[name="'+ name +'"]').remove();
@@ -327,5 +350,180 @@ $(document).ready(function() {
         $('.video_active').fadeIn(0);
     });
 
+    //Image slider init slider, and previous and next functions
+    $('.img_slider').first().addClass('img_active');
+    $('.img_slider').hide();
+    $('.img_active').show();
+
+    $('#image_button-next').click(function(){
+
+        $('.img_active').removeClass('img_active').addClass('old_img_active');
+        if ( $('.old_img_active').is(':last-child')) {
+            $('.img_slider').first().addClass('img_active');
+        }
+        else{
+            $('.old_img_active').next().addClass('img_active');
+        }
+        $('.old_img_active').removeClass('old_img_active');
+        $('.img_slider').fadeOut(0);
+        $('.img_active').fadeIn(0);
+    });
+
+    $('#image_button-previous').click(function(){
+        $('.img_active').removeClass('img_active').addClass('old_img_active');
+        if ( $('.old_img_active').is(':first-child')) {
+            $('.img_slider').last().addClass('img_active');
+        }
+        else{
+            $('.old_img_active').prev().addClass('img_active');
+        }
+        $('.old_img_active').removeClass('old_img_active');
+        $('.img_slider').fadeOut(0);
+        $('.img_active').fadeIn(0);
+    });
+
+    $(document).on('change', '.image_upload', function(){
+        $('#errorAdd').hide();
+        var maxSize = 2097190;
+        var img_types = ['jpg','png','jpge'];
+        var $inputimage = $('.image_upload');
+        if (this.files && this.files[0]) {
+            var fileSize = this.files[0].size;
+            var filetype = this.files[0].type;
+            if(filetype.indexOf('image') === -1){
+                bootstrap_alert('El fitxer ha de ser una imatge.', 'danger', $('.images'));
+                return false;
+            }else{
+                if (fileSize<maxSize){
+                    $inputimage.addClass('image' + imgN);
+                    $inputimage.hide();
+                    $inputimage.attr('name','image' + imgN).removeClass('image_upload');
+                    $('.old_img_active').removeClass('old_img_active');
+                    $('.img_active').removeClass('img_active');
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $imageslider.append('<img name="image' + imgN + '" width="'+ $imageslider.width() +
+                            '" height="' + $imageslider.height() + '" alt="imagen"'+
+                            ' class="img_slider img_active" src="' + e.target.result + '"/>');
+                        imgN++;
+                    };
+                    $('.images').append('<input type="file" name="" class="image_upload"/>');
+                    $('.img_slider').fadeOut(0);
+                    $('.img_active').fadeIn(0);
+                    reader.readAsDataURL(this.files[0]);
+                }else{
+                    bootstrap_alert('El tamany de la imatge es mes gran que ' + parseInt(maxSize/1000000) + 'MB.', 'danger', $('.images'));
+                }
+            }
+        }
+    });
+    
+    //Delete image
+    $(document).on('click', '#imagedelete', function(){
+        console.log('imae delete');
+        $('#errorAdd').hide();
+        $('.img_active').removeClass('img_active').addClass('old_img_active');
+        if ( $('.old_img_active').is(':last-child')) {
+            $('.img_slider').first().addClass('img_active');
+        }
+        else{
+            $('.old_img_active').next().addClass('img_active');
+        }
+        var name = $('.old_img_active').attr('name');
+        if (name == null){
+            var name = $('.img_active').attr('name');
+        }
+        $('img[name="'+ name +'"]').remove();
+        $('input[class="'+ name +'"]').remove();
+        $('.img_slider').fadeOut(0);
+        $('.img_active').fadeIn(0);
+    });
+
+    $(document).on('click', '.addPodcast', function () {
+        var podcasturl = $('#addpodcast').val();
+        if (podcasturl.indexOf('iframe')){
+            podcasturl = podcasturl.substring(podcasturl.indexOf('iframe')+6);
+            podcasturl = podcasturl.substring(0, podcasturl.indexOf('iframe'));
+            if((podcasturl.indexOf('src=')) >0) {
+                src = podcasturl.substring(podcasturl.indexOf('src=') + 5);
+                console.log(src);
+                console.log(src.match('/.*".*/'));
+                if (src.match('/.*".*/')) {
+                    console.log(src);
+                    src = src.substring(0, src.indexOf('"'));
+                } else if (src.match('/.*\'.*/')) {
+                    src = src.substring(0, src.indexOf('\''));
+                } else {
+                    src = src.substring(0, src.indexOf(' ') - 2);
+                }
+                addInPodcastpodcast(src);
+                $('#errorAdd').hide();
+            }
+        }else {
+            $('#errorAdd').hide();
+            bootstrap_alert('Iframe no válido.', 'danger', $podcast_preview)
+        }
+    });
+    var addInPodcastpodcast = function (src) {
+        $('.old_podcast_active').removeClass('old_podcast_active');
+        $('.podcast_active').removeClass('podcast_active');
+        $('#podcast_preview').append('<iframe width="' + $podcast_box.width() + '" height="' + $podcast_box.height()
+            + '" src="' + src + '" name="podcast' + podcastN + '" class="podcast_item podcast_active"></iframe>');
+        $('#slider_podcast_wrapper').append('<input name="podcast' + podcastN + '" value="' + src + '" hidden/>');
+        $('.podcast_item').fadeOut(0);
+        $('.podcast_active').fadeIn(0);
+        podcastN++;
+    };
+
+    //Slider podcast init podcast, and previous and next functions
+    $('.podcast_item').first().addClass('podcast_active');
+    $('.podcast_item').hide();
+    $('.podcast_active').show();
+
+    $('#podcast_next').click(function(){
+        $('.podcast_active').removeClass('podcast_active').addClass('old_podcast_active');
+        if ( $('.old_podcast_active').is(':last-child')) {
+            $('.podcast_item').first().addClass('podcast_active');
+        }
+        else{
+            $('.old_podcast_active').next().addClass('podcast_active');
+        }
+        $('.old_podcast_active').removeClass('old_podcast_active');
+        $('.podcast_item').fadeOut(0);
+        $('.podcast_active').fadeIn(0);
+    });
+
+    $('#podcast_previous').click(function(){
+        $('.podcast_active').removeClass('podcast_active').addClass('old_podcast_active');
+        if ( $('.old_podcast_active').is(':first-child')) {
+            $('.podcast_item').last().addClass('podcast_active');
+        }
+        else{
+            $('.old_podcast_active').prev().addClass('podcast_active');
+        }
+        $('.old_podcast_active').removeClass('old_podcast_active');
+        $('.podcast_item').fadeOut(0);
+        $('.podcast_active').fadeIn(0);
+    });
+
+    //Delet podcast from podcast podcast
+    $(document).on('click', '#podcastdelete', function(){
+        $('.podcast_active').removeClass('podcast_active').addClass('old_podcast_active');
+        if ( $('.old_podcast_active').is(':last-child')) {
+            $('.podcast_item').first().addClass('podcast_active');
+        }
+        else{
+            $('.old_podcast_active').next().addClass('podcast_active');
+        }
+        var name = $('.old_podcast_active').attr('name');
+        if (name == null){
+            var name = $('.podcast_active').attr('name');
+        }
+        $('iframe[name="'+ name +'"]').remove();
+        console.log($('input[name="'+ name +'"]'));
+        $('input[name="'+ name +'"]').remove();
+        $('.podcast_item').fadeOut(0);
+        $('.podcast_active').fadeIn(0);
+    });
 });
 

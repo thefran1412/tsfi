@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-
         <meta name="fragment" content="!">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -11,6 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
         <meta name="_token" content="{{ csrf_token() }}" />
+        <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png" />
         <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet" type="text/css" href="{{ url('css/app.css') }}">
@@ -24,6 +24,13 @@
         <link rel="stylesheet" type="text/css" href="{{ url('css/search-results.css') }}">
 
         <title>TSFI</title>
+
+        <script type="text/javascript">
+            if(localStorage.length < 2){
+                    var url = window.location;
+                    window.location.href = url.origin+"/?url="+url.href.substring(22);
+                }
+        </script>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">

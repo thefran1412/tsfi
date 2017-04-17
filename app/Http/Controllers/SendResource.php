@@ -31,8 +31,10 @@ class SendResource extends Controller
 
 		if($file = $request->file('image')){
 			$name = time() . $file->getClientOriginalName();
-			$file->move('img/image',$name);
-			$input['fotoResum'] = $name;
+			$string1 = preg_replace('/[^a-zA-Z0-9_%\[().\]\\/-]/s', '', $name);
+			$string = preg_replace('/\s*\([^)]*\)/', '', $string1);
+			$file->move('img/image',$string);
+			$input['fotoResum'] = $string;
 		}
 
 		$lastID = Resource::create($input);
@@ -93,14 +95,18 @@ class SendResource extends Controller
 
 		if($file = $request->file('image2')){
 			$name = time() . $file->getClientOriginalName();
-			$file->move('img/image',$name);
-			$photo = ImageResource::create(['titolImatge'=>'','descImatge'=>'','imatge' => $name ,'ordre'=>1,'idRecurs' => $insertedId]);
+			$string1 = preg_replace('/[^a-zA-Z0-9_%\[().\]\\/-]/s', '', $name);
+			$string = preg_replace('/\s*\([^)]*\)/', '', $string1);
+			$file->move('img/image',$string);
+			$photo = ImageResource::create(['titolImatge'=>'','descImatge'=>'','imatge' => $string ,'ordre'=>1,'idRecurs' => $insertedId]);
 		}
 
 		if($file = $request->file('image3')){
 			$name = time() . $file->getClientOriginalName();
-			$file->move('img/image',$name);
-			$photo = ImageResource::create(['titolImatge'=>'','descImatge'=>'','imatge' => $name, 'ordre'=>2, 'idRecurs' => $insertedId]);
+			$string1 = preg_replace('/[^a-zA-Z0-9_%\[().\]\\/-]/s', '', $name);
+			$string = preg_replace('/\s*\([^)]*\)/', '', $string1);
+			$file->move('img/image',$string);
+			$photo = ImageResource::create(['titolImatge'=>'','descImatge'=>'','imatge' => $string, 'ordre'=>2, 'idRecurs' => $insertedId]);
 		}
 
 		return response()->json(['success' => true, 'message' => 'images uploaded']);

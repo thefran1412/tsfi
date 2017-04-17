@@ -144,7 +144,10 @@ import myDatepicker from 'vue-datepicker';
 					if(files[0].type === 'image/png' || files[0].type === 'image/jpeg'){
 							return this.createImage(files[0], imgNum);
 					}else{
-						alert("L'arxiu a de ser .jpg o .png");
+						this.required = true;
+						this.messageHeader = "Advertència!"
+						this.messageBody = "L'Arxiu ha de ser JPG o PNG.";
+						this.showModal = true;
 					}
 					
 				}

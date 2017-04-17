@@ -154,7 +154,7 @@
                 </div>
                 <div id="left"><button id="button-previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
                 <div id="right"><button id="button-next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
-                <div id="center"><button id="button-delete-video"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
+                <div id="center"><button id="deletevideo"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
             </div>
         </div>
         <div class="row">
@@ -181,12 +181,36 @@
                 </div>
                 <div id="left"><button id="image_button-previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
                 <div id="right"><button id="image_button-next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
-                <div id="center"><button id="image_button-delete"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
+                <div id="center"><button id="imagedelete"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
             </div>
         </div>
         <div class="form-group row images">
-            <input type='file' name="" class="image_upload" multiple/>
+            <input type='file' name="" class="image_upload"/>
         </div><br>
+        <div class="form-group row">
+            <div id="slider_podcast_wrapper" class="col-md-4 col-md-offset-3 slider">
+                <input name="podcast0" value="https://www.ivoox.com/player_ej_17386712_4_1.html?c1=ff6600" hidden>
+                <input name="podcast1" value="https://www.ivoox.com/player_ej_3411781_4_1.html?c1=ff6600" hidden>
+                <input name="podcast2" value="https://www.ivoox.com/player_ej_538279_4_1.html?c1=ff6600" hidden>
+                <div id="podcast_preview">
+                    <iframe name="podcast0" class="podcast_item" src='https://www.ivoox.com/player_ej_17386712_4_1.html?c1=ff6600'></iframe>
+                    <iframe name="podcast1" class="podcast_item" src='https://www.ivoox.com/player_ej_3411781_4_1.html?c1=ff6600'></iframe>
+                    <iframe name="podcast2" class="podcast_item" src='https://www.ivoox.com/player_ej_538279_4_1.html?c1=ff6600'></iframe>
+                </div>
+                <div id="left"><button id="podcast_previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
+                <div id="right"><button id="podcast_next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
+                <div id="center"><button id="podcastdelete"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="addpodcast" class="control-label col-md-3">Añade un podcast</label>
+            <div class="col-md-3">
+                <textarea type="text" id="addpodcast" class="form-control" placeholder="iframe podcast"></textarea>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn addPodcast">Add</button>
+            </div>
+        </div>
         <div class="form-group row">
             <label for="target" class="control-label col-md-3">Perfils del recurs</label>
             <div class="col-md-3">

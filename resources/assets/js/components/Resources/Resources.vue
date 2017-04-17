@@ -5,7 +5,8 @@
 				<!-- Columna principal -->
 			<div  v-if="resource" class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
  				<!--  Foto resum-->
-				<div v-if="resource[0].fotoResum" class="resource-img-resum" :style="{ backgroundImage: 'url(/img/image/' + resource[0].fotoResum + ')' }">
+				<div class="resource-img-resum" :style="{ backgroundImage: resource[0].fotoResum ? 'url(/img/image/' + resource[0].fotoResum + ')' : 'url(/img/image/tsfi-default-image.png)' }">
+
 					<div class="resource-title-sub">
 						<h1 v-if="resource[0].titolRecurs" >{{resource[0].titolRecurs}}</h1>
 						<h3 v-if="resource[0].subTitol" >{{resource[0].subTitol}}</h3>

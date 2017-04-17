@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 
-                <div class="recurso-foto" :style="{ backgroundImage: 'url(/img/image/' + r.fotoResum + ')' }"> 
+                <div class="recurso-foto" :style="{ backgroundImage: r.fotoResum ? 'url(/img/image/' + r.fotoResum + ')' : 'url(/img/image/tsfi-default-image.png)' }"> 
                 </div>
               </div>
             </div>

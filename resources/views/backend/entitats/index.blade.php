@@ -41,7 +41,7 @@
                     <tbody>
                         @foreach($entitats as $entitat)
                             <tr>
-                              <th><a href="{{action('backend\Entitats@edit', ['id' => $entitat->entitat_id])}}"><img class="logo" src="{{$entitat->logo}}">{{$entitat->nomEntitat}}</a></th>
+                              <th><a href="{{action('backend\Entitats@edit', ['id' => $entitat->entitat_id])}}"><img class="logo" src="/img/image/{{$entitat->logo}}">{{$entitat->nomEntitat}}</a></th>
                               <th>{{$entitat->adreca}}</th>
                               <th>{{$entitat->link}}</th>
                               <th>{{$entitat->esMembre}}</th>

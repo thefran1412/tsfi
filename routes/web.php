@@ -49,7 +49,7 @@ Route::resource('/admin/tags', 'backend\Tags');
 
 /* ENTITATS */
 Route::resource('/admin/entitats', 'backend\Entitats');
-
+Route::post('/admin/entitats/soft/{id}', 'backend\Entitats@soft');
 
 /* ENTIDADES */
 Route::get('/admin/entitats', 'backend\Entitats@index');

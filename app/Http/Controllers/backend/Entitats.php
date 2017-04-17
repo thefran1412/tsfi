@@ -23,7 +23,7 @@ class Entitats extends Controller
     }
     public function index()
     {
-        $c = Entity::All();
+        $c = Entity::All()->where('deleted', NULL);
         return view('backend.entitats.index', ['entitats' => $c]);
     }
 
@@ -187,5 +187,13 @@ class Entitats extends Controller
 
             'adreca' => 'max:255',
         ]);
+    }
+    public function soft($id)
+    {
+        $e = Entity::where('entitat_id', $id)->first();
+        $e->deleted = 1;
+        $e->save();
+
+        return redirect('admin/entitats');
     }
 }

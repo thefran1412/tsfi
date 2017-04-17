@@ -153,7 +153,6 @@ class Recursos extends Controller
         $video_recurs = VideoResource::where(['idRecurs' => $id])->get();
         $image_recurs = ImageResource::where(['idRecurs' => $id])->get();
         $podcast_recurs = Podcast::where(['idRecurs' => $id])->get();
-        dump($podcast_recurs);
         return view('backend.recursos.edit',[
                 'edats'=>$edats,
                 'categorias'=>$categorias,

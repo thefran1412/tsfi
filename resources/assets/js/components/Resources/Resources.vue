@@ -34,7 +34,7 @@
 
 				<div class="row">
 					<div v-if="resource[0].podcast.length > 0" class="col-md-12 videos-list-resource">
-					<iframe v-for="p in resource[0].podcast" frameborder='0' allowfullscreen='' scrolling='no' height='200' style='border:1px solid #EEE; box-sizing:border-box; width:100%;' :src="p.podCast" src="https://www.ivoox.com/player_ej_12768334_4_1.html?c1=ff6600"></iframe>
+					<iframe v-for="p in resource[0].podcast" frameborder='0' allowfullscreen='' scrolling='no' height='200' style='border:1px solid #EEE; box-sizing:border-box; width:100%;' :src="p.podCast" ></iframe>
 					</div>
 				</div>
 			</div>

@@ -4,6 +4,7 @@
     <link href="{{ URL::asset('/css/backend/extra.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/multi-select.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/resourceadd.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/backend/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -73,11 +74,21 @@
         <div class="form-group row">
             {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-3">
-                {!! Form::date('dataInici', Carbon\Carbon::parse($recurso->dataInici)->format('Y-m-d'), ['class'=>'form-control']) !!}
+                {!! Form::date('dataInici', Carbon\Carbon::parse($recurso->dataInici)->format('Y-m-d'), ['class'=>'form-control', 'readonly']) !!}
             </div>
             {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-3">
-                {!! Form::date('dataFinal', Carbon\Carbon::parse($recurso->dataFinal)->format('Y-m-d') , ['class'=>'form-control']) !!}
+                {!! Form::date('dataFinal', Carbon\Carbon::parse($recurso->dataFinal)->format('Y-m-d') , ['class'=>'form-control', 'readonly']) !!}
+            </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('visible', 'El recurso esta visible?', ['class'=>'control-label col-sm-3']) !!}
+            <div class="col-sm-1">
+                @if($recurso->visible)
+                    {!! Form::checkbox('visible', 'true', true, []) !!}
+                @else
+                    {!! Form::checkbox('visible', 'false', false, []) !!}
+                @endif
             </div>
         </div>
         <div id="error_preus"></div>
@@ -100,9 +111,16 @@
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-sm-8">
-                Selecciona una imagen para subirla:
-                {!! Form::file('fotoResum') !!}
+            <div class="col-sm-4">
+                Para cambiar la imagen selecciona una nueva:
+                {!! Form::file('fotoResum', ['id' => 'fotoResum']) !!}
+                
+            </div>
+            <div class="col-sm-6 currentfotoresum">
+                @if($recurso->fotoResum)
+                    <img name="previousimgresource" src="/img/image/{{ $recurso->fotoResum }}" width="250" height="180">
+                    <input type="text" value="{{ $recurso->fotoResum }}" name="previousimgresource" style="display: none;">
+                @endif    
             </div>
         </div>
         <div class="form-group row">
@@ -145,10 +163,12 @@
         <div class="form-group row">
             {!! Form::label('linkrecurs', 'Entra los enlaces del recurso:', ['class'=>'control-label col-sm-3']) !!}
             <div class="col-sm-4">
-                {!! Form::textarea('linkrecurs', null, ['class'=>'form-control',
-                'placeholder'=>'separa los enlaces por ;',
-                'rows'=>"3",
-                 'cols'=>"50"]) !!}<br>
+                <textarea class="form-control" placeholder="separa los enlaces por ;" rows="12" cols="50" name="linkrecurs" id="linkrecurs">@foreach($selectedLinks as $link){{ $link }}
+@endforeach</textarea>
+                {{--{!! Form::textarea('linkrecurs', null, ['class'=>'form-control',--}}
+                {{--'placeholder'=>'separa los enlaces por ;',--}}
+                {{--'rows'=>"3",--}}
+                 {{--'cols'=>"50"]) !!}<br>--}}
             </div>
         </div>
         <div class="row"><br>
@@ -294,4 +314,5 @@
     {{--<script src="{{ URL::asset('/js/createEntity.js') }}"></script>--}}
     {{--<script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>--}}
     {{--end Google maps--}}
+    <script src="{{ URL::asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
 @endsection

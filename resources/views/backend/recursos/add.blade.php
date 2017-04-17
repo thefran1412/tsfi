@@ -4,6 +4,7 @@
     <link href="{{ URL::asset('/css/backend/extra.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/multi-select.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/resourceadd.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/backend/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 
 @endsection
 
@@ -25,7 +26,7 @@
             </div>
         </div>
         @include('partials.errors')
-        {!! Form::open(array('route' => 'resource_store', 'class' => 'form', 'files' => true)) !!}
+        {!! Form::open(array('id'=>'recurs_form', 'route' => 'resource_store', 'class' => 'form', 'files' => true)) !!}
         <div class="form-group row">
             {!! Form::label('titolRecurs', 'Título del Recurso', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-8">
@@ -73,18 +74,19 @@
         <div class="form-group row">
             {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-3">
-                {!! Form::date('dataInici', null, ['class'=>'form-control', 'placeholder'=> 'YYYY-MM-DD']) !!}
+                {!! Form::datetime('dataInici', null, ['class'=>'form-control', 'placeholder'=> 'YYYY-MM-DD']) !!}
             </div>
             {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-3">
-                {!! Form::date('dataFinal', null, ['class'=>'form-control', 'placeholder'=> 'YYYY-MM-DD']) !!}
+                {!! Form::datetime('dataFinal', null, ['class'=>'form-control', 'placeholder'=> 'YYYY-MM-DD']) !!}
             </div>
-            </div><div class="form-group row">
-                {!! Form::label('gratuit', 'El recurso esta visible?', ['class'=>'control-label col-sm-3']) !!}
-                <div class="col-sm-1">
-                    {!! Form::checkbox('visible', 'false', false, []) !!}
-                </div>
+        </div>
+        <div class="form-group row">
+            {!! Form::label('visible', 'El recurso esta visible?', ['class'=>'control-label col-sm-3']) !!}
+            <div class="col-sm-1">
+                {!! Form::checkbox('visible', 'false', false, []) !!}
             </div>
+        </div>
         <div id="error_preus"></div>
         <div class="form-group row">
             {!! Form::label('gratuit', 'Gratuit:', ['class'=>'control-label col-sm-1']) !!}
@@ -102,7 +104,7 @@
         </div>
         <div class="form-group row">
             <div class="col-sm-8">
-                Selecciona una imagen para subirla:
+                Selecciona una imagen destacada del recurso:
                 {!! Form::file('fotoResum') !!}
             </div>
         </div>
@@ -131,7 +133,7 @@
         <div class="form-group row">
             <label for="tags" class="control-label col-sm-3">Tags: </label>
             <div class="col-sm-4">
-                <input type="text" id="tags" name='tags' placeholder="escribe una categoria para añadir." class="form-control" list="autocomplete" autocomplete="true">
+                <input type="text" id="tags" name='tags' placeholder="escribe una tag para añadir." class="form-control" list="autocomplete" autocomplete="true">
                 <datalist id="autocomplete">
                 </datalist>
             </div>
@@ -189,14 +191,8 @@
         </div><br>
         <div class="form-group row">
             <div id="slider_podcast_wrapper" class="col-md-4 col-md-offset-3 slider">
-                <input name="podcast0" value="https://www.ivoox.com/player_ej_17386712_4_1.html?c1=ff6600" hidden>
-                <input name="podcast1" value="https://www.ivoox.com/player_ej_3411781_4_1.html?c1=ff6600" hidden>
-                <input name="podcast2" value="https://www.ivoox.com/player_ej_538279_4_1.html?c1=ff6600" hidden>
                 <div id="podcast_preview">
                 </div>
-                <div id="left"><button id="podcast_previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
-                <div id="right"><button id="podcast_next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
-                <div id="center"><button id="podcastdelete"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
             </div>
         </div>
         <div class="form-group row">
@@ -243,4 +239,5 @@
     {{--<script src="{{ URL::asset('/js/createEntity.js') }}"></script>--}}
     {{--<script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>--}}
     {{--end Google maps--}}
+    <script src="{{ URL::asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
 @endsection

@@ -1,6 +1,9 @@
 /**
  * Created by nicof on 21/03/2017.
  */
+
+// fix date validation for chrome
+
 $(document).ready(function() {
     //Local vars
     var urlAutocomplete = document.location.origin + "/admin/recursos/autocomplete";
@@ -75,6 +78,24 @@ $(document).ready(function() {
     // startDate.attr('value', current_date);
     // $finalDate.attr('value', current_date);
 
+    $('#dataInici').datetimepicker({
+        format: "yyyy-mm-dd  hh:ii",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left",
+        todayHighlight: true,
+        keyboardNavigation: true,
+        startDate: new Date()
+    });
+    $('#dataFinal').datetimepicker({
+        format: "yyyy-mm-dd  hh:ii",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left",
+        todayHighlight: true,
+        keyboardNavigation: true,
+        startDate: new Date()
+    });
     //When Start Date changes min value in Final date change to startDate value
     startDate.change(function() {
         $finalDate.attr('min',$(this).val());
@@ -275,19 +296,6 @@ $(document).ready(function() {
         $imgSize.height($videoslider.height());
     });
 
-    //before do submit
-    $('#recurs_form').submit(function() {
-        $('#errorAdd').parent().remove();
-        if ($preuInferior.val() === '' && $preuSuperior.val() === ''){
-            if ($gratuit.attr('value') === 'false'){
-                bootstrap_alert('Se ha de especificar si el recurso es gratuito o especificar un precio mayor o menor.',
-                    'danger', $('#error_submit'));
-                return false;
-            }
-        }
-        return true; // return false to cancel form action
-    });
-
     //Add in video carousel
     var addInSlider = function (src) {
         $('.old_video_active').removeClass('old_video_active');
@@ -417,6 +425,34 @@ $(document).ready(function() {
             }
         }
     });
+
+    $(document).on('change', '#fotoResum', function(){
+        $('#errorAdd').hide();
+        $('.currentfotoresum').children().remove();
+        var maxSize = 2097190;
+        var img_types = ['jpg','png','jpge'];
+        var $inputimage = $('#fotoResum');
+        if (this.files && this.files[0]) {
+            var fileSize = this.files[0].size;
+            var filetype = this.files[0].type;
+            if(filetype.indexOf('image') === -1){
+                bootstrap_alert('El fitxer ha de ser una imatge.', 'danger', $('.images'));
+                return false;
+            }else{
+                if (fileSize<maxSize){
+                    var reader = new FileReader();
+                    reader.onload = function (e) {// <input type="text" value="{{ $image->titolImatge }}" name="delimageresource" class="image{{ $key }}" style="display: none;">
+                        $('.currentfotoresum').append('<img name="delimageresource" width="250" height="180" alt="imagen"'+
+                            ' class="previousimgresource" src="' + e.target.result + '"/>');
+                        imgN++;
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }else{
+                    bootstrap_alert('El tamany de la imatge es mes gran que ' + parseInt(maxSize/1000000) + 'MB.', 'danger', $('.images'));
+                }
+            }
+        }
+    });
     
     //Delete image
     $(document).on('click', '#imagedelete', function(){
@@ -524,6 +560,19 @@ $(document).ready(function() {
         $('input[name="'+ name +'"]').remove();
         $('.podcast_item').fadeOut(0);
         $('.podcast_active').fadeIn(0);
+    });
+
+    //before do submit
+    $('#recurs_form').submit(function() {
+        $('#errorAdd').parent().remove();
+        if ($preuInferior.val() === '' && $preuSuperior.val() === ''){
+            if ($gratuit.attr('value') === 'false'){
+                bootstrap_alert('Se ha de especificar si el recurso es gratuito o especificar un precio mayor o menor.',
+                    'danger', $('#error_submit'));
+                return false;
+            }
+        }
+        return true; // return false to cancel form action
     });
 });
 

@@ -10,6 +10,7 @@ use App\Entity;
 use App\EntityResource;
 use App\Http\Controllers\Validators\ImageValidator;
 use App\ImageResource;
+use App\Link;
 use App\Podcast;
 use App\Resource;
 use App\Target;
@@ -67,7 +68,6 @@ class Recursos extends Controller
 //        \App\ImageResource::truncate();
 //        \App\TagResource::truncate();
 //        \App\TargetResource::truncate();
-        dump('store');
         $this->setLog('Resource store =>');
         $inputimage = 'fotoResum';
         if ($request->hasFile($inputimage)) {
@@ -112,7 +112,7 @@ class Recursos extends Controller
         if($request['linkrecurs'] !== null)addRecursLinks($request, $insertedId);
         upsertRecursVideo($request, $insertedId);
         if($request['target'])upsertRecursTarget($request, $insertedId);
-        exit();
+
         return redirect()->to('admin/recursos');
     }
 
@@ -143,6 +143,11 @@ class Recursos extends Controller
 
         $selectedTags = $recurso->tag()->where('idRecurs', $id)->get();
 
+        $selectedLinks = Link::where(['idRecurs' => $id])->pluck('link')->toArray();
+        foreach ($selectedLinks as $key => $val) {
+            $selectedLinks[$key] = $val.';';
+        }
+
         $targets = Target::pluck('target', 'targets_id');
 
         $selectedtarget = TargetResource::where(['idRecurs' =>$id])->first();
@@ -167,26 +172,16 @@ class Recursos extends Controller
                 'selectedTags'=>$selectedTags,
                 'video_recurs'=>$video_recurs,
                 'image_recurs'=>$image_recurs,
-                'podcast_recurs'=>$podcast_recurs
+                'podcast_recurs'=>$podcast_recurs,
+                'selectedLinks'=>$selectedLinks
             ]
         );
     }
     public function update($id, Request $request)
     {
-        dump('id =>'.$id);
         $this->setLog('Resource update =>');
         $inputimage = 'fotoResum';
-        if ($request->hasFile($inputimage)) {
-            $validateimage = new ImageValidator($request, $inputimage);
-            if ($validateimage->validateImage(null,4000)){
-                $validateimage->saveImage();
-                $this->setInfoLog($this->log,sprintf('Se guardó la imagen "%s" en la carpeta "%s"',
-                    $validateimage->getHashName(), $validateimage->getTargetFile()));
-                $this->fotoResum = $validateimage->getNewImagePath();
-            }else{
-                $validateimage->errorUpoad();
-            }
-        }
+
         $recurso = Resource::find($id);
         if ($recurso){
             $recurso->titolRecurs = $request['titolRecurs'];
@@ -203,7 +198,7 @@ class Recursos extends Controller
             $recurso->preuSuperior =  setDefaults($request, 'preuSuperior', 'recursos');
             $recurso->dataPublicacio = getCorrectDate($request['dataPublicacio']);
             $recurso->visible = setDefaults($request,'visible', 'recursos');
-            $recurso->fotoResum = $this->fotoResum;
+            $recurso->fotoResum = uppsertFotoresum($request);
             $recurso->save();
         }
 
@@ -218,15 +213,7 @@ class Recursos extends Controller
         upsertRecursVideo($request, $insertedId);
         if($request['target'] !== null)upsertRecursTarget($request, $insertedId);
 
-//        return view('backend.recursos.edit',  ['recurs' => $insertedId]);
-        exit();
         return redirect()->to('admin/recursos');
-        //echo 'hola ';
-        //var_dump($request);
-        $recurs = Resource::find($id);
-        $recurs->fill($request->all());
-        $recurs->save();
-        return redirect('admin/recursos');
     }
     private function validateEntity($request)
     {

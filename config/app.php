@@ -167,8 +167,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
 
-        //debug bar
-        Barryvdh\Debugbar\ServiceProvider::class,
         //prerender
         Nutsweb\LaravelPrerender\LaravelPrerenderServiceProvider::class,
 

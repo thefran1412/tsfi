@@ -27,8 +27,14 @@
 				<p>{{resource[0].descDetaill2}}</p>
 				
 				<div class="row">
-					<div class="col-md-12 videos-list-resource">
+					<div v-if="resource[0].video_resource.length > 0" class="col-md-12 videos-list-resource">
 					<iframe v-for="r in resource[0].video_resource" width="100%" height="315" :src="r.urlVideo" frameborder="0" allowfullscreen></iframe>
+					</div>
+				</div>
+
+				<div class="row">
+					<div v-if="resource[0].podcast.length > 0" class="col-md-12 videos-list-resource">
+					<iframe v-for="p in resource[0].podcast" frameborder='0' allowfullscreen='' scrolling='no' height='200' style='border:1px solid #EEE; box-sizing:border-box; width:100%;' :src="p.podCast" src="https://www.ivoox.com/player_ej_12768334_4_1.html?c1=ff6600"></iframe>
 					</div>
 				</div>
 			</div>

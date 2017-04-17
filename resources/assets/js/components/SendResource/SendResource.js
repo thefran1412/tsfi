@@ -108,7 +108,6 @@ import myDatepicker from 'vue-datepicker';
 						p.push(t);
 					});
 					this.listAges = p;
-					console.log(this.listAges);
 				})
 			},
 			fetchTargets(){
@@ -274,7 +273,6 @@ import myDatepicker from 'vue-datepicker';
 						});
 						
 					}).catch((e) => {
-						console.log(e);
 							this.required = true;
 							this.messageHeader = "Advertència!"
 							this.messageBody = "T'has deixat un dels camps requerids sence completar o l'imatge es massa gran.";

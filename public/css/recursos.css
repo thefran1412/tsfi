@@ -155,3 +155,12 @@
 		color: white;
 	}
 }
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+
+  	.content-bottom-header .col-md-4 h2{
+		font-size: 22px;
+	}
+}
+

@@ -210,8 +210,6 @@ import { EventBus } from '../../app.js';
                         this.category = { codiCategoria: cap, nomCategoria: to.params.category };
                     }
                 }
-
-                console.log(this.$children[3].isMap);
            }
        }
     }

@@ -69,9 +69,6 @@
                     });
                     marker.setVisible(true);
 
-                    console.log(place.geometry.location.lat());
-                    console.log(place.geometry.location.lng());
-
                     infowindow.setContent('<div><strong>' + place.name + '</strong><br>'+ '<br>' +
                         place.formatted_address);
                     infowindow.open(map, marker);

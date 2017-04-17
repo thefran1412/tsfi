@@ -141,11 +141,7 @@
                     this.dateEnd = response.data.dateEnd;
                     this.datePub = response.data.datePub;
 
-                    console.log(parseFloat(response.data.resource[0].location.latitud));
-
                     var myLatLng = {lat: parseFloat(response.data.resource[0].location.latitud), lng: parseFloat(response.data.resource[0].location.longitud)};
-
-                    console.log(myLatLng);
 
                     this.map = new google.maps.Map(this.$refs.map , {
                         center: myLatLng,

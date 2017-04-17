@@ -50,8 +50,6 @@ export default{
 					this.descriptionMeta = this.resource[0].descDetaill1;
 					this.titleMeta = this.resource[0].titolRecurs;
 
-					console.log(this.$root);
-
 					if(this.resource[0].entity[0]){
 						this.entity=true;
 					}else{

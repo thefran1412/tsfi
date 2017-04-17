@@ -27,10 +27,8 @@
 
         <script type="text/javascript">
             if(localStorage.length < 2){
-                    var url = window.location.href;
-                    var URLactual = window.location;
-                    var newurl = URLactual.origin+"/";
-                    window.location.href = newurl+"?url="+url.substring(22);
+                    var url = window.location;
+                    window.location.href = url.origin+"/?url="+url.href.substring(22);
                 }
         </script>
 

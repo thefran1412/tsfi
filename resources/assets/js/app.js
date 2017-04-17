@@ -25,10 +25,10 @@ Vue.use(Meta);
 
 
 //Index
-import Index from './components/Index.vue';
+import Index from './components/MenuAndFooter/MenuAndFooter.vue';
 
 //SendResource
-import EnviarRecurs from './components/EnviarRecurs.vue';
+import EnviarRecurs from './components/SendResource/SendResource.vue';
 import VeeValidate from 'vee-validate';
 import { Validator } from 'vee-validate';
 
@@ -55,21 +55,21 @@ const validator = new Validator({ first_name: 'required' });
 validator.setLocale('ca');
 
 //Categories
-import Resources from './components/CategoryTypes.vue';
+import Resources from './components/CategoryTypes/CategoryTypes.vue';
 
 
 //Recurso
-import Resource from './components/Resources.vue';
+import Resource from './components/Resources/Resources.vue';
 
 //SearchResource
-import ResultOfSearch from './components/ResultsOfSearch.vue';
+import ResultOfSearch from './components/ResultsOfSearch/ResultsOfSearch.vue';
 
 //map
-import Location from './components/Location.vue';
-import LocationInput from './components/LocationInput.vue';
+import Location from './components/Map/Location.vue';
+import LocationInput from './components/Map/LocationInput.vue';
 
 //NotFound
-import NotFound from './components/NotFound.vue';
+import NotFound from './components/PageNotFound/PageNotFound.vue';
 
 // modal component
 Vue.component('modal', {

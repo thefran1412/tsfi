@@ -22,7 +22,6 @@
                   <div class="post">
                       <div class="post-img-content">
                           <img :src="l.fotoResum ? '/img/image/'+ l.fotoResum : '/img/image/tsfi-default-image.png'" class="img-responsive" />
-                          <!-- <img :src="user.photo ? user.photo.file : '/images/default-profile.png'"></td> -->
                           <span class="post-title">
                             <b><a v-bind:href="'#/resource/'+ l.recurs_id">{{l.titolRecurs}}</a></b><br />
                               <b>{{l.subTitol}}</b></span>

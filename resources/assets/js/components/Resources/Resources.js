@@ -76,7 +76,7 @@ export default{
 
 						var myLatLng = {lat: parseFloat(this.resource[0].location.latitud), lng: parseFloat(this.resource[0].location.longitud)};
 
-							this.map = new google.maps.Map(this.$refs.map , {
+						var map = new google.maps.Map(this.$refs.map , {
 	                        center: myLatLng,
 	                        scrollwheel: true,
 	                        zoom: 16
@@ -84,7 +84,7 @@ export default{
 
 	                    var marker = new google.maps.Marker({
 	                        position: myLatLng,
-	                        map: this.map,
+	                        map: map,
 	                        title: 'Hello World!'
 	                    });
 

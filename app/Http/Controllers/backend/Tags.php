@@ -20,7 +20,7 @@ class Tags extends Controller
     }
     public function index()
     {
-        $c = Tag::All();
+        $c = Tag::All()->where('deleted', '!=', 1);
         return view('backend.tags.index', ['tags' => $c]);
     }
 
@@ -59,7 +59,21 @@ class Tags extends Controller
     private function validateTag($request)
     {
         $this->validate($request, [
-            'nomTags' => 'required|max:70',
+            'nomTags' => 'unique:tags,nomTags|required|max:70',
         ]);
+        
+        // var_dump($request->nomTags);
+        // $c = Tag::where('nomTags', $request->nomTags)->first();
+
+        // if ($c != null && $) {
+        // }
+    }
+    public function soft($id)
+    {
+        $e = Tag::where('tags_id', $id)->first();
+        $e->deleted = 1;
+        $e->save();
+
+        return redirect('admin/tags');
     }
 }

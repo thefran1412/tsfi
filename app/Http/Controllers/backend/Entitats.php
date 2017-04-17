@@ -23,7 +23,7 @@ class Entitats extends Controller
     }
     public function index()
     {
-        $c = Entity::All()->where('deleted', NULL);
+        $c = Entity::All()->where('deleted', '!=', 1);
         return view('backend.entitats.index', ['entitats' => $c]);
     }
 

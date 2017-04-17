@@ -64,7 +64,7 @@
                               <th>
                                 <div class="actions">
                                   <a title="Editar" href="{{action('backend\Tags@edit', ['id' => $tag->tags_id])}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                                  {!!Form::open(['action' => ['backend\Tags@destroy', $tag->tags_id], 'method' => 'delete'])!!}
+                                  {!!Form::open(['action' => ['backend\Tags@soft', $tag->tags_id], 'method' => 'post'])!!}
                                   {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
                                   {!!Form::close()!!}
                                 </div>

@@ -20,18 +20,18 @@ class Categories extends Controller
     }
     public function index()
     {
-    	$c = Category::All();
+    	$c = Category::All()->where('deleted', '!=', 1);
         return view('backend.categories.index', ['categories' => $c]);
     }
 
     public function store(Request $request)
     {
-        $this->validateTag($request);
+        $this->validateCategory($request);
 
         \App\Category::Create([
-            'nomCategoria' => $request['nom'],
-            'codiCategoria' => $request['codi'],
-            'descCategoria' => $request['desc']
+            'nomCategoria' => $request['nomCategoria'],
+            'codiCategoria' => $request['codiCategoria'],
+            'descCategoria' => $request['descCategoria']
         ]);
         return redirect('admin/categories');
     }
@@ -53,7 +53,7 @@ class Categories extends Controller
     }
     public function update($id, Request $request)
     {
-        $this->validateTag($request);
+        $this->validateCategory($request);
 
         $recurs = Category::find($id);
         $recurs->fill($request->all());
@@ -63,8 +63,17 @@ class Categories extends Controller
     private function validateCategory($request)
     {
         $this->validate($request, [
-            'nomCategoria' => 'required|max:70',
+            'nomCategoria' => 'unique:categories,nomCategoria|required|max:70',
             'descCategoria' => 'required|max:70',
+            'codiCategoria' => 'unique:categories,codiCategoria|required|max:70',
         ]);
+    }
+    public function soft($id)
+    {
+        $e = Category::where('categoria_id', $id)->first();
+        $e->deleted = 1;
+        $e->save();
+
+        return redirect('admin/categories');
     }
 }

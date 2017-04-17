@@ -43,17 +43,19 @@ Route::put('/admin/recursos/{recurso}', 'backend\Recursos@update');
 
 /* CATEGORIES */
 Route::resource('/admin/categories', 'backend\Categories');
+Route::post('/admin/categories/soft/{id}', 'backend\Categories@soft');
 
 /* TAGS */
 Route::resource('/admin/tags', 'backend\Tags');
+Route::post('/admin/tags/soft/{id}', 'backend\Tags@soft');
 
 /* ENTITATS */
 Route::resource('/admin/entitats', 'backend\Entitats');
 Route::post('/admin/entitats/soft/{id}', 'backend\Entitats@soft');
 
 /* ENTIDADES */
-Route::get('/admin/entitats', 'backend\Entitats@index');
-Route::get('/admin/entitats/add', 'backend\Entitats@add');
+// Route::get('/admin/entitats', 'backend\Entitats@index');
+// Route::get('/admin/entitats/add', 'backend\Entitats@add');
 
 /* USUARIOS */
 Route::get('/admin/usuaris', 'backend\Usuaris@index');

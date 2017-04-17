@@ -73,11 +73,11 @@
         <div class="form-group row">
             {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-3">
-                {!! Form::date('dataInici', null, ['class'=>'form-control', 'placeholder'=> 'YYYY/MM/DD']) !!}
+                {!! Form::date('dataInici', null, ['class'=>'form-control', 'placeholder'=> 'YYYY-MM-DD']) !!}
             </div>
             {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-3">
-                {!! Form::date('dataFinal', null, ['class'=>'form-control', 'placeholder'=> 'YYYY/MM/DD']) !!}
+                {!! Form::date('dataFinal', null, ['class'=>'form-control', 'placeholder'=> 'YYYY-MM-DD']) !!}
             </div>
             </div><div class="form-group row">
                 {!! Form::label('gratuit', 'El recurso esta visible?', ['class'=>'control-label col-sm-3']) !!}
@@ -193,9 +193,6 @@
                 <input name="podcast1" value="https://www.ivoox.com/player_ej_3411781_4_1.html?c1=ff6600" hidden>
                 <input name="podcast2" value="https://www.ivoox.com/player_ej_538279_4_1.html?c1=ff6600" hidden>
                 <div id="podcast_preview">
-                    <iframe name="podcast0" class="podcast_item" src='https://www.ivoox.com/player_ej_17386712_4_1.html?c1=ff6600'></iframe>
-                    <iframe name="podcast1" class="podcast_item" src='https://www.ivoox.com/player_ej_3411781_4_1.html?c1=ff6600'></iframe>
-                    <iframe name="podcast2" class="podcast_item" src='https://www.ivoox.com/player_ej_538279_4_1.html?c1=ff6600'></iframe>
                 </div>
                 <div id="left"><button id="podcast_previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
                 <div id="right"><button id="podcast_next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>

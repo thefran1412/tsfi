@@ -198,7 +198,7 @@
                 <div id="image_slider">
                     @if($image_recurs)
                         @foreach($image_recurs as $key => $image)
-                            <img name="image{{ $key }}" alt="{{ $image->descImatge }}" class="img_slider" src="{{ $image->imatge }}"/>
+                            <img name="image{{ $key }}" alt="{{ $image->descImatge }}" class="img_slider" src="/img/image/{{ $image->imatge }}"/>
                         @endforeach
                     @endif
                 </div>

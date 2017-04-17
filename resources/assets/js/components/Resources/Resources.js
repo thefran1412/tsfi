@@ -7,6 +7,7 @@ export default{
 				dateIni:null,
 				dateEnd:null,
 				datePub:null,
+				gallery:[],
 				hours:{
 					start:'',
 					end:''
@@ -43,7 +44,16 @@ export default{
 					this.dateEnd = response.data.dateEnd;
 					this.datePub = response.data.datePub;
 
+					var gallery = this.gallery;
 					var URLactual = window.location;
+
+					if(this.resource[0].image_resource.length > 0){
+						this.resource[0].image_resource.forEach(function(data){
+				              gallery.push(data);
+				          });
+					}
+
+					console.log(this.gallery);
 
 					this.imgMeta = URLactual.origin+'/projects/ts/img/image/'+this.resource[0].fotoResum;
 					this.urlMeta = URLactual.href;

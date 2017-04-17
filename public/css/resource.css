@@ -139,6 +139,15 @@
   width:500px;
 }
 
+.image-gallery{
+    display: inline-block;
+    margin-right: 15px;
+    float: left;
+    height: 125px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
 /*.resource-extras a, p {
   padding-left: 10px;
 }*/

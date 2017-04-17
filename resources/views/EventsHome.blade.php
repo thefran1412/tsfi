@@ -25,6 +25,8 @@
 
         <title>TSFI</title>
 
+
+
         <script type="text/javascript">
             if(localStorage.length < 2){
                     var url = window.location;
@@ -46,5 +48,7 @@
         </div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places" async defer></script>
         <script src="{{ URL::asset('/js/app.js') }}" ></script>
+        <script src="{{ URL::asset('/js/lightBox.js') }}"></script>
+
     </body>
 </html>

@@ -9,7 +9,12 @@ var VueRouter = require('vue-router');
 var Meta = require('vue-meta');
 
 
+
+import VueLightbox from 'vue-lightbox';
+Vue.component("Lightbox",VueLightbox)
 require('./bootstrap');
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -47,7 +52,8 @@ const dictionary = {
     }
   }
 };
-Vue.use(VeeValidate)
+
+Vue.use(VeeValidate);
 Validator.updateDictionary(dictionary);
 
 const validator = new Validator({ first_name: 'required' });

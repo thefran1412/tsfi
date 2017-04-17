@@ -71,7 +71,7 @@
           </div>
           <div class="preview">
             <div>
-              <img src="{{$entitat->logo}}">
+              <img src="/img/image/{{$entitat->logo}}">
             </div>
           </div>
 

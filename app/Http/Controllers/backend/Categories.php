@@ -28,8 +28,7 @@ class Categories extends Controller
     {
         $check = Category::
             where('nomCategoria', $request->nomCategoria)
-            ->where('codiCategoria', $request->codiCategoria)
-            ->where('deleted', '!=', 1)
+            ->where('deleted', 0)
             ->count();
 
         if ($check >= 1) {
@@ -42,18 +41,20 @@ class Categories extends Controller
         Category::Create([
             'nomCategoria' => $request['nomCategoria'],
             'codiCategoria' => $request['codiCategoria'],
-            'descCategoria' => $request['descCategoria']
+            'descCategoria' => $request['descCategoria'],
+            'deleted' => 0,
         ]);
         
-
         return redirect('admin/categories');
     }
 
     public function destroy($id)
     {
-        \App\Category::destroy($id);
-        return redirect('admin/categories');
+        $e = Category::where('categoria_id', $id)->first();
+        $e->deleted = 1;
+        $e->save();
 
+        return redirect('admin/categories');
     }
 
     public function edit($id = NULL)
@@ -66,7 +67,17 @@ class Categories extends Controller
     }
     public function update($id, Request $request)
     {
-        $this->validateCategory($request);
+        $check = Category::
+            where('nomCategoria', $request->nomCategoria)
+            ->where('deleted', 0)
+            ->first();
+        
+        if ($check != null && $id != $check->categoria_id) {
+            $this->validateCategory($request);
+        }
+        else{
+            $this->validateCategories($request);
+        }
 
         $recurs = Category::find($id);
         $recurs->fill($request->all());
@@ -78,7 +89,7 @@ class Categories extends Controller
         $this->validate($request, [
             'nomCategoria' => 'unique:categories,nomCategoria|required|max:70',
             'descCategoria' => 'required|max:70',
-            'codiCategoria' => 'unique:categories,codiCategoria|required|max:70',
+            'codiCategoria' => 'required|max:70',
         ]);
     }
     private function validateCategories($request)
@@ -88,13 +99,5 @@ class Categories extends Controller
             'descCategoria' => 'required|max:70',
             'codiCategoria' => 'required|max:70',
         ]);
-    }
-    public function soft($id)
-    {
-        $e = Category::where('categoria_id', $id)->first();
-        $e->deleted = 1;
-        $e->save();
-
-        return redirect('admin/categories');
     }
 }

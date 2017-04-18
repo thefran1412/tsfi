@@ -10,7 +10,7 @@ class Category extends Model
     protected $primaryKey = 'categoria_id';
 
     protected $fillable = [
-    'categoria_id', 'codiCategoria', 'descCategoria', 'nomCategoria'];
+    'categoria_id', 'codiCategoria', 'descCategoria', 'nomCategoria', 'deleted'];
 
     public function resource(){
         return $this->belongsToMany('App\Resource','categoria_recurs','idCategoria','idRecurs');

@@ -70,7 +70,7 @@
                               <th>
                                 <div class="actions">
                                   <a title="Editar" href="{{action('backend\Categories@edit', ['id' => $categoria->categoria_id])}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                                  {!!Form::open(['action' => ['backend\Categories@soft', $categoria->categoria_id], 'method' => 'post'])!!}
+                                  {!!Form::open(['action' => ['backend\Categories@destroy', $categoria->categoria_id], 'method' => 'delete'])!!}
                                   {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
                                   {!!Form::close()!!}
                                 </div>

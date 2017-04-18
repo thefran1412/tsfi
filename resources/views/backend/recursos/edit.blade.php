@@ -89,16 +89,6 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row">
-            {!! Form::label('visible', 'El recurso esta visible?', ['class'=>'control-label col-sm-3']) !!}
-            <div class="col-sm-1">
-                @if($recurso->visible)
-                    {!! Form::checkbox('visible', 'true', true, []) !!}
-                @else
-                    {!! Form::checkbox('visible', 'false', false, []) !!}
-                @endif
-            </div>
-        </div>
         <div id="error_preus"></div>
         <div class="form-group row">
             {!! Form::label('gratuit', 'Gratuit:', ['class'=>'control-label col-sm-1']) !!}
@@ -278,30 +268,34 @@
             </div>
         </div>
         <br>
-        <div class="paper">
-            {!!Form::label('adreca', 'Adreça: ')!!}
-            {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
-            {!!Form::hidden('lat', null, ['class' => 'form-control', 'id' => 'lat'])!!}
-            {!!Form::hidden('lng', null, ['class' => 'form-control', 'id' => 'lng'])!!}
 
-            <div class="map">
-                <div id="map"></div>
+        <div class="form-group row">
+            <div class="row">
+                <label class="control-label">
+                    Guardar recurs com visible?
+                    <input type="radio" value="1" name="visible" @if($recurso->visible === 1) checked @endif></label>
             </div>
-
-            <div id="infowindow-content">
-                <span id="place-name" class="title"></span>
-                {{-- <br>Place ID <span id="place-id"></span><br> --}}
-                {{-- <span id="place-address"></span> --}}
-            </div><br>
-            <div id="error_submit"></div>
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    {!!Form::submit('Create', ['class' => 'btn btn-primary'])!!}
-                </div>
+            <div class="row">
+                <label class="control-label">
+                    Guardar el recurso como pendent?
+                    <input type="radio" value="0" name="visible" @if($recurso->visible === 2) checked @endif></label>
             </div>
-            {!!Form::close()!!}
+            <div class="row">
+                <label class="control-label">
+                    Borrar el recurs?
+                    <input type="radio" value="2" name="visible" @if($recurso->visible === 0) checked @endif></label>
+            </div>
         </div>
+        <br>
+        <div id="error_submit"></div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                {!!Form::submit('Create', ['class' => 'btn btn-primary'])!!}
+            </div>
+        </div>
+        {!!Form::close()!!}
     </div>
+
 
 @endsection
 

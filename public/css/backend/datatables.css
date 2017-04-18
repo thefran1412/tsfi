@@ -213,7 +213,8 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
 
 
 .section{
-	background-color: white;
+	/*background-color: white;*/
+    background-color: rgba(255, 255, 255, 0.3);
     border-radius: 4px;
     /*box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);*/
     margin: 20px 10px;
@@ -221,7 +222,7 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
 }
 
 .sectionHeader{
-	background-color: #6F8294;
+	/*background-color: #6F8294;*/
 	width: 100%;
 	padding: 10px 20px;
     cursor: pointer;
@@ -239,6 +240,7 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
 }
 
 .sectionBody{
+    background-color: rgba(255, 255, 255, 0.6);
 	padding: 15px;
 	padding-bottom: 10px;
 

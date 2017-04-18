@@ -33,6 +33,7 @@ div{
 }
 body{
 	background: linear-gradient(to left, #009688, #4CAF50);
+	background: linear-gradient(to right, #cfad6c, #af5b4c);
 }
 
 /* HEADER */
@@ -77,12 +78,12 @@ body{
 	height: 50px;
 	position: absolute;
 	top: 0;
-	right: 50px;
+	right: 65px;
 	width: 50px;
 	padding: 10px;
 	text-align: center;
 	line-height: 30px;
-	font-size: 20px;
+	font-size: 15px;
 }
 
 .logout{
@@ -90,12 +91,12 @@ body{
 	height: 50px;
 	position: absolute;
 	top: 0;
-	right: 0;
+	right: 15px;
 	width: 50px;
 	padding: 10px;
 	text-align: center;
 	line-height: 30px;
-	font-size: 20px;
+	font-size: 15px;
 
 }
 .dropdown{

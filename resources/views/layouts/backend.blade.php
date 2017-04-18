@@ -49,7 +49,7 @@
     <div class="menu">
         {{-- ICON --}}
         {{-- <div class="menuIcon">T.S.F.I</div> --}}
-        <ul class="nav navbar-nav">
+        <ul>
             <li><a href="{{  action('backend\Backend@index') }}"><i class="fa fa-home"></i>Inici</a></li>
             <li><a href="{{  action('backend\Recursos@index') }}"><i class="fa fa-file-text"></i>Recursos</a></li>
             {{-- <li><a href="{{  action('backend\Recursos@add') }}">---Add</a></li> --}}
@@ -69,6 +69,7 @@
         <div class="headerRoute">
             <h2><a href="{{ action('backend\Backend@index') }}"><i class="fa fa-home"></i></a>@yield('titol')</h2>
         </div>
+        <div class="subActions"></div>
     </div>
 
     <div class="content">
@@ -97,6 +98,16 @@
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),
     ]); ?>
+</script>
+<script type="text/javascript">
+    $( window ).scroll(function() {
+        if ($(window).scrollTop() > 0) {
+            $('.subHeader').addClass('bg');
+        }
+        else{
+            $('.subHeader').removeClass('bg');
+        }
+    });
 </script>
 @yield('script')
 </html>

@@ -31,6 +31,9 @@ html, body {
 div{
 	/*border: 1px solid black;*/
 }
+body{
+	background: linear-gradient(to left, #009688, #4CAF50);
+}
 
 /* HEADER */
 .header{
@@ -110,11 +113,11 @@ div{
 /* MENU */
 .menu{
 	position: fixed;
-	left: 0;
-	top: 50px;
-	width: 250px;
+	left: 3px;
+	top: 100px;
+	width: 150px;
 	height: 100vh;
-	background-color: #313942;
+	/*background-color: #313942;*/
 	display: inline-block;
 	z-index: 9;
 }
@@ -127,14 +130,29 @@ div{
 	font-size: 30px;
 }
 .menu a{
-	color: #9299A2;
+	color: white;
 	text-decoration: none; 
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	border-radius: 3px;
+	transition: background .5s ease
+}
+.menu a:hover{
+	background-color: rgba(65, 99, 104, 0.7);
+}
+.menu ul {
+	list-style-type: none;
 }
 .menu ul li{
+	height: 40px;
 	width: 100%;
+	line-height: 40px;
+	margin: 10px;
 }
 .menu i{
 	margin-right: 15px;
+	margin-left: 15px;
 }
 .noti img{
 	width: 25px;
@@ -147,16 +165,21 @@ div{
 .subHeader{
 	position: fixed;
 	height: 50px;
-	width: calc(100% - 250px);
+	width: 100%;
 	right: 0;
 	top: 50px;
-	background: linear-gradient(to left, #009688, #4CAF50);
 	z-index: 9;
+	transition: all 1s;
+}
+
+.bg{
+	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(124, 124, 124, 0));
 }
 
 .headerRoute{
 	padding: 10px;
-	padding-left: 20px;
+	padding-left: 190px;
+	width: 450px;
 }
 .headerRoute h2 {
 	display: inline-block;
@@ -170,9 +193,9 @@ div{
 /* CONTENT */
 .content{
 	float: right;
-	width: calc(100% - 250px);
-	background-color: #EFF3F6;
-	margin-top: 100px;
+	width: calc(100% - 150px);
+	/*background-color: #EFF3F6;*/
+	margin-top: 70px;
 	padding: 10px;
 	min-height: calc(100% - 40px);
 }

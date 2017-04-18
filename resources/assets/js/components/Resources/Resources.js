@@ -23,10 +23,11 @@ export default{
 		metaInfo() {
 			return {
 				meta: [
-	              { property: 'og:title', content: this.titleMeta },
-	              { property: 'og:description', content: this.descriptionMeta },
-	              { property: 'og:image', content: this.imgMeta },
-	              { property: 'og:url', content: this.urlMeta },
+	              { name: 'twitter:title', content: this.titleMeta },
+	              { name: 'twitter:description', content: this.descriptionMeta },
+	              { name: 'twitter:creator', content:'@TSFI'},
+	              { name: 'twitter:image', content: this.imgMeta },
+	              { name: 'twitter:url', content: this.urlMeta },
 	              { name: 'twitter:card', content: 'summary_large_image' }
 	            ]
 	        }

@@ -82,7 +82,7 @@
 				<!-- etiquetes o tags -->
 				<div v-if="resource[0].tag[0]" class="resource-extras-tag">
 					<span>Tags:</span>
-					<a v-bind:href="'#/search?tag='+ r.tags_id" v-for="r in resource[0].tag" ><p class="tag-rounded-resource">{{r.nomTags}}</p></a>
+					<a v-bind:href="'#/search?tag='+ r.tags_id"  v-for="r in resource[0].tag" ><p class="tag-rounded-resource" v-if="r.deleted === 0 || !r.deleted" >{{r.nomTags}}</p></a>
 				</div>
 				<!-- Links relacionats -->
 				<div v-if="resource[0].link[0]" class="resource-extras-tag links-extra-tags">

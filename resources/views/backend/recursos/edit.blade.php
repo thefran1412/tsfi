@@ -73,12 +73,20 @@
         </div>
         <div class="form-group row">
             {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-3">
-                {!! Form::date('dataInici', Carbon\Carbon::parse($recurso->dataInici)->format('Y-m-d'), ['class'=>'form-control', 'readonly']) !!}
-            </div>
+            <!-- <div class="col-sm-3">
+                {!! Form::date('dataInici', Carbon\Carbon::parse($recurso->dataInici)->format('Y-m-d HH:mm'), ['class'=>'form-control', 'readonly']) !!}
+            </div> -->
             {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-3">
-                {!! Form::date('dataFinal', Carbon\Carbon::parse($recurso->dataFinal)->format('Y-m-d') , ['class'=>'form-control', 'readonly']) !!}
+                {!! Form::date('dataFinal', Carbon\Carbon::parse($recurso->dataFinal)->format('Y-m-d H:i:s') , ['class'=>'form-control', 'readonly']) !!}
+            </div>
+            <div class="form-group">
+                <div class='input-group date' >
+                    {!! Form::date('dataInici', Carbon\Carbon::parse($recurso->dataInici)->format('Y-m-d H:i:s'), ['class'=>'form-control']) !!}
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
             </div>
         </div>
         <div class="form-group row">
@@ -315,4 +323,9 @@
     {{--<script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>--}}
     {{--end Google maps--}}
     <script src="{{ URL::asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
 @endsection

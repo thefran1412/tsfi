@@ -32,7 +32,8 @@ class Recursos extends Controller
         if(isset($_GET["name"])){
             $searchName = $_GET["name"];
 
-            $tags = \App\Tag::where("nomTags","LIKE", "%$searchName%")->get();
+            $tags = \App\Tag::where("nomTags","LIKE", "%$searchName%")
+            ->where('deleted','=', null)->orWhere('deleted','=', 0)->get();
 
             $totalCount = Resource::where('visible', '=', 1)->with('entity')->
             where("titolRecurs","LIKE", "%$searchName%")->count();
@@ -74,7 +75,7 @@ class Recursos extends Controller
 
 
     public function getResource(Request $request, $id) {
-        $resource = Resource::with('category',
+        $resource = Resource::where('recursos.recurs_id','=', $id)->with('category',
                                     'age',
                                     'entity',
                                     'imageResource',
@@ -84,14 +85,8 @@ class Recursos extends Controller
                                     'tag',
                                     'targets',
                                     'videoResource',
-                                    'videoType')
-            ->where('recursos.recurs_id','=', $id)
-            ->get();
+                                    'videoType')->get();
 
-        // $dateIni = Carbon::now();;
-        // $dateEnd = $dateIni;
-        // $datePub = $dateIni;
-        //var_dump($resource)
         if($resource[0]->dataInici){
             $dateIni = $resource[0]->dataInici->format('d/m/Y');
         }

@@ -29,7 +29,7 @@
         <div class="headerActions">
             {{-- FRONTEND --}}
             <div class="globe">
-                <a title="Veure Pàgina" href="{{url('/')}}" class="home"><i class="fa fa-globe"></i></a>
+                <a title="Veure Pàgina" target="_blank" href="{{url('/')}}" class="home"><i class="fa fa-globe"></i></a>
             </div>
             {{-- LOGOUT --}}
             <div class="logout">

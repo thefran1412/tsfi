@@ -26,7 +26,7 @@
     <div class="wrapper" id="listrecurso">
         <div class="section">
             <div class="sectionHeader">
-                <h2>Aprovados</h2>
+                <h2>Aprovats</h2>
                 <i class="fa fa-angle-down"></i>
             </div>
             <div class="sectionBody">
@@ -59,10 +59,10 @@
 
         <div class="section">
             <div class="sectionHeader">
-                <h2>Pendientes</h2>
-                <i class="fa fa-angle-down"></i>    
+                <h2>Pendents</h2>
+                <i class="fa fa-angle-down rotate"></i>    
             </div>
-            <div class="sectionBody">
+            <div class="sectionBody" hidden>
                 <table id="pendientes" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
                     <thead >
                         <tr>
@@ -98,10 +98,10 @@
 
         <div class="section">
             <div class="sectionHeader">
-                <h2>Borrados</h2>
-                <i class="fa fa-angle-down"></i>
+                <h2>Eliminats</h2>
+                <i class="fa fa-angle-down rotate"></i>
             </div>
-            <div class="sectionBody">
+            <div class="sectionBody" hidden>
                 <table id="borrados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
                     <thead >
                     <tr>

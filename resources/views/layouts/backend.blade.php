@@ -33,7 +33,7 @@
             </div>
             {{-- LOGOUT --}}
             <div class="logout">
-                <a title="Més opcions" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></a>
+                <a title="Tancar Sessió" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></a>
             </div>
             
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

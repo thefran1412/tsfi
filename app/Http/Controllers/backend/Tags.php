@@ -61,12 +61,6 @@ class Tags extends Controller
         $this->validate($request, [
             'nomTags' => 'unique:tags,nomTags|required|max:70',
         ]);
-        
-        // var_dump($request->nomTags);
-        // $c = Tag::where('nomTags', $request->nomTags)->first();
-
-        // if ($c != null && $) {
-        // }
     }
     public function soft($id)
     {

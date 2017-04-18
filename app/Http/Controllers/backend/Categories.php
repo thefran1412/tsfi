@@ -26,13 +26,26 @@ class Categories extends Controller
 
     public function store(Request $request)
     {
-        $this->validateCategory($request);
+        $check = Category::
+            where('nomCategoria', $request->nomCategoria)
+            ->where('codiCategoria', $request->codiCategoria)
+            ->where('deleted', '!=', 1)
+            ->count();
 
-        \App\Category::Create([
+        if ($check >= 1) {
+            $this->validateCategory($request);
+        }
+        else{
+            $this->validateCategories($request);
+        }
+        
+        Category::Create([
             'nomCategoria' => $request['nomCategoria'],
             'codiCategoria' => $request['codiCategoria'],
             'descCategoria' => $request['descCategoria']
         ]);
+        
+
         return redirect('admin/categories');
     }
 
@@ -66,6 +79,14 @@ class Categories extends Controller
             'nomCategoria' => 'unique:categories,nomCategoria|required|max:70',
             'descCategoria' => 'required|max:70',
             'codiCategoria' => 'unique:categories,codiCategoria|required|max:70',
+        ]);
+    }
+    private function validateCategories($request)
+    {
+        $this->validate($request, [
+            'nomCategoria' => 'required|max:70',
+            'descCategoria' => 'required|max:70',
+            'codiCategoria' => 'required|max:70',
         ]);
     }
     public function soft($id)

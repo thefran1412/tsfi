@@ -35,15 +35,16 @@ Route::get('/admin/recursos/autocomplete', 'publiccontrollers\publicURLs@autocom
 
 /* RECURSOS */
 //Route::post('admin/recursos/{id}', array('uses' => 'backend\Recursos@recover'));
+//Add resource
+Route::get('/admin/recursos/add', 'backend\Recursos@add');
+Route::post('/admin/recursos/add', ['as' => 'resource_store','uses' => 'backend\Recursos@store']);
+
 Route::resource('admin/recursos', 'backend\Recursos');
 Route::post('admin/recursos/delete/{id}', 'backend\Recursos@destroy');
 Route::post('admin/recursos/recover/{id}', 'backend\Recursos@recover');
 Route::post('admin/recursos/aprove/{id}', 'backend\Recursos@aprove');
 
 Route::get('/admin/recursos', 'backend\Recursos@index');
-//Add resource
-Route::get('/admin/recursos/add', 'backend\Recursos@add');
-Route::post('/admin/recursos/add', ['as' => 'resource_store','uses' => 'backend\Recursos@store']);
 //Update resource
 Route::get('/admin/recursos/{id}/edit', 'backend\Recursos@edit');
 Route::post('/admin/recursos/{id}/edit', ['as' => 'resource_update','uses' => 'backend\Recursos@update']);

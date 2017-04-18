@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,7 +20,10 @@ class Usuaris extends Controller
     }
 	public function index()
 	{
-		return view('backend.usuaris.index');
+	    $usuari = User::all()->first();
+		return view('backend.usuaris.index', [
+		    'usuari' => $usuari
+        ]);
 	}
 	public function add()
 	{

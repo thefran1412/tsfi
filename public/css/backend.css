@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Simplifica;
+    src: url(/fonts/SIMPLIFICA.ttf);
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -26,24 +31,38 @@ html, body {
 div{
 	/*border: 1px solid black;*/
 }
+
+/* HEADER */
 .header{
 	position: fixed;
 	width: 100%;
-	background-color: white;
-	height: 40px;
+	right: 0;
+	background-color: #333333;
+	height: 50px;
 	box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
 	z-index: 10;
 }
-.headerIcon, .headerRoute, .headerActions{
+
+.headerTitle{
+	width: 100px;
+	height: 30px;
+
+	margin: 0 auto;
+	margin-top: 10px;
+	
+	font-size: 2em;
+	font-weight: bold;
+	letter-spacing: 6px;
+	color: #4FC08D;
+	cursor: pointer;
+	font-family: Simplifica;
+	line-height: normal;
+	text-align: center;
+}
+
+.headerRoute, .headerActions{
 	float: left;
 	height: 100%;	
-}
-.headerIcon{
-	width: 10%;
-	background-color: #009CDF;
-	text-align: center;
-	line-height: 40px;
-	font-size: 30px;
 }
 .headerRoute{
 	/*width: 70%;*/
@@ -53,50 +72,36 @@ div{
 	display: inline-block;
 	font-size: 20px;
 }
-.headerActions{
-	padding: 11px;
-	padding-right: 20px;
-	width: 20%;
-	float: right;
-	text-align: right;
-}
+
 .headerActions a{
-	text-decoration: none;
-	margin-left: 25px;
+	color: white;
 }
-.menu{
-	position: fixed;
-	left: 0;
-	top: 40px;
-	width: 10%;
-	height: calc(100vh - 40px);
-	background-color: #313942;
-	display: inline-block;
-	z-index: 10;
-}
-.menu a{
-	color: #9299A2;
-	text-decoration: none; 
-}
-.menu ul li{
-	width: 100%;
-}
-.menu i{
-	margin-right: 15px;
-}
-.content{
-	float: right;
-	width: 90%;
-	background-color: #EFF3F6;
-	margin-top: 40px;
+
+.globe{
+	/*background-color: orange;*/
+	height: 50px;
+	position: absolute;
+	top: 0;
+	right: 50px;
+	width: 50px;
 	padding: 10px;
-	min-height: calc(100% - 40px);
+	text-align: center;
+	line-height: 30px;
+	font-size: 20px;
 }
-.noti img{
-	width: 25px;
-}
-.home img {
-	width: 25px;	
+
+.logout{
+	background-color: orange;
+	height: 50px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50px;
+	padding: 10px;
+	text-align: center;
+	line-height: 30px;
+	font-size: 20px;
+
 }
 .dropdown{
 	width: 30px;
@@ -108,4 +113,60 @@ div{
 	border-radius: 50%;
 	margin-right: 10px;
 	overflow: hidden;
+}
+
+/* MENU */
+.menu{
+	position: fixed;
+	left: 0;
+	top: 50px;
+	width: 250px;
+	height: 100vh;
+	background-color: #313942;
+	display: inline-block;
+	z-index: 10;
+}
+.menuIcon{
+	width: 100%;
+	height: 150px;
+	background-color: #009CDF;
+	text-align: center;
+	line-height: 150px;
+	font-size: 30px;
+}
+.menu a{
+	color: #9299A2;
+	text-decoration: none; 
+}
+.menu ul li{
+	width: 100%;
+}
+.menu i{
+	margin-right: 15px;
+}
+.noti img{
+	width: 25px;
+}
+.home img {
+	width: 25px;	
+}
+/* SUB HEADER */
+
+.subHeader{
+	position: fixed;
+	height: 50px;
+	width: calc(100% - 250px);
+	right: 0;
+	top: 50px;
+	background-color: orange;
+}
+
+/* CONTENT */
+.content{
+	float: right;
+	width: calc(100% - 250px);
+	background-color: #EFF3F6;
+	margin-top: 100px;
+	padding: 10px;
+	min-height: calc(100% - 40px);
 }

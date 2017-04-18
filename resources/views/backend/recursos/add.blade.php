@@ -81,12 +81,6 @@
                 {!! Form::datetime('dataFinal', null, ['class'=>'form-control', 'placeholder'=> 'YYYY-MM-DD']) !!}
             </div>
         </div>
-        <div class="form-group row">
-            {!! Form::label('visible', 'El recurso esta visible?', ['class'=>'control-label col-sm-3']) !!}
-            <div class="col-sm-1">
-                {!! Form::checkbox('visible', 'false', false, []) !!}
-            </div>
-        </div>
         <div id="error_preus"></div>
         <div class="form-group row">
             {!! Form::label('gratuit', 'Gratuit:', ['class'=>'control-label col-sm-1']) !!}
@@ -210,14 +204,25 @@
                 {!! Form::select('target', $targets, null, ['class' => 'form-control']) !!}
             </div>
         </div>
-        <br>
-            <div id="error_submit"></div>
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    {!!Form::submit('Create', ['class' => 'btn btn-primary'])!!}
-                </div>
+        <div class="form-group row">
+            {!! Form::label('visible', 'Guardar como visible?', ['class'=>'control-label col-sm-3']) !!}
+            <div class="col-sm-1">
+                {!! Form::checkbox('visible', null, false, []) !!}
             </div>
-            {!!Form::close()!!}
+        </div>
+        <div class="form-group row">
+            <label class="radio inline control-label">Guardar recurs com visible? <input type="radio" name="visible" checked></label>
+            <label class="radio inline control-label">Guardar el recurso como pendent? <input type="radio" name="visible">Option 2</label>
+            <label class="radio inline control-label">Borrar el recurs?<input type="radio" name="visible">Option 3</label>
+        </div>
+        <br>
+        <div id="error_submit"></div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                {!!Form::submit('Create', ['class' => 'btn btn-primary'])!!}
+            </div>
+        </div>
+        {!!Form::close()!!}
     </div>
 
 @endsection

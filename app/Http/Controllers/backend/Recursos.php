@@ -40,9 +40,16 @@ class Recursos extends Controller
 
     public function index()
     {
-        $r = Resource::All();
-        $v = Resource::where('visible', 0)->get();
-        return view('backend.recursos.index', ['resources' => $r, 'pendents' => $v]);
+        $recursos_pendents = Resource::where('visible', 0)->get();
+        $recursos_visibles = Resource::where('visible', 1)->get();
+        $reported_resources = Resource::where('visible', 2)->get();
+        $deleted_resources = Resource::where('visible', 3)->get();
+        return view('backend.recursos.index', [
+            'recursos_visibles' => $recursos_visibles,
+            'recursos_pendents' => $recursos_pendents,
+            'deleted_resources' => $deleted_resources,
+            'reported_resources' => $reported_resources
+        ]);
     }
     public function add()
     {
@@ -97,7 +104,7 @@ class Recursos extends Controller
             'dataPublicacio' => getCorrectDate($request['dataPublicacio']),
             'created-at' => getCorrectDate()->getTimestamp(),
             'updated_at' => getCorrectDate()->getTimestamp(),
-            'visible' => setDefaults($request,'visible', 'recursos'),
+            'visible' => upsertVisible($request),
             'fotoResum' => $this->fotoResum
         ]);
 
@@ -197,7 +204,7 @@ class Recursos extends Controller
             $recurso->preuInferior =  setDefaults($request, 'preuInferior', 'recursos');
             $recurso->preuSuperior =  setDefaults($request, 'preuSuperior', 'recursos');
             $recurso->dataPublicacio = getCorrectDate($request['dataPublicacio']);
-            $recurso->visible = setDefaults($request,'visible', 'recursos');
+            $recurso->visible = $request['visible'];
             $recurso->fotoResum = uppsertFotoresum($request);
             $recurso->save();
         }
@@ -215,24 +222,17 @@ class Recursos extends Controller
 
         return redirect()->to('admin/recursos');
     }
-    private function validateEntity($request)
+
+    public function destroy($id)
     {
-        $this->validate($request, [
-            'nom' => 'required|max:255',
+        $e = Entity::where('entitat_id', $id)->first();
+        $e->visible = 2;
+        $e->save();
 
-            'telf1' => 'required|min:9|max:9',
-            'telf2' => 'min:9|max:9',
-
-            'link' => 'url|max:255',
-            'facebook' => 'url|max:255',
-            'twitter' => 'url|max:255',
-            'instagram' => 'url|max:255',
-
-            'logo' => 'required',
-            'adreca' => 'max:255',
-        ]);
+        return redirect('admin/entitats');
 
     }
+
     private function setInfoLog(Logger $log, $message)
     {
         $log->info($message);

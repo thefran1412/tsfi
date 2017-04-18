@@ -34,6 +34,17 @@ function objectToArrayAndPleaseSelect($object){
     return $new_array;
 }
 
+function upsertVisible(Request $request)
+{
+    if (!$request['visible']){
+        return 1;
+    }else if (!$request['invisible']){
+        return 0;
+    }else if (!$request['deleted']){
+        return 2;
+    }
+    return null;
+}
 function setDefaults(Request $request, $field, $table)
 {
     $default = null;

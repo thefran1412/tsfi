@@ -30,16 +30,18 @@ Route::get('/admin/config', 'backend\Backend@config');
 Route::get('/admin/analytics', 'backend\Analytics@index');
 
 /* RECURSOS */
-//Route::resource('admin/recursos', 'backend\Recursos');
+Route::resource('admin/recursos', 'backend\Recursos');
 
 Route::get('/admin/recursos', 'backend\Recursos@index');
+//Add resource
 Route::get('/admin/recursos/add', 'backend\Recursos@add');
 Route::post('/admin/recursos/add', ['as' => 'resource_store','uses' => 'backend\Recursos@store']);
-Route::get('/admin/recursos/categories', 'backend\Recursos@autoCompleteCategory');
-Route::get('/admin/recursos/autocomplete', 'publiccontrollers\publicURLs@autocomplete');
+//Update resource
 Route::get('/admin/recursos/{id}/edit', 'backend\Recursos@edit');
 Route::post('/admin/recursos/{id}/edit', ['as' => 'resource_update','uses' => 'backend\Recursos@update']);
-Route::put('/admin/recursos/{recurso}', 'backend\Recursos@update');
+//Links data
+Route::get('/admin/recursos/categories', 'backend\Recursos@autoCompleteCategory');
+Route::get('/admin/recursos/autocomplete', 'publiccontrollers\publicURLs@autocomplete');
 
 /* CATEGORIES */
 Route::resource('/admin/categories', 'backend\Categories');

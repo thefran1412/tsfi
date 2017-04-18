@@ -76,6 +76,8 @@ class Entitats extends Controller
             'twitter' =>  setDefaults($request, 'twitter', 'entitats'),
             'instagram' =>  setDefaults($request, 'instagram', 'entitats'),
 
+            'deleted' => 0,
+
             'adreca' => $request['adreca'],
         ]);
         return redirect('admin/entitats');
@@ -84,7 +86,10 @@ class Entitats extends Controller
 
     public function destroy($id)
     {
-        \App\Entity::destroy($id);
+        $e = Entity::where('entitat_id', $id)->first();
+        $e->deleted = 1;
+        $e->save();
+
         return redirect('admin/entitats');
 
     }
@@ -187,13 +192,5 @@ class Entitats extends Controller
 
             'adreca' => 'max:255',
         ]);
-    }
-    public function soft($id)
-    {
-        $e = Entity::where('entitat_id', $id)->first();
-        $e->deleted = 1;
-        $e->save();
-
-        return redirect('admin/entitats');
     }
 }

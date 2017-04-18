@@ -54,8 +54,8 @@ Route::resource('/admin/entitats', 'backend\Entitats');
 Route::post('/admin/entitats/soft/{id}', 'backend\Entitats@soft');
 
 /* ENTIDADES */
-// Route::get('/admin/entitats', 'backend\Entitats@index');
-// Route::get('/admin/entitats/add', 'backend\Entitats@add');
+Route::get('/admin/entitats', 'backend\Entitats@index');
+Route::get('/admin/entitats/add', 'backend\Entitats@add');
 
 /* USUARIOS */
 Route::get('/admin/usuaris', 'backend\Usuaris@index');

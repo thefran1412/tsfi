@@ -7,7 +7,21 @@
     <link href="{{ URL::asset('/css/backend/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 
 @endsection
-
+@section('script')
+    <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
+    <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
+    <script src="{{ URL::asset('/js/map_back.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            console.log('script');
+            @if ($recursLoc != null)
+              initMap({{$recursLoc->latitud}}, {{$recursLoc->longitud}});
+            @else
+              initMap();
+            @endif
+        });
+</script>
+@endsection
 @section('titol')
     <i class="fa fa-angle-right"></i>
     <a href="{{ action('backend\Recursos@index') }}">Recursos</a>
@@ -75,7 +89,7 @@
             <div class="form-group">
                 {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label col-sm-2']) !!}
                 <div class='input-group date col-sm-3'>
-                    {!! Form::date('dataInici', Carbon\Carbon::parse($recurso->dataInici)->format('Y-m-d H:i'), ['class'=>'form-control']) !!}
+                    <input class="form-control" name="dataInici" type="text" value="{{ Carbon\Carbon::parse($recurso->dataInici)->format('Y-m-d H:i') }}" id="dataInici" readonly>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -84,7 +98,7 @@
             <div class="form-group">
                 {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label col-sm-2']) !!}
                 <div class='input-group date  col-sm-3'>
-                    {!! Form::date('dataFinal', Carbon\Carbon::parse($recurso->dataFinal)->format('Y-m-d H:i'), ['class'=>'form-control']) !!}
+                    <input class="form-control" name="dataFinal" type="text" value="{{ Carbon\Carbon::parse($recurso->dataFinal)->format('Y-m-d H:i') }}" id="dataFinal" readonly>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -289,10 +303,25 @@
             </div>
         </div>
         <br>
+        {!!Form::label('adreca', 'Adreça: ')!!}
+        {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
+        @if($recursLoc)
+            {!!Form::hidden('lat', $recursLoc->latitud, ['class' => 'form-control', 'id' => 'lat'])!!}
+            {!!Form::hidden('lng', $recursLoc->longitud, ['class' => 'form-control', 'id' => 'lng'])!!}
+        @else
+            {!!Form::hidden('lat', null, ['class' => 'form-control', 'id' => 'lat'])!!}
+            {!!Form::hidden('lng', null, ['class' => 'form-control', 'id' => 'lng'])!!}
+        @endif
+        <div class="map"><div id="map"></div></div>
+        <div id="infowindow-content">
+            <span id="place-name" class="title"></span>
+            <span id="place-address"></span>
+        </div>
+
         <div id="error_submit"></div>
         <div class="form-group row">
             <div class="col-sm-10">
-                {!!Form::submit('Create', ['class' => 'btn btn-primary'])!!}
+                {!!Form::submit('Actualizar', ['class' => 'btn btn-primary'])!!}
             </div>
         </div>
         {!!Form::close()!!}
@@ -309,19 +338,14 @@
     <script src="{{ URL::asset('/js/custom_editors.js') }}"></script>
     {{--End Summer Note scripts--}}
     {{--Autocomplete js--}}
-    <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
     {{--end autocompelete--}}
     {{--Multi select--}}
     <script src="{{URL::asset('js/jquery.multi-select.js')}}"></script>
     {{--end Multi select--}}
     {{--Google maps--}}
     {{--<script src="{{ URL::asset('/js/createEntity.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>--}}
+
     {{--end Google maps--}}
     <script src="{{ URL::asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
-    <script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-        </script>
+
 @endsection

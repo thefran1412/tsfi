@@ -11,6 +11,7 @@ use App\EntityResource;
 use App\Http\Controllers\Validators\ImageValidator;
 use App\ImageResource;
 use App\Link;
+use App\Location;
 use App\Podcast;
 use App\Resource;
 use App\Target;
@@ -155,6 +156,12 @@ class Recursos extends Controller
             $selectedLinks[$key] = $val.';';
         }
 
+        if ($recurso->idLocalitzacio){
+            $recursLoc = Location::where(['localitzacions_id' => $recurso->idLocalitzacio])->first();
+        }else{
+            $recursLoc =null;
+        }
+
         $targets = Target::pluck('target', 'targets_id');
 
         $selectedtarget = TargetResource::where(['idRecurs' =>$id])->first();
@@ -180,7 +187,8 @@ class Recursos extends Controller
                 'video_recurs'=>$video_recurs,
                 'image_recurs'=>$image_recurs,
                 'podcast_recurs'=>$podcast_recurs,
-                'selectedLinks'=>$selectedLinks
+                'selectedLinks'=>$selectedLinks,
+                'recursLoc'=>$recursLoc
             ]
         );
     }

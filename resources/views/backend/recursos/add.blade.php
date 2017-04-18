@@ -7,7 +7,17 @@
     <link href="{{ URL::asset('/css/backend/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 
 @endsection
-
+@section('script')
+    <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
+    <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
+    <script src="{{ URL::asset('/js/map_back.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            console.log('script');
+              initMap();
+        });
+    </script>
+@endsection
 @section('titol')
     <i class="fa fa-angle-right"></i>
     <a href="{{ action('backend\Recursos@index') }}">Recursos</a>
@@ -216,6 +226,22 @@
             <label class="radio inline control-label">Borrar el recurs?<input type="radio" name="visible">Option 3</label>
         </div>
         <br>
+        <div class="form-group row">
+            {!!Form::label('adreca', 'Adreça: ')!!}
+            {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
+            {!!Form::hidden('lat', null, ['class' => 'form-control', 'id' => 'lat'])!!}
+            {!!Form::hidden('lng', null, ['class' => 'form-control', 'id' => 'lng'])!!}
+
+            <div class="map">
+                <div id="map"></div>
+            </div>
+
+            <div id="infowindow-content">
+                <span id="place-name" class="title"></span>
+                {{-- <br>Place ID <span id="place-id"></span><br> --}}
+                {{-- <span id="place-address"></span> --}}
+            </div>
+        </div>
         <div id="error_submit"></div>
         <div class="form-group row">
             <div class="col-sm-10">
@@ -239,6 +265,7 @@
     {{--end autocompelete--}}
     {{--Multi select--}}
     <script src="{{URL::asset('js/jquery.multi-select.js')}}"></script>
+    <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
     {{--end Multi select--}}
     {{--Google maps--}}
     {{--<script src="{{ URL::asset('/js/createEntity.js') }}"></script>--}}

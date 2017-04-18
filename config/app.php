@@ -172,7 +172,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+            'Thujohn\Twitter\TwitterServiceProvider',
         //
 
         /*
@@ -233,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Twitter' => 'Thujohn\Twitter\Facades\Twitter',
 
     ],
 

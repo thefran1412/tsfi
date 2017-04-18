@@ -72,17 +72,19 @@
             </div>
         </div>
         <div class="form-group row">
-            {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label col-sm-2']) !!}
-            <!-- <div class="col-sm-3">
-                {!! Form::date('dataInici', Carbon\Carbon::parse($recurso->dataInici)->format('Y-m-d HH:mm'), ['class'=>'form-control', 'readonly']) !!}
-            </div> -->
-            {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-3">
-                {!! Form::date('dataFinal', Carbon\Carbon::parse($recurso->dataFinal)->format('Y-m-d H:i:s') , ['class'=>'form-control', 'readonly']) !!}
+            <div class="form-group">
+                {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label col-sm-2']) !!}
+                <div class='input-group date col-sm-3'>
+                    {!! Form::date('dataInici', Carbon\Carbon::parse($recurso->dataInici)->format('Y-m-d H:i'), ['class'=>'form-control']) !!}
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
             </div>
             <div class="form-group">
-                <div class='input-group date' >
-                    {!! Form::date('dataInici', Carbon\Carbon::parse($recurso->dataInici)->format('Y-m-d H:i:s'), ['class'=>'form-control']) !!}
+                {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label col-sm-2']) !!}
+                <div class='input-group date  col-sm-3'>
+                    {!! Form::date('dataFinal', Carbon\Carbon::parse($recurso->dataFinal)->format('Y-m-d H:i'), ['class'=>'form-control']) !!}
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>

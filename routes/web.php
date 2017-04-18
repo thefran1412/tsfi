@@ -29,8 +29,16 @@ Route::get('/admin/login', 'Auth\LoginController@index');
 Route::get('/admin/config', 'backend\Backend@config');
 Route::get('/admin/analytics', 'backend\Analytics@index');
 
+//Links data
+Route::get('/admin/recursos/categories', 'backend\Recursos@autoCompleteCategory');
+Route::get('/admin/recursos/autocomplete', 'publiccontrollers\publicURLs@autocomplete');
+
 /* RECURSOS */
+//Route::post('admin/recursos/{id}', array('uses' => 'backend\Recursos@recover'));
 Route::resource('admin/recursos', 'backend\Recursos');
+Route::post('admin/recursos/delete/{id}', 'backend\Recursos@destroy');
+Route::post('admin/recursos/recover/{id}', 'backend\Recursos@recover');
+Route::post('admin/recursos/aprove/{id}', 'backend\Recursos@aprove');
 
 Route::get('/admin/recursos', 'backend\Recursos@index');
 //Add resource
@@ -39,9 +47,6 @@ Route::post('/admin/recursos/add', ['as' => 'resource_store','uses' => 'backend\
 //Update resource
 Route::get('/admin/recursos/{id}/edit', 'backend\Recursos@edit');
 Route::post('/admin/recursos/{id}/edit', ['as' => 'resource_update','uses' => 'backend\Recursos@update']);
-//Links data
-Route::get('/admin/recursos/categories', 'backend\Recursos@autoCompleteCategory');
-Route::get('/admin/recursos/autocomplete', 'publiccontrollers\publicURLs@autocomplete');
 
 /* CATEGORIES */
 Route::resource('/admin/categories', 'backend\Categories');

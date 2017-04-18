@@ -42,8 +42,8 @@ class Recursos extends Controller
     {
         $recursos_pendents = Resource::where('visible', 0)->get();
         $recursos_visibles = Resource::where('visible', 1)->get();
-        $reported_resources = Resource::where('visible', 2)->get();
-        $deleted_resources = Resource::where('visible', 3)->get();
+        $deleted_resources = Resource::where('visible', 2)->get();
+        $reported_resources = Resource::where('visible', 3)->get();
         return view('backend.recursos.index', [
             'recursos_visibles' => $recursos_visibles,
             'recursos_pendents' => $recursos_pendents,
@@ -225,12 +225,27 @@ class Recursos extends Controller
 
     public function destroy($id)
     {
-        $e = Entity::where('entitat_id', $id)->first();
+        $e = Resource::where('recurs_id', $id)->first();
         $e->visible = 2;
         $e->save();
 
-        return redirect('admin/entitats');
+        return redirect('admin/recursos');
+    }
+    public function recover($id)
+    {
+        $e = Resource::where('recurs_id', $id)->first();
+        $e->visible = 0;
+        $e->save();
 
+        return redirect('admin/recursos');
+    }
+    public function aprove($id)
+    {
+        $e = Resource::where('recurs_id', $id)->first();
+        $e->visible = 1;
+        $e->save();
+
+        return redirect('admin/recursos');
     }
 
     private function setInfoLog(Logger $log, $message)

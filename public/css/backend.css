@@ -60,17 +60,9 @@ div{
 	text-align: center;
 }
 
-.headerRoute, .headerActions{
+.headerActions{
 	float: left;
 	height: 100%;	
-}
-.headerRoute{
-	/*width: 70%;*/
-	padding: 10px;
-}
-.headerRoute h2 {
-	display: inline-block;
-	font-size: 20px;
 }
 
 .headerActions a{
@@ -91,7 +83,7 @@ div{
 }
 
 .logout{
-	background-color: orange;
+	/*background-color: orange;*/
 	height: 50px;
 	position: absolute;
 	top: 0;
@@ -124,7 +116,7 @@ div{
 	height: 100vh;
 	background-color: #313942;
 	display: inline-block;
-	z-index: 10;
+	z-index: 9;
 }
 .menuIcon{
 	width: 100%;
@@ -150,15 +142,29 @@ div{
 .home img {
 	width: 25px;	
 }
-/* SUB HEADER */
 
+/* SUB HEADER */
 .subHeader{
 	position: fixed;
 	height: 50px;
 	width: calc(100% - 250px);
 	right: 0;
 	top: 50px;
-	background-color: orange;
+	background: linear-gradient(to left, #009688, #4CAF50);
+	z-index: 9;
+}
+
+.headerRoute{
+	padding: 10px;
+	padding-left: 20px;
+}
+.headerRoute h2 {
+	display: inline-block;
+	font-size: 20px;
+	line-height: 30px;
+}
+.headerRoute a {
+	color: white;
 }
 
 /* CONTENT */

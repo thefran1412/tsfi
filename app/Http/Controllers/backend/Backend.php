@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -30,6 +31,25 @@ class Backend extends Controller
     }
     public function config()
     {
-        return view('backend.config');
+        $users = User::all();
+        return view('backend.config', ['users'=> $users]);
     }
+//return view('backend.recursos.edit',[
+    //'edats'=>$edats,
+    //'categorias'=>$categorias,
+    //'entitats'=>$entitats,
+    //'targets'=>$targets,
+    //'selectedtarget'=>$selectedtarget,
+    //'selectedCategoria'=>$selectedCategoria,
+    //'selectedEntitat'=>$selectedEntitat,
+    //'arrayedats'=>$arrayedats,
+    //'id'=>$id,
+    //'recurso'=>$recurso,
+    //'selectedTags'=>$selectedTags,
+    //'video_recurs'=>$video_recurs,
+    //'image_recurs'=>$image_recurs,
+    //'podcast_recurs'=>$podcast_recurs,
+    //'selectedLinks'=>$selectedLinks
+    //]
+//);
 }

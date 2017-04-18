@@ -6,49 +6,5 @@
 @endsection
 
 @section('content')
-                    
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
-                    <p>config</p>
+     <h2>Usuaris</h2>
 @endsection

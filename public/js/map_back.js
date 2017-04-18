@@ -1,5 +1,6 @@
 var lat;
 var lng;
+console.log('hola');
 $("#create").submit(function(e){
   if ($("#pac-input").is(":focus")) {
     e.preventDefault();
@@ -34,6 +35,7 @@ function initMap(ilat = 41.627619, ilng = 2, dir = null) {
     zoom: zoom,
     scrollwheel: false
   });
+  console.log(map);
 
   infowindow = new google.maps.InfoWindow();
   infowindowContent = document.getElementById('infowindow-content');

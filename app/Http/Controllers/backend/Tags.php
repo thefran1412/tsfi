@@ -26,17 +26,31 @@ class Tags extends Controller
 
     public function store(Request $request)
     {
-        $this->validateTag($request);
+        $check = Tag::
+            where('nomTags', $request->nomTags)
+            ->where('deleted', 0)
+            ->count();
 
-        \App\Tag::Create([
-            'nomTags' => $request['nomTags']
+        if ($check >= 1) {
+            $this->validateTag($request);
+        }
+        else{
+            $this->validateTags($request);
+        }
+
+        Tag::Create([
+            'nomTags' => $request['nomTags'],
+            'deleted' => 0,
         ]);
         return redirect('admin/tags');
     }
 
     public function destroy($id)
     {
-        \App\Tag::destroy($id);
+        $e = Tag::where('tags_id', $id)->first();
+        $e->deleted = 1;
+        $e->save();
+
         return redirect('admin/tags');
     }
 
@@ -50,7 +64,18 @@ class Tags extends Controller
     }
     public function update($id, Request $request)
     {
-        $this->validateTag($request);
+        $check = Tag::
+            where('nomTags', $request->nomTags)
+            ->where('deleted', 0)
+            ->first();
+        
+        if ($check != null && $id != $check->tags_id) {
+            $this->validateTag($request);
+        }
+        else{
+            $this->validateTags($request);
+        }
+
         $recurs = Tag::find($id);
         $recurs->fill($request->all());
         $recurs->save();
@@ -60,6 +85,12 @@ class Tags extends Controller
     {
         $this->validate($request, [
             'nomTags' => 'unique:tags,nomTags|required|max:70',
+        ]);
+    }
+    private function validateTags($request)
+    {
+        $this->validate($request, [
+            'nomTags' => 'required|max:70',
         ]);
     }
     public function soft($id)

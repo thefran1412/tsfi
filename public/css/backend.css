@@ -165,7 +165,7 @@ body{
 /* SUB HEADER */
 .subHeader{
 	position: fixed;
-	height: 50px;
+	height: 60px;
 	width: 100%;
 	right: 0;
 	top: 50px;
@@ -173,14 +173,35 @@ body{
 	transition: all 1s;
 }
 
+.subActions{
+	display: inline-block;
+	float: right;
+	cursor: pointer;
+	padding: 5px 20px;
+	margin-right: 20px;
+	margin-top: 18px;
+	background-color: rgba(255, 255, 255, 0.3);
+	border-radius: 4px;
+	color: white;
+}
+
+.down{
+	background-color: rgba(255, 255, 255, 0.8);
+	color: black;
+}
+
+.pad{
+	margin-top: 6px !important;
+}
+
 .bg{
-	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(124, 124, 124, 0));
+	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(124, 124, 124, 0));
 }
 
 .headerRoute{
-	padding: 10px;
-	padding-left: 160px;
-	width: 450px;
+	margin-top: 18px;
+	padding-left: 170px;
+	display: inline-block;
 }
 .headerRoute h2 {
 	display: inline-block;
@@ -196,7 +217,7 @@ body{
 	float: right;
 	width: calc(100% - 150px);
 	/*background-color: #EFF3F6;*/
-	margin-top: 70px;
+	margin-top: 90px;
 	padding: 10px;
 	min-height: calc(100% - 40px);
 }

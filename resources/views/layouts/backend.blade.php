@@ -69,7 +69,10 @@
         <div class="headerRoute">
             <h2><a href="{{ action('backend\Backend@index') }}"><i class="fa fa-home"></i></a>@yield('titol')</h2>
         </div>
-        <div class="subActions"></div>
+        <div class="subActions">
+            <i class="fa fa-plus"></i>
+            <span>Afegir</span>
+        </div>
     </div>
 
     <div class="content">
@@ -103,9 +106,13 @@
     $( window ).scroll(function() {
         if ($(window).scrollTop() > 0) {
             $('.subHeader').addClass('bg');
+            $('.headerRoute, .subActions').addClass('pad');
+            $('.subActions').addClass('down');
         }
         else{
             $('.subHeader').removeClass('bg');
+            $('.headerRoute, .subActions').removeClass('pad');
+            $('.subActions').removeClass('down');
         }
     });
 </script>

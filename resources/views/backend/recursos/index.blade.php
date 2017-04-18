@@ -36,6 +36,7 @@
                             <th>Titol</th>
                             <th>Subtitol</th>
                             <th>Autor</th>
+                            <th>Aprovar</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -46,7 +47,12 @@
                                 <th>{{$pendent->subTitol}}</th>
                                 <th>{{$pendent->creatPer}}</th>
                                 <th>
-                                    {!!Form::open(['action' => ['backend\Recursos@destroy', $pendent->entitat_id], 'method' => 'delete'])!!}
+                                    {!!Form::open(['url'=>'/admin/recursos/aprove/'.$pendent->recurs_id, 'method' => 'post'])!!}
+                                    {!!Form::submit('Aprovar', ['class' => 'btn btn-primary'])!!}
+                                    {!!Form::close()!!}
+                                </th>
+                                <th>
+                                    {!!Form::open(['url'=>'/admin/recursos/delete/'.$pendent->recurs_id, 'method' => 'post'])!!}
                                     {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
                                     {!!Form::close()!!}
                                 </th>
@@ -60,7 +66,7 @@
         <div class="section">
             <div class="sectionHeader">
                 <h2>Reportados</h2>
-                <i class="fa fa-angle-down"></i>    
+                <i class="fa fa-angle-down"></i>
             </div>
             <div class="sectionBody">
                 <table id="reportados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
@@ -79,7 +85,7 @@
                                 <th>{{$reportado->subTitol}}</th>
                                 <th>{{$reportado->creatPer}}</th>
                                 <th>
-                                    {!!Form::open(['action' => ['backend\Recursos@destroy', $reportado->entitat_id], 'method' => 'delete'])!!}
+                                    {!!Form::open(['url'=>'/admin/recursos/delete/'.$reportado->recurs_id, 'method' => 'post'])!!}
                                     {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
                                     {!!Form::close()!!}
                                 </th>
@@ -93,7 +99,7 @@
         <div class="section">
             <div class="sectionHeader">
                 <h2>Aprovados</h2>
-                <i class="fa fa-angle-down"></i>    
+                <i class="fa fa-angle-down"></i>
             </div>
             <div class="sectionBody">
                 <table id="aprovados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
@@ -112,7 +118,7 @@
                                 <th>{{$aprovado->subTitol}}</th>
                                 <th>{{$aprovado->creatPer}}</th>
                                 <th>
-                                    {!!Form::open(['action' => ['backend\Recursos@destroy', $aprovado->entitat_id], 'method' => 'delete'])!!}
+                                    {!!Form::open(['url'=>'/admin/recursos/delete/'.$aprovado->recurs_id, 'method' => 'post'])!!}
                                     {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
                                     {!!Form::close()!!}
                                 </th>
@@ -134,7 +140,7 @@
                         <th>Titol</th>
                         <th>Subtitol</th>
                         <th>Autor</th>
-                        <th>Delete</th>
+                        <th>Recover</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -144,8 +150,8 @@
                             <th>{{$deleted->subTitol}}</th>
                             <th>{{$deleted->creatPer}}</th>
                             <th>
-                                {!!Form::open(['action' => ['backend\Recursos@destroy', $deleted->entitat_id], 'method' => 'delete'])!!}
-                                {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
+                                {!!Form::open(['url'=>'/admin/recursos/recover/'.$deleted->recurs_id, 'method' => 'post'])!!}
+                                {!!Form::submit('Recuperar', ['class' => 'btn btn-primary'])!!}
                                 {!!Form::close()!!}
                             </th>
                         </tr>

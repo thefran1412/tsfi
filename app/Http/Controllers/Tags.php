@@ -10,7 +10,8 @@ class Tags extends Controller
 
     	$searchName = $_GET["q"];
 
-    	 $tags = Tag::where("nomTags","LIKE", "%$searchName%")->get();
+    	 $tags = Tag::where("nomTags","LIKE", "%$searchName%")->
+    	 where('deleted','=', null)->orWhere('deleted','=', 0)->get();
 
          return response()->json([
                 'tags' => $tags

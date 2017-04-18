@@ -20,6 +20,7 @@ import myDatepicker from 'vue-datepicker';
 				required:false,
 				messageBody:'',
 				messageHeader:'',
+				prueba:'mensaje',
 				dateEnd:{
 					time:''
 				},
@@ -92,6 +93,9 @@ import myDatepicker from 'vue-datepicker';
 			      }
 			}
 		},
+		render (createElement) {
+    return createElement('h1', {}, 'Hello World')
+  },
 		created(){
             this.fetchEntities();
             this.fetchTargets();

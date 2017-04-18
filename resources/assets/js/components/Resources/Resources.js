@@ -44,9 +44,7 @@ export default{
 					this.dateEnd = response.data.dateEnd;
 					this.datePub = response.data.datePub;
 
-					console.log(this.resource);
-
-	
+					var URLactual = window.location;
 
 					this.imgMeta = URLactual.origin+'/projects/ts/img/image/'+this.resource[0].fotoResum;
 					this.urlMeta = URLactual.href;

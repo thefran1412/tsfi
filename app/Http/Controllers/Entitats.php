@@ -10,7 +10,8 @@ class Entitats extends Controller
 {
     public function index() {
 
-    	$entities = Entity::select('entitats.nomEntitat','entitats.link')->get();
+    	$entities = Entity::select('entitats.nomEntitat','entitats.link')->
+    	where('deleted','=', null)->orWhere('deleted','=', 0)->get();
 
     	return response()->json([
                 'entities' => $entities

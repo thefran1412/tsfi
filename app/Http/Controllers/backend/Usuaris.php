@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class Usuaris extends Controller
 {
@@ -31,10 +32,14 @@ class Usuaris extends Controller
 	}
 	public function update($id, Request $request)
 	{
-        dump($id);
-        if ($request[''])
-        $user = User::where([''])->first();
-	    exit();
+        $user = User::where(['id'=> $id])->first();
+        $user->name = $request['user'];
+        $user->email = $request['email'];
+        $user->password = bcrypt($request['password']);
+        if ($request['remember']){
+            $user->remember_token = bcrypt($request['remember']);
+        }
+        $user->save();
         return redirect('admin/configuracio/usuari');
 	}
 }

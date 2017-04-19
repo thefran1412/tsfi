@@ -9,6 +9,7 @@ use App\CategoryResource;
 use App\Entity;
 use App\EntityResource;
 use App\Http\Controllers\Validators\ImageValidator;
+use App\Http\Controllers\Validators\MapValidator;
 use App\ImageResource;
 use App\Link;
 use App\Location;
@@ -71,13 +72,6 @@ class Recursos extends Controller
     }
     public function store(Request $request)
     {
-//        \App\Resource::truncate();
-//        \App\AgeResource::truncate();
-//        \App\CategoryResource::truncate();
-//        \App\EntityResource::truncate();
-//        \App\ImageResource::truncate();
-//        \App\TagResource::truncate();
-//        \App\TargetResource::truncate();
         $this->setLog('Resource store =>');
         $inputimage = 'fotoResum';
         if ($request->hasFile($inputimage)) {
@@ -91,6 +85,12 @@ class Recursos extends Controller
                 $validateimage->errorUpload();
             }
         }
+
+        /* VALIDACIÓ MAPA */
+        $validatemap = new MapValidator($request['lat'], $request['lng']);
+        //guarda la localització del mapa i torna l'id
+        $locId = $validatemap->saveMap();
+
         $recurso = Resource::Create([
             'titolRecurs' => $request['titolRecurs'],
             'subTitol' => setDefaults($request, 'subTitol', 'recursos'),
@@ -108,7 +108,8 @@ class Recursos extends Controller
             'created-at' => getCorrectDate()->getTimestamp(),
             'updated_at' => getCorrectDate()->getTimestamp(),
             'visible' => upsertVisible($request),
-            'fotoResum' => $this->fotoResum
+            'fotoResum' => $this->fotoResum,
+            'idLocalitzacio' => $locId
         ]);
 
 
@@ -199,6 +200,11 @@ class Recursos extends Controller
         $this->setLog('Resource update =>');
         $inputimage = 'fotoResum';
 
+        /* VALIDACIÓ MAPA */
+        $validatemap = new MapValidator($request['lat'], $request['lng']);
+        //guarda la localització del mapa i torna l'id
+        $locId = $validatemap->saveMap();
+
         $recurso = Resource::find($id);
         if ($recurso){
             $recurso->titolRecurs = $request['titolRecurs'];
@@ -215,24 +221,17 @@ class Recursos extends Controller
             $recurso->preuSuperior =  setDefaults($request, 'preuSuperior', 'recursos');
             $recurso->dataPublicacio = getCorrectDate($request['dataPublicacio']);
             $recurso->fotoResum = uppsertFotoresum($request);
+            $recurso->visible = upsertVisible($request);
+            $recurso->idLocalitzacio = $locId;
 
             if($visible = $request->only('visible')){
-               
                 if($visible['visible'] == 1){
-
                     $url = $_SERVER['HTTP_HOST'];
-
                     $concat = 'http://'.$url.'/projects/ts/tsfi#/resource/'.$id;
-
                     Twitter::postTweet(['status' => $concat]);
                 }
-
                 $recurso->visible = $request[$visible['visible']];
-
             }
-
-
-
             $recurso->save();
         }
 
@@ -248,7 +247,6 @@ class Recursos extends Controller
         upsertRecursPodcast($request, $insertedId);
         upsertRecursVideo($request, $insertedId);
         if($request['target'] !== null)upsertRecursTarget($request, $insertedId);
-
         return redirect()->to('admin/recursos');
     }
 

@@ -31,7 +31,8 @@ class Backend extends Controller
     }
     public function config()
     {
-        $users = User::all();
+        $users = User::all()->first();
+
         return view('backend.config', ['users'=> $users]);
     }
 //return view('backend.recursos.edit',[

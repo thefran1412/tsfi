@@ -20,7 +20,6 @@ import myDatepicker from 'vue-datepicker';
 				required:false,
 				messageBody:'',
 				messageHeader:'',
-				prueba:'mensaje',
 				dateEnd:{
 					time:''
 				},

@@ -35,12 +35,16 @@ class Recursos extends Controller
             $tags = \App\Tag::where("nomTags","LIKE", "%$searchName%")
             ->where('deleted','=', null)->orWhere('deleted','=', 0)->get();
 
-            $totalCount = Resource::where('visible', '=', 1)->with('entity')->
-            where("titolRecurs","LIKE", "%$searchName%")->count();
+            $totalCount = Resource::where('visible', '=', 1)->with('entity','category')->
+            whereHas('category', function ($query) use ($request) {
+                    $query->where('deleted','=', 0)->orWhere('deleted','=', null);;
+            })->where("titolRecurs","LIKE", "%$searchName%")->count();
 
 
-            $resources = Resource::where('visible', '=', 1)->with('entity')->
-            where("titolRecurs","LIKE", "%$searchName%")->
+            $resources = Resource::where('visible', '=', 1)->with('category','entity')->
+            whereHas('category', function ($query) use ($request) {
+                    $query->where('deleted','=', 0)->orWhere('deleted','=', null);;
+            })->where("titolRecurs","LIKE", "%$searchName%")->
             orderBy('dataPublicacio', 'des')->paginate(20)->items();
 
             return response()->json([

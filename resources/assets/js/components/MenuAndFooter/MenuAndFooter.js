@@ -147,6 +147,7 @@ import { EventBus } from '../../app.js';
                             this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
                           }
                           this.page++;
+                          console.log(this.recursos);
                     } else {
                       this.$children[3].$refs.infiniteLoading.$emit('$InfiniteLoading:complete');
                     }

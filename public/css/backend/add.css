@@ -17,6 +17,11 @@ label{
     padding: 10px;
     display: inline-block;
 }
+.paperfull{
+	width: 98%;
+	padding: 10px;
+    display: inline-block;
+}
 .desc {
 	width: 98% !important;
 }

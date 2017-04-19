@@ -4,6 +4,7 @@
     <link href="{{ URL::asset('/css/backend/extra.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/multi-select.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/resourceadd.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('/css/backend/add.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 
 @endsection
@@ -24,110 +25,91 @@
 
 @section('content')
 
-    <div class="container">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <div class="row justify-content-lg-center text-center">
-                    <h2>Edita el recurso </h2>
-                </div>
-            </div>
-        </div>
+    <div class="section">
         @include('partials.errors')
         {!! Form::open(array('id' => 'create', 'route' => 'resource_store', 'class' => 'form', 'files' => true)) !!}
-        <div class="form-group row">
-            {!! Form::label('titolRecurs', 'Título del Recurso', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-8">
+        <div class="paper">
+            <div class="paperfull">
+                {!! Form::label('titolRecurs', 'Título del Recurso', ['class'=>'control-label']) !!}
                 {!! Form::text('titolRecurs', null,['required', 'class'=>'form-control']) !!}<br>
             </div>
-        </div>
-        <div class="form-group row">
-            {!! Form::label('creatPer', 'Autor del Recurso', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-4">
-                {!! Form::text('creatPer', null, ['class'=>'form-control']) !!}<br>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            {!! Form::label('subTitol', 'Subtítulo:', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-4">
+            <div class="paperdiv">
+                {!! Form::label('subTitol', 'Subtítulo:', ['class'=>'control-label']) !!}
                 {!! Form::text('subTitol', null, ['class'=>'form-control']) !!}<br>
             </div>
-        </div>
-        <div class="form-group row">
+            <div class="paperdiv">
+                {!! Form::label('creatPer', 'Autor del Recurso', ['class'=>'control-label']) !!}
+                {!! Form::text('creatPer', null, ['class'=>'form-control']) !!}<br>
+            </div>
+            <div class="paperfull">
             {!! Form::label('descBreu', 'Descripción breve',
-                    array('class'=>'control-label col-sm-2')) !!}
-            <div class="col-sm-8">
-                {!! Form::textarea('descBreu', null, ['class'=>'form-control input-sm summernote']) !!}
+                    array('class'=>'control-label')) !!}
+                {!! Form::textarea('descBreu', null, ['class'=>'form-control']) !!}
             </div>
         </div>
-        <div class="form-group row">
-            {!! Form::label('descDetaill1', 'Descripción detallada 1', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-8">
-                {!! Form::textarea('descDetaill1', null, ['class'=>'form-control input-sm summernote']) !!}
+        <div class="paper">
+            <div class="paperfull">
+                {!! Form::label('descDetaill1', 'Descripción detallada 1', ['class'=>'control-label']) !!}
+                {!! Form::textarea('descDetaill1', null, ['class'=>'form-control']) !!}
             </div>
         </div>
-        <div class="form-group row">
-            {!! Form::label('descDetaill2', 'Descripción detallada 2' , ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-8">
-                {!! Form::textarea('descDetaill2', null, ['class'=>'form-control input-sm summernote']) !!}
+
+        <div class="paper">
+            <div class="paperfull">
+                {!! Form::label('descDetaill2', 'Descripción detallada 2' , ['class'=>'control-label']) !!}
+                    {!! Form::textarea('descDetaill2', null, ['class'=>'form-control']) !!}
             </div>
         </div>
-        <div class="form-group row">
-            {!! Form::label('relevancia', 'Relevancia:', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-2">
+
+        <div class="paper">
+            <div class="paperdiv">
+                {!! Form::label('relevancia', 'Relevancia:', ['class'=>'control-label']) !!}
                 {!! Form::number('relevancia', null, ['class'=>'form-control number', 'min'=>'0', 'max'=>'11']) !!}
             </div>
-        </div>
-        <div class="form-group row">
-            {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-3">
+            <div class="paperdiv">
+                {!! Form::label('dataInici', 'Fecha inicial:', ['class'=>'control-label']) !!}
                 {!! Form::datetime('dataInici', null, ['class'=>'form-control', 'placeholder'=> 'YYYY-MM-DD']) !!}
             </div>
-            {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-3">
+            <div class="paperdiv">
+                {!! Form::label('dataFinal', 'Fecha Final:', ['class'=>'control-label']) !!}
                 {!! Form::datetime('dataFinal', null, ['class'=>'form-control', 'placeholder'=> 'YYYY-MM-DD']) !!}
             </div>
-        </div>
-        <div id="error_preus"></div>
-        <div class="form-group row">
-            {!! Form::label('gratuit', 'Gratuit:', ['class'=>'control-label col-sm-1']) !!}
-            <div class="col-sm-1">
-                    {!! Form::checkbox('gratuit', 'false', false, []) !!}
+
+            <div class="paperdiv">
+                {!! Form::label('gratuit', 'Gratuit:', ['class'=>'control-label']) !!}
+                {!! Form::checkbox('gratuit', 'false', false, []) !!}
             </div>
-            {!! Form::label('preuInferior', 'Precio menos que:', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-2">
+                
+            <div class="paperdiv">
+                {!! Form::label('preuInferior', 'Precio menos que:', ['class'=>'control-label']) !!}
                 {!! Form::number('preuInferior', null, ['class'=>'form-control number', 'placeholder'=>'€', 'min'=>'0']) !!}
             </div>
-            {!! Form::label('preuSuperior', 'Precio mas que:', ['class'=>'control-label col-sm-2']) !!}
-            <div class="col-sm-2">
+            <div class="paperdiv">
+                {!! Form::label('preuSuperior', 'Precio mas que:', ['class'=>'control-label']) !!}
                 {!! Form::number('preuSuperior', null, ['class'=>'form-control number', 'placeholder'=>'€', 'min'=>'0']) !!}
             </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-4">
-                Selecciona la imagen destacada del recurso:
-                {!! Form::file('fotoResum', ['id' => 'fotoResum']) !!}
 
-            </div>
-            <div class="col-sm-6 currentfotoresum">
+        </div>
+        
+        <div class="paper">
+            <div class="paperfull upload">
+                {!! Form::file('fotoResum', ['id' => 'fotoResum']) !!}
             </div>
         </div>
-        <div class="form-group row">
-            {!! Form::Label('categorias', 'Categorias:', ['class'=>'control-label col-sm-3']) !!}
-            <div class="col-sm-3">
+        <div class="paper">
+            <div class="paperdiv">
+                {!! Form::Label('categorias', 'Categorias:', ['class'=>'control-label']) !!}
                 {{ Form::select('categorias', $categorias, null,['class' => 'form-control']) }}
             </div>
-        </div>
-        <div class="form-group row">
-            {!! Form::Label('edat', 'Edats a qui s\'hadreça el recurs:', ['class'=>'control-label col-sm-3']) !!}
-            <div class="col-sm-3">
-                {!! Form::select('multipleage[]', $edats, null, ['id' => 'multipleage','multiple'=>'multiple', 'class' => 'form-control']) !!}
+            <div class="paperdiv">
+                {!! Form::Label('entitats', 'Escoje la entidad a la cual pertenece el recrso:', ['class'=>'control-label']) !!}
+                {!! Form::select('entitats', $entitats, null, ['class' => 'form-control']) !!}
             </div>
         </div>
-        <div class="form-group row">
-            {!! Form::Label('entitats', 'Escoje la entidad a la cual pertenece el recrso:', ['class'=>'control-label col-sm-3']) !!}
-            <div class="col-sm-3">
-                {!! Form::select('entitats', $entitats, null, ['class' => 'form-control']) !!}
+        <div class="paper">
+            <div class="paperfull">
+                {!! Form::Label('edat', 'Edats a qui s\'hadreça el recurs:', ['class'=>'control-label']) !!}
+                {!! Form::select('multipleage[]', $edats, null, ['id' => 'multipleage','multiple'=>'multiple', 'class' => 'form-control']) !!}
             </div>
         </div>
         <div class="form-group row">

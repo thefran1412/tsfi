@@ -7,28 +7,32 @@
     <link href="{{ URL::asset('/css/backend/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 
 @endsection
-@section('script')
-    <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
-    <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
-    <script src="{{ URL::asset('/js/map_back.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            console.log('script');
-            @if ($recursLoc != null)
-              initMap({{$recursLoc->latitud}}, {{$recursLoc->longitud}});
-            @else
-              initMap();
-            @endif
-        });
-</script>
-@endsection
+
 @section('titol')
     <i class="fa fa-angle-right"></i>
     <a href="{{ action('backend\Recursos@index') }}">Recursos</a>
     <i class="fa fa-angle-right"></i>
     <a href="{{ action('backend\Recursos@add') }}">Afegir</a>
 @endsection
+@section('script')
+    <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
+    <script src="{{ URL::asset('/js/custom_editors.js') }}"></script>
+    <script src="{{URL::asset('js/jquery.multi-select.js')}}"></script>
+    <script src="{{ URL::asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=before') }}" async defer></script>
+    <script src="{{ URL::asset('/js/map_back.js') }}"></script>
+    <script type="text/javascript">
+        function before() {
+            @if ($recursLoc)
+            console.log({{$recursLoc->latitud}});
+              initMap({{$recursLoc->latitud}}, {{$recursLoc->longitud}});
+            @else
+              initMap();
+            @endif
+        }
 
+    </script>
+@endsection
 @section('content')
 
     <div class="container">
@@ -128,13 +132,13 @@
             <div class="col-sm-4">
                 Para cambiar la imagen selecciona una nueva:
                 {!! Form::file('fotoResum', ['id' => 'fotoResum']) !!}
-                
+
             </div>
             <div class="col-sm-6 currentfotoresum">
                 @if($recurso->fotoResum)
                     <img name="previousimgresource" src="/img/image/{{ $recurso->fotoResum }}" width="250" height="180">
                     <input type="text" value="{{ $recurso->fotoResum }}" name="previousimgresource" style="display: none;">
-                @endif    
+                @endif
             </div>
         </div>
         <div class="form-group row">
@@ -284,40 +288,34 @@
             </div>
         </div>
         <br>
-
-        <div class="form-group row">
-            <div class="row">
-                <label class="control-label">
+            <div class="form-group row">
+                <label class="control-label col-md-3">
                     Guardar recurs com visible?
                     <input type="radio" value="1" name="visible" @if($recurso->visible === 1) checked @endif></label>
             </div>
-            <div class="row">
-                <label class="control-label">
+            <div class="form-group row">
+                <label class="control-label col-md-3">
                     Guardar el recurso como pendent?
-                    <input type="radio" value="0" name="visible" @if($recurso->visible === 2) checked @endif></label>
+                    <input type="radio" value="0" name="visible" @if($recurso->visible === 0) checked @endif></label>
             </div>
-            <div class="row">
+            <div class="form-group row col-md-3">
                 <label class="control-label">
                     Borrar el recurs?
-                    <input type="radio" value="2" name="visible" @if($recurso->visible === 0) checked @endif></label>
+                    <input type="radio" value="2" name="visible" @if($recurso->visible === 2) checked @endif></label>
             </div>
-        </div>
         <br>
+        <div class="paper">
         {!!Form::label('adreca', 'Adreça: ')!!}
         {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
-        @if($recursLoc)
-            {!!Form::hidden('lat', $recursLoc->latitud, ['class' => 'form-control', 'id' => 'lat'])!!}
-            {!!Form::hidden('lng', $recursLoc->longitud, ['class' => 'form-control', 'id' => 'lng'])!!}
-        @else
             {!!Form::hidden('lat', null, ['class' => 'form-control', 'id' => 'lat'])!!}
             {!!Form::hidden('lng', null, ['class' => 'form-control', 'id' => 'lng'])!!}
-        @endif
-        <div class="map"><div id="map"></div></div>
+
+        <div id="map" class="form-group"></div>
         <div id="infowindow-content">
             <span id="place-name" class="title"></span>
             <span id="place-address"></span>
         </div>
-
+        </div>
         <div id="error_submit"></div>
         <div class="form-group row">
             <div class="col-sm-10">
@@ -327,25 +325,5 @@
         {!!Form::close()!!}
     </div>
 
-
-@endsection
-
-@section('script')
-    {{--Summer Note--}}
-    <script src="{{ URL::asset('/js/sumer_note/jquery_sumernote.js') }}"></script>
-    <script src="{{ URL::asset('/js/sumer_note/summernote.js') }}"></script>
-    <script src="{{ URL::asset('/js/sumer_note/summernote-es-ES.js') }}"></script>
-    <script src="{{ URL::asset('/js/custom_editors.js') }}"></script>
-    {{--End Summer Note scripts--}}
-    {{--Autocomplete js--}}
-    {{--end autocompelete--}}
-    {{--Multi select--}}
-    <script src="{{URL::asset('js/jquery.multi-select.js')}}"></script>
-    {{--end Multi select--}}
-    {{--Google maps--}}
-    {{--<script src="{{ URL::asset('/js/createEntity.js') }}"></script>--}}
-
-    {{--end Google maps--}}
-    <script src="{{ URL::asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
 
 @endsection

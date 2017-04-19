@@ -30,45 +30,6 @@ $(document).ready(function() {
     var $podcast_preview = $('#podcast_preview');
 
 
-    //Summer Note script
-    $('.summernote').each(function(i, obj) {
-        var altura = 200;
-        var tool_tips = [
-            ["style", ["style"]],
-            ["font", ["bold", "underline", "clear"]],
-            ["fontname", ["fontname"]],
-            ["color", ["color"]],
-            ["para", ["ul", "ol", "paragraph"]],
-            ["table", ["table"]],
-            ["insert", ["link"
-                //  ,"picture", "video"
-            ]],
-            ["view", ["fullscreen", "codeview", "help"]]];
-        if (obj.name === 'descBreu'){
-            altura = 100;
-            tool_tips = [
-                ["style", ["style"]],
-                ["font", ["bold", "underline", "clear"]],
-                ["fontname", ["fontname"]],
-                ["color", ["color"]],
-                ["para", ["paragraph"]],
-                ["insert", ["link"]],
-                ["view", ["fullscreen", "codeview", "help"]]
-            ]
-        }
-        $(obj).summernote({
-            onblur: function(e) {
-                var id = $(obj).data('id');
-                var sHTML = $(obj).code();
-                alert(sHTML);
-            },
-            height: altura,
-            lang: 'es-ES',
-            toolbar: tool_tips
-        });
-    });
-
-
     //Assing current Date to Date start end fields
     // var dia = date.getDate();
     // if (dia < 10){
@@ -256,13 +217,9 @@ $(document).ready(function() {
             if((videourl.indexOf('src=')+5) >0) {
                 src = videourl.substring(videourl.indexOf('src=')+5);
                 if (src.match('/."./')){
-                    console.log('with "');
                     src = src.substring(0, src.indexOf('"'));
-                    console.log(src);
                 }else if (src.match('/.*\'.*/')){
-                    console.log('with \'');
                     src = src.substring(0, src.indexOf('\''));
-                    console.log(src);
                 }
                 $('#errorAdd').hide();
             }else{
@@ -282,8 +239,8 @@ $(document).ready(function() {
     $podcast_box.innerHeight(($videoslider.innerWidth()*2)/3);
     $videoSize.width($videoslider.width());
     $videoSize.height($videoslider.height());
-    $imgSize.width($videoslider.width());
-    $imgSize.height($videoslider.height());
+    $imgSize.width($imageslider.width());
+    $imgSize.height($imageslider.height());
     $(window).resize(function() {
         var $videoSize = $('iframe');
         var $imgSize = $('.img_slider');
@@ -340,7 +297,6 @@ $(document).ready(function() {
 
     //Delet video from Video Slider
     $(document).on('click', '#deletevideo', function(){
-        console.log('video delete');
         $('.video_active').removeClass('video_active').addClass('old_video_active');
         if ( $('.old_video_active').is(':last-child')) {
             $('.slider_item').first().addClass('video_active');
@@ -429,14 +385,15 @@ $(document).ready(function() {
     $(document).on('change', '#fotoResum', function(){
         $('#errorAdd').hide();
         $('.currentfotoresum').children().remove();
-        var maxSize = 2097190;
+        var maxSize = 5242880;
+        // var maxSize = 2097190;
         var img_types = ['jpg','png','jpge'];
         var $inputimage = $('#fotoResum');
         if (this.files && this.files[0]) {
             var fileSize = this.files[0].size;
             var filetype = this.files[0].type;
             if(filetype.indexOf('image') === -1){
-                bootstrap_alert('El fitxer ha de ser una imatge.', 'danger', $('.images'));
+                bootstrap_alert('El fitxer ha de ser una imatge.', 'danger', $('.currentfotoresum'));
                 return false;
             }else{
                 if (fileSize<maxSize){
@@ -448,7 +405,7 @@ $(document).ready(function() {
                     };
                     reader.readAsDataURL(this.files[0]);
                 }else{
-                    bootstrap_alert('El tamany de la imatge es mes gran que ' + parseInt(maxSize/1000000) + 'MB.', 'danger', $('.images'));
+                    bootstrap_alert('El tamany de la imatge es mes gran que ' + parseInt(maxSize/1000000) + 'MB.', 'danger', $('.currentfotoresum'));
                 }
             }
         }
@@ -456,7 +413,6 @@ $(document).ready(function() {
     
     //Delete image
     $(document).on('click', '#imagedelete', function(){
-        console.log('imae delete');
         $('#errorAdd').hide();
         $('.img_active').removeClass('img_active').addClass('old_img_active');
         if ( $('.old_img_active').is(':last-child')) {
@@ -482,10 +438,7 @@ $(document).ready(function() {
             podcasturl = podcasturl.substring(0, podcasturl.indexOf('iframe'));
             if((podcasturl.indexOf('src=')) >0) {
                 src = podcasturl.substring(podcasturl.indexOf('src=') + 5);
-                console.log(src);
-                console.log(src.match('/.*".*/'));
                 if (src.match('/.*".*/')) {
-                    console.log(src);
                     src = src.substring(0, src.indexOf('"'));
                 } else if (src.match('/.*\'.*/')) {
                     src = src.substring(0, src.indexOf('\''));
@@ -556,7 +509,6 @@ $(document).ready(function() {
             var name = $('.podcast_active').attr('name');
         }
         $('iframe[name="'+ name +'"]').remove();
-        console.log($('input[name="'+ name +'"]'));
         $('input[name="'+ name +'"]').remove();
         $('.podcast_item').fadeOut(0);
         $('.podcast_active').fadeIn(0);

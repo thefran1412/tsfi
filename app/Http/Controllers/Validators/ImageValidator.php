@@ -48,7 +48,7 @@ class ImageValidator
     public function isBiggerThan($size = null)
     {
         if (is_null($size)) {
-            $size = 2048;
+            $size = 5120;
         }
         $this->size = $size;
         return $this->image_size < $size;

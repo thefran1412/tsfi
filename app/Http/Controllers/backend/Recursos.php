@@ -80,13 +80,13 @@ class Recursos extends Controller
         $inputimage = 'fotoResum';
         if ($request->hasFile($inputimage)) {
             $validateimage = new ImageValidator($request, $inputimage);
-            if ($validateimage->validateImage(null,4000)){
+            if ($validateimage->validateImage(null,50000)){
                 $validateimage->saveImage();
                 $this->setInfoLog($this->log,sprintf('Se guardó la imagen "%s" en la carpeta "%s"',
                     $validateimage->getHashName(), $validateimage->getTargetFile()));
                     $this->fotoResum = $validateimage->getNewImagePath();
             }else{
-                $validateimage->errorUpoad();
+                $validateimage->errorUpload();
             }
         }
         $recurso = Resource::Create([
@@ -120,7 +120,7 @@ class Recursos extends Controller
         if($request['linkrecurs'] !== null)addRecursLinks($request, $insertedId);
         upsertRecursVideo($request, $insertedId);
         if($request['target'])upsertRecursTarget($request, $insertedId);
-
+        exit();
         return redirect()->to('admin/recursos');
     }
 

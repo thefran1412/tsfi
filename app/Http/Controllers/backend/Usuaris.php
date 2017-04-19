@@ -29,4 +29,12 @@ class Usuaris extends Controller
 	{
 		return view('backend.usuaris.add');
 	}
+	public function update($id, Request $request)
+	{
+        dump($id);
+        if ($request[''])
+        $user = User::where([''])->first();
+	    exit();
+        return redirect('admin/configuracio/usuari');
+	}
 }

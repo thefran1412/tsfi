@@ -9,14 +9,11 @@
 @endsection
 @section('script')
     <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
-    <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
+    <script src="{{ URL::asset('/js/custom_editors.js') }}"></script>
+    <script src="{{URL::asset('js/jquery.multi-select.js')}}"></script>
+    <script src="{{ URL::asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ URL::asset('/js/map_back.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            console.log('script');
-              initMap();
-        });
-    </script>
+    <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
 @endsection
 @section('titol')
     <i class="fa fa-angle-right"></i>
@@ -36,7 +33,7 @@
             </div>
         </div>
         @include('partials.errors')
-        {!! Form::open(array('id'=>'recurs_form', 'route' => 'resource_store', 'class' => 'form', 'files' => true)) !!}
+        {!! Form::open(array('id' => 'create', 'route' => 'resource_store', 'class' => 'form', 'files' => true)) !!}
         <div class="form-group row">
             {!! Form::label('titolRecurs', 'Título del Recurso', ['class'=>'control-label col-sm-2']) !!}
             <div class="col-sm-8">
@@ -107,9 +104,12 @@
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-sm-8">
-                Selecciona una imagen destacada del recurso:
-                {!! Form::file('fotoResum') !!}
+            <div class="col-sm-4">
+                Selecciona la imagen destacada del recurso:
+                {!! Form::file('fotoResum', ['id' => 'fotoResum']) !!}
+
+            </div>
+            <div class="col-sm-6 currentfotoresum">
             </div>
         </div>
         <div class="form-group row">
@@ -214,32 +214,34 @@
                 {!! Form::select('target', $targets, null, ['class' => 'form-control']) !!}
             </div>
         </div>
+
         <div class="form-group row">
-            {!! Form::label('visible', 'Guardar como visible?', ['class'=>'control-label col-sm-3']) !!}
-            <div class="col-sm-1">
-                {!! Form::checkbox('visible', null, false, []) !!}
-            </div>
+            <label class="control-label col-md-4">
+                Guardar recurs com visible?
+                <input type="radio" value="1" name="visible" checked></label>
         </div>
         <div class="form-group row">
-            <label class="radio inline control-label">Guardar recurs com visible? <input type="radio" name="visible" checked></label>
-            <label class="radio inline control-label">Guardar el recurso como pendent? <input type="radio" name="visible">Option 2</label>
-            <label class="radio inline control-label">Borrar el recurs?<input type="radio" name="visible">Option 3</label>
+            <label class="control-label col-md-4">
+                Guardar el recurso como pendent?
+                <input type="radio" value="0" name="visible"></label>
+        </div>
+        <div class="form-group row col-md-4">
+            <label class="control-label">
+                Borrar el recurs?
+                <input type="radio" value="2" name="visible"></label>
         </div>
         <br>
-        <div class="form-group row">
+
+        <div class="paper">
             {!!Form::label('adreca', 'Adreça: ')!!}
             {!!Form::text('adreca', null, ['class' => 'form-control location', 'placeholder' => 'Adreça de la entitat', 'id' => 'pac-input'])!!}
             {!!Form::hidden('lat', null, ['class' => 'form-control', 'id' => 'lat'])!!}
             {!!Form::hidden('lng', null, ['class' => 'form-control', 'id' => 'lng'])!!}
 
-            <div class="map">
-                <div id="map"></div>
-            </div>
-
+            <div id="map" class="form-group"></div>
             <div id="infowindow-content">
                 <span id="place-name" class="title"></span>
-                {{-- <br>Place ID <span id="place-id"></span><br> --}}
-                {{-- <span id="place-address"></span> --}}
+                <span id="place-address"></span>
             </div>
         </div>
         <div id="error_submit"></div>
@@ -251,25 +253,4 @@
         {!!Form::close()!!}
     </div>
 
-@endsection
-
-@section('script')
-    {{--Summer Note--}}
-    <script src="{{ URL::asset('/js/sumer_note/jquery_sumernote.js') }}"></script>
-    <script src="{{ URL::asset('/js/sumer_note/summernote.js') }}"></script>
-    <script src="{{ URL::asset('/js/sumer_note/summernote-es-ES.js') }}"></script>
-    <script src="{{ URL::asset('/js/custom_editors.js') }}"></script>
-    {{--End Summer Note scripts--}}
-    {{--Autocomplete js--}}
-    <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
-    {{--end autocompelete--}}
-    {{--Multi select--}}
-    <script src="{{URL::asset('js/jquery.multi-select.js')}}"></script>
-    <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
-    {{--end Multi select--}}
-    {{--Google maps--}}
-    {{--<script src="{{ URL::asset('/js/createEntity.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>--}}
-    {{--end Google maps--}}
-    <script src="{{ URL::asset('/js/bootstrap-datetimepicker.min.js') }}"></script>
 @endsection

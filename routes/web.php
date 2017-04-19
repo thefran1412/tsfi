@@ -66,5 +66,5 @@ Route::get('/admin/entitats', 'backend\Entitats@index');
 Route::get('/admin/entitats/add', 'backend\Entitats@add');
 
 /* USUARIOS */
-Route::get('/admin/usuaris', 'backend\Usuaris@index');
-Route::get('/admin/usuaris/add', 'backend\Usuaris@add');
+Route::get('/admin/configuracio/usuari', 'backend\Usuaris@index');
+Route::post('/admin/configuracio/usuari/{id}', 'backend\Usuaris@update');

@@ -224,7 +224,7 @@ function uppsertFotoresum(Request $request){
     $immgpath = null;
     if ($request->hasFile($inputimage)) {
         $validateimage = new ImageValidator($request, $inputimage);
-        if ($validateimage->validateImage(null,4000)){
+        if ($validateimage->validateImage(null,50000)){
             $validateimage->saveImage();
             $immgpath = $validateimage->getNewImagePath();
         }else{

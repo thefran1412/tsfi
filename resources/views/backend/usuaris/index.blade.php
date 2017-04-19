@@ -8,71 +8,42 @@
 @section('content')
 
     <div class="container">
-        <form class="form-horizontal">
+        {!!Form::model($usuari, ['action' => ['backend\Usuaris@update', $usuari->id], 'method' => 'post', 'class' => 'form-horizontal'])!!}
             <fieldset>
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textinput">Nom de l'usuari</label>
+                    <label class="col-md-4 control-label" for="user">Nom de l'usuari</label>
                     <div class="col-md-4">
-                        <input id="textinput" name="textinput" type="text" placeholder="{{ $usuari->name }}" class="form-control input-md">
+                        <input id="user" name="user" type="text" placeholder="@if($usuari){{ $usuari->name }} @endif" class="form-control input-md" required>
                     </div>
                 </div>
-
-                <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textinput">date attended</label>
+                    <label class="col-md-4 control-label" for="email">E-mail</label>
                     <div class="col-md-4">
-                        <input id="textinput" name="textinput" type="text" placeholder="date attended" class="form-control input-md">
-
+                        <input id="email" name="email" type="text" placeholder="@if($usuari){{ $usuari->email }} @endif" class="form-control input-md" required>
                     </div>
                 </div>
-
-                <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textinput">host</label>
+                    <label class="col-md-4 control-label" for="password1">Password</label>
                     <div class="col-md-4">
-                        <input id="textinput" name="textinput" type="text" placeholder="host" class="form-control input-md">
-
+                        <input id="password1" name="password1" type="password" placeholder="Escriu un nou password" class="form-control input-md" required>
                     </div>
                 </div>
-
-                <!-- Select Basic -->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="selectbasic">country</label>
+                    <label class="col-md-4 control-label" for="password2">Repetaix el password</label>
                     <div class="col-md-4">
-                        <select id="selectbasic" name="selectbasic" class="form-control">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                        </select>
+                        <input id="password2" name="password2" type="password" placeholder="Repeteix el nou password" class="form-control input-md" required>
                     </div>
                 </div>
-
-                <!-- Textarea -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="textarea">trade show introduction</label>
-                    <div class="col-md-4">
-                        <textarea class="form-control" id="textarea" name="textarea">trade show introduction</textarea>
-                    </div>
-                </div>
-
-                <!-- File Button -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="filebutton">upload photo</label>
-                    <div class="col-md-4">
-                        <input id="filebutton" name="filebutton" class="input-file" type="file">
-                    </div>
-                </div>
-
                 <!-- Button -->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="singlebutton"></label>
                     <div class="col-md-4">
-                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">submit</button>
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Actualizar</button>
                     </div>
                 </div>
-
             </fieldset>
-        </form>
+        {!!Form::close()!!}
 
     </div>
 

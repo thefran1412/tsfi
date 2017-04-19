@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['add' => 'link'])
+@extends('layouts.backend', ['add' => 'link', 'active' => 5])
 
 @section('addUrl', '/admin/entitats/add')
 

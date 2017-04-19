@@ -3,6 +3,11 @@
 if (!isset($add)) {
     $add = false;
 }
+
+if (!isset($active)) {
+    $active = 1;
+}
+
  ?>
 
 <!DOCTYPE html>
@@ -52,13 +57,13 @@ if (!isset($add)) {
     {{-- HEADER END --}}
     <div class="menu">
         <ul>
-            <li><a href="{{  action('backend\Backend@index') }}"><i class="fa fa-home"></i>Inici</a></li>
-            <li><a href="{{  action('backend\Recursos@index') }}"><i class="fa fa-file-text"></i>Recursos</a></li>
-            <li><a href="{{  action('backend\Categories@index') }}"><i class="fa fa-archive"></i>Categories</a></li>
-            <li><a href="{{  action('backend\Tags@index') }}"><i class="fa fa-tag"></i>Tags</a></li>
-            <li><a href="{{  action('backend\Entitats@index') }}"><i class="fa fa-building"></i>Entitats</a></li>
-            <li><a href="{{  action('backend\Analytics@index') }}"><i class="fa fa-bar-chart"></i>Analytics</a></li>
-            <li><a href="{{  action('backend\Backend@config') }}"><i class="fa fa-cog"></i>Configuració</a></li>
+            <li class="@if($active == 1) active @endif"><a href="{{  action('backend\Backend@index') }}"><i class="fa fa-home"></i>Inici</a></li>
+            <li class="@if($active == 2) active @endif"><a href="{{  action('backend\Recursos@index') }}"><i class="fa fa-file-text"></i>Recursos</a></li>
+            <li class="@if($active == 3) active @endif"><a href="{{  action('backend\Categories@index') }}"><i class="fa fa-archive"></i>Categories</a></li>
+            <li class="@if($active == 4) active @endif"><a href="{{  action('backend\Tags@index') }}"><i class="fa fa-tag"></i>Tags</a></li>
+            <li class="@if($active == 5) active @endif"><a href="{{  action('backend\Entitats@index') }}"><i class="fa fa-building"></i>Entitats</a></li>
+            <li class="@if($active == 6) active @endif"><a href="{{  action('backend\Analytics@index') }}"><i class="fa fa-bar-chart"></i>Analytics</a></li>
+            <li class="@if($active == 7) active @endif"><a href="{{  action('backend\Backend@config') }}"><i class="fa fa-cog"></i>Configuració</a></li>
         </ul>
     </div>
     

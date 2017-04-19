@@ -1,4 +1,4 @@
-@extends('layouts.backend', ['add' => 'true'])
+@extends('layouts.backend', ['add' => 'true', 'active' => 4])
 
 @section('titol')
   <i class="fa fa-angle-right"></i>

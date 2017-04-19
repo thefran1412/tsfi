@@ -1,4 +1,4 @@
-@extends('layouts.backend')
+@extends('layouts.backend', ['active' => 2])
 @section('css')
     <link href="{{ URL::asset('/js/sumer_note/summernote.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/extra.css') }}" rel="stylesheet">

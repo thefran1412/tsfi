@@ -151,6 +151,10 @@ body{
 	line-height: 40px;
 	margin: 10px;
 }
+.active{
+	background-color: #af5b4c;
+	border-radius: 3px;
+}
 .menu i{
 	margin-right: 15px;
 	margin-left: 15px;
@@ -161,6 +165,7 @@ body{
 .home img {
 	width: 25px;	
 }
+
 
 /* SUB HEADER */
 .subHeader{

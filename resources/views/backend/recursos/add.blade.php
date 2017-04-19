@@ -112,47 +112,34 @@
                 {!! Form::select('multipleage[]', $edats, null, ['id' => 'multipleage','multiple'=>'multiple', 'class' => 'form-control']) !!}
             </div>
         </div>
-        <div class="form-group row">
-            <div id="boxOfTags" class="col-md-4 col-md-offset-3">
+        <div class="paper">
+                <div id="boxOfTags">
+                </div>
+            <div class="paperfull">
+                <label for="tags">Tags: </label>
+                <div>
+                    <input type="text" id="tags" name='tags' placeholder="escribe una tag para añadir." class="form-control" list="autocomplete" autocomplete="true">
+                    <datalist id="autocomplete">
+                    </datalist>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label for="tags" class="control-label col-sm-3">Tags: </label>
-            <div class="col-sm-4">
-                <input type="text" id="tags" name='tags' placeholder="escribe una tag para añadir." class="form-control" list="autocomplete" autocomplete="true">
-                <datalist id="autocomplete">
-                </datalist>
-            </div>
-            <div class="col-md-2">
+            <div>
                 <button type="button" class="btn addTag">Add</button>
             </div>
         </div>
-        <div class="form-group row">
-            {!! Form::label('linkrecurs', 'Entra los enlaces del recurso:', ['class'=>'control-label col-sm-3']) !!}
-            <div class="col-sm-4">
+        <div class="paper">
+            <div class="paperfull">
+                {!! Form::label('linkrecurs', 'Entra los enlaces del recurso:', ['class'=>'control-label col-sm-3']) !!}
                 {!! Form::textarea('linkrecurs', null, ['class'=>'form-control',
                 'placeholder'=>'separa los enlaces por ;',
                 'rows'=>"3",
                  'cols'=>"50"]) !!}<br>
             </div>
         </div>
-        <div class="form-group row">
-            <div id="slider-video-wrapper" class="col-md-4 col-md-offset-3 slider">
-                <div id="video_slider">
-                </div>
-                <div id="left"><button id="button-previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
-                <div id="right"><button id="button-next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
-                <div id="center"><button id="deletevideo"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
-            </div>
-        </div>
-        <div class="row">
-            <div id="videoInput" class="col-md-4 col-md-offset-3">
-
-            </div>
-        </div>
-        <br>
-        <div class="form-group row">
-            <label for="selectFormat" class="control-label col-md-3">Selecciona el formato de video.</label>
+        <div class="paper">
+            
+            <div class="paperfull">
+                <label for="selectFormat" class="control-label col-md-3">Selecciona el formato de video.</label>
             <div class="col-md-3">
                 <select class="form-control col-md-4" id="selectFormat">
                     <option>Selecciona una opción</option>
@@ -161,58 +148,64 @@
                     <option value="3">Link video</option>
                 </select>
             </div>
-        </div>
-        <br>
-        <div class="form-group row">
-            <div id="slider-image-wrapper" class="col-md-4 col-md-offset-3 slider">
-                <div id="image_slider">
-                </div>
-                <div id="left"><button id="image_button-previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
-                <div id="right"><button id="image_button-next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
-                <div id="center"><button id="imagedelete"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
-            </div>
-        </div>
-        <div class="form-group row images">
-            <input type='file' name="" class="image_upload"/>
-        </div><br>
-        <div class="form-group row">
-            <div id="slider_podcast_wrapper" class="col-md-4 col-md-offset-3 slider">
-                <div id="podcast_preview">
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="addpodcast" class="control-label col-md-3">Añade un podcast</label>
-            <div class="col-md-3">
-                <textarea type="text" id="addpodcast" class="form-control" placeholder="iframe podcast"></textarea>
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn addPodcast">Add</button>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="target" class="control-label col-md-3">Perfils del recurs</label>
-            <div class="col-md-3">
-                {!! Form::select('target', $targets, null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
+            <div class="row">
+                <div id="videoInput" class="col-md-4 col-md-offset-3">
 
-        <div class="form-group row">
-            <label class="control-label col-md-4">
-                Guardar recurs com visible?
-                <input type="radio" value="1" name="visible" checked></label>
+                </div>
+            </div>
+            <div id="slider-video-wrapper" class="col-md-4 col-md-offset-3 slider">
+                <div id="video_slider">
+                </div>
+                <div id="left"><button id="button-previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
+                <div id="right"><button id="button-next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
+                <div id="center"><button id="deletevideo"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
+            </div>
+            </div>
         </div>
-        <div class="form-group row">
-            <label class="control-label col-md-4">
-                Guardar el recurso como pendent?
-                <input type="radio" value="0" name="visible"></label>
+        <div class="paper">
+            
+            <div class="paperfull">
+                <div class="form-group row images">
+                    <input type='file' name="" class="image_upload"/>
+                </div>
+            </div>
+
+            <div class="paperfull">
+                <div id="slider-image-wrapper" class="col-md-4 col-md-offset-3 slider">
+                    <div id="image_slider">
+                    </div>
+                    <div id="left"><button id="image_button-previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
+                    <div id="right"><button id="image_button-next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
+                    <div id="center"><button id="imagedelete"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
+                </div>
+            </div>
         </div>
-        <div class="form-group row col-md-4">
-            <label class="control-label">
-                Borrar el recurs?
-                <input type="radio" value="2" name="visible"></label>
+        <div class="paper">
+            <div class="paperfull">
+                <div id="slider_podcast_wrapper" class="col-md-4 col-md-offset-3 slider">
+                    <div id="podcast_preview">
+                    </div>
+                </div>
+            </div>
+
+            <div class="paperfull">
+                <label for="addpodcast" class="control-label">Añade un podcast</label>
+                <div class="col-md-3">
+                    <textarea type="text" id="addpodcast" class="form-control" placeholder="iframe podcast"></textarea>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn addPodcast">Add</button>
+                </div>
+            </div>
         </div>
-        <br>
+        <div class="paper">
+            <div class="paperfull">
+                <label for="target" class="control-label">Perfils del recurs</label>
+                <div class="col-md-3">
+                    {!! Form::select('target', $targets, null, ['class' => 'form-control']) !!}
+                </div>
+            </div>
+        </div>
 
         <div class="paper">
             {!!Form::label('adreca', 'Adreça: ')!!}
@@ -225,6 +218,24 @@
                 <span id="place-name" class="title"></span>
                 <span id="place-address"></span>
             </div>
+            </div>
+            <div class="paper">
+            <div class="paperfull">
+                <label class="control-label col-md-4">
+                    Guardar recurs com visible?
+                    <input type="radio" value="1" name="visible" checked></label>
+            </div>
+            <div  class="paperfull">
+                <label class="control-label col-md-4">
+                    Guardar el recurso como pendent?
+                    <input type="radio" value="0" name="visible"></label>
+            </div>
+            <div  class="paperfull">
+                <label class="control-label">
+                    Borrar el recurs?
+                    <input type="radio" value="2" name="visible"></label>
+            </div>
+            <br>
         </div>
         <div id="error_submit"></div>
         <div class="form-group row">

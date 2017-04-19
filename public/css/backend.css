@@ -115,7 +115,7 @@ body{
 .menu{
 	position: fixed;
 	left: 3px;
-	top: 100px;
+	top: 110px;
 	width: 150px;
 	height: 100vh;
 	/*background-color: #313942;*/
@@ -215,7 +215,7 @@ body{
 
 .headerRoute{
 	margin-top: 18px;
-	padding-left: 170px;
+	padding-left: 175px;
 	display: inline-block;
 }
 .headerRoute h2 {
@@ -230,7 +230,7 @@ body{
 /* CONTENT */
 .content{
 	float: right;
-	width: calc(100% - 150px);
+	width: calc(100% - 155px);
 	/*background-color: #EFF3F6;*/
 	margin-top: 90px;
 	padding: 10px;

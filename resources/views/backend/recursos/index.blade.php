@@ -16,8 +16,8 @@
     <script>
         $(document).ready(function() {
              $('#pendientes').DataTable();
-             $('#reportados').DataTable();
              $('#aprovados').DataTable();
+             $('#borrados').DataTable();
         } );
     </script>
 @endsection
@@ -26,10 +26,43 @@
     <div class="wrapper" id="listrecurso">
         <div class="section">
             <div class="sectionHeader">
-                <h2>Pendientes</h2>
-                <i class="fa fa-angle-down"></i>    
+                <h2>Aprovats</h2>
+                <i class="fa fa-angle-down"></i>
             </div>
             <div class="sectionBody">
+                <table id="aprovados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
+                    <thead >
+                        <tr>
+                            <th>Titol</th>
+                            <th>Subtitol</th>
+                            <th>Autor</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($recursos_visibles as $aprovado)
+                            <tr>
+                                <th><a href="{{action('backend\Recursos@edit', ['id' => $aprovado->recurs_id])}}">{{$aprovado->titolRecurs}}</a></th>
+                                <th>{{$aprovado->subTitol}}</th>
+                                <th>{{$aprovado->creatPer}}</th>
+                                <th>
+                                    {!!Form::open(['url'=>'/admin/recursos/delete/'.$aprovado->recurs_id, 'method' => 'post'])!!}
+                                    {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
+                                    {!!Form::close()!!}
+                                </th>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="sectionHeader">
+                <h2>Pendents</h2>
+                <i class="fa fa-angle-down rotate"></i>    
+            </div>
+            <div class="sectionBody" hidden>
                 <table id="pendientes" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
                     <thead >
                         <tr>
@@ -65,76 +98,11 @@
 
         <div class="section">
             <div class="sectionHeader">
-                <h2>Reportados</h2>
-                <i class="fa fa-angle-down"></i>
+                <h2>Eliminats</h2>
+                <i class="fa fa-angle-down rotate"></i>
             </div>
-            <div class="sectionBody">
-                <table id="reportados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
-                    <thead >
-                        <tr>
-                            <th>Titol</th>
-                            <th>Subtitol</th>
-                            <th>Autor</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($reported_resources as $reportado)
-                            <tr>
-                                <th><a href="{{action('backend\Recursos@edit', ['id' => $reportado->recurs_id])}}">{{$reportado->titolRecurs}}</a></th>
-                                <th>{{$reportado->subTitol}}</th>
-                                <th>{{$reportado->creatPer}}</th>
-                                <th>
-                                    {!!Form::open(['url'=>'/admin/recursos/delete/'.$reportado->recurs_id, 'method' => 'post'])!!}
-                                    {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
-                                    {!!Form::close()!!}
-                                </th>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="sectionHeader">
-                <h2>Aprovados</h2>
-                <i class="fa fa-angle-down"></i>
-            </div>
-            <div class="sectionBody">
-                <table id="aprovados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
-                    <thead >
-                        <tr>
-                            <th>Titol</th>
-                            <th>Subtitol</th>
-                            <th>Autor</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($recursos_visibles as $aprovado)
-                            <tr>
-                                <th><a href="{{action('backend\Recursos@edit', ['id' => $aprovado->recurs_id])}}">{{$aprovado->titolRecurs}}</a></th>
-                                <th>{{$aprovado->subTitol}}</th>
-                                <th>{{$aprovado->creatPer}}</th>
-                                <th>
-                                    {!!Form::open(['url'=>'/admin/recursos/delete/'.$aprovado->recurs_id, 'method' => 'post'])!!}
-                                    {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
-                                    {!!Form::close()!!}
-                                </th>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="section">
-            <div class="sectionHeader">
-                <h2>Borrados</h2>
-                <i class="fa fa-angle-down"></i>
-            </div>
-            <div class="sectionBody">
-                <table id="aprovados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
+            <div class="sectionBody" hidden>
+                <table id="borrados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
                     <thead >
                     <tr>
                         <th>Titol</th>

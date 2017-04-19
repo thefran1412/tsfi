@@ -27,6 +27,8 @@ use Monolog\Handler\StreamHandler;
 use \App\Category;
 use \App\Tag;
 use stdClass;
+use Twitter;
+
 
 class Recursos extends Controller
 {
@@ -212,10 +214,29 @@ class Recursos extends Controller
             $recurso->preuInferior =  setDefaults($request, 'preuInferior', 'recursos');
             $recurso->preuSuperior =  setDefaults($request, 'preuSuperior', 'recursos');
             $recurso->dataPublicacio = getCorrectDate($request['dataPublicacio']);
-            $recurso->visible = $request['visible'];
             $recurso->fotoResum = uppsertFotoresum($request);
+
+            if($visible = $request->only('visible')){
+               
+                if($visible['visible'] == 1){
+
+                    $url = $_SERVER['HTTP_HOST'];
+
+                    $concat = 'http://'.$url.'/projects/ts/tsfi#/resource/'.$id;
+
+                    Twitter::postTweet(['status' => $concat]);
+                }
+
+                $recurso->visible = $request[$visible['visible']];
+
+            }
+
+
+
             $recurso->save();
         }
+
+
 
         $insertedId = $recurso->recurs_id;
         if($request['multipleage'] !== null)addRecursoAge($request, $insertedId);

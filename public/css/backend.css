@@ -31,6 +31,10 @@ html, body {
 div{
 	/*border: 1px solid black;*/
 }
+body{
+	background: linear-gradient(to left, #009688, #4CAF50);
+	background: linear-gradient(to right, #cfad6c, #af5b4c);
+}
 
 /* HEADER */
 .header{
@@ -74,12 +78,12 @@ div{
 	height: 50px;
 	position: absolute;
 	top: 0;
-	right: 50px;
+	right: 65px;
 	width: 50px;
 	padding: 10px;
 	text-align: center;
 	line-height: 30px;
-	font-size: 20px;
+	font-size: 15px;
 }
 
 .logout{
@@ -87,12 +91,12 @@ div{
 	height: 50px;
 	position: absolute;
 	top: 0;
-	right: 0;
+	right: 15px;
 	width: 50px;
 	padding: 10px;
 	text-align: center;
 	line-height: 30px;
-	font-size: 20px;
+	font-size: 15px;
 
 }
 .dropdown{
@@ -110,11 +114,11 @@ div{
 /* MENU */
 .menu{
 	position: fixed;
-	left: 0;
-	top: 50px;
-	width: 250px;
+	left: 3px;
+	top: 100px;
+	width: 150px;
 	height: 100vh;
-	background-color: #313942;
+	/*background-color: #313942;*/
 	display: inline-block;
 	z-index: 9;
 }
@@ -127,14 +131,29 @@ div{
 	font-size: 30px;
 }
 .menu a{
-	color: #9299A2;
+	color: white;
 	text-decoration: none; 
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	border-radius: 3px;
+	transition: background .5s ease
+}
+.menu a:hover{
+	background-color: rgba(65, 99, 104, 0.7);
+}
+.menu ul {
+	list-style-type: none;
 }
 .menu ul li{
+	height: 40px;
 	width: 100%;
+	line-height: 40px;
+	margin: 10px;
 }
 .menu i{
 	margin-right: 15px;
+	margin-left: 15px;
 }
 .noti img{
 	width: 25px;
@@ -146,17 +165,43 @@ div{
 /* SUB HEADER */
 .subHeader{
 	position: fixed;
-	height: 50px;
-	width: calc(100% - 250px);
+	height: 60px;
+	width: 100%;
 	right: 0;
 	top: 50px;
-	background: linear-gradient(to left, #009688, #4CAF50);
 	z-index: 9;
+	transition: all 1s;
+}
+
+.subActions{
+	display: inline-block;
+	float: right;
+	cursor: pointer;
+	padding: 5px 20px;
+	margin-right: 20px;
+	margin-top: 18px;
+	background-color: rgba(255, 255, 255, 0.3);
+	border-radius: 4px;
+	color: white;
+}
+
+.down{
+	background-color: rgba(255, 255, 255, 0.8);
+	color: black;
+}
+
+.pad{
+	margin-top: 6px !important;
+}
+
+.bg{
+	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(124, 124, 124, 0));
 }
 
 .headerRoute{
-	padding: 10px;
-	padding-left: 20px;
+	margin-top: 18px;
+	padding-left: 170px;
+	display: inline-block;
 }
 .headerRoute h2 {
 	display: inline-block;
@@ -170,9 +215,9 @@ div{
 /* CONTENT */
 .content{
 	float: right;
-	width: calc(100% - 250px);
-	background-color: #EFF3F6;
-	margin-top: 100px;
+	width: calc(100% - 150px);
+	/*background-color: #EFF3F6;*/
+	margin-top: 90px;
 	padding: 10px;
 	min-height: calc(100% - 40px);
 }

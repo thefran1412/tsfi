@@ -29,11 +29,11 @@
         <div class="headerActions">
             {{-- FRONTEND --}}
             <div class="globe">
-                <a title="Veure Pàgina" href="{{url('/')}}" class="home"><i class="fa fa-globe"></i></a>
+                <a title="Veure Pàgina" target="_blank" href="{{url('/')}}" class="home"><i class="fa fa-globe"></i></a>
             </div>
             {{-- LOGOUT --}}
             <div class="logout">
-                <a title="Més opcions" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></a>
+                <a title="Tancar Sessió" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i></a>
             </div>
             
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
@@ -49,7 +49,7 @@
     <div class="menu">
         {{-- ICON --}}
         {{-- <div class="menuIcon">T.S.F.I</div> --}}
-        <ul class="nav navbar-nav">
+        <ul>
             <li><a href="{{  action('backend\Backend@index') }}"><i class="fa fa-home"></i>Inici</a></li>
             <li><a href="{{  action('backend\Recursos@index') }}"><i class="fa fa-file-text"></i>Recursos</a></li>
             {{-- <li><a href="{{  action('backend\Recursos@add') }}">---Add</a></li> --}}
@@ -68,6 +68,10 @@
         {{-- ROUTE --}}
         <div class="headerRoute">
             <h2><a href="{{ action('backend\Backend@index') }}"><i class="fa fa-home"></i></a>@yield('titol')</h2>
+        </div>
+        <div class="subActions">
+            <i class="fa fa-plus"></i>
+            <span>Afegir</span>
         </div>
     </div>
 
@@ -97,6 +101,20 @@
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),
     ]); ?>
+</script>
+<script type="text/javascript">
+    $( window ).scroll(function() {
+        if ($(window).scrollTop() > 0) {
+            $('.subHeader').addClass('bg');
+            $('.headerRoute, .subActions').addClass('pad');
+            $('.subActions').addClass('down');
+        }
+        else{
+            $('.subHeader').removeClass('bg');
+            $('.headerRoute, .subActions').removeClass('pad');
+            $('.subActions').removeClass('down');
+        }
+    });
 </script>
 @yield('script')
 </html>

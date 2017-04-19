@@ -13,25 +13,26 @@
 @endsection
 
 @section('content')
-     <div class="leftCreate">
-          <div class="createHeader">
-               <h2>Editar</h2>
-          </div>
-          <div class="createBody">
+     <div class="section">
+            <div class="sectionHeader">
+                <h2>Editar Tag</h2>
+                <i class="fa fa-angle-down"></i>    
+            </div>
+            <div class="sectionBody">
             {!!Form::model($categoria, ['action' => ['backend\Categories@update', $categoria->categoria_id], 'method' => 'put'])!!}
               <div>
                   {!!Form::label('nomCategoria', 'Nom: ')!!}
                   {!!Form::text('nomCategoria', null, ['class' => 'form-control', 'placeholder' => 'Nom de la categoria'])!!}
               </div>
-              <div>
+              <div class="mar">
                   {!!Form::label('descCategoria', 'Descripció: ')!!}
                   {!!Form::textarea('descCategoria', null, ['class' => 'form-control', 'placeholder' => 'Descripció de la categoria'])!!}
               </div>
-              <div>
+              <div class="mar">
                   {!!Form::label('codiCategoria', 'Codi: ')!!}
                   {!!Form::text('codiCategoria', null, ['class' => 'form-control', 'placeholder' => 'Codi de la categoria'])!!}
               </div>
-              <div>
+              <div class="mar">
                   {!!Form::submit('Guardar canvis', ['class' => 'btn btn-primary'])!!}
               </div>
           {!!Form::close()!!}

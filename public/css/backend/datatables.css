@@ -226,6 +226,7 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
 	width: 100%;
 	padding: 10px 20px;
     cursor: pointer;
+    position: relative;
 }
 .sectionHeader h2, .sectionHeader i{
     display: inline-block;

@@ -29,6 +29,7 @@
         <div class="section">
             <div class="sectionHeader">
                 <h2>Aprovats</h2>
+                <div class="numbers">{{ $recursos_visibles->count() }}</div>
                 <i class="fa fa-angle-down"></i>
             </div>
             <div class="sectionBody">
@@ -66,6 +67,7 @@
         <div class="section">
             <div class="sectionHeader">
                 <h2>Pendents</h2>
+                <div class="numbers">{{ $recursos_pendents->count() }}</div>
                 <i class="fa fa-angle-down rotate"></i>    
             </div>
             <div class="sectionBody" hidden>
@@ -110,6 +112,7 @@
         <div class="section">
             <div class="sectionHeader">
                 <h2>Eliminats</h2>
+                <div class="numbers">{{ $deleted_resources->count() }}</div>
                 <i class="fa fa-angle-down rotate"></i>
             </div>
             <div class="sectionBody" hidden>

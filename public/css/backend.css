@@ -195,7 +195,7 @@ body{
 }
 
 .bg{
-	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(124, 124, 124, 0));
+	background: linear-gradient(rgba(64, 64, 64, 0.8), rgba(124, 124, 124, 0));
 }
 
 .headerRoute{
@@ -220,4 +220,12 @@ body{
 	margin-top: 90px;
 	padding: 10px;
 	min-height: calc(100% - 40px);
+}
+
+#add{
+	width: 100%;
+}
+
+.mar{
+	margin-top: 10px;
 }

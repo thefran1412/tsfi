@@ -39,26 +39,17 @@
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>
-            {{-- NOTIFICATIONS --}}
-            {{-- <a title="Notificacions" href="#" class="noti"><i class="fa fa-bell-o"></i><!-- <img alt="Notificacions" src="/img/noti.png"> --></a> --}}
-            {{-- <a title="Més opcions" href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">admin<i class="fa fa-angle-down dropdown"></i><!-- <img src="/img/down.png" > --></a> --}}
         </div>
 
     </div>
     {{-- HEADER END --}}
     <div class="menu">
-        {{-- ICON --}}
-        {{-- <div class="menuIcon">T.S.F.I</div> --}}
         <ul>
             <li><a href="{{  action('backend\Backend@index') }}"><i class="fa fa-home"></i>Inici</a></li>
             <li><a href="{{  action('backend\Recursos@index') }}"><i class="fa fa-file-text"></i>Recursos</a></li>
-            {{-- <li><a href="{{  action('backend\Recursos@add') }}">---Add</a></li> --}}
             <li><a href="{{  action('backend\Categories@index') }}"><i class="fa fa-archive"></i>Categories</a></li>
             <li><a href="{{  action('backend\Tags@index') }}"><i class="fa fa-tag"></i>Tags</a></li>
             <li><a href="{{  action('backend\Entitats@index') }}"><i class="fa fa-building"></i>Entitats</a></li>
-            {{-- <li><a href="{{  action('backend\Entitats@add') }}">---Add</a></li> --}}
-            {{-- <li><a href="{{  action('backend\Usuaris@index') }}"><i class="fa fa-user"></i>Usuaris</a></li> --}}
-            {{-- <li><a href="{{  action('backend\Usuaris@add') }}">---Add</a></li> --}}
             <li><a href="{{  action('backend\Analytics@index') }}"><i class="fa fa-bar-chart"></i>Analytics</a></li>
             <li><a href="{{  action('backend\Backend@config') }}"><i class="fa fa-cog"></i>Configuració</a></li>
         </ul>
@@ -74,7 +65,7 @@
             <span>Afegir</span>
         </div>
     </div>
-
+    
     <div class="content">
       @if(count($errors) > 0)
         <div class="row">
@@ -86,7 +77,9 @@
             @endforeach
         </div>
     @endif
-    
+    <div id="add" hidden>
+        @yield('add')
+    </div>
     @yield('content')
     
     </div>
@@ -97,24 +90,15 @@
  <script src="{{ URL::asset('/js/jquery.min.js') }}"></script>
  <script type="{{ URL::asset('/js/bootstrap.min.js') }}"></script>
  <script src="{{ URL::asset('/js/backend.js') }}"></script>
+ @if(count($errors) > 0)
+    <script type="text/javascript">
+        toggleAdd();
+    </script>
+@endif
 <script>
     window.Laravel = <?php echo json_encode([
         'csrfToken' => csrf_token(),
     ]); ?>
-</script>
-<script type="text/javascript">
-    $( window ).scroll(function() {
-        if ($(window).scrollTop() > 0) {
-            $('.subHeader').addClass('bg');
-            $('.headerRoute, .subActions').addClass('pad');
-            $('.subActions').addClass('down');
-        }
-        else{
-            $('.subHeader').removeClass('bg');
-            $('.headerRoute, .subActions').removeClass('pad');
-            $('.subActions').removeClass('down');
-        }
-    });
 </script>
 @yield('script')
 </html>

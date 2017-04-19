@@ -1,8 +1,8 @@
 .paper{
 	/*background-color: white;*/
-	background-color: rgba(255, 255, 255, 0.6);
+	background-color: rgba(255, 255, 255, 0.3);
 	padding: 10px;
-	margin: 20px;
+	margin: 20px 10px;
 	box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
 	display: block;
 }

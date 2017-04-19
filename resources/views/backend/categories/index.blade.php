@@ -11,7 +11,7 @@
 @endsection
 
 @section('script')
-         <script src="{{ URL::asset('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(document).ready(function() {
@@ -20,8 +20,37 @@
     </script>
 @endsection
 
+@section('add')
+  <div class="section">
+    <div class="sectionHeader">
+        <h2>Afegir Categoria</h2>
+        <i class="fa fa-angle-down"></i>    
+    </div>
+    <div class="sectionBody">
+      {!!Form::open(['action' => 'backend\Categories@store', 'method' => 'post'])!!}
+        <div class="mar">
+            {!!Form::label('nomCategoria', 'Nom: ')!!}
+            {!!Form::text('nomCategoria', null, ['class' => 'form-control', 'placeholder' => 'Nom de la categoria'])!!}
+        </div>
+        <div class="mar">
+            {!!Form::label('descCategoria', 'Descripció: ')!!}
+            {!!Form::textarea('descCategoria', null, ['class' => 'form-control', 'placeholder' => 'Descripció de la categoria'])!!}
+        </div>
+        <div class="mar">
+            {!!Form::label('codiCategoria', 'Codi: ')!!}
+            {!!Form::text('codiCategoria', null, ['class' => 'form-control', 'placeholder' => 'Codi de la categoria'])!!}
+        </div>
+        <div class="mar">
+            {!!Form::submit('Guardar canvis', ['class' => 'btn btn-primary'])!!}
+        </div>
+    {!!Form::close()!!}
+    </div>
+   </div>
+@endsection
+
 @section('content')
-     <div class="leftCreate">
+    <?php
+    /* <div class="leftCreate">
           <div class="createHeader">
                <h2>Afegir Categoria</h2>
           </div>
@@ -44,11 +73,12 @@
               </div>
           {!!Form::close()!!}
           </div>
-     </div>
+     </div>*/
+    ?>
      <div class="rightTable">
           <div class="section">
             <div class="sectionHeader">
-                <h2>Pendientes</h2>
+                <h2>Categories</h2>
                 <i class="fa fa-angle-down"></i>    
             </div>
             <div class="sectionBody">

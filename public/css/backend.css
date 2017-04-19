@@ -185,11 +185,18 @@ body{
 	color: white;
 }
 
+.subActions a{
+	color: white;
+	text-decoration: none;
+}
 .down{
 	background-color: rgba(255, 255, 255, 0.8);
 	color: black;
 }
 
+.down a{
+	color: black;
+}
 .pad{
 	margin-top: 6px !important;
 }
@@ -219,7 +226,7 @@ body{
 	/*background-color: #EFF3F6;*/
 	margin-top: 90px;
 	padding: 10px;
-	min-height: calc(100% - 40px);
+	/*min-height: calc(100% - 40px);*/
 }
 
 #add{

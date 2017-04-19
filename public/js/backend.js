@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    $('.subActions').click(function () {
+    $('#afegir').click(function () {
     	toggleAdd();
     })
 });

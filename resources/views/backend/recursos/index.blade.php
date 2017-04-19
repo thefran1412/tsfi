@@ -1,4 +1,6 @@
-@extends('layouts.backend')
+@extends('layouts.backend', ['add' => 'link'])
+
+@section('addUrl', '/admin/recursos/add')
 
 @section('titol')
   <i class="fa fa-angle-right"></i>
@@ -15,9 +17,9 @@
     <script src="{{ URL::asset('https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-             $('#pendientes').DataTable();
-             $('#aprovados').DataTable();
-             $('#borrados').DataTable();
+            $('#pendientes').DataTable();
+            $('#aprovados').DataTable();
+            $('#borrados').DataTable();
         } );
     </script>
 @endsection

@@ -1,4 +1,5 @@
 @extends('layouts.backend')
+
 @section('css')
     <link href="{{ URL::asset('/js/sumer_note/summernote.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/extra.css') }}" rel="stylesheet">
@@ -6,8 +7,8 @@
     <link href="{{ URL::asset('/css/backend/resourceadd.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/add.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
-
 @endsection
+
 @section('script')
     <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
     <script src="{{ URL::asset('/js/custom_editors.js') }}"></script>
@@ -16,6 +17,7 @@
     <script src="{{ URL::asset('/js/map_back.js') }}"></script>
     <script src="{{ URL::asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyC6W8jZVCTHjiEWUf12Gi5oCfehmzPj8mg&libraries=places&callback=initMap') }}" async defer></script>
 @endsection
+
 @section('titol')
     <i class="fa fa-angle-right"></i>
     <a href="{{ action('backend\Recursos@index') }}">Recursos</a>
@@ -24,7 +26,6 @@
 @endsection
 
 @section('content')
-
     <div class="section">
         @include('partials.errors')
         {!! Form::open(array('id' => 'create', 'route' => 'resource_store', 'class' => 'form', 'files' => true)) !!}
@@ -220,23 +221,23 @@
             </div>
             </div>
             <div class="paper">
-            <div class="paperfull">
-                <label class="control-label col-md-4">
-                    Guardar recurs com visible?
-                    <input type="radio" value="1" name="visible" checked></label>
+                <div class="paperfull">
+                    <label class="control-label col-md-4">
+                        Guardar recurs com visible?
+                        <input type="radio" value="1" name="visible" checked></label>
+                </div>
+                <div  class="paperfull">
+                    <label class="control-label col-md-4">
+                        Guardar el recurso como pendent?
+                        <input type="radio" value="0" name="visible"></label>
+                </div>
+                <div  class="paperfull">
+                    <label class="control-label">
+                        Borrar el recurs?
+                        <input type="radio" value="2" name="visible"></label>
+                </div>
+                <br>
             </div>
-            <div  class="paperfull">
-                <label class="control-label col-md-4">
-                    Guardar el recurso como pendent?
-                    <input type="radio" value="0" name="visible"></label>
-            </div>
-            <div  class="paperfull">
-                <label class="control-label">
-                    Borrar el recurs?
-                    <input type="radio" value="2" name="visible"></label>
-            </div>
-            <br>
-        </div>
         <div id="error_submit"></div>
         <div class="form-group row">
             <div class="col-sm-10">

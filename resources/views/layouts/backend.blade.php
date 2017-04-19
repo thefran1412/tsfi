@@ -1,3 +1,10 @@
+<?php 
+
+if (!isset($add)) {
+    $add = false;
+}
+ ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -60,10 +67,20 @@
         <div class="headerRoute">
             <h2><a href="{{ action('backend\Backend@index') }}"><i class="fa fa-home"></i></a>@yield('titol')</h2>
         </div>
-        <div class="subActions">
-            <i class="fa fa-plus"></i>
-            <span>Afegir</span>
-        </div>
+        @if($add == 'true')
+            <div id="afegir" class="subActions">
+                <i class="fa fa-plus"></i>
+                <span>Afegir</span>
+            </div>
+        @elseif($add == 'link')
+            <div class="subActions">
+                <a href="@yield('addUrl')">
+                    <i class="fa fa-plus"></i>
+                    <span>Afegir</span>
+                </a>
+            </div>
+        @endif
+
     </div>
     
     <div class="content">

@@ -7689,36 +7689,3 @@ button.close {
 }
 
 /*# sourceMappingURL=app.css.map */
-
-
-/* FRAN */
-
-.header{
-  background-color: #333;
-  height: 50px;
-  width: 100%;
-  position: fixed;
-}
-.header span{
-  color: green;
-}
-.row{
-  margin-top: 70px;
-}
-
-body{
-  background: linear-gradient(to right, #cfad6c, #af5b4c);
-}
-
-.panel-body{
-  background-color: rgba(255, 255, 255, 0.6);
-}
-.panel-heading{
-  background-color: rgba(255, 255, 255, 0.3) !important;
-}
-.panel {
-  background-color: rgba(0, 0, 0, 0);
-  border: 0px solid transparent; 
-  border-radius: 0px; 
-  box-shadow: 0; 
-}

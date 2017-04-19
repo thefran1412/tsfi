@@ -22,11 +22,25 @@
             $('#borrados').DataTable();
         } );
     </script>
+    <script type="text/javascript">
+        if (localStorage.aprovats == 'false') {
+            close('aprovats');
+        }
+
+        if (localStorage.pendents == 'false') {
+            close('pendents');
+        }
+
+        if (localStorage.eliminats == 'false') {
+            close('eliminats');
+        }
+
+    </script>
 @endsection
 
 @section('content')
     <div class="wrapper" id="listrecurso">
-        <div class="section">
+        <div id="aprovats" class="section">
             <div class="sectionHeader">
                 <h2>Aprovats</h2>
                 <div class="numbers">{{ $recursos_visibles->count() }}</div>
@@ -64,13 +78,13 @@
             </div>
         </div>
 
-        <div class="section">
+        <div id="pendents" class="section">
             <div class="sectionHeader">
                 <h2>Pendents</h2>
                 <div class="numbers">{{ $recursos_pendents->count() }}</div>
-                <i class="fa fa-angle-down rotate"></i>    
+                <i class="fa fa-angle-down"></i>    
             </div>
-            <div class="sectionBody" hidden>
+            <div class="sectionBody">
                 <table id="pendientes" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
                     <thead >
                         <tr>
@@ -109,13 +123,13 @@
             </div>
         </div>
 
-        <div class="section">
+        <div id="eliminats" class="section">
             <div class="sectionHeader">
                 <h2>Eliminats</h2>
                 <div class="numbers">{{ $deleted_resources->count() }}</div>
-                <i class="fa fa-angle-down rotate"></i>
+                <i class="fa fa-angle-down"></i>
             </div>
-            <div class="sectionBody" hidden>
+            <div class="sectionBody">
                 <table id="borrados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
                     <thead >
                     <tr>

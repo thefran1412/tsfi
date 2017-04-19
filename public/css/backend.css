@@ -140,7 +140,7 @@ body{
 	transition: background .5s ease
 }
 .menu a:hover{
-	background-color: rgba(65, 99, 104, 0.7);
+	background-color: rgba(55, 55, 55, 0.5);
 }
 .menu ul {
 	list-style-type: none;
@@ -152,8 +152,11 @@ body{
 	margin: 10px;
 }
 .active{
-	background-color: #af5b4c;
+	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 3px;
+}
+.active a{
+	color: black;
 }
 .menu i{
 	margin-right: 15px;
@@ -240,4 +243,12 @@ body{
 
 .mar{
 	margin-top: 10px;
+}
+
+.alert {
+	margin: 20px 25px 10px 25px;
+}
+.alert-danger{
+	background-color: rgba(255, 255, 255, 0.65);
+	border: none;
 }

@@ -2,6 +2,9 @@ $( document ).ready(function() {
     $('#afegir').click(function () {
     	toggleAdd();
     })
+    $('.close').click(function () {
+        $('.alert-danger').remove();
+    })
 });
 
 $( ".sectionHeader" ).on( "click", function() {

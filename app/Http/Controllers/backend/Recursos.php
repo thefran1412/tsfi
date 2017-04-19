@@ -44,15 +44,15 @@ class Recursos extends Controller
 
     public function index()
     {
-        $recursos_pendents = Resource::where('visible', 0)->get();
-        $recursos_visibles = Resource::where('visible', 1)->get();
-        $deleted_resources = Resource::where('visible', 2)->get();
-        $reported_resources = Resource::where('visible', 3)->get();
+        $recursos_pendents = Resource::where('visible', 0)->with('category','entity')->get();
+        $recursos_visibles = Resource::where('visible', 1)->with('category','entity')->get();
+        $deleted_resources = Resource::where('visible', 2)->with('category','entity')->get();
+        // $reported_resources = Resource::where('visible', 3)->get();
         return view('backend.recursos.index', [
             'recursos_visibles' => $recursos_visibles,
             'recursos_pendents' => $recursos_pendents,
-            'deleted_resources' => $deleted_resources,
-            'reported_resources' => $reported_resources
+            'deleted_resources' => $deleted_resources
+            // 'reported_resources' => $reported_resources
         ]);
     }
     public function add()

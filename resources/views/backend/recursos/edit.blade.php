@@ -12,7 +12,7 @@
     <i class="fa fa-angle-right"></i>
     <a href="{{ action('backend\Recursos@index') }}">Recursos</a>
     <i class="fa fa-angle-right"></i>
-    <a href="{{ action('backend\Recursos@add') }}">Afegir</a>
+    <a href="{{ action('backend\Recursos@add') }}">Editar</a>
 @endsection
 @section('script')
     <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>

@@ -36,23 +36,27 @@
                     <thead >
                         <tr>
                             <th>Titol</th>
-                            <th>Subtitol</th>
                             <th>Autor</th>
-                            <th>Delete</th>
+                            <th>Categoria</th>
+                            <th>Entitat</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($recursos_visibles as $aprovado)
-                            <tr>
-                                <th><a href="{{action('backend\Recursos@edit', ['id' => $aprovado->recurs_id])}}">{{$aprovado->titolRecurs}}</a></th>
-                                <th>{{$aprovado->subTitol}}</th>
-                                <th>{{$aprovado->creatPer}}</th>
-                                <th>
-                                    {!!Form::open(['url'=>'/admin/recursos/delete/'.$aprovado->recurs_id, 'method' => 'post'])!!}
-                                    {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
-                                    {!!Form::close()!!}
-                                </th>
-                            </tr>
+                            @if(isset($aprovado->entity[0]) && $aprovado->entity[0]->deleted == 0 || !isset($aprovado->entity[0]))
+                                <tr>
+                                    <th><a href="{{action('backend\Recursos@edit', ['id' => $aprovado->recurs_id])}}">{{$aprovado->titolRecurs}}</a></th>
+                                    <th>{{$aprovado->creatPer}}</th>
+                                    <th>{{isset($aprovado->category[0]) ? $aprovado->category[0]->nomCategoria : 'Sense categoria' }}</th>
+                                    <th>{{ isset($aprovado->entity[0]) ? $aprovado->entity[0]->nomEntitat : 'Sense entitat' }}</th>
+                                    <th>
+                                        {!!Form::open(['url'=>'/admin/recursos/delete/'.$aprovado->recurs_id, 'method' => 'post'])!!}
+                                        {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
+                                        {!!Form::close()!!}
+                                    </th>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -69,29 +73,34 @@
                     <thead >
                         <tr>
                             <th>Titol</th>
-                            <th>Subtitol</th>
+                            <th>Autor</th>
                             <th>Autor</th>
                             <th>Aprovar</th>
-                            <th>Delete</th>
+                            <th>asdasd</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($recursos_pendents as $pendent)
-                            <tr>
-                                <th><a href="{{action('backend\Recursos@edit', ['id' => $pendent->recurs_id])}}">{{$pendent->titolRecurs}}</a></th>
-                                <th>{{$pendent->subTitol}}</th>
-                                <th>{{$pendent->creatPer}}</th>
-                                <th>
-                                    {!!Form::open(['url'=>'/admin/recursos/aprove/'.$pendent->recurs_id, 'method' => 'post'])!!}
-                                    {!!Form::submit('Aprovar', ['class' => 'btn btn-primary'])!!}
-                                    {!!Form::close()!!}
-                                </th>
-                                <th>
-                                    {!!Form::open(['url'=>'/admin/recursos/delete/'.$pendent->recurs_id, 'method' => 'post'])!!}
-                                    {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
-                                    {!!Form::close()!!}
-                                </th>
-                            </tr>
+                            @if(isset($pendent->entity[0]) && $pendent->entity[0]->deleted == 0 || !isset($pendent->entity[0]))
+                                <tr>
+                                    <th><a href="{{action('backend\Recursos@edit', ['id' => $pendent->recurs_id])}}">{{$pendent->titolRecurs}}</a></th>
+                                    <th>{{$pendent->creatPer}}</th>
+                                    <th>{{isset($pendent->category[0]) ? $pendent->category[0]->nomCategoria : 'Sense categoria' }}</th>
+                                    <th>{{ isset($pendent->entity[0]) ? $pendent->entity[0]->nomEntitat : 'Sense entitat' }}</th>
+                                    <th>
+                                        {!!Form::open(['url'=>'/admin/recursos/aprove/'.$pendent->recurs_id, 'method' => 'post'])!!}
+                                        {!!Form::submit('Aprovar', ['class' => 'btn btn-primary'])!!}
+                                        {!!Form::close()!!}
+                                    </th>
+                                    <th>
+                                        {!!Form::open(['url'=>'/admin/recursos/delete/'.$pendent->recurs_id, 'method' => 'post'])!!}
+                                        {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
+                                        {!!Form::close()!!}
+                                    </th>
+                                </tr>
+                            @endif
+                           
                         @endforeach
                     </tbody>
                 </table>
@@ -110,7 +119,7 @@
                         <th>Titol</th>
                         <th>Subtitol</th>
                         <th>Autor</th>
-                        <th>Recover</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>

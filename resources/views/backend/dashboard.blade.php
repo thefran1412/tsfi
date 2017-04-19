@@ -1,15 +1,20 @@
 @extends('layouts.backend')
 @section('title', 'Dashboard')
 @section('content')
-@endsection
-@section('content')
-<div class="paper">
-     <div class="paper_title">
-          Hola
-     </div>
-     <div>
-          <p>{{$views}}</p>
-     </div>
-</div>
+	<div class="dashWrap">
+		<div class="dash">
+			<h2>Recursos Aprovats</h2>
+			<h1>{{ $visibles }}</h1>
+		</div>
+		<div class="dash">
+			<h2>Recursos Per Aprovar</h2>
+			<h1>{{ $pendents }}</h1>
+		</div>
+		<div class="dash">
+			<h2>Entitats</h2>
+			<h1>{{ $entitats }}</h1>
+		</div>
+	</div>
+
 
 @endsection

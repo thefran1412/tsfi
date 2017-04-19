@@ -5,6 +5,8 @@ namespace App\Http\Controllers\backend;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Entity;
+use App\Resource;
 
 class Backend extends Controller
 {
@@ -21,8 +23,11 @@ class Backend extends Controller
 
     public function index()
     {
-        $views = 0;
-        return view('backend.dashboard', ['views' => $views]);
+        $pendents = Resource::where('visible', 0)->get()->count();
+        $visibles = Resource::where('visible', 1)->get()->count();
+        $entitats = Entity::get()->count();
+
+        return view('backend.dashboard', ['pendents' => $pendents, 'visibles' => $visibles, 'entitats' => $entitats]);
     }
 
     public function resource()

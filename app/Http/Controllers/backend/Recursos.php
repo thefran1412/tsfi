@@ -62,6 +62,7 @@ class Recursos extends Controller
         $edats = Age::pluck('descEdat', 'edats_id');
         $targets = Target::pluck('target', 'targets_id');
         $current_time = Carbon::now()->format('Y-m-d');
+
         return view('backend.recursos.add',[
                 'edats'=>$edats,
                 'categorias'=>$categorias,
@@ -107,7 +108,7 @@ class Recursos extends Controller
             'dataPublicacio' => getCorrectDate($request['dataPublicacio']),
             'created-at' => getCorrectDate()->getTimestamp(),
             'updated_at' => getCorrectDate()->getTimestamp(),
-            'visible' => upsertVisible($request),
+            'visible' => strval($request['visible']),
             'fotoResum' => $this->fotoResum,
             'idLocalitzacio' => $locId
         ]);
@@ -123,7 +124,6 @@ class Recursos extends Controller
         if($request['linkrecurs'] !== null)addRecursLinks($request, $insertedId);
         upsertRecursVideo($request, $insertedId);
         if($request['target'])upsertRecursTarget($request, $insertedId);
-        exit();
         return redirect()->to('admin/recursos');
     }
 
@@ -205,7 +205,7 @@ class Recursos extends Controller
         //guarda la localització del mapa i torna l'id
         $locId = $validatemap->saveMap();
 
-        $recurso = Resource::find($id);
+        $recurso = Resource::where(['recurs_id' => $id])->first();
         if ($recurso){
             $recurso->titolRecurs = $request['titolRecurs'];
             $recurso->subTitol = setDefaults($request, 'subTitol', 'recursos');
@@ -221,8 +221,10 @@ class Recursos extends Controller
             $recurso->preuSuperior =  setDefaults($request, 'preuSuperior', 'recursos');
             $recurso->dataPublicacio = getCorrectDate($request['dataPublicacio']);
             $recurso->fotoResum = uppsertFotoresum($request);
-            $recurso->visible = upsertVisible($request);
+            $recurso->visible = strval($request['visible']);
             $recurso->idLocalitzacio = $locId;
+            $recurso->save();
+
 
             if($visible = $request->only('visible')){
                 if($visible['visible'] == 1){
@@ -232,10 +234,7 @@ class Recursos extends Controller
                 }
                 $recurso->visible = $request[$visible['visible']];
             }
-            $recurso->save();
         }
-
-
 
         $insertedId = $recurso->recurs_id;
         if($request['multipleage'] !== null)addRecursoAge($request, $insertedId);
@@ -247,6 +246,7 @@ class Recursos extends Controller
         upsertRecursPodcast($request, $insertedId);
         upsertRecursVideo($request, $insertedId);
         if($request['target'] !== null)upsertRecursTarget($request, $insertedId);
+
         return redirect()->to('admin/recursos');
     }
 

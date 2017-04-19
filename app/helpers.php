@@ -27,10 +27,10 @@ use App\CategoryResource;
 
 function objectToArrayAndPleaseSelect($object){
     $new_array = [];
+    $new_array[0] = 'Selecciona una opcion';
     foreach ($object as $key => $item){
         $new_array[$key] = $item;
     }
-    $new_array = array_merge(['0'=>'Selecciona una opcion'], $new_array);
     return $new_array;
 }
 

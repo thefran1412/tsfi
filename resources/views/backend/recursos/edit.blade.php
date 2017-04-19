@@ -231,7 +231,6 @@
                 <div class="col-md-3">
                 <select class="form-control col-md-4" id="selectFormat">
                     <option>Selecciona una opción</option>
-                    <option value="1">Upload video (20 mb max)</option>
                     <option value="2">Embed video</option>
                     <option value="3">Link video</option>
                 </select>

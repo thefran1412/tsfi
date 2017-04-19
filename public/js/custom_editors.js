@@ -237,8 +237,8 @@ $(document).ready(function() {
     $videoslider.innerHeight(($videoslider.innerWidth()*2)/3);
     $imageslider.innerHeight(($videoslider.innerWidth()*2)/3);
     $podcast_box.innerHeight(($videoslider.innerWidth()*2)/3);
-    $videoSize.width($videoslider.width());
-    $videoSize.height($videoslider.height());
+    $videoSize.width($videoslider.width()-20);
+    $videoSize.height($videoslider.height()-20);
     $imgSize.width($imageslider.width());
     $imgSize.height($imageslider.height());
     $(window).resize(function() {

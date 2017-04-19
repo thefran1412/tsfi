@@ -24,15 +24,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="password1">Password</label>
+                    <label class="col-md-4 control-label" for="password">Password</label>
                     <div class="col-md-4">
-                        <input id="password1" name="password1" type="password" placeholder="Escriu un nou password" class="form-control input-md" required>
+                        <input id="password" name="password" type="password" placeholder="Escriu un nou password" class="form-control input-md" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="password2">Repetaix el password</label>
+                    <label class="col-md-4 control-label" for="remember">Indici de contrasenya</label>
                     <div class="col-md-4">
-                        <input id="password2" name="password2" type="password" placeholder="Repeteix el nou password" class="form-control input-md" required>
+                        <input id="remember" name="remember" type="text" placeholder="Escriu un indici de contraseña" class="form-control input-md" required>
                     </div>
                 </div>
                 <!-- Button -->

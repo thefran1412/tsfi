@@ -21,7 +21,6 @@ var place;
 var lat;
 var lng;
 var zoom = 7;
-
 function initMap(ilat = 41.627619, ilng = 2, dir = null) {
 
   var myLatLng = {lat: ilat, lng: ilng};

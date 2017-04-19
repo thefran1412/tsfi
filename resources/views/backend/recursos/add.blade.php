@@ -1,7 +1,6 @@
 @extends('layouts.backend')
 
 @section('css')
-    <link href="{{ URL::asset('/js/sumer_note/summernote.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/extra.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/multi-select.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('/css/backend/resourceadd.css') }}" rel="stylesheet">
@@ -138,17 +137,16 @@
             </div>
         </div>
         <div class="paper">
-            
             <div class="paperfull">
                 <label for="selectFormat" class="control-label col-md-3">Selecciona el formato de video.</label>
-            <div class="col-md-3">
-                <select class="form-control col-md-4" id="selectFormat">
-                    <option>Selecciona una opción</option>
-                    <option value="1">Upload video (20 mb max)</option>
-                    <option value="2">Embed video</option>
-                    <option value="3">Link video</option>
-                </select>
-            </div>
+                <div class="col-md-3">
+                    <select class="form-control col-md-4" id="selectFormat">
+                        <option>Selecciona una opción</option>
+                        <option value="1">Upload video (20 mb max)</option>
+                        <option value="2">Embed video</option>
+                        <option value="3">Link video</option>
+                    </select>
+                </div>
             <div class="row">
                 <div id="videoInput" class="col-md-4 col-md-offset-3">
 
@@ -186,11 +184,13 @@
                 <div id="slider_podcast_wrapper" class="col-md-4 col-md-offset-3 slider">
                     <div id="podcast_preview">
                     </div>
+                    <div id="left"><button id="podcast_previous" type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-left"></button></div>
+                    <div id="right"><button id="podcast_next"  type="button" class="btn btn-default btn-xs glyphicon glyphicon-chevron-right"></button></div>
+                    <div id="center"><button id="podcastdelete"  type="button" class="btn btn-danger btn-xs glyphicon glyphicon-remove"></button></div>
                 </div>
             </div>
-
             <div class="paperfull">
-                <label for="addpodcast" class="control-label">Añade un podcast</label>
+                <label for="addpodcast" class="control-label col-md-3">Añade un podcast</label>
                 <div class="col-md-3">
                     <textarea type="text" id="addpodcast" class="form-control" placeholder="iframe podcast"></textarea>
                 </div>
@@ -201,7 +201,7 @@
         </div>
         <div class="paper">
             <div class="paperfull">
-                <label for="target" class="control-label">Perfils del recurs</label>
+                <label for="target" class="control-label col-md-3">Perfils del recurs</label>
                 <div class="col-md-3">
                     {!! Form::select('target', $targets, null, ['class' => 'form-control']) !!}
                 </div>

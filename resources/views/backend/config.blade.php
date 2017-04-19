@@ -6,5 +6,5 @@
 @endsection
 
 @section('content')
-     <h2>Usuaris</h2>
+     <h2><a href="{{ action('backend\Usuaris@index') }}">Usuaris</a></h2>
 @endsection

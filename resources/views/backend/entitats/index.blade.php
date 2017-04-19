@@ -50,8 +50,8 @@
                               <th>
                                 <div class="actions">
                                   <a title="Editar" href="{{action('backend\Entitats@edit', ['id' => $entitat->entitat_id])}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                                  {!!Form::open(['action' => ['backend\Entitats@destroy', $entitat->entitat_id], 'method' => 'delete'])!!}
-                                  {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
+                                  {!!Form::open(['action' => ['backend\Entitats@destroy', $entitat->entitat_id], 'method' => 'delete', 'id' => 'dle'])!!}
+                                  {!!Form::submit('Borrar', ['class' => 'btn btn-danger del'])!!}
                                   {!!Form::close()!!}
                                 </div>
                               </th>

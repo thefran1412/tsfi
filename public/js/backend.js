@@ -5,6 +5,10 @@ $( document ).ready(function() {
     $('.close').click(function () {
         $('.alert-danger').remove();
     })
+    $('.del').on('click', function(e){
+        e.preventDefault();
+        popupToggle();
+  });
 });
 
 $( ".sectionHeader" ).on( "click", function() {
@@ -45,12 +49,10 @@ function toggleAdd() {
 function state(id) {
     var e = $('#'+id).children( ".sectionBody" );
     if (e.is(":visible")) {
-        console.log('not visible');
         return false;
 
     }
     else{
-        console.log('visible');
         return true;
     }
 
@@ -64,4 +66,16 @@ function close(id) {
     // add class rotate
     $('#'+id).children('.sectionHeader').children('i').toggleClass("rotate", 'non-rotate');
 
+}
+
+function response(answer) {
+    if (answer) {
+        $( "#dle" ).submit();
+    }
+    popupToggle();
+}
+
+function popupToggle() {
+    $('.ask').fadeToggle();
+    $('.popup').fadeToggle();
 }

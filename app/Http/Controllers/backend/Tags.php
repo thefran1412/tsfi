@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Tag;
+use App\TagResource;
 
 class Tags extends Controller
 {
@@ -47,9 +48,16 @@ class Tags extends Controller
 
     public function destroy($id)
     {
+        // var_dump($id);
+        // exit();
+        //soft delete
         $e = Tag::where('tags_id', $id)->first();
         $e->deleted = 1;
         $e->save();
+
+        // delete relationship with resources
+        $tr = TagResource::where('idTag', $id)->delete();
+
 
         return redirect('admin/tags');
     }

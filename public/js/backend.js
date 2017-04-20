@@ -7,6 +7,9 @@ $( document ).ready(function() {
     })
     $('.del').on('click', function(e){
         e.preventDefault();
+        var id = $(this).parent().attr('class');
+
+        $(".doit").attr("onClick","response(true, "+id+");");
         popupToggle();
   });
 });
@@ -59,7 +62,6 @@ function state(id) {
 }
 
 function close(id) {
-    console.log('exec');
     //sectionBody hidden
     var s = $('#'+id).children(".sectionBody");
     s.slideToggle();
@@ -68,9 +70,9 @@ function close(id) {
 
 }
 
-function response(answer) {
+function response(answer, id) {
     if (answer) {
-        $( "#dle" ).submit();
+        $( "."+id ).submit();
     }
     popupToggle();
 }

@@ -108,7 +108,7 @@ if (!isset($active)) {
     <div class="ask" hidden>
         <div class="popup" hidden>
             <p>Estàs segur que vols eliminar aquest element?</p>
-            <button onClick="response(true);" class="btn btn-danger">Sí</button>
+            <button onClick="response(true);" class="btn btn-danger doit">Sí</button>
             <button onClick="response(false);" class="btn btn-info">No</button>
         </div>
     </div>

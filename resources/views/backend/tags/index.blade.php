@@ -44,30 +44,6 @@
 
 
 @section('content')
-     <?php 
-
-/*<div class="leftCreate">
-          <div class="createHeader">
-               <h2>Afegir Tag</h2>
-          </div>
-          <div class="createBody">
-            {!!Form::open(['action' => 'backend\Tags@store', 'method' => 'post'])!!}
-              <div>
-                  {!!Form::label('nomTags', 'Nom: ')!!}
-                  {!!Form::text('nomTags', null, ['class' => 'form-control', 'placeholder' => 'Nom del tag'])!!}
-              </div>
-              {{-- <div>
-                  {!!Form::label('desc', 'Descripció: ')!!}
-                  {!!Form::textarea('desc', null, ['class' => 'form-control', 'placeholder' => 'Descripció del tag'])!!}
-              </div> --}}
-              <div>
-                  {!!Form::submit('Guardar canvis', ['class' => 'btn btn-primary'])!!}
-              </div>
-          {!!Form::close()!!}
-          </div>
-     </div>*/
-
-     ?>
      <div class="rightTable">
           <div class="section">
             <div class="sectionHeader">
@@ -79,7 +55,6 @@
                     <thead >
                         <tr>
                             <th>Nom</th>
-                            {{-- <th>Descripció</th> --}}
                             <th>Accions</th>
                         </tr>
                     </thead>
@@ -87,11 +62,10 @@
                         @foreach($tags as $tag)
                             <tr>
                               <th><a href="{{action('backend\Tags@edit', ['id' => $tag->tags_id])}}">{{$tag->nomTags}}</a></th>
-                              {{-- <th>{{$tag->descTag}}</th> --}}
                               <th>
                                 <div class="actions">
                                   <a title="Editar" href="{{action('backend\Tags@edit', ['id' => $tag->tags_id])}}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                                  {!!Form::open(['action' => ['backend\Tags@destroy', $tag->tags_id], 'method' => 'delete', 'id' => 'dle'])!!}
+                                  {!!Form::open(['action' => ['backend\Tags@destroy', $tag->tags_id], 'method' => 'delete', 'id' => 'dle'.$tag->tags_id, 'class' => $tag->tags_id])!!}
                                   {!!Form::submit('Borrar', ['class' => 'btn btn-danger del'])!!}
                                   {!!Form::close()!!}
                                 </div>

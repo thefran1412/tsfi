@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
+use App\CategoryResource;
 
 class Categories extends Controller
 {
@@ -53,6 +54,14 @@ class Categories extends Controller
         $e = Category::where('categoria_id', $id)->first();
         $e->deleted = 1;
         $e->save();
+
+        // change relationship with resources
+        $cr = CategoryResource::where('idCategoria', $id)->get();
+
+        foreach ($cr as $resource) {
+            $resource->idCategoria = 1;
+            $resource->save();
+        }
 
         return redirect('admin/categories');
     }

@@ -48,9 +48,6 @@ class Tags extends Controller
 
     public function destroy($id)
     {
-        // var_dump($id);
-        // exit();
-        //soft delete
         $e = Tag::where('tags_id', $id)->first();
         $e->deleted = 1;
         $e->save();

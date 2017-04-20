@@ -12,7 +12,11 @@
           name="animate-css"
           mode="in-out"
           enter-active-class="animated fadeInUp">
+<<<<<<< HEAD
           <div class="col-md-4" v-for="(r, key) in this.$root.recursos" v-if="r.category[0].deleted === 0 || r.category[0].deleted" :key="r.recurs_id">
+=======
+          <div class="col-md-4" v-if="r.category[0].deleted === 0 || !r.category[0].deleted" v-for="(r, key) in this.$root.recursos" :key="r.recurs_id">
+>>>>>>> 880ed83c3be0bbe5b54425ff23cc257a19ef086a
             <div class="recurso">
               <div class="recurso-content">
                 <a v-bind:href="'#/resource/'+ r.recurs_id">

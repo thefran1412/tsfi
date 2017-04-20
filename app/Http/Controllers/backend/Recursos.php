@@ -57,8 +57,18 @@ class Recursos extends Controller
     }
     public function add()
     {
-        $categorias = objectToArrayAndPleaseSelect($categorias = Category::pluck('nomCategoria', 'categoria_id'));
-        $entitats = objectToArrayAndPleaseSelect(Entity::pluck('nomEntitat', 'entitat_id'));
+        $categorias = objectToArrayAddingPleaseSelect(Category::where('deleted', '!=', 1)
+            ->orWhereNull('deleted')
+            ->orderby('nomCategoria', 'ASC')
+            ->get()
+            ->pluck('nomCategoria', 'categoria_id'));
+
+        $entitats = objectToArrayAddingPleaseSelect(Entity::where('deleted', '!=', 1)
+            ->orWhereNull('deleted')
+            ->orderby('nomEntitat', 'ASC')
+            ->get()
+            ->pluck('nomEntitat', 'entitat_id'));
+
         $edats = Age::pluck('descEdat', 'edats_id');
         $targets = Target::pluck('target', 'targets_id');
         $current_time = Carbon::now()->format('Y-m-d');
@@ -132,14 +142,23 @@ class Recursos extends Controller
         $recurso = Resource::find($id);
 
 
-        $categorias = objectToArrayAndPleaseSelect($categorias = Category::pluck('nomCategoria', 'categoria_id'));
+        $categorias = objectToArrayAddingPleaseSelect($categorias = Category::where('deleted', '!=', 1)
+            ->orWhereNull('deleted')
+            ->orderby('nomCategoria', 'ASC')
+            ->get()
+            ->pluck('nomCategoria', 'categoria_id'));
 
         $selectedCategoria = CategoryResource::where(['idRecurs'=>$id])->first();
         if ($selectedCategoria){
             $selectedCategoria = $selectedCategoria->idCategoria;
         }
 
-        $entitats = objectToArrayAndPleaseSelect(Entity::pluck('nomEntitat', 'entitat_id'));
+        $entitats = objectToArrayAddingPleaseSelect(Entity::where('deleted', '!=', 1)
+            ->orWhereNull('deleted')
+            ->orderby('nomEntitat', 'ASC')
+            ->get()
+            ->pluck('nomEntitat', 'entitat_id'));
+
         $selectedEntitat = EntityResource::where(['idRecurs'=>$id])->first();
         if ($selectedEntitat){
             $selectedEntitat = $selectedEntitat->idEntitat;

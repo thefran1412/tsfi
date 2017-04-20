@@ -25,7 +25,7 @@ use App\TagResource;
 use App\CategoryResource;
 
 
-function objectToArrayAndPleaseSelect($object){
+function objectToArrayAddingPleaseSelect($object){
     $new_array = [];
     $new_array[0] = 'Selecciona una opcion';
     foreach ($object as $key => $item){

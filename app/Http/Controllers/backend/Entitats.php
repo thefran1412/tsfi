@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\EntityResource;
 use App\Http\Controllers\Validators\ImageValidator;
 use App\Http\Controllers\Validators\MapValidator;
+use App\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Entity;
@@ -90,6 +92,12 @@ class Entitats extends Controller
         $e->deleted = 1;
         $e->save();
 
+        if ($orphanresources = EntityResource::where('idEntitat', $id)->get()){
+            foreach ($orphanresources as $resource){
+                $resource->idEntitat = 101;
+                $resource->save();
+            }
+        }
         return redirect('admin/entitats');
 
     }

@@ -14,11 +14,12 @@
 				</div>
 			</div>
       <div class="container">
-          <div class="row">
+          <div v-if="list" class="row">
               <div class="col-md-12 total-results">
                   <h4>Em trobat <b>{{totalResults}}</b> recurs/os amb aquets criteris de cerca...</h4>
               </div>
-              <div class="col-sm-4 col-md-4 margin-post" v-for="l in list">
+              <!-- <pre>{{list.category.deleted}}</pre> -->
+              <div class="col-sm-4 col-md-4 margin-post"  v-for="(l, key) in list" :key="l.recurs_id">
                   <div class="post">
                       <div class="post-img-content">
                           <img :src="l.fotoResum ? 'img/image/'+ l.fotoResum : 'img/image/tsfi-default-image.png'" class="img-responsive" />

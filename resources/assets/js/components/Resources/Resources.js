@@ -38,7 +38,7 @@ export default{
 		methods:{
 			initMap: function(id) {
 
-                this.$http.get('api/recursos/'+id).then(function(response){
+                this.$http.get('../api/recursos/'+id).then(function(response){
 					
 					this.resource = response.data.resource;
 					this.dateIni = response.data.dateIni;

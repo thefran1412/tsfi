@@ -14,7 +14,7 @@ export default {
 
     onInfiniteSearch() {
 
-    	var route = 'api/search?page=' + this.pageSearch;
+    	var route = '../api/search?page=' + this.pageSearch;
       var t;
       var d;
 

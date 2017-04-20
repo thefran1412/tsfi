@@ -179,7 +179,7 @@
             </div>
             <div class="paperfull upload currentfotoresum">
                 @if($recurso->fotoResum)
-                    <img align="middle" name="previousimgresource" src="/projects/ts/img/image/{{ $recurso->fotoResum }}" width="300px" height="180px">
+                    <img align="middle" name="previousimgresource" src="/img/image/{{ $recurso->fotoResum }}" width="300px" height="180px">
                     <input type="text" value="{{ $recurso->fotoResum }}" name="previousimgresource" style="display: none;">
                 @endif
             </div>
@@ -276,7 +276,7 @@
                 <div id="image_slider">
                     @if($image_recurs)
                         @foreach($image_recurs as $key => $image)
-                            <img name="image{{ $key }}" alt="{{ $image->descImatge }}" class="img_slider" src="/projects/ts/img/image/{{ $image->imatge }}"/>
+                            <img name="image{{ $key }}" alt="{{ $image->descImatge }}" class="img_slider" src="/img/image/{{ $image->imatge }}"/>
                         @endforeach
                     @endif
                 </div>

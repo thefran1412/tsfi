@@ -49,7 +49,7 @@
             <div class="sectionBody">
                 <table id="aprovados" class="table" cellspacing="0" border="0" cellpadding="0" width="100%">
                     <thead >
-                        <tr>a
+                        <tr>
                             <th>Titol</th>
                             <th>Autor</th>
                             <th>Categoria</th>

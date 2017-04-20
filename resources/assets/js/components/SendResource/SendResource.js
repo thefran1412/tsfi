@@ -106,7 +106,7 @@ import myDatepicker from 'vue-datepicker';
         },
 		methods:{
 			fetchAges(){
-				this.$http.get('../api/ages').then(response=>{
+				this.$http.get('api/ages').then(response=>{
 	                var p=[];
 					response.data.ages.forEach(function(t){
 						p.push(t);
@@ -115,7 +115,7 @@ import myDatepicker from 'vue-datepicker';
 				})
 			},
 			fetchTargets(){
-				this.$http.get('../api/targets').then(response=>{
+				this.$http.get('api/targets').then(response=>{
 	                var p=[];
 					response.data.targets.forEach(function(t){
 						p.push(t);
@@ -124,7 +124,7 @@ import myDatepicker from 'vue-datepicker';
 				})
 			},
 			fetchEntities(){
-	            this.$http.get('../api/categories').then(response=>{
+	            this.$http.get('api/categories').then(response=>{
 	                var p=[];
 					response.data.categories.forEach(function(c){
 							if(c.categoria_id !== 6){
@@ -217,9 +217,9 @@ import myDatepicker from 'vue-datepicker';
 								concatIdTags += '#' + data.tags_id;
 							});
 							splitPr = concatIdTags.substr(1).split('#');
-							url = '../api/submit?tags='+ splitPr;
+							url = 'api/submit?tags='+ splitPr;
 						}else{
-							url = '../api/submit';
+							url = 'api/submit';
 						}
 
 						if(this.date.time !== ''){

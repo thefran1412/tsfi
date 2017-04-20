@@ -108,24 +108,24 @@ import { EventBus } from '../../app.js';
                 
             },
             fetchEntities(){
-                this.$http.get('../api/entitats').then(response=>{
+                this.$http.get('api/entitats').then(response=>{
                     this.entities = response.data.entities;
                 })
             },
             fetchCategories(){
-                this.$http.get('../api/categories').then(response=>{
+                this.$http.get('api/categories').then(response=>{
                     this.categories = response.data.categories;
                 })
             },
             fetchResource(typeUser, category){
-                this.$http.get('../api/typeuser/'+this.type+'/'+category).then(response=>{
+                this.$http.get('api/typeuser/'+this.type+'/'+category).then(response=>{
                     this.recursos = response.data.resources;
                     this.search = '';
                     this.loading = true;
                 });
               },
              onInfinite(typeUser, typeCategory) {
-                  var route = '../api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
+                  var route = 'api/typeuser/'+ typeUser+'/'+typeCategory + '?page=' + this.page;
                   var t;
                   var d;
                   

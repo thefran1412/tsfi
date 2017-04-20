@@ -5,7 +5,7 @@
 				<!-- Columna principal -->
 			<div  v-if="resource" class="col-xs-12 col-sm-8 col-md-8 col-lg-8 resource-body">
  				<!--  Foto resum-->
-				<div class="resource-img-resum" :style="{ backgroundImage: resource[0].fotoResum ? 'url(/img/image/' + resource[0].fotoResum + ')' : 'url(/img/image/tsfi-default-image.png)' }">
+				<div class="resource-img-resum" :style="{ backgroundImage: resource[0].fotoResum ? 'url(img/image/' + resource[0].fotoResum + ')' : 'url(img/image/tsfi-default-image.png)' }">
 					<div class="resource-title-sub">
 						<h1 v-if="resource[0].titolRecurs" >{{resource[0].titolRecurs}}</h1>
 						<h3 v-if="resource[0].subTitol" >{{resource[0].subTitol}}</h3>
@@ -18,18 +18,18 @@
 				<h2>{{resource[0].subtitol}}</h2>
 				<p><strong>{{resource[0].descBreu}}</strong></p>
 					<div v-if="resource[0].image_resource.length > 0" class="col-md-10 col-md-offset-2 img-resource">
-						<img class="img-responsive" :src="'/img/image/'+resource[0].image_resource[0].imatge" :alt="resource[0].image_resource[0].descImatge" :title="resource[0].image_resource[0].descImatge"></img>
+						<img class="img-responsive" :src="'img/image/'+resource[0].image_resource[0].imatge" :alt="resource[0].image_resource[0].descImatge" :title="resource[0].image_resource[0].descImatge"></img>
 					</div>
 				<p>{{resource[0].descDetaill1}}</p>
 					<div v-if="resource[0].image_resource.length > 0" class="col-md-10 col-md-offset-2 img-resource">
-						<img class="img-responsive" :src="'/img/image/'+resource[0].image_resource[1].imatge" :alt="resource[0].image_resource[1].descImatge" :title="resource[0].image_resource[1].descImatge"></img>
+						<img class="img-responsive" :src="'img/image/'+resource[0].image_resource[1].imatge" :alt="resource[0].image_resource[1].descImatge" :title="resource[0].image_resource[1].descImatge"></img>
 					</div>
 				<p>{{resource[0].descDetaill2}}</p>
 
 				<div v-if="resource[0].image_resource.length > 0">
 					<div v-for="g in resource[0].image_resource">
-						<lightbox  album="gallery" :src="'/img/image/'+g.imatge">
-							<img  class="image-gallery" width="200px" :src="'/img/image/'+g.imatge">
+						<lightbox  album="gallery" :src="'img/image/'+g.imatge">
+							<img  class="image-gallery" width="200px" :src="'img/image/'+g.imatge">
 						</lightbox>
 					</div>
 					

@@ -96,22 +96,22 @@
                     </thead>
                     <tbody>
                         @foreach($recursos_pendents as $pendent)
-                                    <tr>
-                                        <th><a href="{{action('backend\Recursos@edit', ['id' => $pendent->recurs_id])}}">{{$pendent->titolRecurs}}</a></th>
-                                        <th>{{$pendent->creatPer}}</th>
-                                        <th>{{isset($pendent->category[0]) ? $pendent->category[0]->nomCategoria : 'Sense categoria' }}</th>
-                                        <th>{{ isset($pendent->entity[0]) ? $pendent->entity[0]->nomEntitat : 'Sense entitat' }}</th>
-                                        <th>
-                                            {!!Form::open(['url'=>'/admin/recursos/aprove/'.$pendent->recurs_id, 'method' => 'post'])!!}
-                                            {!!Form::submit('Aprovar', ['class' => 'btn btn-primary'])!!}
-                                            {!!Form::close()!!}
-                                        </th>
-                                        <th>
-                                            {!!Form::open(['url'=>'/admin/recursos/delete/'.$pendent->recurs_id, 'method' => 'post'])!!}
-                                            {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
-                                            {!!Form::close()!!}
-                                        </th>
-                                    </tr>                          
+                            <tr>
+                                <th><a href="{{action('backend\Recursos@edit', ['id' => $pendent->recurs_id])}}">{{$pendent->titolRecurs}}</a></th>
+                                <th>{{$pendent->creatPer}}</th>
+                                <th>{{isset($pendent->category[0]) ? $pendent->category[0]->nomCategoria : 'Sense categoria' }}</th>
+                                <th>{{ isset($pendent->entity[0]) ? $pendent->entity[0]->nomEntitat : 'Sense entitat' }}</th>
+                                <th>
+                                    {!!Form::open(['url'=>'/admin/recursos/aprove/'.$pendent->recurs_id, 'method' => 'post'])!!}
+                                    {!!Form::submit('Aprovar', ['class' => 'btn btn-primary'])!!}
+                                    {!!Form::close()!!}
+                                </th>
+                                <th>
+                                    {!!Form::open(['url'=>'/admin/recursos/delete/'.$pendent->recurs_id, 'method' => 'post'])!!}
+                                    {!!Form::submit('Borrar', ['class' => 'btn btn-danger'])!!}
+                                    {!!Form::close()!!}
+                                </th>
+                            </tr>                          
                         @endforeach
                     </tbody>
                 </table>

@@ -1,4 +1,14 @@
 $( document ).ready(function() {
+    
+    if ($(window).scrollTop() > 10) {
+        $('.background').show();
+        $('.subActions').addClass('down');
+    }
+    else{
+        $('.background').fadeOut();
+        $('.subActions').removeClass('down');
+    }
+
     $('#afegir').click(function () {
     	toggleAdd();
     })
@@ -32,14 +42,12 @@ $( ".sectionHeader" ).on( "click", function() {
 });
 
 $( window ).scroll(function() {
-    if ($(window).scrollTop() > 0) {
-        $('.subHeader').addClass('bg');
-        $('.headerRoute, .subActions').addClass('pad');
+    if ($(window).scrollTop() > 10) {
+        $('.background').fadeIn();
         $('.subActions').addClass('down');
     }
     else{
-        $('.subHeader').removeClass('bg');
-        $('.headerRoute, .subActions').removeClass('pad');
+        $('.background').fadeOut();
         $('.subActions').removeClass('down');
     }
 });

@@ -47,26 +47,41 @@ body{
 	z-index: 10;
 }
 
+.background{
+	width: 100%;
+	height: 60px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	/*background: linear-gradient(rgba(64, 64, 64, 0.8), rgba(124, 124, 124, 0));*/
+	background: linear-gradient(to bottom, rgba(64, 64, 64, 0.75) 0%,rgba(64, 64, 64,0.50) 30%,rgba(64, 64, 64, 0) 100%);
+	display: none;
+	z-index: -1;
+}
+
 .headerTitle{
 	width: 100px;
 	height: 30px;
-
-	margin: 0 auto;
 	margin-top: 10px;
-	
+	display: inline-block;
 	font-size: 2em;
 	font-weight: bold;
 	letter-spacing: 6px;
-	color: #4FC08D;
+	color: #333;
 	cursor: pointer;
 	font-family: Simplifica;
 	line-height: normal;
 	text-align: center;
+	position: absolute;
+    top: 8px;
+    left: 35px;
+	z-index: 10;
 }
 
 .headerActions{
 	float: left;
-	height: 100%;	
+	height: 100%;
+	z-index: 10;	
 }
 
 .headerActions a{
@@ -77,7 +92,7 @@ body{
 	/*background-color: orange;*/
 	height: 50px;
 	position: absolute;
-	top: 0;
+	top: 8px;
 	right: 65px;
 	width: 50px;
 	padding: 10px;
@@ -90,7 +105,7 @@ body{
 	/*background-color: orange;*/
 	height: 50px;
 	position: absolute;
-	top: 0;
+	top: 8px;
 	right: 15px;
 	width: 50px;
 	padding: 10px;
@@ -115,7 +130,7 @@ body{
 .menu{
 	position: fixed;
 	left: 3px;
-	top: 110px;
+	top: 60px;
 	width: 150px;
 	height: 100vh;
 	/*background-color: #313942;*/
@@ -176,7 +191,7 @@ body{
 	height: 60px;
 	width: 100%;
 	right: 0;
-	top: 50px;
+	top: 0;
 	z-index: 9;
 	transition: all 1s;
 }
@@ -186,11 +201,12 @@ body{
 	float: right;
 	cursor: pointer;
 	padding: 5px 20px;
-	margin-right: 20px;
+	margin-right: 120px;
 	margin-top: 18px;
 	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 4px;
 	color: white;
+	z-index: 10;
 }
 
 .subActions a{
@@ -217,6 +233,7 @@ body{
 	margin-top: 18px;
 	padding-left: 175px;
 	display: inline-block;
+	z-index: 10;
 }
 .headerRoute h2 {
 	display: inline-block;
@@ -238,7 +255,7 @@ body{
 	float: right;
 	width: calc(100% - 155px);
 	/*background-color: #EFF3F6;*/
-	margin-top: 90px;
+	margin-top: 40px;
 	padding: 10px;
 	/*min-height: calc(100% - 40px);*/
 }

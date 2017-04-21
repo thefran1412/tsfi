@@ -242,7 +242,7 @@
                 <br>
             </div>
         <div id="error_submit"></div>
-        <div class="form-group row">
+        <div>
             <div class="col-sm-10">
                 {!!Form::submit('Create', ['class' => 'btn btn-primary'])!!}
             </div>

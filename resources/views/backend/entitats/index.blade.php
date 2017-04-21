@@ -1,6 +1,6 @@
 @extends('layouts.backend', ['add' => 'link', 'active' => 5])
 
-@section('addUrl', '/admin/entitats/add')
+@section('addUrl', action('backend\Entitats@add'))
 
 @section('titol')
   <i class="fa fa-angle-right"></i>
@@ -17,7 +17,7 @@
     <script src="{{ URL::asset('https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-             $('#entitats').DataTable();
+          $('#entitats').DataTable();
         });
     </script>
 @endsection

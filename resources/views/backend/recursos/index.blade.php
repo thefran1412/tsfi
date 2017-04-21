@@ -1,6 +1,6 @@
 @extends('layouts.backend', ['add' => 'link', 'active' => 2])
 
-@section('addUrl', '/admin/recursos/add')
+@section('addUrl', action('backend\Recursos@add'))
 
 @section('titol')
   <i class="fa fa-angle-right"></i>
